@@ -1,0 +1,37 @@
+<img class="loading" src="../../../assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div class="row" *ngIf="!loading">
+  <div class="col-10 mx-auto">
+    <div class="row mt-2">
+      <div class="col-12">
+        <div class="student">
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-sm float-right" (click)="cancel()">X</button>
+              <h2 class="text-center">
+                <strong>Receipt</strong>
+              </h2>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12 mt-5">
+              <div class="receipt pb-5">
+                <p>We Way2Success Classes received amount of &#8377; {{receipt.amount}}.00/- of/for {{receipt.description}}, from our student Mr/Ms. {{receipt.student}}, on date {{ receipt.date }} for {{receipt.batch}} Batch in {{receipt.course}} Course of branch {{ receipt.branch }}.</p>
+                <hr>
+                <button class="btn btn-sm btn-success float-right" type="button" (click)="print()"><i class="fa fa-print"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h6 class="text-center mt-5">*This is computer generated receipt, does not require any stamp ot signature..</h6>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

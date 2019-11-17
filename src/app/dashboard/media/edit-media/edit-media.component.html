@@ -1,0 +1,140 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div *ngIf="!loading">
+    <div class="row mt-2">
+    <div class="col-md-10 col-12 mx-auto">
+      <h4 class="page-heading text-center mb-3">{{media.title}}</h4>
+      <form class="form" (submit)="editMedia()" [formGroup]="form">
+
+
+        <div class="row">
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="title">Title </label>
+                </div>
+                <input class="input-text form-control" type="text" name="title" id="title" formControlName="title" placeholder="Title">
+              </div>
+              <span class="input-error"*ngIf="!form.get('title').valid && form.get('title').touched">*Please enter Title for Media</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="branch">Branch </label>
+                </div>
+                <select class="input-select form-control" type="text" name="branch" id="branch" formControlName="branch" (change)="branchChanged()">
+                  <option class="select-option" value="">Select Branch</option>
+                  <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+                </select>
+              </div>
+              <span class="input-error"*ngIf="!form.get('branch').valid && form.get('branch').touched">*Please Select Branch</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="course">Course </label>
+                </div>
+                <select class="input-select form-control" type="text" name="course" id="course" formControlName="course" placeholder="course" (change)="courseChanged()">
+                  <option class="select-option" value="">Select Course</option>
+                  <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+                </select>
+              </div>
+              <span clas="input-error" *ngIf="!form.get('course').valid && form.get('course').touched">*Please Select Course</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="batch">Batch </label>
+                </div>
+                <select class="input-select form-control" type="text" name="batchName" id="batchName" formControlName="batch" (change)="batchChanged()">
+                  <option class="select-option" value="">Select Batch</option>
+                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{batch.batchName}}</option>
+                </select>
+              </div>
+              <span class="input-error" *ngIf="!form.get('batch').valid && form.get('batch').touched">*Please Select Batch Name</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group m-1">
+              <div *ngIf="!!subjects.length > 0; else empty_subject">
+                <label class="input-label">Subjects : </label>
+                <ng-container *ngFor="let curSubject of subjects, let i = index">
+                  &nbsp;&nbsp;
+                  <input class="input-radio" type="radio" formControlName="subject" id="subject" name="subject" class="subject" [value]="curSubject._id">
+                    {{curSubject.subject}}
+                </ng-container>
+              </div>
+              <ng-template #empty_subject>
+                <p class="no-data-found">No Subjects..</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="date">Date </label>
+                </div>
+                <input class="input-text form-control" type="date" name="date" id="date" formControlName="date" placeholder="">
+              </div>
+              <span class="input-error"*ngIf="!form.get('date').valid && form.get('date').touched">*Please Select Date</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="time">Time </label>
+                </div>
+                <input class="input-text form-control" type="time" name="time" id="time" formControlName="time" placeholder="">
+              </div>
+              <span class="input-error"*ngIf="!form.get('time').valid && form.get('time').touched">*Please Select Time</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row mt-1" *ngIf="formError">
+          <div class="col-12">
+            <span class="form-error">*Please Fill All Media Fields</span>
+          </div>
+        </div>
+
+        <hr class="horizontal-line">
+
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary btn-save" type="submit">SAVE</button>
+            <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

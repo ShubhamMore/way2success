@@ -1,0 +1,17 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div *ngIf="!loading">
+    <div class="row" *ngIf="waitingToStart">
+        <div class="col-12">
+            <p id="waitingToStart">{{waitingToStart}}</p>
+        </div>
+    </div>
+    <div class="row" *ngIf="!waitingToStart && videoPrepared">
+        <div class="col-10 mx-auto">
+            <video #videoPlayer class="video" disablePictureInPicture id="video" name="video" oncontextmenu="return false;" width="100%" controls controlsList="nodownload noremoteplayback">
+                <source [src]="media.link" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</div>

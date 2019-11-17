@@ -1,0 +1,177 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-12 mx-auto">
+      <h4 class="page-heading text-center mb-3">Edit - {{student.name | uppercase}}</h4>
+      <form class="form" (submit)="addStudent()" [formGroup]="form">
+
+         <div class="row">
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="name">Name </label>
+                </div>
+                <input class="input-text form-control" type="text" name="name" id="name" formControlName="name" placeholder="Name">
+              </div>
+              <span class="input-error"*ngIf="!form.get('name').valid && form.get('name').touched">*Please enter Name</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="birthDate">Birth Date </label>
+                </div>
+                <input class="input-date form-control" type="date" name="birthDate" id="birthDate" formControlName="birthDate">
+              </div>
+              <span class="input-error" *ngIf="!form.get('birthDate').valid && form.get('birthDate').touched">*Please enter Birth Date</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="email">Email </label>
+                </div>
+                <input class="input-email form-control" type="email" name="email" id="email" formControlName="email" placeholder="example@email.com" (focusout)="checkUser()">
+              </div>
+              <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please enter valid Email</span>
+              <span class="input-error" *ngIf="!(!form.get('email').valid && form.get('email').touched) && userExist">*Please try another Email, this user alredy exist</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="phone">Phone </label>
+                </div>
+                <input class="input-number form-control" type="text" pattern="\d*" name="phone" id="phone" maxlength="10" minlength="10" formControlName="phone" placeholder="987654****">
+              </div>
+              <span class="input-error" *ngIf="!form.get('phone').valid && form.get('phone').touched">*Please enter valid phone number</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="input-group-text input-label" for="address">Address </label>
+              <textarea class="input-text form-control" name="address" id="address" rows="3" formControlName="address" placeholder="45, New York"></textarea>
+              <span class="input-error" *ngIf="!form.get('address').valid && form.get('address').touched">*Please enter Address</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group m-1">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text input-label">branch</label>
+                  </div>
+                  <select class="input-select form-control" type="text" name="branch" id="branch" formControlName="branch" (change)="branchChanged()" disabled>
+                    <option class="select-option" value="">Select Branch</option>
+                    <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+                  </select>
+                </div>
+                <span class="input-error" *ngIf="!form.get('branch').valid && form.get('branch').touched">*Please Enter Branch</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="course">Course </label>
+                </div>
+                <select class="input-select form-control" type="text" name="course" id="course" formControlName="course" placeholder="course" (change)="courseChanged()">
+                  <option class="select-option" value="">Select Course</option>
+                  <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+                </select>
+              </div>
+              <span class="input-error" *ngIf="!form.get('course').valid && form.get('course').touched">*Please Select Course</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="batch">Batch </label>
+                </div>
+                <select class="input-select form-control" type="text" name="batchName" id="batchName" formControlName="batch" (change)="batchChanged()">
+                  <option class="select-option" value="">Select Batch</option>
+                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{batch.batchName}}</option>
+                </select>
+              </div>
+              <span class="input-error" *ngIf="!form.get('batch').valid && form.get('batch').touched">*Please Select Batch Name</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group m-1">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text input-label">Status </label>
+                  </div>
+                  <select class="input-select form-control" type="text" name="status" id="status" formControlName="status">
+                    <option class="select-option" value="0">Activated</option>
+                    <option class="select-option" value="1">Fees Pending</option>
+                    <option class="select-option" value="2">Pass Out</option>
+                  </select>
+                </div>
+                <span class="input-error" *ngIf="!form.get('status').valid && form.get('status').touched">*Please Select Status</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row" *ngIf="!!subjects.length > 0">
+            <div class="col-12">
+              <div class="form-group m-1">
+                <label class="input-label">Subjects : </label>
+                <ng-container *ngFor="let curSubject of subjects, let i = index">
+                    &nbsp;&nbsp;
+                    <input class="input-checkbox" type="checkbox" [id]="subject" class="subject" (change)="subjectsChanged($event, curSubject._id)" [checked]="subChecked(curSubject._id)" [value]="curSubject._id">
+                    {{curSubject.subject}}
+                </ng-container>
+              </div>
+            </div>
+        </div>
+
+        <div class="row mt-1" *ngIf="formError">
+          <div class="col-12">
+            <span class="form-error">*Please Fill All Student Fields</span>
+          </div>
+        </div>
+
+        <hr class="horizontal-line">
+
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary btn-save" type="submit">SAVE</button>
+            <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* * {
+    margin: 0;
+    padding: 0;
+} */
+
+body {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+.input-error, .form-error {
+    font-size: 75%;
+    color: #f00;
+}
+
+/* input.ng-invalid.ng-touched {
+    border: 1px solid #f00;
+} */
+
+.pointer {
+    cursor: pointer;
+}
+
+.disable-selection {
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer */
+  -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
+
+
+/*--SCROLL BAR--*/
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: transparent;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #c1c1c1;
+}

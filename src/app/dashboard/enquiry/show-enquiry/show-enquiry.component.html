@@ -1,0 +1,54 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div  *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-md-10 col-12 mx-auto">
+      <button type="button" class="btn btn-sm btn-white float-right" (click)="cancel()">X</button>
+      <h4 class="page-heading mr-4">Enquiry from {{ enquiry.name }}</h4>
+      <hr>
+      <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <span><i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="replyTo:{{enquiry.email}}">{{ enquiry.email }}</a></span><br>
+              <span><i class="fa fa-phone"></i>&nbsp;&nbsp;+91 {{ enquiry.phone }}</span>
+            </div>
+            <div class="col-md-6 col-12">
+              <button class="btn btn-sm btn-light float-right" routerLink="reply"><i class="fa fa-reply"></i></button>
+              <span class="mr-1"><i class="fa fa-date"></i>&nbsp;&nbsp;{{ enquiry.date }}</span>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+              <p class="m-2 p-2 body">{{ enquiry.message }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row" *ngIf="enquiry.reply.length > 0">
+            <div class="col-12">
+              <h6 class="ml-2">Admin Reply : </h6>
+              <div class="show-reply">
+                <ng-container *ngFor="let curReply of enquiry.reply; let i = index">
+                  <div class="card m-2">
+                    <div class="card-header">
+                      <span class="float-right">{{curReply.date}}</span>
+                      <a class="card-link" [ngClass]="{'collapsed': i !== 0}" data-toggle="collapse" href="{{'#' + 'reply' + curReply._id}}">
+                        {{curReply.subject}}
+                      </a>
+                    </div>
+                    <div id="{{'reply' + curReply._id}}" class="collapse" [ngClass]="{'show': i === 0}">
+                      <div class="card-body">
+                        <p class="">{{curReply.message}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

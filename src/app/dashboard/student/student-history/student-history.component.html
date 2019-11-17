@@ -1,0 +1,57 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div  *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-12 mx-auto">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn float-right" (click)="cancel()">X</button>
+          <h3 class="page-heading">Student History</h3>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-12">
+          <h4 class="branch-heading">Branch : {{branch.branchName}}</h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
+            <div class="row" *ngFor="let course of courses">
+                <div class="col-12">
+                    <h5 class="course-heading mt-3">{{course.course | uppercase}}</h5>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive batches-border" id="batches">
+                                <table class="table table-sm">
+                                    <thead class="table-heading">
+                                        <th class="table-heading-data">Batch</th>
+                                        <th class="table-heading-data">Subjects</th>
+                                    </thead>
+                                    <tbody class="table-body">
+                                        <ng-container *ngFor="let batch of course.batches; let i = index">
+                                        <tr class="table-row">
+                                            <td class="table-data" class="text-left">{{batch.batch}}</td>
+                                            <td class="table-data">
+                                                <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.subject}}</p>
+                                            </td>
+                                        </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

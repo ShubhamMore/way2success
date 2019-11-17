@@ -1,0 +1,23 @@
+.income-text {
+    color: #28a745;
+}
+
+.expence-text {
+    color: #dc3545;
+}
+
+.negatice-balance {
+    color: #dc3545;
+}
+
+.btn-delete-budget {
+    border-radius: 50%;
+}
+
+.income {
+    background-color: #ebfaeb;
+}
+
+.expence {
+    background-color: #ffe6e6;
+}

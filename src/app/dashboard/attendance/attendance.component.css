@@ -1,0 +1,25 @@
+
+.attendance-selector input {
+    display: none!important;
+}
+
+.attendance-selector input[type=checkbox] + label {
+    display: inline-block;
+    font-size: 70%;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    background: #fff;
+    height: 35px;
+    width: 35px;
+    padding: 2px;
+    margin: 2px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+  
+.attendance-selector input[type=checkbox]:checked + label {
+    background: #aaa;
+    color: #fff;
+}

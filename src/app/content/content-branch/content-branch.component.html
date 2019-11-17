@@ -1,0 +1,85 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-12 mx-auto">
+      <h3>Our Branches</h3>
+      <div class="row mb-3" *ngFor="let branch of branches">
+        <div class="col-md-10 col-12 mx-auto">
+          <div class="card shadow">
+            <div class="card-header"><i class="fa fa-building-o"></i>&nbsp;&nbsp;&nbsp;{{branch.branchName}}</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="row">
+                    <div class="col-12 mt-2">
+                      <span><i class="fa fa-map-marker"></i></span>
+                      &nbsp;&nbsp;{{branch.address}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 mt-2">
+                      <span><i class="fa fa-phone"></i></span>
+                      &nbsp;&nbsp;{{branch.phone}}
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <div class="row">
+                      <span><i class="fa fa-envelope"></i></span>
+                      &nbsp;&nbsp;<a href="mailto:{{branch.email}}">{{branch.email}}</a>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="text-center">
+                    <strong>COURCES</strong>
+                  </div>
+                  <hr>
+                  <div class="course pr-1" *ngIf="branch.course.length > 0; else empty_course">
+                    <div class="card" *ngFor="let course of branch.course">
+                      <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" href="{{'#' + branch.branchName + course.courseName}}">
+                          {{course.courseName}}
+                        </a>
+                      </div>
+                      <div id="{{branch.branchName + course.courseName}}" class="collapse">
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-sm">
+                              <thead class="table-heading text-center">
+                                <th class="table-heading-data">Batch</th>
+                                <th class="table-heading-data">Subjects</th>
+                                <th class="table-heading-data">Fees</th>
+                              </thead>
+                              <tbody class="table-body">
+                                <ng-container *ngFor="let batch of course.batch">
+                                  <tr class="table-row">
+                                    <td class="table-data" class="text-left">{{batch.batchName}}</td>
+                                    <td class="table-data">
+                                      <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.subject}}</p>
+                                    </td>
+                                    <td class="table-data">
+                                      <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.fee}}</p>
+                                    </td>
+                                  </tr>
+                                </ng-container>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #empty_course>
+                    <p class="text-center">No Courses Available</p>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

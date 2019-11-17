@@ -1,0 +1,103 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-10 mx-auto">
+
+        <div class="row">
+          <div class="col-12">
+            <h3 class="page-heading text-center">{{student.name | uppercase}}</h3>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-8 col-sm-10 mx-auto">
+
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <tbody class="table-body">
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                      <p class="data-heading"><strong>Branch : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data">{{studentMetaData.branch}}</p>
+                    </td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                      <p class="data-heading"><strong>Course : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data">{{studentMetaData.course}}</p>
+                    </td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                      <p class="data-heading"><strong>Batch : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data">{{studentMetaData.batch}}</p>
+                    </td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                        <p class="data-heading"><strong>Subjects : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data">{{subject.join(', ')}}</p>
+                    </td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                      <p class="data-heading"><strong>Birth Date : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data">{{student.birthDate}}</p>
+                    </td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                      <p class="data-heading"><strong>Address : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data">{{student.address}}</p>
+                    </td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                      <p class="data-heading"><strong><em>E-</em>mail : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data"><a href="mailto:{{student.email}}">{{student.email}}</a></p>
+                    </td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                      <p class="data-heading"><strong>Phone : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data">+91 {{student.phone}}</p>
+                    </td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-data table-data-parameter">
+                      <p class="data-heading"><strong>Status : </strong></p>
+                    </td>
+                    <td class="table-data table-data-value">
+                      <p class="data" *ngIf="student.status == 0">ACTIVATED</p>
+                      <p class="data" *ngIf="student.status == 1">FEE PENDING</p>
+                      <p class="data" *ngIf="student.status == 2">PASS OUT</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+  </div>
+</div>

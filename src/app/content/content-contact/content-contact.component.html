@@ -1,0 +1,105 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div  *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-12 mx-auto">
+      <h3>Contact Us..</h3>
+      <br>
+      <div class="row">
+        <div class="col-md-6 col-12 mx-auto">
+          <div class="row">
+            <div class="col-10 mx-auto">
+              <form class="form" (submit)="sendEnquiry()" [formGroup]="form">
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <label for="name" class="input-group-text">Name</label>
+                        </div>
+                        <input class="input-text form-control" type="text" name="name" id="name" formControlName="name" placeholder="John">
+                      </div>
+                      <span class="input-error" *ngIf="!form.get('name').valid && form.get('name').touched">*Please Enter Name</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <label for="phone" class="input-group-text">Contact</label>
+                        </div>
+                        <input class="input-number form-control" type="text" pattern="\d*" name="phone" id="phone" maxlength="10" minlength="10" formControlName="phone" placeholder="987654****">
+                      </div>
+                      <span class="input-error" *ngIf="!form.get('phone').valid && form.get('phone').touched">*Please enter Valid Contact Number</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <label for="email" class="input-group-text">E-mail</label>
+                        </div>
+                        <input class="input-text form-control" type="text" name="email" id="email" formControlName="email" placeholder="example@gmail.com">
+                      </div>
+                      <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please Enter Valid Email</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <label for="message" class="input-group-text">Message</label>
+                        </div>
+                        <input class="input-text form-control" type="text" name="message" id="message" formControlName="message" placeholder="Enquiry about">
+                      </div>
+                      <span class="input-error" *ngIf="!form.get('message').valid && form.get('message').touched">*Please Enter Message</span>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary float-right">Send</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-10 mx-auto">
+          <div class="row">
+            <div class="col-12 mt-2">
+              <span><i class="fa fa-map-marker"></i></span>
+              &nbsp;&nbsp;{{contact.address}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mt-2">
+              <span><i class="fa fa-phone"></i></span>
+              &nbsp;&nbsp;{{contact.numbers.join(', ')}}
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <div class="row">
+              <span><i class="fa fa-envelope"></i></span>
+              &nbsp;&nbsp;<a href="mailto:{{contact.email}}">{{contact.email}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

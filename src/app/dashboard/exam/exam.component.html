@@ -1,0 +1,122 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div  *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-12 mx-auto">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <h3 class="page-heading">Exams</h3>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="branch">Branch </label>
+            </div>
+            <select class="form-control input-select" type="text" name="branch" id="branch" (change)="onSelectBranch($event.target.value)" [value]="branch">
+              <option class="select-option" value="">Select Branch</option>
+              <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr class="horizontal-line">
+      <form class="" [formGroup]="form">
+
+        <div class="row">
+          <div class="col-md-3 col-sm-12 mt-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text label-text" for="course">Course</label>
+                </div>
+                <select class="form-control input-select" type="text" name="course" id="course" formControlName="course" (change)="onSelectCourse()">
+                  <option class="select-option" value="">Select Course</option>
+                  <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+              </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-12 mt-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text label-text" for="batch">Batch</label>
+                </div>
+                <select class="form-control input-select" type="text" name="batch" id="batch" formControlName="batch" (change)="onSelectBatch()">
+                  <option class="select-option" value="">Select Batch</option>
+                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{batch.batchName}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 mt-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text label-text" for="subject">Subject</label>
+                </div>
+                <select class="form-control input-select" type="text" name="subject" id="subject" formControlName="subject" (change)="onSelectSubject()">
+                  <option class="select-option" value="">Select Subject</option>
+                  <option class="select-option" *ngFor="let curSubject of subjects" [value]="curSubject._id">{{curSubject.subject}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 mt-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text label-text" for="year">Year</label>
+                </div>
+                <select class="form-control input-select" type="text" name="year" id="year" formControlName="year" (change)="onSelectYear()">
+                  <option class="select-option" *ngFor="let year of years" [value]="year">{{year}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <br>
+      <div class="row" *ngIf="exams.length > 0; else empty_exams">
+        <div class="table-responsive">
+          <table class="table table-sm table-hover">
+            <thead class="table-heading">
+              <tr class="table-row">
+                <th class="table-heading-data">ID</th>
+                <th class="table-heading-data">Exam</th>
+                <th class="table-heading-data">Edit</th>
+                <th class="table-heading-data">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr class="table-row" *ngFor="let exam of exams, let i = index" routerLinkActive="active">
+                <td class="table-data">{{ i+1 }}</td>
+                <td class="table-data">
+                  <a class="exam" [routerLink]="exam._id">
+                    <p class="data">{{ exam.examTitle | uppercase }}</p>
+                  </a>
+                </td>
+                <td class="table-data">
+                  <button class="btn btn-light btn-sm btn-edit" type="button" (click)="editExam(exam._id)">
+                      <i class="fa fa-edit"></i>
+                  </button>
+                </td>
+                <td class="table-data">
+                  <button class="btn btn-danger btn-sm btn-delete" type="button" (click)="deleteExam(exam._id)">
+                      <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #empty_exams>
+        <h5 class="no-data-found pl-3">{{noExam}}</h5>
+      </ng-template>
+    </div>
+  </div>
+</div>

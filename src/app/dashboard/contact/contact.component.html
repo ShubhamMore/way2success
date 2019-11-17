@@ -1,0 +1,101 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div  *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-10 mx-auto">
+      <div class="row">
+        <div class="cil-12 ">
+          <h3 class="page-heading">Contact Us</h3>
+        </div>
+      </div>
+      <hr class="horizontal-line">
+      <form class="form" (submit)="saveContact()" [formGroup]="form">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="address">Address</label>
+                </div>
+                <textarea class="form-control input-text" type="text" rows="3" name="address" id="address" formControlName="address" placeholder="25, New York, USA">
+                </textarea>
+              </div>
+              <span class="input-error" *ngIf="!form.get('address').valid && form.get('address').touched">*Please enter Address (at least 10 Charecters)</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 mt-2">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="email">Email</label>
+                </div>
+                <input class="form-control input-text" type="email" name="email" id="email" formControlName="email" placeholder="way2success@gmail.com">
+              </div>
+              <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please enter Valid Email</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 mt-2">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="phone">Phone</label>
+                </div>
+                <input class="form-control input-number" type="text" pattern="\d*" name="phone" id="phone" formControlName="phone" minlength="10" maxlength="10" placeholder="987654****">
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-success" (click)="addPhone()"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <span class="input-error" *ngIf="!form.get('phone').valid && form.get('phone').touched">*Please enter Valid Phone</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="numbers.length > 0">
+          <div class="col-10 mx-auto">
+            <div class="table-responsive">
+              <table class="table table-sm table-hover">
+                <thead class="table-heading">
+                  <tr class="table-row">
+                    <th class="table-heading-data">ID</th>
+                    <th class="table-heading-data">Phone</th>
+                    <th class="table-heading-data">Delete</th>
+                  </tr>
+                </thead>
+                <tbody class="table-body">
+                  <tr class="table-row" *ngFor="let number of numbers, let i = index">
+                    <td class="table-data">
+                      <span>{{i + 1}}</span>
+                    </td>
+                    <td class="table-data">
+                      <span>{{number}}</span>
+                    </td>
+                    <td class="table-data">
+                      <button type="button" class="btn btn-danger btn-sm" (click)="deletePhone(i)"><i class="fa fa-trash"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="noNumberErr">
+          <div class="col-12">
+            <span class="text-danger">*Please Add minimum 1 Contact Number</span>
+          </div>
+        </div>
+
+        <hr class="horizontal-line">
+
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

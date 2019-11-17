@@ -1,0 +1,110 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-12 mx-auto">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <h3 class="page-heading">Exam</h3>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text input-label" for="date">Date</label>
+            </div>
+            <input class="form-control input-date" type="date" [(ngModel)]="date" name="date" id="date">
+            <div class="input-group-append">
+              <button class="btn btn-success" type="button" (click)="saveExam()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="horizontal-line">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <label for=""><strong>Branch : </strong>{{examMetaData.branch}}</label><br>
+          <label for=""><strong>Course : </strong>{{examMetaData.course}}</label><br>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <label for=""><strong>Batch : </strong>{{examMetaData.batch}}</label><br>
+          <label for=""><strong>Date : </strong>{{exam.date}}</label><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <label for=""><strong>Subject : </strong>{{examMetaData.subject}}</label>
+        </div>
+      </div>
+
+      <hr>
+
+      <form class="" [formGroup]="examForm">
+        <div class="row p-2">
+          <div class="col-md-4 col-sm-12 mt-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="examTitle">Title </label>
+                </div>
+                <input class="input-text form-control" type="text" name="examTitle" id="examTitle" formControlName="examTitle" placeholder="Exam Title">
+              </div>
+              <span class="input-error" *ngIf="!examForm.get('examTitle').valid && examForm.get('examTitle').touched">*Please enter Exam Title</span>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-12 mt-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="outOfMarks">Out of Marks </label>
+                </div>
+                <input class="input-text form-control" type="text" name="outOfMarks" id="outOfMarks" formControlName="outOfMarks" placeholder="100">
+              </div>
+              <span class="input-error" *ngIf="!examForm.get('outOfMarks').valid && examForm.get('outOfMarks').touched">*Please enter Out of Marks</span>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-12 mt-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="passingMarks">Passing marks </label>
+                </div>
+                <input class="input-text form-control" type="text" name="passingMarks" id="passingMarks" formControlName="passingMarks" placeholder="40">
+              </div>
+              <span class="input-error" *ngIf="!examForm.get('passingMarks').valid && examForm.get('passingMarks').touched">*Please enter Passing marks</span>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="row p-2" *ngIf="marks.length > 0; else empty_marks">
+        <div class="table-responsive">
+          <table class="table table-sm table-hover">
+            <thead class="table-heading">
+              <tr class="table-row">
+                <th class="table-heading-data">ID</th>
+                <th class="table-heading-data">Student</th>
+                <th class="table-heading-data">Marks</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr class="table-row" *ngFor="let mark of marks, let i = index" routerLinkActive="active">
+                <td class="table-data">{{ i+1 }}</td>
+                <td class="table-data">
+                    <p class="data">{{ examMetaData.students[i].name | uppercase }}</p>
+                </td>
+                <td class="table-data">
+                    <input class="input-text form-control" type="text" [value]="mark.marks" (input)="inputmarks($event, i)">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #empty_marks>
+        <h5 class="no-data-found pl-3">Error</h5>
+      </ng-template>
+    </div>
+  </div>
+</div>

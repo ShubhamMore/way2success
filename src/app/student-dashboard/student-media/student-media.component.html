@@ -1,0 +1,62 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div  *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-12 mx-auto">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <h3 class="page-heading">Media</h3>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group mt-2">
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                          <label class="input-group-text" for="subjects">Subject</label>
+                      </div>
+                      <select class="form-control input-select" type="text" name="subject" id="subject" [value]="subject" (change)="onSelectSubject($event.target.value)">
+                        <option class="select-option" value="">Select Subject</option>
+                        <ng-container *ngIf="studentData.subjects.length > 0">
+                          <option class="select-option" *ngFor="let subject of studentData.subjects, let i = index" [value]="subject._id">{{subject.subject | uppercase}}</option>
+                        </ng-container>
+                      </select>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row" *ngIf="medias.length > 0; else empty_medias">
+        <div class="col-md-8 col-12 mx-auto">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover">
+              <thead class="table-heading">
+                <tr class="table-row">
+                  <th class="table-heading-data">ID</th>
+                  <th class="table-heading-data">Media</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr class="table-row" *ngFor="let media of medias, let i = index">
+                  <td class="table-data">{{ i+1 }}</td>
+                  <td class="table-data">
+                    <a class="media" [routerLink]="media._id">
+                        <h5 class="media-title">{{ media.title | uppercase }}s</h5>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <ng-template #empty_medias>
+        <h5 class="no-data-found pl-3">No Media Available</h5>
+      </ng-template>
+    </div>
+  </div>
+</div>

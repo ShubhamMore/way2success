@@ -1,0 +1,123 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-md-10 col-sm-12 col-12 mx-auto">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <h4 class="page-heading">Media</h4>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="branch">Branch</label>
+            </div>
+            <select class="form-control input-select" type="text" name="branch" id="branch" (change)="onSelectBranch($event.target.value)" [value]="branch">
+              <option class="select-option" value="">Select Branch</option>
+              <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-12">
+          <form class="form" [formGroup]="form">
+
+            <div class="row">
+
+              <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text input-label" for="course">Course </label>
+                    </div>
+                    <select class="input-select form-control" name="course" id="course" formControlName="course" placeholder="course" (change)="courseChanged()">
+                      <option class="select-option" value="">Select Course</option>
+                      <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+                    </select>
+                  </div>
+                  <span clas="input-error" *ngIf="!form.get('course').valid && form.get('course').touched">*Please Select course</span>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text input-label" for="batch">Batch </label>
+                    </div>
+                    <select class="input-select form-control" name="batchName" id="batchName" formControlName="batch" (change)="batchChanged()">
+                      <option class="select-option" value="">Select Batch</option>
+                      <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{batch.batchName}}</option>
+                    </select>
+                  </div>
+                  <span class="input-error" *ngIf="!form.get('batch').valid && form.get('batch').touched">*Please Select Batch Name</span>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text input-label">Subject </label>
+                    </div>
+                    <select class="input-select form-control" name="subject" id="subject" formControlName="subject" (change)="subjectChanged()">
+                      <option class="select-option" value="">Select Subject</option>
+                      <option class="select-option" *ngFor="let curSubject of subjects" [value]="curSubject._id">{{curSubject.subject}}</option>
+                    </select>
+                  </div>
+                    <span class="input-error" *ngIf="!form.get('subject').valid && form.get('subject').touched">*Please Select Subject</span>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="allMedia.length > 0; else empty_media">
+        <div class="table-responsive">
+          <table class="table table-sm table-hover">
+            <thead class="table-heading">
+              <tr class="table-row">
+                <th class="table-heading-data">ID</th>
+                <th class="table-heading-data">Title</th>
+                <th class="table-heading-data text-center">Edit</th>
+                <th class="table-heading-data text-center">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr class="table-row" *ngFor="let media of allMedia, let i = index" routerLinkActive="active">
+                <td class="table-data">{{ i+1 }}</td>
+                <td class="table-data">
+                  <a class="media" [routerLink]="media._id">
+                    <h5 class="media-title">{{ media.title }}</h5>
+                  </a>
+                </td>
+                <td class="table-data text-center">
+                  <button class="btn btn-light btn-sm edit-media-btn" type="button" (click)="editMedia(media._id)">
+                      <i class="fa fa-edit"></i>
+                  </button>
+                </td>
+                <td class="table-data text-center">
+                  <button class="btn btn-danger btn-sm delete-media-btn" type="button" (click)="deleteMedia(media._id)">
+                      <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #empty_media>
+        <h5 class="no-data-found pl-3">{{noMedia}}</h5>
+      </ng-template>
+
+    </div>
+
+  </div>
+</div>
