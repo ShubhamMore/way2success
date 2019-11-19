@@ -26,6 +26,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['course', 'new'], {relativeTo: this.route});
   }
 
+  addTopper() {
+    this.router.navigate(['topper', 'new'], {relativeTo: this.route});
+  }
+
   addMedia() {
     this.router.navigate(['media', 'new'], {relativeTo: this.route});
   }

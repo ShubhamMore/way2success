@@ -1,1 +1,59 @@
-<p>topper works!</p>
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div  *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-12 mx-auto">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <h3 class="page-heading">Toppers</h3>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="year">Year </label>
+            </div>
+            <select class="form-control input-select" type="text" name="year" id="year" (change)="getToppers($event.target.value)" [value]="year">
+              <option class="select-option" *ngFor="let year of years" [value]="year">{{year}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr class="horizontal-line">
+
+      <div class="row" *ngIf="toppers.length > 0; else no_topper">
+        <div class="col-md-4 col-sm-10 mt-3 mx-auto" *ngFor="let topper of toppers">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="text-center">{{topper.name | uppercase}}</h4>
+            </div>
+            <div class="card-body text-center">
+              <img class="topper-image shadow-sm" [src]="topper.image" [alt]="topper.name">
+              <h5 class="">{{topper.score}}</h5>
+              <hr>
+              <p class="">{{topper.details}}</p>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-6">
+                  <button class="btn btn-light btn-sm" type="button" (click)="editTopper(topper._id)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-danger btn-sm float-right" type="button" (click)="deleteTopper(topper._id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #no_topper>
+        <h5 class="no-data-found pl-3">No Toppers found on year {{year}}</h5>
+      </ng-template>
+    </div>
+  </div>
+</div>

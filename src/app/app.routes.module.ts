@@ -73,6 +73,8 @@ import { ShowEnquiryComponent } from './dashboard/enquiry/show-enquiry/show-enqu
 import { ReplyEnquiryComponent } from './dashboard/enquiry/reply-enquiry/reply-enquiry.component';
 
 import { TopperComponent } from './dashboard/topper/topper.component';
+import { AddTopperComponent } from './dashboard/topper/add-topper/add-topper.component';
+import { EditTopperComponent } from './dashboard/topper/edit-topper/edit-topper.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -103,6 +105,8 @@ const appRoutes: Routes = [
     { path: 'admin/contact', component: ContactComponent, canActivate: [AdminAuthGuard] },
 
     { path: 'admin/topper', component: TopperComponent, canActivate: [AdminAuthGuard] },
+    { path: 'admin/topper/new', component: AddTopperComponent, canActivate: [AdminAuthGuard] },
+    { path: 'admin/topper/:id/edit', component: EditTopperComponent, canActivate: [AdminAuthGuard] },
 
     { path: 'admin/enquiry', component: EnquiryComponent, canActivate: [AdminAuthGuard] },
     { path: 'admin/enquiry/:id', component: ShowEnquiryComponent, canActivate: [AdminAuthGuard] },

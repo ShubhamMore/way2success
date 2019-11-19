@@ -1,0 +1,113 @@
+<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+
+<div *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-md-10 col-12 mx-auto">
+      <h4 class="page-heading text-center mb-3">Add New Topper</h4>
+      <form class="form" (submit)="addTopper()" [formGroup]="form">
+
+        <div class="row">
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="name">Name </label>
+                </div>
+                <input class="input-text form-control" type="text" name="name" id="name" formControlName="name" placeholder="name">
+              </div>
+              <span class="input-error"*ngIf="!form.get('name').valid && form.get('name').touched">*Please enter Name of Topper</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="year">Year </label>
+                </div>
+                <select class="input-select form-control" type="text" name="year" id="year" formControlName="year">
+                  <option class="select-option" *ngFor="let year of years" [value]="year">{{year}}</option>
+                </select>
+              </div>
+              <span class="input-error"*ngIf="!form.get('year').valid && form.get('year').touched">*Please Select Year</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="score">Score </label>
+                </div>
+                <input class="input-text form-control" type="text" name="score" id="score" formControlName="score" placeholder="Score">
+              </div>
+              <span class="input-error"*ngIf="!form.get('score').valid && form.get('score').touched">*Please enter Score of Topper</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="details">Details </label>
+                </div>
+                <input class="input-text form-control" type="text" name="details" id="details" formControlName="details" placeholder="Details like branch, course or subject, etc..">
+              </div>
+              <span class="input-error"*ngIf="!form.get('name').valid && form.get('details').touched">*Please enter Details of Topper</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group m-1">
+                <label class="input-label">Select Topper Image File : </label>
+                <div class="form-group">
+                    <button class="btn btn-link image-picker-btn" type="button" id="image" (click)="filePicker.click()">Click Here to Pick Image File</button>
+                    <input class="form-control" type="file" #filePicker formControlName="image" (change)="onImagePicked($event)" hidden>
+                </div>
+                <span class="input-error" *ngIf="form.get('image').invalid || imageError">Please Select a Valid Image File</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="row" *ngIf="imagePreview">
+              <div class="col-12">
+                <div class="image-container">
+                  <img class="image" [src]="imagePreview">
+                  <div class="middle">
+                    <a class="delete" (click)="onCancelImage()"><i class="fa fa-trash-o trash"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-1" *ngIf="formError">
+          <div class="col-12">
+            <span class="form-error">*Please Fill All Form Fields</span>
+          </div>
+        </div>
+
+        <hr class="horizontal-line">
+
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary btn-add" type="submit">ADD</button>
+            <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

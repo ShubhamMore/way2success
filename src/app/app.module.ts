@@ -77,6 +77,8 @@ import { StudentMediaComponent } from './student-dashboard/student-media/student
 import { ShowStudentMediaComponent } from './student-dashboard/student-media/show-student-media/show-student-media.component';
 
 import { TopperComponent } from './dashboard/topper/topper.component';
+import { AddTopperComponent } from './dashboard/topper/add-topper/add-topper.component';
+import { EditTopperComponent } from './dashboard/topper/edit-topper/edit-topper.component';
 
 import { ContentComponent } from './content/content.component';
 import { ContentAboutComponent } from './content/content-about/content-about.component';
@@ -99,6 +101,7 @@ import { ContactService } from './services/contact.service';
 import { EnquiryService } from './services/enquiry.service';
 import { AboutService } from './services/about.service';
 import { CourseService } from './services/course.service';
+import { TopperService } from './services/topper.service';
 
 import { Validator } from './shared/validators';
 
@@ -163,6 +166,8 @@ import { Validator } from './shared/validators';
     BudgetComponent,
 
     TopperComponent,
+    AddTopperComponent,
+    EditTopperComponent,
 
     AimComponent,
     VisionComponent,
@@ -205,6 +210,7 @@ import { Validator } from './shared/validators';
     ContactService,
     EnquiryService,
     AboutService,
+    TopperService,
 
     LoginGuard,
     AdminAuthGuard,
