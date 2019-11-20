@@ -76,6 +76,10 @@ import { TopperComponent } from './dashboard/topper/topper.component';
 import { AddTopperComponent } from './dashboard/topper/add-topper/add-topper.component';
 import { EditTopperComponent } from './dashboard/topper/edit-topper/edit-topper.component';
 
+import { ImagesComponent } from './dashboard/images/images.component';
+import { AddImagesComponent } from './dashboard/images/add-images/add-images.component';
+import { AddImageCategoriesComponent } from './dashboard/images/add-image-categories/add-image-categories.component';
+
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 
@@ -137,6 +141,10 @@ const appRoutes: Routes = [
     { path: 'admin/exam/new', component: AddExamComponent, canActivate: [AdminAuthGuard] },
     { path: 'admin/exam/:id', component: ShowExamComponent, canActivate: [AdminAuthGuard] },
     { path: 'admin/exam/:id/edit', component: EditExamComponent, canActivate: [AdminAuthGuard] },
+
+    { path: 'admin/image', component: ImagesComponent, canActivate: [AdminAuthGuard] },
+    { path: 'admin/image/new', component: AddImagesComponent, canActivate: [AdminAuthGuard] },
+    { path: 'admin/image/category', component: AddImageCategoriesComponent, canActivate: [AdminAuthGuard] },
 
     { path: 'admin/budget', component: BudgetComponent, canActivate: [AdminAuthGuard] },
 

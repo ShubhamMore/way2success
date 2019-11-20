@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, NgForm, FormBuilder } from '@angular/forms';
 import { Params, ActivatedRoute, Router } from '@angular/router';
@@ -86,6 +87,7 @@ export class ResetPasswordComponent implements OnInit {
           this.router.navigate(['/login'], {relativeTo: this.roure});
         },
         (error: any) => {
+          this.error = error;
           this.loading = false;
         }
       );

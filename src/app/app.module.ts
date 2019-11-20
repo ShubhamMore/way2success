@@ -66,6 +66,10 @@ import { AddExamComponent } from './dashboard/exam/add-exam/add-exam.component';
 import { ShowExamComponent } from './dashboard/exam/show-exam/show-exam.component';
 import { EditExamComponent } from './dashboard/exam/edit-exam/edit-exam.component';
 
+import { ImagesComponent } from './dashboard/images/images.component';
+import { AddImagesComponent } from './dashboard/images/add-images/add-images.component';
+import { AddImageCategoriesComponent } from './dashboard/images/add-image-categories/add-image-categories.component';
+
 import { BudgetComponent } from './dashboard/budget/budget.component';
 
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
@@ -104,7 +108,7 @@ import { CourseService } from './services/course.service';
 import { TopperService } from './services/topper.service';
 
 import { Validator } from './shared/validators';
-
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -163,6 +167,10 @@ import { Validator } from './shared/validators';
     ShowExamComponent,
     EditExamComponent,
 
+    ImagesComponent,
+    AddImagesComponent,
+    AddImageCategoriesComponent,
+
     BudgetComponent,
 
     TopperComponent,
@@ -185,7 +193,8 @@ import { Validator } from './shared/validators';
     ContentBranchComponent,
     ContentContactComponent,
     ContentAboutComponent,
-    ContentPhotosComponent
+    ContentPhotosComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import { Validator } from '../../shared/validators';
 export class ChangePasswordComponent implements OnInit {
 
   form: FormGroup;
+  loading: boolean;
   error: string;
 
   constructor(private httpService: HttpService,
@@ -21,6 +22,7 @@ export class ChangePasswordComponent implements OnInit {
               private validator: Validator) { }
 
   ngOnInit() {
+    this.loading = true;
     this.form = this.formBuilder.group({
       oldPassword: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(6)]
@@ -34,11 +36,13 @@ export class ChangePasswordComponent implements OnInit {
     }, {
       validators: this.validator.passwordValidator.bind(this)
     });
+    this.loading = false;
   }
 
   changePassword() {
     if (this.form.valid && !this.form.hasError('invalidPassword')) {
 
+      this.loading = true;
       this.error = null;
 
       const data = {
@@ -54,9 +58,11 @@ export class ChangePasswordComponent implements OnInit {
         (resData: any) => {
           this.error = null;
           this.form.reset();
+          this.loading = false;
         },
         (errorMessage: any) => {
           this.error = errorMessage;
+          this.loading = false;
         }
       );
     } else {

@@ -12,22 +12,26 @@ export class ForgotPasswordComponent implements OnInit {
 
   form: FormGroup;
   emailSend: boolean;
-  error: string = null;
+  loading: boolean;
+  error: string;
 
   constructor(private httpService: HttpService,
               private router: Router) { }
 
   ngOnInit() {
+    this.loading = true;
     this.emailSend = false;
     this.form = new FormGroup({
       email: new FormControl(null, {
         validators: [Validators.required, Validators.email]
       })
     });
+    this.loading = false;
   }
 
   forgotPassword() {
     if (this.form.valid) {
+      this.loading = true;
       this.error = null;
       this.emailSend = null;
       const data = {
@@ -41,10 +45,12 @@ export class ForgotPasswordComponent implements OnInit {
       .subscribe(
         (resData: any) => {
           this.emailSend = true;
+          this.loading = false;
         },
         (errorMessage: any) => {
           console.log(errorMessage);
           this.error = errorMessage;
+          this.loading = false;
         }
       );
     } else {

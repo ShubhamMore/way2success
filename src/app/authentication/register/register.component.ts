@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthResponseData, AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EncryptService } from '../../encrypt.service';
 import { EnvVar } from '../../shared/config';
 import { Validator } from '../../shared/validators';
@@ -18,17 +18,19 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
 
   userExist: boolean;
-  isLoading = false;
+  loading: boolean;
   error: string = null;
 
   constructor(private authService: AuthService,
               private router: Router,
+              private route: ActivatedRoute,
               private encryptService: EncryptService,
               private userService: UserService,
               private formBuilder: FormBuilder,
               private validator: Validator) {}
 
   ngOnInit() {
+    this.loading = true;
     this.userExist = false;
     this.form = this.formBuilder.group({
       name: new FormControl(null, {
@@ -49,6 +51,7 @@ export class RegisterComponent implements OnInit {
     }, {
       validators: this.validator.passwordValidator.bind(this)
     });
+    this.loading = false;
   }
 
   checkUser() {
@@ -69,14 +72,11 @@ export class RegisterComponent implements OnInit {
     if (!this.form.valid && this.form.hasError('invalidPassword')) {
       this.error = 'Please fill All the fields Correctly..';
       return;
-    }
-
-    if (this.userExist) {
+    } else if (this.userExist) {
       return;
     }
-
+    this.loading = true;
     this.error = null;
-    console.log(this.form.value);
 
     const data = {
       name: this.form.value.name.toLowerCase(),
@@ -87,20 +87,16 @@ export class RegisterComponent implements OnInit {
 
     let authObs: Observable<AuthResponseData>;
 
-    // this.isLoading = true;
-
     authObs = this.authService.createUser(data);
 
     authObs.subscribe(
       resData => {
-        console.log(resData);
-        // this.isLoading = false;
-        this.router.navigate(['/login']);
+        this.loading = false;
+        this.router.navigate(['/login'], {relativeTo: this.route});
       },
       errorMessage => {
-        console.log(errorMessage);
         this.error = errorMessage;
-        // this.isLoading = false;
+        this.loading = false;
       }
     );
 

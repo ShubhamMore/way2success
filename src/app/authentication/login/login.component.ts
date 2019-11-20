@@ -14,7 +14,7 @@ import { EncryptService } from '../../encrypt.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  // isLoading = false;
+  loading: boolean;
   error: string = null;
 
   constructor(private authService: AuthService,
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.loading = true;
     this.form = new FormGroup({
       email: new FormControl(null, {
         validators: [Validators.required, Validators.email]
@@ -31,25 +32,25 @@ export class LoginComponent implements OnInit {
         validators: [Validators.required]
       })
     });
+    this.loading = false;
   }
 
   login() {
     if (!this.form.valid) {
       return;
     }
+    this.loading = true;
 
     const email = this.form.value.email;
     const password = this.encryptService.encrypt(this.form.value.password, EnvVar.encKey);
 
     let authObs: Observable<AuthResponseData>;
 
-    // this.isLoading = true;
-
     authObs = this.authService.login(email, password);
 
     authObs.subscribe(
       resData => {
-        // this.isLoading = false;
+        this.loading = false;
         if (resData.userType === 'admin') {
           this.router.navigate(['/admin'], { relativeTo: this.route });
         } else if (resData.userType === 'student') {
@@ -59,14 +60,12 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigate(['/login'], { relativeTo: this.route, queryParams: { auth: 'false' }, skipLocationChange: true });
         }
+        this.form.reset();
       },
       errorMessage => {
         this.error = errorMessage;
-        // this.isLoading = false;
+        this.loading = false;
       }
     );
-
-    this.form.reset();
   }
-
 }
