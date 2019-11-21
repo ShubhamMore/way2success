@@ -10,13 +10,27 @@ import { BudgetModel } from '../models/budget.model';
 export class BudgetService {
 
   budgetSearchData = {
-    seatchType: '0'
+    seatchType: '0',
+    year: null,
+    month: null
   };
 
   constructor(private httpService: HttpService) {}
 
   getBudget(searchData: any) {
     const data = {api: 'getBudget', data: searchData};
+    return this.httpService.httpPostAuth(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
+  getBudgetSummery(searchData: any) {
+    const data = {api: 'getBudgetSummery', data: searchData};
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

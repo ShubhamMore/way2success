@@ -71,6 +71,7 @@ import { AddImagesComponent } from './dashboard/images/add-images/add-images.com
 import { AddImageCategoriesComponent } from './dashboard/images/add-image-categories/add-image-categories.component';
 
 import { BudgetComponent } from './dashboard/budget/budget.component';
+import { BudgetSummeryComponent } from './dashboard/budget/budget-summery/budget-summery.component';
 
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { ShowStudentAttendanceComponent } from './student-dashboard/show-student-attendance/show-student-attendance.component';
@@ -172,6 +173,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     AddImageCategoriesComponent,
 
     BudgetComponent,
+    BudgetSummeryComponent,
 
     TopperComponent,
     AddTopperComponent,

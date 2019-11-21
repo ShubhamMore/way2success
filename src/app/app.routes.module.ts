@@ -53,6 +53,7 @@ import { ShowExamComponent } from './dashboard/exam/show-exam/show-exam.componen
 import { EditExamComponent } from './dashboard/exam/edit-exam/edit-exam.component';
 
 import { BudgetComponent } from './dashboard/budget/budget.component';
+import { BudgetSummeryComponent } from './dashboard/budget/budget-summery/budget-summery.component';
 
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { ShowStudentAttendanceComponent } from './student-dashboard/show-student-attendance/show-student-attendance.component';
@@ -147,6 +148,7 @@ const appRoutes: Routes = [
     { path: 'admin/image/category', component: AddImageCategoriesComponent, canActivate: [AdminAuthGuard] },
 
     { path: 'admin/budget', component: BudgetComponent, canActivate: [AdminAuthGuard] },
+    { path: 'admin/budget/summery', component: BudgetSummeryComponent, canActivate: [AdminAuthGuard] },
 
     { path: 'student/:id', component: StudentDashboardComponent, canActivate: [StudentAuthGuard] },
     { path: 'student/:id/attendance', component: ShowStudentAttendanceComponent, canActivate: [StudentAuthGuard] },

@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AttendanceService } from '../../services/attendance.service';
 import { BranchModel } from 'src/app/models/branch.model';
-import { BranchService } from 'src/app/services/branch.service';
 
 @Component({
   selector: 'app-attendance',
@@ -112,6 +111,9 @@ export class AttendanceComponent implements OnInit {
   curDate() {
     const date = new Date();
     this.date = date.getFullYear() + '-' + this.zeroAppend(date.getMonth() + 1) + '-' + this.zeroAppend(date.getDate());
+    if (this.attendaceService.attendanceSearchData.date === null) {
+      this.attendaceService.attendanceSearchData.date = this.date;
+    }
   }
 
   zeroAppend(n: number): string {
@@ -242,16 +244,10 @@ export class AttendanceComponent implements OnInit {
       };
       this.attendaceService.saveAttendance(attendance)
       .subscribe((responce: any) => {
-        this.attendance = this.students = [];
-        this.curDate();
-        this.form.setValue({
-          course: this.course,
-          batch: this.batch,
-          subject: this.subject
-        });
-        this.loading = false;
-      }, (error: any) => {
         this.ngOnInit();
+      }, (error: any) => {
+        this.error = error;
+        this.loading = false;
       });
     }
   }

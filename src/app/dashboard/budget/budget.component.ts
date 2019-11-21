@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BudgetService } from 'src/app/services/budget.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { BudgetModel } from 'src/app/models/budget.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-budget',
@@ -32,9 +33,13 @@ export class BudgetComponent implements OnInit {
 
   budgetType: string;
 
+  error: string;
+
   date: string;
 
-  constructor(private budgetService: BudgetService) { }
+  constructor(private budgetService: BudgetService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -53,7 +58,9 @@ export class BudgetComponent implements OnInit {
     this.budgetType = '1';
 
     this.month = this.date.split('-')[1];
+    this.budgetService.budgetSearchData.month = this.month;
     this.year = this.date.split('-')[0];
+    this.budgetService.budgetSearchData.year = this.year;
 
     this.budgetForm = new FormGroup({
       budgetType: new FormControl('1', {
@@ -100,11 +107,13 @@ export class BudgetComponent implements OnInit {
 
   onSelectMonth(month: string) {
     this.month = month;
+    this.budgetService.budgetSearchData.month = this.month;
     this.searchBudget({month: this.month, year: this.year});
   }
 
   onSelectYear(year: string) {
     this.year = year;
+    this.budgetService.budgetSearchData.year = this.year;
     this.searchBudget({year: this.year});
   }
 
@@ -114,7 +123,7 @@ export class BudgetComponent implements OnInit {
     this.totalExpence = 0.00;
     this.budgetService.getBudget(searchData)
     .subscribe(
-      resData => {
+      (resData: any) => {
         this.income = resData.income;
         this.expence = resData.expence;
         let len;
@@ -134,7 +143,9 @@ export class BudgetComponent implements OnInit {
 
         this.loading = false;
       },
-      errorMessage => {
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
       }
     );
   }
@@ -147,6 +158,7 @@ export class BudgetComponent implements OnInit {
     if (!this.budgetForm.valid) {
       return;
     }
+    this.loading = true;
 
     const budget = {
       title: this.budgetForm.value.budgetTitle,
@@ -157,23 +169,32 @@ export class BudgetComponent implements OnInit {
 
     this.budgetService.saveBudget(budget)
     .subscribe(
-      resData => {
-        this.budgetForm.reset({budgetTitle: null, amount: null});
+      (resData: any) => {
+        this.budgetForm.reset({budgetType: this.budgetType, date: this.date, budgetTitle: null, amount: null});
         this.onSelectSearchType(this.searchType);
       },
-      errorMessage => {
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
       }
     );
   }
 
   deleteBudget(id: string) {
+    this.loading = true;
     this.budgetService.deleteBudget(id)
     .subscribe(
-      resData => {
+      (resData: any) => {
         this.onSelectSearchType(this.searchType);
       },
-      errorMessage => {
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
       }
     );
+  }
+
+  statement() {
+    this.router.navigate(['summery'], {relativeTo: this.route});
   }
 }
