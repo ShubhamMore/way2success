@@ -5,7 +5,6 @@ import { CourseService } from '../../../services/course.service';
 import { MediaService } from '../../../services/media.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { MediaModel } from '../../../models/MediaModel';
 
 @Component({
   selector: 'app-edit-media',
@@ -28,7 +27,7 @@ export class EditMediaComponent implements OnInit {
 
   subjects: SubjectModel[];
 
-  media: MediaModel;
+  media: any;
   id: string;
 
   constructor(private courseService: CourseService,
@@ -168,14 +167,14 @@ export class EditMediaComponent implements OnInit {
     const time = this.form.value.time + ':00';
     const StartTime = this.months[date[1] - 1] + ' ' + date[2] + ', ' + date[0] + ' ' + time;
 
-    const media: MediaModel = {
+    const media = {
       _id: this.id,
       title: this.form.value.title,
       branch: this.form.value.branch,
       course: this.form.value.course,
       batch: this.form.value.batch,
       subject: this.form.value.subject,
-      link: this.media.link,
+      media: this.media.media,
       duration: this.media.duration,
       startTime: StartTime
     };

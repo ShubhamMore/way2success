@@ -5,7 +5,7 @@
    <div class="col-md-10 col-12 mx-auto">
      <h4>Branches</h4>
      <hr>
-     <div class="row">
+     <div class="row" *ngIf="branches.length > 0; else noBranch">
        <div class="col-12">
          <div class="table-responsive">
            <table class="table table-sm">
@@ -39,6 +39,9 @@
          </div>
        </div>
      </div>
+     <ng-template #noBranch>
+       <p>No Branches Added Yet</p>
+     </ng-template>
    </div>
   </div>
 </div>

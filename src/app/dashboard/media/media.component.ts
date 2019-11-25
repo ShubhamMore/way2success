@@ -181,9 +181,7 @@ export class MediaComponent implements OnInit {
 
     deleteMedia(id: string) {
       this.loading = true;
-      const media = this.allMedia.find((curMedia) => curMedia._id === id);
-      const image = media.link.substring(media.link.lastIndexOf('/') + 1);
-      this.mediaService.deleteMedia(id, image)
+      this.mediaService.deleteMedia(id)
       .subscribe(
         (resData: any) => {
           this.error = null;
