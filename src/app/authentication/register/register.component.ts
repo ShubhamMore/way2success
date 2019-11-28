@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
 
+  developmentMode: boolean;
+
   userExist: boolean;
   loading: boolean;
   error: string = null;
@@ -31,6 +33,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.developmentMode = !environment.production;
+    if (!this.developmentMode) {
+      this.router.navigate(['page_not_found'], {relativeTo: this.route});
+    }
     this.userExist = false;
     this.form = this.formBuilder.group({
       name: new FormControl(null, {
@@ -75,6 +81,7 @@ export class RegisterComponent implements OnInit {
     } else if (this.userExist) {
       return;
     }
+
     this.loading = true;
     this.error = null;
 
