@@ -9,12 +9,13 @@ import { AuthService } from './auth.service';
 export class AdminAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot):| boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
+  // tslint:disable-next-line: max-line-length
+  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.authService.user.pipe(
       take(1),
       map(user => {
         const isAuth = !!user;
-        if (isAuth && user.userType === "admin") {
+        if (isAuth && user.userType === 'admin') {
           return true;
         }
         return this.router.createUrlTree(['/login']);
@@ -27,6 +28,7 @@ export class AdminAuthGuard implements CanActivate {
     );
   }
 
+  // tslint:disable-next-line: max-line-length
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.canActivate(route, state);
   }
@@ -36,12 +38,13 @@ export class AdminAuthGuard implements CanActivate {
 export class FacultyAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot):| boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
+  // tslint:disable-next-line: max-line-length
+  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.authService.user.pipe(
       take(1),
       map(user => {
         const isAuth = !!user;
-        if (isAuth && user.userType === "faculty") {
+        if (isAuth && user.userType === 'faculty') {
           return true;
         }
         return this.router.createUrlTree(['/login']);
@@ -54,6 +57,7 @@ export class FacultyAuthGuard implements CanActivate {
     );
   }
 
+  // tslint:disable-next-line: max-line-length
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.canActivate(route, state);
   }
@@ -63,12 +67,13 @@ export class FacultyAuthGuard implements CanActivate {
 export class StudentAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot):| boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
+  // tslint:disable-next-line: max-line-length
+  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.authService.user.pipe(
       take(1),
       map(user => {
         const isAuth = !!user;
-        if (isAuth && user.userType === "student") {
+        if (isAuth && user.userType === 'student') {
           return true;
         }
         return this.router.createUrlTree(['/login']);
@@ -81,6 +86,7 @@ export class StudentAuthGuard implements CanActivate {
     );
   }
 
+  // tslint:disable-next-line: max-line-length
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.canActivate(route, state);
   }
@@ -90,12 +96,13 @@ export class StudentAuthGuard implements CanActivate {
 export class ChangePassswordGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
+  // tslint:disable-next-line: max-line-length
   canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.authService.user.pipe(
       take(1),
       map(user => {
         const isAuth = !!user;
-        if (isAuth && (user.userType === "admin" || user.userType === "student" || user.userType === "faculty")) {
+        if (isAuth && (user.userType === 'admin' || user.userType === 'student' || user.userType === 'faculty')) {
           return true;
         }
         return this.router.createUrlTree(['/login']);
@@ -108,6 +115,7 @@ export class ChangePassswordGuard implements CanActivate {
     );
   }
 
+  // tslint:disable-next-line: max-line-length
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.canActivate(route, state);
   }
@@ -117,27 +125,24 @@ export class ChangePassswordGuard implements CanActivate {
 export class LoginGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot):| boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
+  // tslint:disable-next-line: max-line-length
+  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot): | boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.authService.user.pipe(
       take(1),
       map(user => {
-        if(!localStorage.getItem("userData")) {
+        if (!localStorage.getItem('userData')) {
           this.authService.removeUser();
         }
         const isAuth = !!user;
         if (!isAuth) {
           return true;
-        }
-        else if(user.userType === "admin") {
+        } else if (user.userType === 'admin') {
           return this.router.createUrlTree(['/admin']);
-        }
-        else if(user.userType === "student") {
+        } else if (user.userType === 'student') {
           return this.router.createUrlTree(['/student', user._id]);
-        }
-        else if(user.userType === "faculty") {
+        } else if (user.userType === 'faculty') {
           return this.router.createUrlTree(['/faculty']);
-        }
-        else {
+        } else {
           return this.router.createUrlTree(['/']);
         }
       })
