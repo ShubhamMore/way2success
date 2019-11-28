@@ -14,7 +14,7 @@ export class ContentContactComponent implements OnInit {
 
   loading: boolean;
   error: string;
-  contact: ContactModel[];
+  contact: ContactModel;
   form: FormGroup;
   enquirySend: boolean;
 
@@ -23,7 +23,6 @@ export class ContentContactComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.contact = [];
     this.enquirySend = false;
     this.form = new FormGroup({
       name: new FormControl(null, {

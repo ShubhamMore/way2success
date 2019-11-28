@@ -105,9 +105,9 @@
                       <p class="data-heading"><strong>Status : </strong></p>
                     </td>
                     <td class="table-data table-data-value">
-                      <p class="data" *ngIf="student.status == 0">ACTIVATED</p>
-                      <p class="data" *ngIf="student.status == 1">FEE PENDING</p>
-                      <p class="data" *ngIf="student.status == 2">PASS OUT</p>
+                      <p class="data" *ngIf="student.status === '0'">ACTIVATED</p>
+                      <p class="data" *ngIf="student.status === '1'">FEE PENDING</p>
+                      <p class="data" *ngIf="student.status === '2'">PASS OUT</p>
                     </td>
                   </tr>
                 </tbody>

@@ -142,23 +142,17 @@
 
         </div>
 
-        <div class="row" *ngIf="!!subjects.length > 0">
+        <div class="row" *ngIf="subjects.length > 0">
             <div class="col-12">
               <div class="form-group m-1">
                 <label class="input-label">Subjects : </label>
                 <ng-container *ngFor="let curSubject of subjects, let i = index">
                     &nbsp;&nbsp;
-                    <input class="input-checkbox" type="checkbox" [id]="subject" class="subject" (change)="subjectsChanged($event, curSubject._id)" value="curSubject._id">
+                    <input class="input-checkbox" type="checkbox" [id]="curSubject._id" name="subject" class="subject" (change)="subjectsChanged($event, curSubject._id)" value="curSubject._id">
                     {{curSubject.subject}}
                 </ng-container>
               </div>
             </div>
-        </div>
-
-        <div class="row mt-1" *ngIf="formError">
-          <div class="col-12">
-            <span class="form-error">*Please Fill All Student Fields</span>
-          </div>
         </div>
 
         <hr class="horizontal-line">

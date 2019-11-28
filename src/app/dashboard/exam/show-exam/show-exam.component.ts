@@ -50,6 +50,13 @@ export class ShowExamComponent implements OnInit {
     );
   }
 
+  checkPassFail(marks: string, passingMarks: string): boolean {
+    if (+marks >= +passingMarks) {
+      return true;
+    }
+    return false;
+  }
+
   editExam() {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }

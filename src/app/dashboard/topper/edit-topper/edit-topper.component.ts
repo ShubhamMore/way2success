@@ -146,4 +146,8 @@ export class EditTopperComponent implements OnInit {
     return true;
   }
 
+  cancel() {
+    this.location.back();
+  }
+
 }

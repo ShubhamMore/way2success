@@ -36,12 +36,12 @@
       </div>
       <hr class="horizontal-line">
       <form class="" [formGroup]="form">
-        <div class="row">
-          <div class="col-md-6 col-sm-12 mt-3" *ngIf="searchType == '3'">
+        <div class="row" *ngIf="searchType === '3'">
+          <div class="col-md-6 col-sm-12 mt-3">
             <div class="form-group">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <label class="input-group-text" for="student">Student Name</label>
+                  <label class="input-group-text" for="student">Name</label>
                 </div>
                 <input class="input-text form-control" type="text" name="student" id="student" formControlName="student" placeholder="Student" (keyup.enter)="searchByStudentName()">
                 <div class="input-group-append">
@@ -52,7 +52,10 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-12 mt-3" *ngIf="searchType != '3'">
+        </div>
+
+        <div class="row" *ngIf="searchType !== '3'">
+          <div class="col-md-4 col-sm-12 mt-3">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="course">Course </label>
@@ -62,9 +65,9 @@
                 <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
               </select>
             </div>
-
           </div>
-          <div class="col-md-4 col-sm-12 mt-3" *ngIf="(searchType == '0' || searchType == '1') && searchType != '3'">
+
+          <div class="col-md-4 col-sm-12 mt-3" *ngIf="searchType === '0' || searchType === '1'">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="batch">Batch </label>
@@ -75,7 +78,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-4 col-sm-12 mt-3" *ngIf="searchType == '0' && searchType != '3'">
+          <div class="col-md-4 col-sm-12 mt-3" *ngIf="searchType === '0'">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="subject">Subject </label>

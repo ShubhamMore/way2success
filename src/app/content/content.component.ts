@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
+  loading: boolean;
+  error: string;
   constructor() { }
 
   ngOnInit() {
+    this.loading = true;
+    this.loading = false;
   }
 
 }

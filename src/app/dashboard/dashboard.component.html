@@ -1,6 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
-<div class="row">
+<div class="row" *ngIf="!loading">
     <div class="col-10 mx-auto">
         <h1 class="welcome-heading text-center">Welcome to <b>Way2Success</b></h1>
     </div>

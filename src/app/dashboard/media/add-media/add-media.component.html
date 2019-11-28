@@ -74,7 +74,7 @@
         <div class="row">
             <div class="col-12">
               <div class="form-group m-1">
-                <div *ngIf="!!subjects.length > 0; else empty_subject">
+                <div *ngIf="subjects.length > 0; else empty_subject">
                   <label class="input-label">Subjects : </label>
                   <ng-container *ngFor="let curSubject of subjects, let i = index">
                       &nbsp;&nbsp;
@@ -143,12 +143,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="row mt-1" *ngIf="formError">
-          <div class="col-12">
-            <span class="form-error">*Please Fill All Media Fields</span>
           </div>
         </div>
 

@@ -8,10 +8,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  loading: boolean;
+  error: string;
   constructor(private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loading = true;
+    this.loading = false;
   }
 
   addStudent() {

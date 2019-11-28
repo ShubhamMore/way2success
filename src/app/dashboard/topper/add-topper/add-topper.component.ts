@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TopperService } from '../../../services/topper.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-topper',
@@ -27,7 +28,8 @@ export class AddTopperComponent implements OnInit {
 
   constructor(private topperService: TopperService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit() {
     this.loading = true;
@@ -122,6 +124,10 @@ export class AddTopperComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  cancel() {
+    this.location.back();
   }
 
 }
