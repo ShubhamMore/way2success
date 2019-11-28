@@ -4,7 +4,7 @@ import { FormControl, Validators, FormGroup, NgForm, FormBuilder } from '@angula
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { EncryptService } from '../../encrypt.service';
-import { EnvVar } from '../../shared/config';
+import { environment } from '../../../environments/environment';
 import { Validator } from '../../shared/validators';
 
 @Component({
@@ -75,7 +75,7 @@ export class ResetPasswordComponent implements OnInit {
 
       const resetPassword = {
         // user: this.user,
-        password: this.encryptService.encrypt(this.form.value.password, EnvVar.encKey),
+        password: this.encryptService.encrypt(this.form.value.password, environment.encKey),
         token: this.token
       };
 

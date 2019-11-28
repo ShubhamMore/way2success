@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { EnvVar } from '../../shared/config';
+import { environment } from '../../../environments/environment';
 
 import { AuthService, AuthResponseData } from '../auth/auth.service';
 import { EncryptService } from '../../encrypt.service';
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
 
     const email = this.form.value.email;
-    const password = this.encryptService.encrypt(this.form.value.password, EnvVar.encKey);
+    const password = this.encryptService.encrypt(this.form.value.password, environment.encKey);
 
     let authObs: Observable<AuthResponseData>;
 

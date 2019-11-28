@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EncryptService } from '../../encrypt.service';
-import { EnvVar } from '../../shared/config';
+import { environment } from '../../../environments/environment';
 import { Validator } from '../../shared/validators';
 import { UserService } from '../../services/user.service';
 
@@ -82,7 +82,7 @@ export class RegisterComponent implements OnInit {
       name: this.form.value.name.toLowerCase(),
       userType: this.form.value.userType,
       email: this.form.value.email,
-      password: this.encryptService.encrypt(this.form.value.password, EnvVar.encKey)
+      password: this.encryptService.encrypt(this.form.value.password, environment.encKey)
     };
 
     let authObs: Observable<AuthResponseData>;

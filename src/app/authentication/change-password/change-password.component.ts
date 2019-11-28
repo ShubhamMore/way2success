@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { EnvVar } from '../../shared/config';
+import { environment } from '../../../environments/environment';
 import { EncryptService } from '../../encrypt.service';
 import { Validator } from '../../shared/validators';
 
@@ -49,8 +49,8 @@ export class ChangePasswordComponent implements OnInit {
         api: 'changePassword',
         data: {
           email: JSON.parse(localStorage.getItem('userData')).email,
-          password : this.encryptService.encrypt(this.form.value.oldPassword, EnvVar.encKey),
-          newPassword : this.encryptService.encrypt(this.form.value.password, EnvVar.encKey)
+          password : this.encryptService.encrypt(this.form.value.oldPassword, environment.encKey),
+          newPassword : this.encryptService.encrypt(this.form.value.password, environment.encKey)
         }
       };
       this.httpService.httpPostAuth(data)

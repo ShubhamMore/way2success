@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { StudentModel } from '../../../models/student.model';
 import { BranchModel } from '../../../models/branch.model';
 import { UserService } from '../../../services/user.service';
-import { EnvVar } from '../../../shared/config';
+import { environment } from '../../../../environments/environment';
 import { EncryptService } from '../../../encrypt.service';
 
 @Component({
@@ -198,7 +198,7 @@ export class EditStudentComponent implements OnInit {
       birthDate: this.form.value.birthDate,
       phone: this.form.value.phone,
       email: this.form.value.email,
-      password: this.encryptService.encrypt(this.form.value.phone, EnvVar.encKey),
+      password: this.encryptService.encrypt(this.form.value.phone, environment.encKey),
       address: this.form.value.address,
       course: this.form.value.course,
       batch: this.form.value.batch,
