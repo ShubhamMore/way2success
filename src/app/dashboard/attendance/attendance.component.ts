@@ -99,7 +99,6 @@ export class AttendanceComponent implements OnInit {
         } else {
           this.onSelectBranch(this.branches[0]._id);
         }
-        this.loading = false;
       },
       (errorMessage: any) => {
         this.error = errorMessage;

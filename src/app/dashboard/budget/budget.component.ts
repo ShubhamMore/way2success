@@ -78,7 +78,6 @@ export class BudgetComponent implements OnInit {
     });
 
     this.onSelectSearchType(this.searchType);
-    this.loading = false;
   }
 
   curDate() {

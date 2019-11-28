@@ -66,7 +66,7 @@ export class ShowStudentAttendanceComponent implements OnInit {
         this.id = params['id'];
         this.historyService.getStudentHistory(this.id)
         .subscribe(
-          resData => {
+          (resData: any) => {
             this.error = null;
             this.courses = resData.history;
             this.branch = resData.branch;
@@ -77,10 +77,9 @@ export class ShowStudentAttendanceComponent implements OnInit {
             this.subject = this.subjects[0]._id;
 
             this.searchAttendance(this.month, this.year, this.course, this.batch, this.subject);
-            this.loading = false;
           },
-          errorMessage => {
-            this.error = errorMessage;
+          (error: any) => {
+            this.error = error;
             this.loading = false;
           }
         );

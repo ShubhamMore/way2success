@@ -65,47 +65,45 @@ export class StudentComponent implements OnInit {
     this.courseService.getBranchesAndCourses()
     .subscribe(
       (resData: any) => {
-      this.error = null;
-      this.allCourses = resData.courses;
-      this.branches = resData.branches;
-      this.form = new FormGroup({
-        course : new FormControl('', {
-          validators: [Validators.required]
-        }),
-        batch : new FormControl('', {
-          validators: [Validators.required]
-        }),
-        subject : new FormControl('', {
-          validators: [Validators.required]
-        }),
-        student : new FormControl(this.student, {
-          validators: [Validators.required]
-        })
-      });
+        this.error = null;
+        this.allCourses = resData.courses;
+        this.branches = resData.branches;
+        this.form = new FormGroup({
+          course : new FormControl('', {
+            validators: [Validators.required]
+          }),
+          batch : new FormControl('', {
+            validators: [Validators.required]
+          }),
+          subject : new FormControl('', {
+            validators: [Validators.required]
+          }),
+          student : new FormControl(this.student, {
+            validators: [Validators.required]
+          })
+        });
 
-      if (this.branch !== '') {
-        this.onSelectBranch(this.branch);
-        if (this.course !== '') {
-          if (this.searchType === '0' || this.searchType === '1' || this.searchType === '2') {
-            this.form.patchValue({course: this.course});
-            this.onSelectCourse();
+        if (this.branch !== '') {
+          this.onSelectBranch(this.branch);
+          if (this.course !== '') {
+            if (this.searchType === '0' || this.searchType === '1' || this.searchType === '2') {
+              this.form.patchValue({course: this.course});
+              this.onSelectCourse();
+            }
+            if (this.searchType === '0' || this.searchType === '1') {
+              this.form.patchValue({batch: this.batch});
+              this.onSelectBatch();
+            }
+            if (this.searchType === '0') {
+              this.form.patchValue({subject: this.subject});
+              this.onSelectSubject();
+            }
+          } else if (this.student !== null && this.searchType === '3') {
+            this.searchByStudentName();
           }
-          if (this.searchType === '0' || this.searchType === '1') {
-            this.form.patchValue({batch: this.batch});
-            this.onSelectBatch();
-          }
-          if (this.searchType === '0') {
-            this.form.patchValue({subject: this.subject});
-            this.onSelectSubject();
-          }
-        } else if (this.student !== null && this.searchType === '3') {
-          this.searchByStudentName();
+        } else {
+          this.onSelectBranch(this.branches[0]._id);
         }
-      } else {
-        this.onSelectBranch(this.branches[0]._id);
-      }
-
-      this.loading = false;
       },
       (errorMessage: any) => {
         this.error = errorMessage;
