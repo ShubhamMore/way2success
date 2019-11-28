@@ -100,9 +100,12 @@ export class StudentComponent implements OnInit {
             }
           } else if (this.student !== null && this.searchType === '3') {
             this.searchByStudentName();
+          } else {
+            this.loading = false;
           }
         } else {
           this.onSelectBranch(this.branches[0]._id);
+          this.loading = false;
         }
       },
       (errorMessage: any) => {

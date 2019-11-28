@@ -135,7 +135,6 @@ export class ShowStudentPerformanceComponent implements OnInit {
   }
 
   searchExams(month: string, year: string, course: string, batch: string, subject: string) {
-    console.log(month, year, subject);
     this.examService.getExamsPerformance(month, year, this.branch.branch, course, batch, subject, this.id)
     .subscribe(
       resData => {

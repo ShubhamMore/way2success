@@ -83,9 +83,12 @@ export class MediaComponent implements OnInit {
               this.batchChanged();
               this.form.patchValue({subject: this.subject});
               this.subjectChanged();
+            } else {
+              this.loading = false;
             }
           } else {
             this.onSelectBranch(this.branches[0]._id);
+            this.loading = false;
           }
         },
         (errorMessage: any) => {
@@ -166,8 +169,8 @@ export class MediaComponent implements OnInit {
           }
           this.loading = false;
         },
-        (errorMessage: any) => {
-          this.error = errorMessage;
+        (error: any) => {
+          this.error = error;
           this.loading = false;
         }
       );
