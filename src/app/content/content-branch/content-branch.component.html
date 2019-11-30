@@ -1,11 +1,11 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div *ngIf="!loading">
-  <div class="row mt-2">
+  <div class="brachbox row mt-2">
     <div class="col-12 mx-auto">
       <h3>Our Branches</h3>
       <div class="row mb-3" *ngFor="let branch of branches">
-        <div class="col-md-10 col-12 mx-auto">
+        <div class="cardBox col-md-10 col-12 mx-auto">
           <div class="card shadow">
             <div class="card-header"><i class="fa fa-building-o"></i>&nbsp;&nbsp;&nbsp;{{branch.branchName}}</div>
             <div class="card-body">
@@ -23,8 +23,8 @@
                       &nbsp;&nbsp;{{branch.phone}}
                     </div>
                   </div>
-                  <div class="col-12 mt-2">
-                    <div class="row">
+                  <div class="row">
+                    <div class="col-12 mt-2">
                       <span><i class="fa fa-envelope"></i></span>
                       &nbsp;&nbsp;<a href="mailto:{{branch.email}}">{{branch.email}}</a>
                     </div>
