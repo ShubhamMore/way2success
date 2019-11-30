@@ -34,11 +34,12 @@
   bottom: 120px;
   padding-left: 250px;
   padding-top: 150px;
+  width: 800px;
 }
 .ourInfoText{
   font-size: 25px;
   padding: 20px;
-  letter-spacing: 8px;
+  letter-spacing: 4px;
 }
 .ourInfoText i{
   padding-right: 10px;
