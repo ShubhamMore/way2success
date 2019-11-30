@@ -1,0 +1,26 @@
+.backgroundBox{
+  text-align: center;
+}
+
+.submitBtn{
+    width: 100%;
+}
+.submitBtn {
+    padding: 20px 50px;
+}
+.submitBtn a{
+    position: relative;
+    top: 10px;
+}
+
+@media only screen and (max-width: 1283px) {
+    .customCard{
+      width: inherit;
+    }
+  }
+
+  @media only screen and (max-width: 764px) {
+    .customCard{
+      width: 100%;
+    }
+}

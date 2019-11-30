@@ -73,7 +73,35 @@ body {
 
 
 
-/*Added input css animations*/
+/*---------------------Custom card css start---------------------------------*/
+
+.backgroundBox{
+  min-height: 600px;
+  background-color: #272343;
+  z-index: 0;
+  position: relative;
+  padding: 50px 100px;
+}
+
+
+.customCard{
+  display: inline-block;
+  width: 500px;
+  background-color: #bae8e8;
+  text-align: center;
+}
+
+.customCard h2{
+  color: #272343;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 40px;
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+
 .submitBtn{
   display: inline-block;
   padding-bottom: 10px;
@@ -82,6 +110,7 @@ body {
 .submitBtn button{
   background-color: #272343;
   width: 100px;
+  border: 0px;
 }
 
 /*input animations*/
@@ -141,11 +170,14 @@ body {
 .Input {
   position: relative;
   width: 100%;
-  padding: 0 50px 0 50px;
+  padding: 0 50px 12px 50px;
   margin:40px 0;
 }
 .Input span{
+  display: block;
+  position: absolute;
   font-size: 20px;
+  right:50px;
 }
 .Input-text {
   display: block;
@@ -174,7 +206,7 @@ body {
 .Input-label {
   display: block;
   position: absolute;
-  bottom: 50%;
+  bottom: 40%;
   left: 1rem;
   color: #272343;
   font-family: inherit;
@@ -212,3 +244,20 @@ body {
     visibility 0ms,
     z-index 0ms;
 }
+/*---------------------Custom card css end---------------------------------*/
+
+
+
+/*---------------------Media Queries Start---------------------------------*/
+@media only screen and (max-width: 764px) {
+  .backgroundBox{
+    padding: 0px;
+  }
+}
+
+@media only screen and (max-width: 1283px) {
+  .customCard{
+    width: 100%;
+  }
+}
+/*---------------------Media Queries End---------------------------------*/

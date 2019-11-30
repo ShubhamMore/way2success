@@ -12,34 +12,29 @@
     </div> -->
 
     <!-- <div class="row" *ngIf="!isLoading"> -->
-    <div class="row">
-      <div class="col-md-6 mx-auto">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="page-heading">Login</h2>
-            <form class="form login-form" (submit)="login()" [formGroup]="form">
-              <div class="form-group">
-                <label class="input-label" for="email">E-Mail</label>
-                <input class="input-email" type="email" id="email" class="form-control" name="email" formControlName="email">
-                <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please enter E-Mail</span>
-              </div>
-              <div class="form-group">
-                <label class="input-label" for="password">Password</label>
-                <input class="input-password" type="password" id="password" class="form-control" name="password" formControlName="password">
-                <span class="input-error" *ngIf="!form.get('password').valid && form.get('password').touched">*Please enter Password</span>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-md-6 col-12">
-                  <button class="btn-login btn btn-primary" type="submit">Login</button>
-                </div>
-                <div class="col-md-6 col-12 text-right">
-                  <a class="forgot-password-link" routerLink="/forgotPassword">Forgot Password</a>
-                </div>
-              </div>
-            </form>
+    <div class="backgroundBox">
+      <div class="customCard">
+        <form class="form login-form" (submit)="login()" [formGroup]="form">  
+          <h2>Login</h2>
+          <div class="Wrapper">
+            <div class="Input">
+              <input type="email" id="email"  name="email"  formControlName="email" class="Input-text" placeholder="Enter your login Id">
+              <label for="input" class="Input-label">Email</label>
+              <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please enter E-Mail</span>
+            </div>
           </div>
-        </div>
+          <div class="Wrapper">
+            <div class="Input">
+              <input type="password" id="password" class="form-control" name="password" formControlName="password" class="Input-text" placeholder="Enter your password">
+              <label for="input" class="Input-label">Password</label>
+              <span class="input-error" *ngIf="!form.get('password').valid && form.get('password').touched">*Please enter Password</span>
+            </div>
+          </div>
+          <div class="submitBtn">
+              <button type="submit" class="btn btn-primary float-left">Login</button>
+              <a class="float-right" routerLink="/forgotPassword">Forgot Password</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>

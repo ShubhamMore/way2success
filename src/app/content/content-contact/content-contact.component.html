@@ -1,8 +1,8 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div  *ngIf="!loading">
-  <div class="contactUsDiv">
-    <div class="contactUsBox">
+  <div class="backgroundBox">
+    <div class="customCard">
       <form (submit)="sendEnquiry()" [formGroup]="form">
         <h2>Contact Us</h2>
           <div class="Wrapper">
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="submitBtn">
-            <button type="submit" class="btn btn-primary float-right">Send</button>
+            <button type="submit" class="btn btn-primary">Send</button>
           </div>
         </form>
       </div>
