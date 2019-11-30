@@ -43,12 +43,17 @@ export class CourseComponent implements OnInit {
           } else {
             this.branchChanged(this.branch);
           }
+        } else {
+          this.noCourses = 'Currently No Branches Available, Please Add Branch';
+          this.loading = false;
         }
-        this.noCourses = 'Currently No Branches Available, Please Add Branch';
-        this.loading = false;
       },
       (errorMessage: any) => {
         this.error = errorMessage;
+        if (this.error === 'Error: No Branch Found') {
+          this.error = null;
+          this.noCourses = 'Currently No Branches Available, Please Add Branch';
+        }
         this.loading = false;
       }
     );

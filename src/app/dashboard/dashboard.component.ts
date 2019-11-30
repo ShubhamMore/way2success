@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,11 +8,26 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(private router: Router,
+  dashboard: any;
+  loading: boolean;
+  error: string;
+  constructor(private dashboardService: DashboardService,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loading = true;
+    this.dashboardService.getDashboardData()
+      .subscribe(
+        (resData: any) => {
+          this.dashboard = resData;
+          this.loading = false;
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
   }
 
   addStudent() {

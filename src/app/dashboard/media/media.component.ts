@@ -83,12 +83,13 @@ export class MediaComponent implements OnInit {
               this.batchChanged();
               this.form.patchValue({subject: this.subject});
               this.subjectChanged();
+            } else {
+              this.loading = false;
             }
           } else {
             this.onSelectBranch(this.branches[0]._id);
+            this.loading = false;
           }
-
-          this.loading = false;
         },
         (errorMessage: any) => {
           this.error = errorMessage;
@@ -168,8 +169,8 @@ export class MediaComponent implements OnInit {
           }
           this.loading = false;
         },
-        (errorMessage: any) => {
-          this.error = errorMessage;
+        (error: any) => {
+          this.error = error;
           this.loading = false;
         }
       );
@@ -181,9 +182,7 @@ export class MediaComponent implements OnInit {
 
     deleteMedia(id: string) {
       this.loading = true;
-      const media = this.allMedia.find((curMedia) => curMedia._id === id);
-      const image = media.link.substring(media.link.lastIndexOf('/') + 1);
-      this.mediaService.deleteMedia(id, image)
+      this.mediaService.deleteMedia(id)
       .subscribe(
         (resData: any) => {
           this.error = null;

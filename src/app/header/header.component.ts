@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { environment } from '../../environments/environment';
 import { AuthService } from '../authentication/auth/auth.service';
 import { User } from '../authentication/auth/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,7 +12,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  isAuthenticated = false;
+  isAuthenticated: boolean;
+  developmentMode: boolean;
   private userSub: Subscription;
   user: User;
 
@@ -20,6 +22,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.isAuthenticated = false;
+    this.developmentMode = !environment.production;
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
       this.user = user;

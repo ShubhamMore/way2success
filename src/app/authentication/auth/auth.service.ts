@@ -5,7 +5,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 import { User } from './user.model';
-import { EnvVar } from '../../shared/config';
+import { environment } from '../../../environments/environment';
 
 export interface AuthResponseData {
   _id: string;
@@ -35,7 +35,7 @@ export class AuthService {
 
   createUser(data: any) {
     return this.http
-      .post<AuthResponseData>(EnvVar.url + 'newUser', data)
+      .post<AuthResponseData>(environment.backend + 'newUser', data)
       .pipe(
         catchError(this.handleError),
         tap(resData => {
@@ -56,7 +56,7 @@ export class AuthService {
       password
     };
     return this.http
-      .post<AuthResponseData>(EnvVar.url + 'login', data)
+      .post<AuthResponseData>(environment.backend + 'login', data)
       .pipe(
         catchError(this.handleError),
         tap(resData => {
@@ -108,7 +108,7 @@ export class AuthService {
       token = 'Bearer ' + JSON.parse(localStorage.getItem('userData'))._token;
     }
     const headers = new HttpHeaders().set('Authorization', token);
-    return this.http.post(EnvVar.url + 'autoLogin', {}, { headers })
+    return this.http.post(environment.backend + 'autoLogin', {}, { headers })
     .pipe(
       map((response: any) => {
           return response;
@@ -135,7 +135,7 @@ export class AuthService {
     }
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this.http.post(EnvVar.url + 'logout', {}, { headers })
+    return this.http.post(environment.backend + 'logout', {}, { headers })
     .subscribe(
       resData => {
         this.user.next(null);
@@ -167,7 +167,7 @@ export class AuthService {
     }
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this.http.post(EnvVar.url + 'logoutAll', {}, { headers })
+    return this.http.post(environment.backend + 'logoutAll', {}, { headers })
     .subscribe(
       resData => {
         this.user.next(null);

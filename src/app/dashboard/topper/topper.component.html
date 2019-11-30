@@ -1,4 +1,4 @@
-<img class="loading" src="/src/assets/images/Reload-1.3s-78px.svg" *ngIf="loading">
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div  *ngIf="!loading">
   <div class="row mt-2">
@@ -29,7 +29,7 @@
               <h4 class="text-center">{{topper.name | uppercase}}</h4>
             </div>
             <div class="card-body text-center">
-              <img class="topper-image shadow-sm" [src]="topper.image" [alt]="topper.name">
+              <img class="topper-image shadow-sm" [src]="topper.image.secure_url" [alt]="topper.name">
               <h5 class="">{{topper.score}}</h5>
               <hr>
               <p class="">{{topper.details}}</p>

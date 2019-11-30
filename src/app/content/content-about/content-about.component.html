@@ -4,7 +4,7 @@
   <div class="row mt-2">
     <div class="col-12">
       <h3>About Us..</h3>
-      <div class="row">
+      <div class="row" *ngIf="about">
         <div class="col-md-4 col-12 pt-3 mx-auto" *ngIf="about.aim !== ''">
           <div class="card shadow">
             <div class="card-header"><i class="fa fa-crosshairs"></i>&nbsp;&nbsp;&nbsp;Aim</div>

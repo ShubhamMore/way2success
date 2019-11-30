@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ContactService } from 'src/app/services/contact.service';
 import { Location } from '@angular/common';
 import { ContactModel } from 'src/app/models/contact.model';
-import { Validator } from 'src/app/shared/validators';
 
 @Component({
   selector: 'app-contact',

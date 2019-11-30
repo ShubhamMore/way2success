@@ -89,7 +89,7 @@ export class ImageService {
   }
 
   deleteImage(id: string) {
-    const data = {api: 'deleteImage', data: {_id: id}};
+    const data = {api: 'deleteImage', data: {public_id: id}};
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

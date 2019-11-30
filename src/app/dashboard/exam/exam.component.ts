@@ -97,11 +97,13 @@ export class ExamComponent implements OnInit {
             this.onSelectBatch();
             this.form.patchValue({subject: this.subject});
             this.onSelectSubject();
+          } else {
+            this.loading = false;
           }
         } else {
           this.onSelectBranch(this.branches[0]._id);
+          this.loading = false;
         }
-        this.loading = false;
       },
       (errorMessage: any) => {
         this.error = errorMessage;

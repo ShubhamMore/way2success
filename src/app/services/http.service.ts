@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { EnvVar } from '../shared/config';
+import { environment } from '../../environments/environment';
 import { AuthService } from '../authentication/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class HttpService {
               private route: ActivatedRoute) { }
 
   public httpPost(data: any): any {
-    return this.http.post(EnvVar.url + data.api, data.data)
+    return this.http.post(environment.backend + data.api, data.data)
     .pipe(
       map((response: any) => {
           return response;
@@ -43,7 +43,7 @@ export class HttpService {
       token = 'Bearer ' + JSON.parse(localStorage.getItem('userData'))._token;
     }
     const headers = new HttpHeaders().set('Authorization', token);
-    return this.http.post(EnvVar.url + data.api, data.data, { headers })
+    return this.http.post(environment.backend + data.api, data.data, { headers })
     .pipe(
       map((response: any) => {
           return response;

@@ -13,16 +13,18 @@
         <div class="row">
           <div class="col-md-8 col-12 mx-auto">
             <div class="row">
-              <div class="col-3">
+              <div class="col-6">
                 <button class="btn btn-link" type="button" (click)="studentAttendance()">Attendance</button>
               </div>
-              <div class="col-3">
+              <div class="col-6">
                 <button class="btn btn-link" type="button" (click)="studentPerformance()">Performance</button>
               </div>
-              <div class="col-3">
+            </div>
+            <div class="row">
+              <div class="col-6">
                 <button class="btn btn-link" type="button" (click)="studentHistory()">History</button>
               </div>
-              <div class="col-3">
+              <div class="col-6">
                 <button class="btn btn-link" type="button" (click)="studentReceipts()">Receipts</button>
               </div>
             </div>
@@ -38,7 +40,7 @@
                 <tbody class="table-body">
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                      <p class="data-heading"><strong>Branch : </strong></p>
+                      <p class="data-heading"><strong>Branch</strong></p>
                     </td>
                     <td class="table-data table-data-value">
                       <p class="data">{{studentMetaData.branch}}</p>
@@ -46,7 +48,7 @@
                   </tr>
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                      <p class="data-heading"><strong>Course : </strong></p>
+                      <p class="data-heading"><strong>Course</strong></p>
                     </td>
                     <td class="table-data table-data-value">
                       <p class="data">{{studentMetaData.course}}</p>
@@ -54,7 +56,7 @@
                   </tr>
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                      <p class="data-heading"><strong>Batch : </strong></p>
+                      <p class="data-heading"><strong>Batch</strong></p>
                     </td>
                     <td class="table-data table-data-value">
                       <p class="data">{{studentMetaData.batch}}</p>
@@ -62,7 +64,7 @@
                   </tr>
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                        <p class="data-heading"><strong>Subjects : </strong></p>
+                        <p class="data-heading"><strong>Subjects</strong></p>
                     </td>
                     <td class="table-data table-data-value">
                       <p class="data">{{subject.join(', ')}}</p>
@@ -70,7 +72,7 @@
                   </tr>
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                      <p class="data-heading"><strong>Birth Date : </strong></p>
+                      <p class="data-heading"><strong>Birth Date</strong></p>
                     </td>
                     <td class="table-data table-data-value">
                       <p class="data">{{student.birthDate}}</p>
@@ -78,7 +80,7 @@
                   </tr>
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                      <p class="data-heading"><strong>Address : </strong></p>
+                      <p class="data-heading"><strong>Address</strong></p>
                     </td>
                     <td class="table-data table-data-value">
                       <p class="data">{{student.address}}</p>
@@ -86,7 +88,7 @@
                   </tr>
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                      <p class="data-heading"><strong><em>E-</em>mail : </strong></p>
+                      <p class="data-heading"><strong><em>E-</em>mail</strong></p>
                     </td>
                     <td class="table-data table-data-value">
                       <p class="data"><a href="mailto:{{student.email}}">{{student.email}}</a></p>
@@ -94,7 +96,7 @@
                   </tr>
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                      <p class="data-heading"><strong>Phone : </strong></p>
+                      <p class="data-heading"><strong>Phone</strong></p>
                     </td>
                     <td class="table-data table-data-value">
                       <p class="data">+91 {{student.phone}}</p>
@@ -102,12 +104,12 @@
                   </tr>
                   <tr class="table-row">
                     <td class="table-data table-data-parameter">
-                      <p class="data-heading"><strong>Status : </strong></p>
+                      <p class="data-heading"><strong>Status</strong></p>
                     </td>
                     <td class="table-data table-data-value">
-                      <p class="data" *ngIf="student.status == 0">ACTIVATED</p>
-                      <p class="data" *ngIf="student.status == 1">FEE PENDING</p>
-                      <p class="data" *ngIf="student.status == 2">PASS OUT</p>
+                      <p class="data" *ngIf="student.status === '0'">ACTIVATED</p>
+                      <p class="data" *ngIf="student.status === '1'">FEE PENDING</p>
+                      <p class="data" *ngIf="student.status === '2'">PASS OUT</p>
                     </td>
                   </tr>
                 </tbody>

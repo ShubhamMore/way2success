@@ -63,7 +63,6 @@ export class ImagesComponent implements OnInit {
   }
 
   deleteImage(id: string) {
-
     this.loading = true;
     this.imageService.deleteImage(id)
     .subscribe((responce: any) => {

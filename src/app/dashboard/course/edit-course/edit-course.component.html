@@ -177,7 +177,7 @@
                           </thead>
                           <tbody class="table-body">
                             <ng-container *ngFor="let batch of batches; let i = index">
-                              <tr class="table-row" class="p-1 text-center" *ngIf="batch.batch === currentBatch">
+                              <tr class="table-row" class="p-1 text-center">
                                 <td class="table-data" class="text-left">{{batch.batchName}}</td>
                                 <td class="table-data">
                                   <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.subject}}</p>
@@ -200,12 +200,6 @@
                           </tbody>
                         </table>
                       </div>
-                    </div>
-                  </div>
-
-                  <div class="row" *ngIf="formError">
-                    <div class="col-12">
-                      <span class="form-error">{{formError}}</span>
                     </div>
                   </div>
 

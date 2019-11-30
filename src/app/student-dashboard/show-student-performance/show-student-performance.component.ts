@@ -65,7 +65,7 @@ export class ShowStudentPerformanceComponent implements OnInit {
         this.id = params['id'];
         this.historyService.getStudentHistory(this.id)
         .subscribe(
-          resData => {
+          (resData: any) => {
             this.error = null;
             this.courses = resData.history;
             this.branch = resData.branch;
@@ -75,10 +75,9 @@ export class ShowStudentPerformanceComponent implements OnInit {
             this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
             this.subject = this.subjects[0]._id;
             this.searchExams(this.month, this.year, this.course, this.batch, this.subject);
-            this.loading = false;
           },
-          errorMessage => {
-            this.error = errorMessage;
+          (error: any) => {
+            this.error = error;
             this.loading = false;
           }
         );
@@ -136,7 +135,6 @@ export class ShowStudentPerformanceComponent implements OnInit {
   }
 
   searchExams(month: string, year: string, course: string, batch: string, subject: string) {
-    console.log(month, year, subject);
     this.examService.getExamsPerformance(month, year, this.branch.branch, course, batch, subject, this.id)
     .subscribe(
       resData => {

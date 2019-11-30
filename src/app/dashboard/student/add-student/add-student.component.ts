@@ -4,7 +4,7 @@ import { StudentService } from '../../../services/student.service';
 import { CourseService } from '../../../services/course.service';
 import { EncryptService } from '../../../encrypt.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { EnvVar } from '../../../shared/config';
+import { environment } from '../../../../environments/environment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { UserService } from '../../../services/user.service';
@@ -180,7 +180,7 @@ export class AddStudentComponent implements OnInit {
       birthDate: this.form.value.birthDate,
       phone: this.form.value.phone,
       email: this.form.value.email,
-      password: this.encryptService.encrypt(this.form.value.phone, EnvVar.encKey),
+      password: this.encryptService.encrypt(this.form.value.phone, environment.encKey),
       address: this.form.value.address,
       branch: this.form.value.branch,
       course: this.form.value.course,

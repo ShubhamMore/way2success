@@ -49,10 +49,10 @@
                     <p class="data">{{ examMetaData.students[i].name | uppercase }}</p>
                 </td>
                 <td class="table-data">
-                    <p class="data"><span [ngClass]="+mark.marks >= +exam.passingMarks ? 'pass' : 'fail'">{{mark.marks}}</span>/{{exam.outOfMarks}}</p>
+                    <p class="data"><span [ngClass]="checkPassFail(mark.marks, exam.passingMarks) ? 'pass' : 'fail'">{{mark.marks}}</span>/{{exam.outOfMarks}}</p>
                 </td>
                 <td class="table-data">
-                    <p [ngClass]="+mark.marks >= +exam.passingMarks ? '' : 'fail'">{{+mark.marks >= +exam.passingMarks ? "Pass" : "Fail"}}</p>
+                    <p [ngClass]="checkPassFail(mark.marks, exam.passingMarks) ? '' : 'fail'">{{ checkPassFail(mark.marks, exam.passingMarks) ? "Pass" : "Fail" }}</p>
                 </td>
               </tr>
             </tbody>

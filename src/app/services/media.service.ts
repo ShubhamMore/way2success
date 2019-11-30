@@ -90,8 +90,8 @@ export class MediaService {
     );
   }
 
-  deleteMedia(id: string, image: string) {
-    const data = {api: 'deleteMedia', data: {_id: id, image}};
+  deleteMedia(id: string) {
+    const data = {api: 'deleteMedia', data: {_id: id}};
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

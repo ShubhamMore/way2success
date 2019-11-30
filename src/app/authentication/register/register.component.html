@@ -1,6 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
-<div class="row" *ngIf="!loading">
+<div class="row" *ngIf="!loading && developmentMode">
   <div class="col-12">
 
     <div class="alert alert-danger" *ngIf="error">
