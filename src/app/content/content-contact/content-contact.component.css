@@ -1,6 +1,9 @@
 .input-group-text {
   width: 90px;
 }
+.backgroundBox{
+  text-align: unset;
+}
 
 .ourInfo{
   position: relative;
@@ -10,6 +13,14 @@
   padding-left: 250px;
   padding-top: 150px;
   width: 800px;
+  -moz-animation: fadein 1.5s; 
+  -ms-animation: fadein 1.5s;
+  -o-animation: fadein 1.5s;
+   animation: fadein 1.5s;
+   -moz-animation: moveright 1s;; 
+  -ms-animation: moveright 1s;;
+  -o-animation: moveright 1s;;
+   animation: moveright 1s;;
 }
 .ourInfoText{
   font-size: 25px;
@@ -31,6 +42,7 @@
  .ourInfoText{
    display: inline-block;
    padding: 0px;
+   word-break: break-all;
  }
 }
 

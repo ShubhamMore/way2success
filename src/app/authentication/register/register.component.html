@@ -1,8 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
-<div class="row" *ngIf="!loading && developmentMode">
-  <div class="col-12">
-
+<div *ngIf="!loading && developmentMode">
     <div class="alert alert-danger" *ngIf="error">
       <p class="alert-error">{{ error }}</p>
     </div>
@@ -13,53 +11,54 @@
 
     <!-- <div class="row" *ngIf="!isLoading"> -->
 
-    <div class="row">
-      <div class="col-md-6 mx-auto">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="page-heading">Register</h2>
-            <form class="form register-form" (submit)="register()" [formGroup]="form">
-              <div class="form-group">
-                <label class="input-label" for="name">Name</label>
-                <input class="input-text" type="text" id="name" class="form-control" name="name" placeholder="" formControlName="name">
-                <span class="input-error" *ngIf="!form.get('name').valid && form.get('name').touched">*Please enter Name</span>
+    <div class="backgroundBox">
+      <div class="customCard">
+          <form  (submit)="register()" [formGroup]="form">
+              <h2>Register</h2>
+              <div class="Wrapper">
+                <div class="Input">
+                  <input type="text" id="name"   name="name"  formControlName="name" class="Input-text" placeholder="Enter Your Name">
+                  <label for="input" class="Input-label">Name</label>
+                  <span class="input-error" *ngIf="!form.get('name').valid && form.get('name').touched">*Please enter Name</span>
+                </div>
               </div>
-              <div class="form-group">
-                <label class="input-label" for="email">User Type</label>
-                <select class="input-select" name="userType" id="userType" class="form-control" formControlName="userType">
-                  <option value="">Select User Type</option>
-                  <option value="admin">Admin</option>
-                  <option value="student">Student</option>
-                  <option value="faculty">Faculty</option>
-                </select>
-                <span class="input-error" *ngIf="!form.get('userType').valid && form.get('userType').touched">*Please Select User Type</span>
+              <div class="Wrapper">
+                <div class="Input">
+                  <select name="userType" id="userType"  formControlName="userType" class="Input-text dropdown" placeholder="select user type">
+                    <option default value="">Select User Type</option>
+                    <option value="admin">Admin</option>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                  </select>
+                  <label for="input" class="Input-label">Select User Type</label>
+                  <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please enter E-Mail</span>
+                </div>
               </div>
-              <div class="form-group">
-                <label class="input-label" for="email">E-Mail</label>
-                <input class="input-email" type="email" id="email" class="form-control" name="email" placeholder="example@email.com" formControlName="email" (focusout)="checkUser()">
-                <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please enter E-mail</span>
-                <span class="input-error" *ngIf="!(!form.get('email').valid && form.get('email').touched) && userExist">*Please try another Email, this user alredy exist</span>
+              <div class="Wrapper">
+                <div class="Input">
+                  <input type="email" id="email"  name="email"  formControlName="email" (focusout)="checkUser()" class="Input-text" placeholder="example@email.com">
+                  <label for="input" class="Input-label">Email</label>
+                  <span class="input-error" *ngIf="!(!form.get('email').valid && form.get('email').touched) && userExist">*Please try another Email, this user alredy exist</span>
+                </div>
               </div>
-              <div class="form-group">
-                <label class="input-label" for="password">Password</label>
-                <input class="input-password" type="password" id="password" class="form-control" name="password" formControlName="password">
-                <span class="input-error" *ngIf="!form.get('password').valid && form.get('password').touched">*Please enter Password</span>
+              <div class="Wrapper">
+                <div class="Input">
+                  <input type="password" id="password" name="password" formControlName="password" class="Input-text" placeholder="Enter your Password">
+                  <label for="input" class="Input-label">Password</label>
+                  <span class="input-error" *ngIf="!form.get('password').valid && form.get('password').touched">*Please enter Password</span>
+                </div>
               </div>
-              <div class="form-group">
-                <label class="input-label" for="confirm_password">Confirm Password</label>
-                <input class="input-password" type="password" id="confirm_password" class="form-control" name="confirm_password" formControlName="confirm_password">
-                <span class="input-error" *ngIf="!form.get('confirm_password').valid && form.get('confirm_password').touched">*Please enter Confirm Password</span>
+              <div class="Wrapper">
+                <div class="Input">
+                  <input type="password" id="confirm_password"  name="confirm_password" formControlName="confirm_password" class="Input-text" placeholder="Confirm Your Password">
+                  <label for="input" class="Input-label">Email</label>
+                  <span class="input-error" *ngIf="!form.get('confirm_password').valid && form.get('confirm_password').touched">*Please Confirm Password</span>
+                </div>
               </div>
-              <div>
-                <span class="input-error" *ngIf="form.hasError('invalidPassword') && form.get('password').touched">*Password & Confirm Password Does Not Match</span>
+              <div class="submitBtn">
+                  <button type="submit" class="btn btn-primary">Register</button>
               </div>
-              <div>
-                <button class="btn-register btn btn-primary" type="submit">Register</button>
-              </div>
-            </form>
-          </div>
-        </div>
+          </form>
       </div>
     </div>
-  </div>
 </div>

@@ -1,6 +1,3 @@
-.backgroundBox{
-  text-align: center;
-}
 
 .submitBtn{
     width: 100%;
@@ -22,5 +19,6 @@
   @media only screen and (max-width: 764px) {
     .customCard{
       width: 100%;
+      height: 100vh;
     }
 }

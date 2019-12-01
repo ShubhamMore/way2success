@@ -2,7 +2,7 @@
 #272343
 #ffffff
 #e3f6f5
-#bae8e8
+#d0e1f9
 */
 
 /* * {
@@ -81,14 +81,19 @@ body {
   z-index: 0;
   position: relative;
   padding: 50px 100px;
+  text-align: center;
 }
 
 
 .customCard{
   display: inline-block;
   width: 500px;
-  background-color: #bae8e8;
+  background-color: #d0e1f9;
   text-align: center;
+  -moz-animation: fadein 1.5s; 
+  -ms-animation: fadein 1.5s;
+  -o-animation: fadein 1.5s;
+   animation: fadein 1.5s;
 }
 
 .customCard h2{
@@ -104,7 +109,7 @@ body {
 
 .submitBtn{
   display: inline-block;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 .submitBtn button{
@@ -176,7 +181,7 @@ body {
 .Input span{
   display: block;
   position: absolute;
-  font-size: 20px;
+  font-size: 15px;
   right:50px;
 }
 .Input-text {
@@ -257,7 +262,62 @@ body {
 
 @media only screen and (max-width: 1283px) {
   .customCard{
+    overflow: auto;
     width: 100%;
   }
 }
 /*---------------------Media Queries End---------------------------------*/
+
+
+/*---------------------Animations Start---------------------------------*/
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+/*-------------------Move Right Animation------------------*/
+
+@keyframes moveright {
+  from { right: 30px; }
+  to   { right: 0px; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes moveright {
+  from { right: 30px; }
+  to   { right: 0px; }
+}
+
+/* Safari, Chrome and Opera > 12.1*/
+@-webkit-keyframes moveright {
+  from { right: 30px; }
+  to   { right: 0px; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes moveright {
+  from { right: 30px; }
+  to   { right: 0px; }
+}
+
+
+/*---------------------Animations End---------------------------------*/
