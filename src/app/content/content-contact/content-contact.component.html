@@ -39,9 +39,43 @@
         </form>
       </div>
       <div class="ourInfo">
-        <div class="ourInfoText"><i class="fa fa-map-marker"></i>{{contact.address}}</div>
-        <div class="ourInfoText"><i class="fa fa-phone"></i>{{contact.numbers.join(', ')}}</div>
-        <div class="ourInfoText"><i class="fa fa-envelope"></i><a style="color:#fff!important" href="mailto:{{contact.email}}">{{contact.email}}</a></div>
+        <div class="ourInfoText">
+          <div class="row">
+              <div class="col-2">
+                  <i class="fa fa-map-marker"></i>
+              </div>
+              <div class="col-10">
+                <div class="text">
+                  {{contact.address}}
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="ourInfoText">
+            <div class="row">
+                <div class="col-2">
+                    <i class="fa fa-phone"></i>
+                </div>
+                <div class="col-10">
+                  <div class="text">
+                    {{contact.numbers.join(', ')}}
+                  </div>
+                </div>
+              </div>
+          </div>
+         
+        <div class="ourInfoText">
+          <div class="row">
+            <div class="col-2">
+                <i class="fa fa-envelope"></i>
+            </div>
+            <div class="col-10">
+              <div class="text">
+                  <a style="color:#fff!important" href="mailto:{{contact.email}}">{{contact.email}}</a>
+              </div>
+            </div>
+          </div>
+         </div>
       </div>
   </div>
 </div>

@@ -12,7 +12,7 @@
   bottom: 120px;
   padding-left: 250px;
   padding-top: 150px;
-  width: 800px;
+  width: 625px;
   -moz-animation: fadein 1.5s; 
   -ms-animation: fadein 1.5s;
   -o-animation: fadein 1.5s;
@@ -31,10 +31,12 @@
   padding-right: 10px;
   padding-left: 20px;
 }
-
+.ourInfoText .text{
+  padding-left: 12px;
+}
 /*Media Queries*/
 
-@media only screen and (max-width: 1283px) {
+@media only screen and (max-width: 1324px) {
   .ourInfo{
     padding-left: 0px;
     width: 100%;
@@ -50,6 +52,9 @@
   .ourInfoText{
     padding: 0px 20px;
     letter-spacing: 5px;
+  }
+  .ourInfoText i{
+    padding-top: 15px;
   }
   .Input{
     padding-left: 25px;
