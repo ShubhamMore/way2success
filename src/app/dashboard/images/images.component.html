@@ -1,42 +1,44 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
-<div class="row" *ngIf="!loading">
-  <div class="col-12">
+<div class="container" *ngIf="!loading">
+  <div class="row mt-2">
+    <div class="col-12">
 
-    <div class="row">
-      <div class="col-md-6 col-12">
-        <h3>Images</h3>
-      </div>
-      <div class="col-md-6 col-12">
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <label for="category" class="input-group-text">Category</label>
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <h3>Images</h3>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label for="category" class="input-group-text">Category</label>
+              </div>
+              <select name="category" id="category" class="form-control input-select" (change)="getImages($event.target.value)" [value]="category">
+                <option value="">Select Categoty</option>
+                <option *ngFor="let category of categories" [value]="category._id">{{category.category}}</option>
+              </select>
             </div>
-            <select name="category" id="category" class="form-control input-select" (change)="getImages($event.target.value)" [value]="category">
-              <option value="">Select Categoty</option>
-              <option *ngFor="let category of categories" [value]="category._id">{{category.category}}</option>
-            </select>
           </div>
         </div>
       </div>
-    </div>
 
-    <hr>
+      <hr>
 
-    <div class="row">
-      <div class="col-12">
-        <div class="row" *ngIf="images.length > 0; else noImages">
-          <span class="m-2" *ngFor="let image of images; let i = index;">
-             <div class="image-container">
-              <img [src]="image.secure_url" class="image" [alt]="image.image_name">
-              <div class="middle">
-                <a class="delete" (click)="deleteImage(image.public_id)"><i class="fa fa-trash-o trash"></i></a>
+      <div class="row">
+        <div class="col-12">
+          <div class="row" *ngIf="images.length > 0; else noImages">
+            <span class="m-2" *ngFor="let image of images; let i = index;">
+               <div class="image-container">
+                <img [src]="image.secure_url" class="image" [alt]="image.image_name">
+                <div class="middle">
+                  <a class="delete" (click)="deleteImage(image.public_id)"><i class="fa fa-trash-o trash"></i></a>
+                </div>
               </div>
-            </div>
-          </span>
+            </span>
+          </div>
+          <ng-template #noImages><h4>No Images Available</h4></ng-template>
         </div>
-        <ng-template #noImages><h4>No Images Available</h4></ng-template>
       </div>
     </div>
   </div>
