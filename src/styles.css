@@ -18,6 +18,7 @@ html, body {
   font-size: 20px;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  zoom:90%;
 }
 body {
     position: relative;
