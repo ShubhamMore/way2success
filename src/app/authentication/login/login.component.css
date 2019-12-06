@@ -1,4 +1,6 @@
-
+.backgroundBox{
+  height:97vh;
+}
 .submitBtn{
     width: 100%;
 }
