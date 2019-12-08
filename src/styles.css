@@ -321,3 +321,54 @@ body {
 
 
 /*---------------------Animations End---------------------------------*/
+
+
+/*-------------------Move left Animation------------------*/
+
+@keyframes moveleft {
+  from { left: 30px; }
+  to   { left: 0px; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes moveleft {
+  from { left: 30px; }
+  to   { left: 0px; }
+}
+
+/* Safari, Chrome and Opera > 12.1*/
+@-webkit-keyframes moveleft {
+  from { left: 30px; }
+  to   { left: 0px; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes moveleft {
+  from { left: 30px; }
+  to   { left: 0px; }
+}
+
+/*-------------------Move top Animation------------------*/
+
+@keyframes movetop {
+  from { top: 30px; }
+  to   { top: 0px; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes movetop {
+  from { top: 30px; }
+  to   { top: 0px; }
+}
+
+/* Safari, Chrome and Opera > 12.1*/
+@-webkit-keyframes movetop {
+  from { top: 30px; }
+  to   { top: 0px; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes movetop {
+  from { top: 30px; }
+  to   { top: 0px; }
+}

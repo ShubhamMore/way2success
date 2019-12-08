@@ -1,5 +1,64 @@
 .scroll {
-  height: 200px;
-  max-height: 200px;
   overflow-y: auto;
+}
+
+.backgroundBox{
+  min-height: 97vh;
+}
+
+.customCard{
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+
+.customCard{
+  padding:10px;
+}
+.backgroundBox .header{
+  padding-bottom: 25px;
+  color:white;
+}
+
+.card1{
+  position: relative;
+  -moz-animation: moveright 1s; 
+  -ms-animation: moveright 1s;
+  -o-animation: moveright 1s;
+   animation: moveright 1s;
+}
+.card2{
+  position: relative;
+  -moz-animation: movetop 1s; 
+  -ms-animation: movetop 1s;
+  -o-animation: movetop 1s;
+   animation: movetop 1s;
+}
+.card3{
+  position: relative;
+  -moz-animation: moveleft 1s; 
+  -ms-animation: moveleft 1s;
+  -o-animation: moveleft 1s;
+   animation: moveleft 1s;
+}
+
+
+@media only screen and (max-width: 991px) {
+  .backgroundBox .col-lg-4{
+    padding:1px
+  }
+  .card2{
+    position: relative;
+    -moz-animation: moveleft 1s; 
+    -ms-animation: moveleft 1s;
+    -o-animation: moveleft 1s;
+     animation: moveleft 1s;
+  }
+  .card3{
+    position: relative;
+    -moz-animation: moveright 1s; 
+    -ms-animation: moveright 1s;
+    -o-animation: moveright 1s;
+     animation: moveright 1s;
+  }
 }
