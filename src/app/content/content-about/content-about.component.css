@@ -1,5 +1,165 @@
+
+.aboutUsImage{
+  position: relative;
+  height: 400px;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.884),rgba(0, 0, 0, 0)), url('../../../assets/images/aboutUs-backgroundImageCompressed.jpg');
+  background-size: cover;
+  background-attachment: unset;
+  background-position: 50% 44%;
+}
+.imageText{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: #cccccc ;
+  font-size: 4rem;
+  letter-spacing: 20px;
+  font-weight: 600;
+  text-align: center;
+ 
+}
+.imageText span{
+  position: relative;
+  display: inline-block;
+  animation: movetop .75s ease-in;
+}
 .scroll {
-  height: 200px;
-  max-height: 200px;
   overflow-y: auto;
+}
+
+.backgroundBox{
+  background-image: linear-gradient(rgb(0, 0, 0),rgba(39, 35, 67, 0));
+}
+
+.customCard{
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  background-color: #cccccc  ;
+}
+
+
+.card1{
+  position: relative;
+  -moz-animation: moveright 1s ease-in .5s; 
+  -ms-animation: moveright  1s ease-in .5s ;
+  -o-animation: moveright  1s ease-in .5s;
+   animation: moveright  1s ease-in .5s;
+   animation-fill-mode: backwards;
+}
+.card2{
+  position: relative;
+  -moz-animation: movetop  1s ease-in .5s; 
+  -ms-animation: movetop  1s ease-in .5s;
+  -o-animation: movetop  1s ease-in .5s;
+   animation: movetop  1s ease-in .5s;
+   animation-fill-mode: backwards;
+}
+.card3{
+  position: relative;
+  -moz-animation: moveleft  1s ease-in .5s; 
+  -ms-animation: moveleft  1s ease-in .5s;
+  -o-animation: moveleft  1s ease-in .5s;
+   animation: moveleft  1s ease-in .5s;
+   animation-fill-mode: backwards;
+}
+
+
+@media only screen and (max-width: 991px) {
+  .card2{
+    position: relative;
+    -moz-animation: moveleft  1s ease-in .5s; 
+    -ms-animation: moveleft  1s ease-in .5s;
+    -o-animation: moveleft  1s ease-in .5s;
+     animation: moveleft  1s ease-in .5s;
+     animation-fill-mode: backwards;
+  }
+  .card3{
+    position: relative;
+    -moz-animation: moveright  1s ease-in .5s; 
+    -ms-animation: moveright  1s ease-in .5s;
+    -o-animation: moveright  1s ease-in .5s;
+     animation: moveright  1s ease-in .5s;
+     animation-fill-mode: backwards;
+  }
+}
+
+
+
+@keyframes moveright {
+  from {opacity:0;transform: translate(-30px,0px) }
+  to   {opacity:1;transform: translate(0,0px) }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes moveright {
+  from {opacity:0;transform: translate(-30px,0px) }
+  to   {opacity:1;transform: translate(0,0px) }
+}
+
+/* Safari, Chrome and Opera > 12.1*/
+@-webkit-keyframes moveright {
+  from {opacity:0;transform: translate(-30px,0px) }
+  to   {opacity:1;transform: translate(0,0px) }
+}
+
+/* Internet Explorer */
+@-ms-keyframes moveright {
+  from {opacity:0;transform: translate(-30px,0px) }
+  to   {opacity:1;transform: translate(0,0px) }
+}
+
+
+/*---------------------Custom Animations Start---------------------------------*/
+
+
+/*-------------------Move left Animation------------------*/
+
+@keyframes moveleft {
+  from {opacity:0;transform: translate(30px,0px) }
+  to   {opacity:1;transform: translate(0,0px) }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes moveleft {
+  from {opacity:0;transform: translate(30px,0px) }
+  to   {opacity:1;transform: translate(0,0px) }
+}
+
+/* Safari, Chrome and Opera > 12.1*/
+@-webkit-keyframes moveleft {
+  from {opacity:0;transform: translate(30px,0px) }
+  to   {opacity:1;transform: translate(0,0px) }
+}
+
+/* Internet Explorer */
+@-ms-keyframes moveleft {
+  from {opacity:0;transform: translate(30px,0px) }
+  to   {opacity:1;transform: translate(0,0px) }
+}
+
+/*-------------------Move top Animation------------------*/
+
+@keyframes movetop {
+  from {opacity:0;transform: translate(0,30px) }
+  to   { opacity:1;transform: translate(0,0px) }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes movetop {
+  from {opacity:0;transform: translate(0,30px) }
+  to   { opacity:1;transform: translate(0,0px) }
+}
+
+/* Safari, Chrome and Opera > 12.1*/
+@-webkit-keyframes movetop {
+  from {opacity:0;transform: translate(0,30px) }
+  to   { opacity:1;transform: translate(0,0px) }
+}
+
+/* Internet Explorer */
+@-ms-keyframes movetop {
+  from {opacity:0;transform: translate(0,30px) }
+  to   { opacity:1;transform: translate(0,0px) }
 }

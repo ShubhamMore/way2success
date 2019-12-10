@@ -18,12 +18,12 @@ html, body {
   font-size: 20px;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
-  
 }
 body {
     position: relative;
     min-height: 100vh;
     padding-bottom: 60px;
+    zoom:90%;
 }
 
 .input-error, .form-error {
@@ -115,7 +115,6 @@ body {
 
 .submitBtn button{
   background-color: #272343;
-  width: 100px;
   border: 0px;
 }
 
@@ -298,27 +297,78 @@ body {
 /*-------------------Move Right Animation------------------*/
 
 @keyframes moveright {
-  from { right: 30px; }
-  to   { right: 0px; }
+  from {transform: translate(-30px,0px) }
+  to   {transform: translate(0,0px) }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes moveright {
-  from { right: 30px; }
-  to   { right: 0px; }
+  from {transform: translate(-30px,0px) }
+  to   {transform: translate(0,0px) }
 }
 
 /* Safari, Chrome and Opera > 12.1*/
 @-webkit-keyframes moveright {
-  from { right: 30px; }
-  to   { right: 0px; }
+  from {transform: translate(-30px,0px) }
+  to   {transform: translate(0,0px) }
 }
 
 /* Internet Explorer */
 @-ms-keyframes moveright {
-  from { right: 30px; }
-  to   { right: 0px; }
+  from {transform: translate(-30px,0px) }
+  to   {transform: translate(0,0px) }
 }
 
 
 /*---------------------Animations End---------------------------------*/
+
+
+/*-------------------Move left Animation------------------*/
+
+@keyframes moveleft {
+  from {transform: translate(30px,0px) }
+  to   {transform: translate(0,0px) }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes moveleft {
+  from {transform: translate(30px,0px) }
+  to   {transform: translate(0,0px) }
+}
+
+/* Safari, Chrome and Opera > 12.1*/
+@-webkit-keyframes moveleft {
+  from {transform: translate(30px,0px) }
+  to   {transform: translate(0,0px) }
+}
+
+/* Internet Explorer */
+@-ms-keyframes moveleft {
+  from {transform: translate(30px,0px) }
+  to   {transform: translate(0,0px) }
+}
+
+/*-------------------Move top Animation------------------*/
+
+@keyframes movetop {
+  from {transform: translate(0,30px) }
+  to   { transform: translate(0,0px) }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes movetop {
+  from {transform: translate(0,30px) }
+  to   { transform: translate(0,0px) }
+}
+
+/* Safari, Chrome and Opera > 12.1*/
+@-webkit-keyframes movetop {
+  from {transform: translate(0,30px) }
+  to   { transform: translate(0,0px) }
+}
+
+/* Internet Explorer */
+@-ms-keyframes movetop {
+  from {transform: translate(0,30px) }
+  to   { transform: translate(0,0px) }
+}
