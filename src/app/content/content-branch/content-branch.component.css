@@ -1,6 +1,17 @@
+.backgroundBox{
+  height: 97vh;
+}
 .course {
   max-height: 200px;
   overflow-y: auto;
+}
+
+.card{
+  position: relative;
+  -moz-animation: movetop.75s ease-in; 
+  -ms-animation: movetop .75s ease-in ;
+  -o-animation: movetop .75s ease-in ;
+   animation: movetop .75s ease-in;
 }
 
 .brachbox{
@@ -21,12 +32,16 @@
 
 .brachbox .card{
   border-radius: 0;
+  background-color: rgba(000, 000, 000, 0);
   
+}
+.card-header:first-child{
+  border-radius: 0;
 }
 
 .brachbox .card-header{
-  background-color: #6497b1;
+  background-color: #c1c1c1;
 }
 .brachbox .card-body{
-  background-color: #d0e1f9;
+  background-color: #e2e2e2;
 }

@@ -2,6 +2,7 @@
 .aboutUsImage{
   position: relative;
   height: 400px;
+  background-color: black;
   background-image: radial-gradient(rgba(0, 0, 0, 0.884),rgba(0, 0, 0, 0)), url('../../../assets/images/aboutUs-backgroundImageCompressed.jpg');
   background-size: cover;
   background-attachment: unset;
