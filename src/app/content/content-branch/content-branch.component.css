@@ -14,23 +14,24 @@
    animation: movetop .75s ease-in;
 }
 
-.brachbox{
+.branchbox{
   background-color:#272343;
+  min-height: 100vh;
   text-align: center;
 }
 
-.brachbox h3{
+.branchbox h3{
   display: inline-block;
   color:#fff;
   padding: 20px 0;
   text-transform: uppercase;
 }
 
-.brachbox .cardBox{
+.branchbox .cardBox{
   padding: 5px 0;
 }
 
-.brachbox .card{
+.branchbox .card{
   border-radius: 0;
   background-color: rgba(000, 000, 000, 0);
   
@@ -39,9 +40,11 @@
   border-radius: 0;
 }
 
-.brachbox .card-header{
-  background-color: #c1c1c1;
+.branchbox .card-header{
+  background-color: #d0e1f9;
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
-.brachbox .card-body{
-  background-color: #e2e2e2;
+.branchbox .card-body{
+  background-color: #d0e1f9;
 }
