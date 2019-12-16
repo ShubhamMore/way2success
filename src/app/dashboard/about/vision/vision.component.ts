@@ -22,7 +22,7 @@ export class VisionComponent implements OnInit {
     this.edit = true;
     this.form = new FormGroup({
       vision: new FormControl(null, {
-        validators: [Validators.required]
+        validators: []
       })
     });
     this.aboutService.getAbout()

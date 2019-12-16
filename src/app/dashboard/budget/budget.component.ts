@@ -180,17 +180,20 @@ export class BudgetComponent implements OnInit {
   }
 
   deleteBudget(id: string) {
-    this.loading = true;
-    this.budgetService.deleteBudget(id)
-    .subscribe(
-      (resData: any) => {
-        this.onSelectSearchType(this.searchType);
-      },
-      (error: any) => {
-        this.error = error;
-        this.loading = false;
-      }
-    );
+    const confirm = window.confirm('Do you want to delete this?');
+    if (confirm) {
+      this.loading = true;
+      this.budgetService.deleteBudget(id)
+      .subscribe(
+        (resData: any) => {
+          this.onSelectSearchType(this.searchType);
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    }
   }
 
   statement() {

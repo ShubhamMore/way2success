@@ -15,7 +15,8 @@ import { ForgotPasswordComponent } from './authentication/forgot-password/forgot
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './authentication/change-password/change-password.component';
 
-import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
+import { ErrorComponent } from './error/error.component';
+import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
 import { AdminAuthGuard, LoginGuard, ChangePassswordGuard, StudentAuthGuard, FacultyAuthGuard } from './authentication/auth/auth.guard';
 
@@ -124,6 +125,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     ResetPasswordComponent,
     ChangePasswordComponent,
 
+    ErrorComponent,
     PageNotFoundComponent,
 
     DashboardComponent,
@@ -196,7 +198,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     ContentContactComponent,
     ContentAboutComponent,
     ContentPhotosComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

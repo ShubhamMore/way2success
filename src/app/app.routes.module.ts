@@ -9,7 +9,7 @@ import { ForgotPasswordComponent } from './authentication/forgot-password/forgot
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './authentication/change-password/change-password.component';
 
-import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
 import { ContentComponent } from './content/content.component';
 import { ContentBranchComponent } from './content/content-branch/content-branch.component';

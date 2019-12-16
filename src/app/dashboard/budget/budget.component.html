@@ -49,26 +49,28 @@
       <hr>
       <div class="row">
             <div class="col-10 mx-auto">
-              <div class="row">
-                    <div class="col-md-4 col-sm-10 col-12 mx-auto">
+                <div class="row">
+                    <div class="col-md-6 col-sm-10 col-12 mx-auto">
+                        <h4 class="text-center">
+                            <strong>Balance : </strong>
+                            &#x20b9; <span class="" [ngClass]="totalBalance >= 0 ? '' : 'negatice-balance'">{{totalBalance.toFixed(2)}}/-</span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-10 col-12 mx-auto">
                         <h4>
                             <strong>Income : </strong>
                             &#x20b9; <span class="">{{totalIncome.toFixed(2)}}/-</span>
                         </h4>
                     </div>
-                    <div class="col-md-4 col-sm-10 col-12 mx-auto">
+                    <div class="col-md-6 col-sm-10 col-12 mx-auto">
                         <h4>
                             <strong>Expence : </strong>
                             &#x20b9; <span class="">{{totalExpence.toFixed(2)}}/-</span>
                         </h4>
                     </div>
-                    <div class="col-md-4 col-sm-10 col-12 mx-auto">
-                        <h4>
-                            <strong>Balance : </strong>
-                            &#x20b9; <span class="" [ngClass]="totalBalance >= 0 ? '' : 'negatice-balance'">{{totalBalance.toFixed(2)}}/-</span>
-                        </h4>
-                    </div>
-              </div>
+                </div>
           </div>
       </div>
       <hr>
@@ -129,10 +131,10 @@
       <div class="row">
           <div class="col-10 mx-auto">
             <div class="row">
-                <div class="col-6 show-income">
+                <div class="col-md-6 col-12">
                     <h5>Incomes : </h5>
                     <hr>
-                    <div class="table-responsive" *ngIf="income.length > 0; else noIncome">
+                    <div class="table-responsive show-income" *ngIf="income.length > 0; else noIncome">
                         <table class="table table-sm table-hover">
                             <thead class="table-heading">
                                 <tr class="table-row">
@@ -146,10 +148,10 @@
                                 <tr class="table-row" *ngFor="let curIncome of income, let i = index" routerLinkActive="active">
                                     <td class="table-data">{{ i+1 }}</td>
                                     <td class="table-data">
-                                        <p class="data">{{curIncome.title}}</p>
+                                        <span class="data">{{curIncome.title}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <p class="data">{{curIncome.amount}}</p>
+                                        <span class="data">{{curIncome.amount}}</span>
                                     </td>
                                     <td class="table-data">
                                         <button class="btn btn-danger btn-sm btn-delete-budget" type="button" (click)="deleteBudget(curIncome._id)">
@@ -165,10 +167,10 @@
                     </ng-template>
                 </div>
 
-                <div class="col-6 show-expence">
+                <div class="col-md-6 col-12">
                     <h5>Expences : </h5>
                     <hr>
-                    <div class="table-responsive" *ngIf="expence.length > 0; else noExpence">
+                    <div class="table-responsive show-expence" *ngIf="expence.length > 0; else noExpence">
                         <table class="table table-sm table-hover">
                             <thead class="table-heading">
                                 <tr class="table-row">
@@ -182,10 +184,10 @@
                                 <tr class="table-row" *ngFor="let curExpence of expence, let i = index" routerLinkActive="active">
                                     <td class="table-data">{{ i+1 }}</td>
                                     <td class="table-data">
-                                        <p class="data">{{curExpence.title}}</p>
+                                        <span class="data">{{curExpence.title}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <p class="data">{{curExpence.amount}}</p>
+                                        <span class="data">{{curExpence.amount}}</span>
                                     </td>
                                     <td class="table-data">
                                         <button class="btn btn-danger btn-sm btn-delete-budget" type="button" (click)="deleteBudget(curExpence._id)">

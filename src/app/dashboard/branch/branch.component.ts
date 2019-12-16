@@ -38,6 +38,40 @@ export class BranchComponent implements OnInit {
   }
 
   deleteBranch(id: string) {
+    window.alert('You can\'t Delete the Branch due to Data Protection..');
+  }
 
+  deactivateBranch(id: string) {
+    const confirm = window.confirm('Do you really want to Deactivate tis Branch??');
+    if (confirm) {
+      this.loading = true;
+      this.branchService.deactivateBranch(id)
+      .subscribe(
+        (resdata: any) => {
+          this.ngOnInit();
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    }
+  }
+
+  activateBranch(id: string) {
+    const confirm = window.confirm('Do you want to Activate tis Branch Again..?');
+    if (confirm) {
+      this.loading = true;
+      this.branchService.activateBranch(id)
+      .subscribe(
+        (resdata: any) => {
+          this.ngOnInit();
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    }
   }
 }

@@ -15,7 +15,7 @@
                  <th class="table-heading-data">Branch</th>
                  <th class="table-heading-data">Info</th>
                  <th class="table-heading-data">Edit</th>
-                 <th class="table-heading-data">Delete</th>
+                 <th class="table-heading-data">Activate/Deactivate</th>
                </tr>
              </thead>
              <tbody class="table-body">
@@ -30,8 +30,9 @@
                 <td class="table-data">
                   <button type="button" class="btn btn-sm btn-light" (click)="editBranch(branch._id)"><i class="fa fa-edit"></i></button>
                 </td>
-                <td class="table-data">
-                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteBranch(branch._id)"><i class="fa fa-trash"></i></button>
+                <td class="table-data text-center">
+                  <button type="button" class="btn btn-sm btn-danger" title="Deactivate" (click)="deactivateBranch(branch._id)" *ngIf="branch.status === '1'"><i class="fa fa-power-off"></i></button>
+                  <button type="button" class="btn btn-sm btn-warning" title="Activate" (click)="activateBranch(branch._id)" *ngIf="branch.status === '0'"><i class="fa fa-power-off"></i></button>
                 </td>
                </tr>
              </tbody>

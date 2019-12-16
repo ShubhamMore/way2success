@@ -22,7 +22,7 @@ export class MissionComponent implements OnInit {
     this.edit = true;
     this.form = new FormGroup({
       mission: new FormControl(null, {
-        validators: [Validators.required]
+        validators: []
       })
     });
     this.aboutService.getAbout()

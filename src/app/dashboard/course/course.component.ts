@@ -93,8 +93,41 @@ export class CourseComponent implements OnInit {
   }
 
   deletecourse(id: string) {
-    this.courseService.deleteCourse(id);
-    this.ngOnInit();
+    window.alert('You can\'t Delete the course due to Data Protection..');
+  }
+
+  deactivateCourse(id: string) {
+    const confirm = window.confirm('Do you really want to Deactivate tis Course??');
+    if (confirm) {
+      this.loading = true;
+      this.courseService.deactivateCourse(id)
+      .subscribe(
+        (resdata: any) => {
+          this.ngOnInit();
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    }
+  }
+
+  activateCourse(id: string) {
+    const confirm = window.confirm('Do you want to Activate tis Course Again..?');
+    if (confirm) {
+      this.loading = true;
+      this.courseService.activateCourse(id)
+      .subscribe(
+        (resdata: any) => {
+          this.ngOnInit();
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    }
   }
 
 }

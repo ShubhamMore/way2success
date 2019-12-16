@@ -21,3 +21,15 @@
 .expence {
     background-color: #ffe6e6;
 }
+
+.show-income {
+    height: auto;
+    max-height: 300px;
+    overflow-y: auto;
+}
+  
+.show-expence {
+    height: auto;
+    max-height: 300px;
+    overflow-y: auto;
+}

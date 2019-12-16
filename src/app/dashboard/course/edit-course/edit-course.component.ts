@@ -116,11 +116,6 @@ export class EditCourseComponent implements OnInit {
     }
   }
 
-  // Delete Subject
-  deleteSubject(index: number) {
-    this.subjects.splice(index, 1);
-  }
-
   // Edit Batch
   editSubjectData(index: number) {
     this.editSubjectIndex = index;
@@ -181,12 +176,6 @@ export class EditCourseComponent implements OnInit {
     this.batches.push(batch);
 
     this.resetBatchForm();
-  }
-
-  // Delete Batch
-  deleteBatch(index: number) {
-    const batch = this.batches[index];
-    this.batches.splice(index, 1);
   }
 
   // Edit Batch

@@ -35,7 +35,7 @@
               <th class="table-heading-data">ID</th>
               <th class="table-heading-data">Course</th>
               <th class="table-heading-data text-center">Edit</th>
-              <th class="table-heading-data text-center">Delete</th>
+              <th class="table-heading-data text-center">Activate/Deactivate</th>
             </tr>
           </thead>
           <tbody class="table-body">
@@ -52,9 +52,8 @@
                 </button>
               </td>
               <td class="table-data text-center">
-                <button class="btn btn-danger btn-sm btn-delete" type="button" (click)="deletecourse(course._id)">
-                    <i class="fa fa-trash"></i>
-                </button>
+                <button type="button" class="btn btn-sm btn-danger" title="Deactivate" (click)="deactivateCourse(course._id)" *ngIf="course.status === '1'"><i class="fa fa-power-off"></i></button>
+                <button type="button" class="btn btn-sm btn-warning" title="Activate" (click)="activateCourse(course._id)" *ngIf="course.status === '0'"><i class="fa fa-power-off"></i></button>    
               </td>
             </tr>
           </tbody>

@@ -100,4 +100,28 @@ export class CourseService {
   deleteCourse(id: string) {
       // this.Courses.splice(id, 1);
   }
+
+  deactivateCourse(id: string) {
+    const data = {api: 'deactivateCourse', data: {_id: id}};
+    return this.httpService.httpPostAuth(data).pipe(
+        map((response: any) => {
+            return response;
+        }),
+        catchError((err: any) => {
+            return throwError(err);
+        })
+    );
+  }
+
+  activateCourse(id: string) {
+    const data = {api: 'activateCourse', data: {_id: id}};
+    return this.httpService.httpPostAuth(data).pipe(
+        map((response: any) => {
+            return response;
+        }),
+        catchError((err: any) => {
+            return throwError(err);
+        })
+    );
+  }
 }

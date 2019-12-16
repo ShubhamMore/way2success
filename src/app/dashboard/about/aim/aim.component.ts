@@ -23,7 +23,7 @@ export class AimComponent implements OnInit {
     this.edit = true;
     this.form = new FormGroup({
       aim: new FormControl(null, {
-        validators: [Validators.required]
+        validators: []
       })
     });
     this.aboutService.getAbout()

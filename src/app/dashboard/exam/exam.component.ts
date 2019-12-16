@@ -211,18 +211,22 @@ export class ExamComponent implements OnInit {
   }
 
   deleteExam(id: string) {
-    this.loading = true;
-    this.examService.deleteExam(id)
-    .subscribe(
-      (resData: any) => {
-        this.error = null;
-        this.ngOnInit();
-      },
-      (errorMessage: any) => {
-        this.error = errorMessage;
-        this.loading = false;
-      }
-    );
+    // tslint:disable-next-line: max-line-length
+    const confirm = window.confirm('Do you really want to Delete this Exam?\n If you Delete this Exam all the exam related data will be permanantly deleted from Database..\nIf you wish to delete this Click Ok');
+    if (confirm) {
+      this.loading = true;
+      this.examService.deleteExam(id)
+      .subscribe(
+        (resData: any) => {
+          this.error = null;
+          this.ngOnInit();
+        },
+        (errorMessage: any) => {
+          this.error = errorMessage;
+          this.loading = false;
+        }
+      );
+    }
   }
 
 }

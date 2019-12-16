@@ -181,22 +181,26 @@ export class MediaComponent implements OnInit {
     }
 
     deleteMedia(id: string) {
-      this.loading = true;
-      this.mediaService.deleteMedia(id)
-      .subscribe(
-        (resData: any) => {
-          this.error = null;
-          const i = this.allMedia.findIndex((curMedia) => curMedia._id === id);
-          this.allMedia.splice(i, 1);
-          if (this.allMedia.length < 1) {
-            this.noMedia = 'No Media Available';
+      // tslint:disable-next-line: max-line-length
+      const confirm = window.confirm('Do you really want to Delete this Media?\n If you Delete this Exam all the media related data will be permanantly deleted from Database.., and media file will be disappere from server..\nIf you wish to delete this Click Ok');
+      if (confirm) {
+        this.loading = true;
+        this.mediaService.deleteMedia(id)
+        .subscribe(
+          (resData: any) => {
+            this.error = null;
+            const i = this.allMedia.findIndex((curMedia) => curMedia._id === id);
+            this.allMedia.splice(i, 1);
+            if (this.allMedia.length < 1) {
+              this.noMedia = 'No Media Available';
+            }
+            this.loading = false;
+          },
+          (errorMessage: any) => {
+            this.error = errorMessage;
+            this.loading = false;
           }
-          this.loading = false;
-        },
-        (errorMessage: any) => {
-          this.error = errorMessage;
-          this.loading = false;
-        }
-      );
+        );
+      }
     }
 }

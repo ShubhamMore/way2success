@@ -90,10 +90,10 @@
                                           </div>
                                           <input class="input-text form-control" type="text" name="fee" id="fee" formControlName="fee" placeholder="Fee">
                                           <div class="input-group-append">
-                                            <button class="btn-add-subject btn btn-primary" type="button" (click)="addSubject()" *ngIf="!editingSubject">
+                                            <button class="btn-add-subject btn btn-sm btn-primary" type="button" (click)="addSubject()" *ngIf="!editingSubject">
                                               <i class="fa fa-plus"></i>
                                             </button>
-                                            <button class="btn-add-subject btn btn-primary" type="button" (click)="editSubject(editSubjectIndex)" *ngIf="editingSubject">
+                                            <button class="btn-add-subject btn btn-sm btn-primary" type="button" (click)="editSubject(editSubjectIndex)" *ngIf="editingSubject">
                                               <i class="fa fa-save"></i>
                                             </button>
                                           </div>
@@ -116,21 +116,15 @@
                                       <th class="table-heading-data">Subject</th>
                                       <th class="table-heading-data">Fee</th>
                                       <th class="table-heading-data">Edit</th>
-                                      <th class="table-heading-data">Delete</th>
                                     </thead>
                                     <tbody class="table-body">
                                       <ng-container *ngFor="let curSubject of subjects; let i = index">
                                         <tr class="table-row" class="table-row">
                                           <td class="table-data">{{curSubject.subject}}</td>
                                           <td class="table-data">{{curSubject.fee}}</td>
-                                          <td class="table-data">
-                                            <button class="btn btn-light btn-delete-subject" type="button" (click)="editSubjectData(i)">
+                                          <td class="table-data text-center">
+                                            <button class="btn btn-sm btn-light btn-edit-subject" type="button" (click)="editSubjectData(i)">
                                               <i class="fa fa-edit"></i>
-                                            </button>
-                                          </td>
-                                          <td class="table-data">
-                                            <button class="btn btn-danger btn-delete-subject" type="button" (click)="deleteSubject(i)">
-                                              <i class="fa fa-trash"></i>
                                             </button>
                                           </td>
                                         </tr>
@@ -147,9 +141,9 @@
 
                             <div class="row">
                               <div class="col-12">
-                                <button class="btn btn-primary btn-add-batch" type="submit" (click)="addBatch()" *ngIf="!editingBatch">ADD BATCH</button>
-                                <button class="btn btn-primary btn-save-batch" type="button" (click)="editBatch(editBatchIndex)" *ngIf="editingBatch">SAVE BATCH</button>
-                                <button class="btn btn-light ml-3 btn-cancel-edit-batch" type="button" (click)="cancelEditBatch()" *ngIf="editingBatch">CANCEL</button>
+                                <button class="btn btn-primary btn-sm btn-add-batch" type="submit" (click)="addBatch()" *ngIf="!editingBatch">ADD BATCH</button>
+                                <button class="btn btn-primary btn-sm btn-save-batch" type="button" (click)="editBatch(editBatchIndex)" *ngIf="editingBatch">SAVE BATCH</button>
+                                <button class="btn btn-light btn-sm ml-3 btn-cancel-edit-batch" type="button" (click)="cancelEditBatch()" *ngIf="editingBatch">CANCEL</button>
                               </div>
                             </div>
                           </form>
@@ -175,7 +169,6 @@
                               <th class="table-heading-data">Subjects</th>
                               <th class="table-heading-data">Fees</th>
                               <th class="table-heading-data">Edit</th>
-                              <th class="table-heading-data">Delete</th>
                             </thead>
                             <tbody class="table-body">
                               <ng-container *ngFor="let batch of batches; let i = index">
@@ -188,13 +181,8 @@
                                     <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.fee}}</p>
                                   </td>
                                   <td class="table-data">
-                                    <button class="btn btn-light btn-edit-batch" type="button" (click)="editBatchData(i)">
+                                    <button class="btn btn-light btn-sm btn-edit-batch" type="button" (click)="editBatchData(i)">
                                       <i class="fa fa-edit" style="font-size:20px"></i>
-                                    </button>
-                                  </td>
-                                  <td class="table-data">
-                                    <button class="btn btn-danger btn-delete-batch" type="button" (click)="deleteBatch(i)">
-                                      <i class="fa fa-trash" style="font-size:20px"></i>
                                     </button>
                                   </td>
                                 </tr>
@@ -209,8 +197,8 @@
 
                     <div class="row">
                       <div class="col-12">
-                        <button class="btn btn-primary btn-edit" type="submit">SAVE</button>
-                        <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">Cancel</button>
+                        <button class="btn btn-primary btn-sm btn-edit" type="submit">SAVE</button>
+                        <button class="btn btn-light btn-sm btn-cancel float-right" type="button" (click)="cancel()">Cancel</button>
                       </div>
                     </div>
                   </form>

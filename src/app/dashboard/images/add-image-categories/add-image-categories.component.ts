@@ -58,18 +58,22 @@ export class AddImageCategoriesComponent implements OnInit {
   }
 
   deleteCategory(id: string) {
-    this.loading = true;
-    this.imageService.deleteCategory(id)
-    .subscribe(
-      (resData: any) => {
-        this.imageService.imageSearchData.category = '';
-        this.ngOnInit();
-      },
-      (error: any) => {
-        this.error = error;
-        this.loading = false;
-      }
-    );
+    // tslint:disable-next-line: max-line-length
+    const confirm = window.confirm('Do you really want to Delete this Category?\n If you Delete this Category all the images in this category will be permanantly deleted from Database and Server..\nIf you wish to delete this Click Ok');
+    if (confirm) {
+      this.loading = true;
+      this.imageService.deleteCategory(id)
+      .subscribe(
+        (resData: any) => {
+          this.imageService.imageSearchData.category = '';
+          this.ngOnInit();
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    }
   }
 
   cancel() {

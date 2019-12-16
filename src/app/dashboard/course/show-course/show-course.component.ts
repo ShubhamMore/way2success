@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/services/course.service';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { CourseModel, BatchModel } from 'src/app/models/course.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-show-course',
@@ -22,7 +23,8 @@ export class ShowCourseComponent implements OnInit {
 
   constructor(private courseService: CourseService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit() {
     this.loading = true;
@@ -57,9 +59,8 @@ export class ShowCourseComponent implements OnInit {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
-  deletecourse() {
-    this.courseService.deleteCourse(this.id);
-    this.router.navigate(['/admin', 'course'], {relativeTo: this.route});
+  cancel() {
+    this.location.back();
   }
 
 }

@@ -84,4 +84,28 @@ export class BranchService {
   deleteBranch(id: string) {
       // this.branches.splice(id, 1);
   }
+
+  deactivateBranch(id: string) {
+    const data = {api: 'deactivateBranch', data: {_id: id}};
+    return this.httpService.httpPostAuth(data).pipe(
+        map((response: any) => {
+            return response;
+        }),
+        catchError((err: any) => {
+            return throwError(err);
+        })
+    );
+  }
+
+  activateBranch(id: string) {
+    const data = {api: 'activateBranch', data: {_id: id}};
+    return this.httpService.httpPostAuth(data).pipe(
+        map((response: any) => {
+            return response;
+        }),
+        catchError((err: any) => {
+            return throwError(err);
+        })
+    );
+  }
 }
