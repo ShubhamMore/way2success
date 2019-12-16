@@ -84,7 +84,7 @@ export class ShowMediaComponent implements OnInit {
                 this.waitingToStart = 'Video Loading..';
 
                 // Buffer time is 10 seconds (For calulating Video Data)
-                const bufferTime = 5;
+                const bufferTime = 60;
 
                 // Calculate current Time
                 let currentTime: number = Math.floor((new Date().getTime() - countDownDate) / 1000);
