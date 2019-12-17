@@ -3,15 +3,8 @@
 <div class="row" *ngIf="!loading">
   <div class="col-12">
 
-    <div class="alert alert-danger" *ngIf="error">
-      <p class="alert-error">{{ error }}</p>
-    </div>
+    <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
-    <!-- <div *ngIf="isLoading" style="text-align: center;">
-        <app-loading-spinner></app-loading-spinner>
-    </div> -->
-
-    <!-- <div class="row" *ngIf="!isLoading"> -->
     <div class="backgroundBox">
       <div class="customCard">
         <form class="form login-form" (submit)="login()" [formGroup]="form">  

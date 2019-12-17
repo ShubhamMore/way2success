@@ -30,28 +30,36 @@ export class StudentDashboardComponent implements OnInit {
       (params: Params) => {
         // tslint:disable-next-line: no-string-literal
         this.id = params['id'];
+        if (!this.id) {
+          this.router.navigate(['/page_not_found'], {relativeTo: this.route});
+          return;
+        }
         this.studentService.getStudent(this.id)
         .subscribe(
-          resData => {
+          (resData: any) => {
             this.error = null;
             this.student = resData.student;
             if (!this.student) {
-              // this.router.navigate(['/page_not_found'], {relativeTo: this.route});
+              this.router.navigate(['/page_not_found'], {relativeTo: this.route});
               return;
             }
             this.studentMetaData = resData.studentMetaData;
-            this.studentMetaData.subject.forEach(subject => {
+            this.studentMetaData.subject.forEach((subject: any) => {
               this.subject.push(subject.subject);
             });
             this.loading = false;
           },
-          errorMessage => {
+          (errorMessage: any) => {
             this.error = errorMessage;
             this.loading = false;
-            // this.router.navigate(['/page_not_found'], {relativeTo: this.route});
+            this.router.navigate(['/page_not_found'], {relativeTo: this.route});
           }
         );
       }
     );
+  }
+
+  onErrorClose() {
+    this.error = null;
   }
 }

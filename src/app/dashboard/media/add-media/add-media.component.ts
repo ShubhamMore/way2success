@@ -226,4 +226,8 @@ export class AddMediaComponent implements OnInit {
     }
     return true;
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

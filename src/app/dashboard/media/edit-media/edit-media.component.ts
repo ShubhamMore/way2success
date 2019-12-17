@@ -205,4 +205,8 @@ export class EditMediaComponent implements OnInit {
     }
     return true;
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

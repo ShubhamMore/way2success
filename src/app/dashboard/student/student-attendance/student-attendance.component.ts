@@ -200,4 +200,8 @@ export class StudentAttendanceComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

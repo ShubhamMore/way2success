@@ -131,4 +131,8 @@ export class ShowMediaComponent implements OnInit {
       }
     );
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

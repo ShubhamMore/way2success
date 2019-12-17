@@ -45,4 +45,8 @@ export class ShowEnquiryComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

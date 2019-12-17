@@ -47,4 +47,8 @@ export class ShowReceiptComponent implements OnInit {
   cancel() {
     this.location.back();
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

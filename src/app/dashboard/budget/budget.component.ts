@@ -199,4 +199,8 @@ export class BudgetComponent implements OnInit {
   statement() {
     this.router.navigate(['summery'], {relativeTo: this.route});
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

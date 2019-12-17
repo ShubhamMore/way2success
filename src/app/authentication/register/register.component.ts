@@ -110,4 +110,8 @@ export class RegisterComponent implements OnInit {
     this.form.reset();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

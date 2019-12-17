@@ -229,4 +229,8 @@ export class ExamComponent implements OnInit {
     }
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

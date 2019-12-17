@@ -130,4 +130,8 @@ export class CourseComponent implements OnInit {
     }
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

@@ -44,4 +44,8 @@ export class EnquiryComponent implements OnInit {
     }
     return data;
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

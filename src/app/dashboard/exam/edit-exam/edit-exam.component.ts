@@ -99,4 +99,8 @@ export class EditExamComponent implements OnInit {
       });
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

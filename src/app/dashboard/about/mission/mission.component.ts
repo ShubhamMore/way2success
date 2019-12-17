@@ -73,4 +73,8 @@ export class MissionComponent implements OnInit {
   cancel() {
     this.edit = false;
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

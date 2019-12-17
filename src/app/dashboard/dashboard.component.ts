@@ -58,4 +58,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['exam', 'new'], {relativeTo: this.route});
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

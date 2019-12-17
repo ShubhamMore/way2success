@@ -74,4 +74,8 @@ export class AimComponent implements OnInit {
   cancel() {
     this.edit = false;
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

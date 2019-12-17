@@ -101,4 +101,8 @@ export class ContactComponent implements OnInit {
       );
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

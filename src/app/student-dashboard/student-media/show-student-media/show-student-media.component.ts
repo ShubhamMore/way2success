@@ -43,7 +43,7 @@ export class ShowStudentMediaComponent implements OnInit {
         console.log(this.id);
         this.mediaService.getMedia(this.id)
         .subscribe(
-          resData => {
+          (resData: any) => {
             this.error = null;
             this.media = resData;
             console.log(resData);
@@ -122,13 +122,16 @@ export class ShowStudentMediaComponent implements OnInit {
               }
             }, 1000);
           },
-          errorMessage => {
+          (errorMessage: null) => {
             this.loading = false;
-            this.error = errorMessage;
             this.router.navigate(['/page_not_found'], {relativeTo: this.route});
           }
         );
       }
     );
+  }
+
+  onErrorClose() {
+    this.error = null;
   }
 }

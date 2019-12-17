@@ -253,4 +253,8 @@ export class AddCourseComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

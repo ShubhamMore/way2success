@@ -80,4 +80,8 @@ export class AddImageCategoriesComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

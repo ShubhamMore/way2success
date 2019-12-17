@@ -87,4 +87,8 @@ export class BudgetSummeryComponent implements OnInit {
   cancel() {
     this.location.back();
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }
