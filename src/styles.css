@@ -15,7 +15,7 @@ html, body {
   color:#555;
   font-family: 'Varela Round', sans-serif;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 15px;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
@@ -23,8 +23,8 @@ html, body {
 body {
     position: relative;
     min-height: 100vh;
-    padding-bottom: 60px;
-    zoom:90%;
+    padding-bottom: 50px;
+    /* zoom:90%; */
 }
 
 .input-error, .form-error {
