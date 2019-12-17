@@ -78,7 +78,7 @@ body {
 /*---------------------Custom card css start---------------------------------*/
 
 .backgroundBox{
-  min-height: 600px;
+  min-height: 97vh;
   background-color: #272343;
   z-index: 0;
   position: relative;
@@ -96,6 +96,7 @@ body {
   -ms-animation: fadein 1.5s;
   -o-animation: fadein 1.5s;
    animation: fadein 1.5s;
+   zoom:80%;
 }
 
 .customCard h2{
