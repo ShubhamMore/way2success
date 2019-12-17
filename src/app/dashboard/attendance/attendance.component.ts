@@ -253,4 +253,8 @@ export class AttendanceComponent implements OnInit {
       });
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

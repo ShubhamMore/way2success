@@ -1,215 +1,218 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-  <div class="row mt-2">
-      <div class="col-md-8 col-12 mx-auto">
 
-        <h4 class="page-heading text-center mb-3">Add New Course</h4>
+    <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
-        <hr>
+    <div class="row mt-2">
+        <div class="col-md-8 col-12 mx-auto">
 
-        <form class="course-form" (submit)="addCourse()" [formGroup]="courseForm">
-
-            <div class="row">
-                <div class="col-md-6 col-12">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text input-label" for="course">Course</label>
-                      </div>
-                      <input class="input-text form-control" type="text" name="course" id="course" formControlName="course" placeholder="Course">
-                    </div>
-                    <span class="input-error" *ngIf="!courseForm.get('course').valid && courseForm.get('course').touched">*Please enter Course Name</span>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-12">
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text input-label" for="branch">Branch</label>
-                        </div>
-                        <select class="form-control input-select" name="branch" id="branch" formControlName="branch">
-                          <option value="">Select Branch</option>
-                          <option *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
-                        </select>
-                      </div>
-                      <span class="input-error" *ngIf="!courseForm.get('branch').valid && courseForm.get('branch').touched">*Please Select Branch</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <label class="input-label" for="batch">Add Batches : </label>
-
-                    <div class="form-border pl-2 pr-2" id="batch">
-                        <form class="batch-form" (submit)="addBatch()" [formGroup]="batchForm">
-                            <div class="row">
-
-                                <div class="col-12 p-1">
-                                    <div class="form-group m-1">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <label class="input-group-text input-label" for="batchName">Batch</label>
-                                            </div>
-                                            <input class="input-text form-control" type="text" name="batchName" id="batchName" formControlName="batchName" placeholder="Batch Name">
-                                        </div>
-                                        <span class="input-error" *ngIf="!batchForm.get('batchName').valid && batchForm.get('batchName').touched">*Please Enter Batch Name</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <form class="subject-form" (submit)="addSubject()" [formGroup]="subjectForm">
-                                        <div class="row">
-
-                                            <div class="col-md-6 col-sm-12 p-1">
-                                                <div class="form-group m-1">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <label class="input-group-text input-label" for="subject">Subject </label>
-                                                        </div>
-                                                        <input class="input-text form-control" type="text" name="subject" id="subject" formControlName="subject" placeholder="Subject">
-                                                    </div>
-                                                    <span class="input-error" *ngIf="!subjectForm.get('subject').valid && subjectForm.get('subject').touched">*Please Enter Subject</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-12 p-1">
-
-                                                <div class="form-group m-1">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <label class="input-group-text input-label" for="fee">Fee </label>
-                                                        </div>
-                                                        <input class="input-text form-control" type="text" name="fee" id="fee" formControlName="fee" placeholder="Fee">
-                                                        <div class="input-group-append">
-                                                            <button class="btn-add-subject btn btn-primary" type="button" (click)="addSubject()" *ngIf="!editingSubject">
-                                                                <i class="fa fa-plus"></i>
-                                                            </button>
-                                                            <button class="btn-add-subject btn btn-primary" type="button" (click)="editSubject(editSubjectIndex)" *ngIf="editingSubject">
-                                                                <i class="fa fa-save"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <span class="input-error" *ngIf="!subjectForm.get('fee').valid && subjectForm.get('fee').touched">*Please Enter Fee</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <span class="input-error" *ngIf="subErr">*Please Enter Subject</span>
-
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-12 p-1 pr-2">
-                                    <div class="table-responsive ml-2 mr-2" *ngIf="subjects.length > 0; else noSubjects">
-                                        <table class="table table-sm">
-                                            <thead class="table-heading" class="table-heading text-center">
-                                                <th class="table-heading-data">Subject</th>
-                                                <th class="table-heading-data">Fee</th>
-                                                <th class="table-heading-data">Edit</th>
-                                                <th class="table-heading-data">Delete</th>
-                                            </thead>
-                                            <tbody class="table-body">
-                                                <ng-container *ngFor="let curSubject of subjects; let i = index">
-                                                    <tr class="table-row" class="table-row">
-                                                        <td class="table-data">{{curSubject.subject}}</td>
-                                                        <td class="table-data">{{curSubject.fee}}</td>
-                                                        <td class="table-data">
-                                                            <button class="btn btn-light btn-delete-subject" type="button" (click)="editSubjectData(i)">
-                                                                <i class="fa fa-edit"></i>
-                                                            </button>
-                                                        </td>
-                                                        <td class="table-data">
-                                                            <button class="btn btn-danger btn-delete-subject" type="button" (click)="deleteSubject(i)">
-                                                                <i class="fa fa-trash"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </ng-container>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <ng-template #noSubjects>
-                                        <label>Please Add Subjects</label>
-                                    </ng-template>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <button class="btn btn-primary btn-add-batch" type="submit" (click)="addBatch()" *ngIf="!editingBatch">ADD BATCH</button>
-                                    <button class="btn btn-primary btn-save-batch" type="button" (click)="editBatch(editBatchIndex)" *ngIf="editingBatch">SAVE BATCH</button>
-                                    <button class="btn btn-light ml-3 btn-cancel-edit-batch" type="button" (click)="cancelEditBatch()" *ngIf="editingBatch">CANCEL</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-
-            <hr *ngIf="batches.length > 0">
-
-            <div class="row" *ngIf="batches.length > 0">
-                <div class="col-12">
-
-                    <div class="batch">
-                      <label for="batch"><strong>Batches : </strong></label>
-                    </div>
-
-                    <div class="table-responsive batches-border" id="batches">
-                        <table class="table table-sm">
-                            <thead class="table-heading" class="table-heading text-center">
-                                <th class="table-heading-data">Batch</th>
-                                <th class="table-heading-data">Subjects</th>
-                                <th class="table-heading-data">Fees</th>
-                                <th class="table-heading-data">Edit</th>
-                                <th class="table-heading-data">Delete</th>
-                            </thead>
-                            <tbody class="table-body">
-                                <ng-container *ngFor="let batch of batches; let i = index">
-                                <tr class="table-row" class="p-1 text-center">
-                                    <td class="table-data" class="text-left">{{batch.batchName}}</td>
-                                    <td class="table-data">
-                                        <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.subject}}</p>
-                                    </td>
-                                    <td class="table-data">
-                                        <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.fee}}</p>
-                                    </td>
-                                    <td class="table-data">
-                                        <button class="btn btn-light btn-edit-batch" type="button" (click)="editBatchData(i)">
-                                            <i class="fa fa-edit" style="font-size:20px"></i>
-                                        </button>
-                                    </td>
-                                    <td class="table-data">
-                                        <button class="btn btn-danger btn-delete-batch" type="button" (click)="deleteBatch(i)">
-                                            <i class="fa fa-trash" style="font-size:20px"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </ng-container>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <h4 class="page-heading text-center mb-3">Add New Course</h4>
 
             <hr>
-            <div class="row">
-                <div class="col-12">
-                    <button class="btn btn-primary btn-add" type="submit">ADD</button>
-                    <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">Cancel</button>
-                </div>
-            </div>
-        </form>
 
-      </div>
-  </div>
+            <form class="course-form" (submit)="addCourse()" [formGroup]="courseForm">
+
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text input-label" for="course">Course</label>
+                        </div>
+                        <input class="input-text form-control" type="text" name="course" id="course" formControlName="course" placeholder="Course">
+                        </div>
+                        <span class="input-error" *ngIf="!courseForm.get('course').valid && courseForm.get('course').touched">*Please enter Course Name</span>
+                    </div>
+                    </div>
+
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <label class="input-group-text input-label" for="branch">Branch</label>
+                            </div>
+                            <select class="form-control input-select" name="branch" id="branch" formControlName="branch">
+                            <option value="">Select Branch</option>
+                            <option *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+                            </select>
+                        </div>
+                        <span class="input-error" *ngIf="!courseForm.get('branch').valid && courseForm.get('branch').touched">*Please Select Branch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <label class="input-label" for="batch">Add Batches : </label>
+
+                        <div class="form-border pl-2 pr-2" id="batch">
+                            <form class="batch-form" (submit)="addBatch()" [formGroup]="batchForm">
+                                <div class="row">
+
+                                    <div class="col-12 p-1">
+                                        <div class="form-group m-1">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text input-label" for="batchName">Batch</label>
+                                                </div>
+                                                <input class="input-text form-control" type="text" name="batchName" id="batchName" formControlName="batchName" placeholder="Batch Name">
+                                            </div>
+                                            <span class="input-error" *ngIf="!batchForm.get('batchName').valid && batchForm.get('batchName').touched">*Please Enter Batch Name</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form class="subject-form" (submit)="addSubject()" [formGroup]="subjectForm">
+                                            <div class="row">
+
+                                                <div class="col-md-6 col-sm-12 p-1">
+                                                    <div class="form-group m-1">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <label class="input-group-text input-label" for="subject">Subject </label>
+                                                            </div>
+                                                            <input class="input-text form-control" type="text" name="subject" id="subject" formControlName="subject" placeholder="Subject">
+                                                        </div>
+                                                        <span class="input-error" *ngIf="!subjectForm.get('subject').valid && subjectForm.get('subject').touched">*Please Enter Subject</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-12 p-1">
+
+                                                    <div class="form-group m-1">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <label class="input-group-text input-label" for="fee">Fee </label>
+                                                            </div>
+                                                            <input class="input-text form-control" type="text" name="fee" id="fee" formControlName="fee" placeholder="Fee">
+                                                            <div class="input-group-append">
+                                                                <button class="btn-add-subject btn btn-primary" type="button" (click)="addSubject()" *ngIf="!editingSubject">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                                <button class="btn-add-subject btn btn-primary" type="button" (click)="editSubject(editSubjectIndex)" *ngIf="editingSubject">
+                                                                    <i class="fa fa-save"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <span class="input-error" *ngIf="!subjectForm.get('fee').valid && subjectForm.get('fee').touched">*Please Enter Fee</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <span class="input-error" *ngIf="subErr">*Please Enter Subject</span>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-12 p-1 pr-2">
+                                        <div class="table-responsive ml-2 mr-2" *ngIf="subjects.length > 0; else noSubjects">
+                                            <table class="table table-sm">
+                                                <thead class="table-heading" class="table-heading text-center">
+                                                    <th class="table-heading-data">Subject</th>
+                                                    <th class="table-heading-data">Fee</th>
+                                                    <th class="table-heading-data">Edit</th>
+                                                    <th class="table-heading-data">Delete</th>
+                                                </thead>
+                                                <tbody class="table-body">
+                                                    <ng-container *ngFor="let curSubject of subjects; let i = index">
+                                                        <tr class="table-row" class="table-row">
+                                                            <td class="table-data">{{curSubject.subject}}</td>
+                                                            <td class="table-data">{{curSubject.fee}}</td>
+                                                            <td class="table-data">
+                                                                <button class="btn btn-light btn-delete-subject" type="button" (click)="editSubjectData(i)">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+                                                            </td>
+                                                            <td class="table-data">
+                                                                <button class="btn btn-danger btn-delete-subject" type="button" (click)="deleteSubject(i)">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-container>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <ng-template #noSubjects>
+                                            <label>Please Add Subjects</label>
+                                        </ng-template>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button class="btn btn-primary btn-add-batch" type="submit" (click)="addBatch()" *ngIf="!editingBatch">ADD BATCH</button>
+                                        <button class="btn btn-primary btn-save-batch" type="button" (click)="editBatch(editBatchIndex)" *ngIf="editingBatch">SAVE BATCH</button>
+                                        <button class="btn btn-light ml-3 btn-cancel-edit-batch" type="button" (click)="cancelEditBatch()" *ngIf="editingBatch">CANCEL</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <hr *ngIf="batches.length > 0">
+
+                <div class="row" *ngIf="batches.length > 0">
+                    <div class="col-12">
+
+                        <div class="batch">
+                        <label for="batch"><strong>Batches : </strong></label>
+                        </div>
+
+                        <div class="table-responsive batches-border" id="batches">
+                            <table class="table table-sm">
+                                <thead class="table-heading" class="table-heading text-center">
+                                    <th class="table-heading-data">Batch</th>
+                                    <th class="table-heading-data">Subjects</th>
+                                    <th class="table-heading-data">Fees</th>
+                                    <th class="table-heading-data">Edit</th>
+                                    <th class="table-heading-data">Delete</th>
+                                </thead>
+                                <tbody class="table-body">
+                                    <ng-container *ngFor="let batch of batches; let i = index">
+                                    <tr class="table-row" class="p-1 text-center">
+                                        <td class="table-data" class="text-left">{{batch.batchName}}</td>
+                                        <td class="table-data">
+                                            <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.subject}}</p>
+                                        </td>
+                                        <td class="table-data">
+                                            <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.fee}}</p>
+                                        </td>
+                                        <td class="table-data">
+                                            <button class="btn btn-light btn-edit-batch" type="button" (click)="editBatchData(i)">
+                                                <i class="fa fa-edit" style="font-size:20px"></i>
+                                            </button>
+                                        </td>
+                                        <td class="table-data">
+                                            <button class="btn btn-danger btn-delete-batch" type="button" (click)="deleteBatch(i)">
+                                                <i class="fa fa-trash" style="font-size:20px"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-primary btn-add" type="submit">ADD</button>
+                        <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>

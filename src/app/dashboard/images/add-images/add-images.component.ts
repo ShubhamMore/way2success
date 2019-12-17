@@ -118,4 +118,8 @@ export class AddImagesComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

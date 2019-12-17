@@ -217,4 +217,8 @@ export class AddStudentComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

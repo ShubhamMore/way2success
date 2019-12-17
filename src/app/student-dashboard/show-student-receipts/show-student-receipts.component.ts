@@ -44,4 +44,8 @@ export class ShowStudentReceiptsComponent implements OnInit {
   showReceipt(id: string) {
     this.router.navigate([id], {relativeTo: this.route});
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

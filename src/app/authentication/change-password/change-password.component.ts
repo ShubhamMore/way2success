@@ -69,4 +69,8 @@ export class ChangePasswordComponent implements OnInit {
       this.error = 'Please Fill all The Fields Correctly';
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

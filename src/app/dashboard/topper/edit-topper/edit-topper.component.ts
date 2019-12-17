@@ -150,4 +150,8 @@ export class EditTopperComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

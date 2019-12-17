@@ -152,4 +152,8 @@ export class StudentPaymentComponent implements OnInit {
     }
     return null;
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

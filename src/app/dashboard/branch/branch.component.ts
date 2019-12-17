@@ -74,4 +74,8 @@ export class BranchComponent implements OnInit {
       );
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

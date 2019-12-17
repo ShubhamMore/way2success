@@ -65,4 +65,8 @@ export class ShowExamComponent implements OnInit {
     this.router.navigate(['/admin', 'exam'], {relativeTo: this.route});
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

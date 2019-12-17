@@ -57,4 +57,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.error = 'Please Enter Email';
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

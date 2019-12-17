@@ -49,14 +49,14 @@ export class StudentMediaComponent implements OnInit {
         this.id = params['id'];
         this.studentService.getStudentDataForMedia(this.id)
         .subscribe(
-          resData => {
+          (resData: any) => {
             this.error = null;
             this.studentData = resData;
             this.subject = this.studentData.subjects[0]._id;
             this.searchMedia(this.date, this.studentData.course, this.studentData.batch, this.subject);
             this.loading = false;
           },
-          errorMessage => {
+          (errorMessage: any) => {
             this.error = errorMessage;
             this.loading = false;
           }
@@ -99,5 +99,9 @@ export class StudentMediaComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  onErrorClose() {
+    this.error = null;
   }
 }

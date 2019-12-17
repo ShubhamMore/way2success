@@ -95,4 +95,8 @@ export class ResetPasswordComponent implements OnInit {
       this.error = 'PLease Fill All the Fields Correctly';
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

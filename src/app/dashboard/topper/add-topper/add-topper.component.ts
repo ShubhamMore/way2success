@@ -130,4 +130,8 @@ export class AddTopperComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

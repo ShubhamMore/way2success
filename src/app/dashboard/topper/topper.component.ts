@@ -66,4 +66,8 @@ export class TopperComponent implements OnInit {
     );
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

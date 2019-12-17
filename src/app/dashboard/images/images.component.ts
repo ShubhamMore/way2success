@@ -74,4 +74,8 @@ export class ImagesComponent implements OnInit {
     });
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

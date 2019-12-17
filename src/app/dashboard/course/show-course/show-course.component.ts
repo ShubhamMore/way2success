@@ -63,4 +63,8 @@ export class ShowCourseComponent implements OnInit {
     this.location.back();
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

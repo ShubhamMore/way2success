@@ -203,4 +203,8 @@ export class MediaComponent implements OnInit {
         );
       }
     }
+
+    onErrorClose() {
+      this.error = null;
+    }
 }

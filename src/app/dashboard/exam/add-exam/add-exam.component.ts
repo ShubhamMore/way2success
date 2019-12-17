@@ -220,4 +220,8 @@ export class AddExamComponent implements OnInit {
       });
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

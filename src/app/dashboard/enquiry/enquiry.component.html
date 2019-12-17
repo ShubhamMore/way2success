@@ -1,6 +1,9 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
+  
+  <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
+
   <div class="row mt-2">
    <div class="col-md-10 col-12 mx-auto">
      <h4>Enquiries</h4>

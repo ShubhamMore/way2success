@@ -56,4 +56,8 @@ export class AddBranchComponent implements OnInit {
     }
   }
 
+  onErrorClose() {
+    this.error = null;
+  }
+
 }

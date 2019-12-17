@@ -79,4 +79,8 @@ export class EditBranchComponent implements OnInit {
       );
     }
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

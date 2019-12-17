@@ -1,1 +1,7 @@
-<p>error works!</p>
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+    <p>{{message}}</p>
+    <div class="alert-box-actions">
+        <button class="btn btn-sm btn-primary" (click)="onClose()">Close</button>
+    </div>
+</div>

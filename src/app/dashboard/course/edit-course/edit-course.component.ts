@@ -259,4 +259,8 @@ export class EditCourseComponent implements OnInit {
     this.resetBatchForm();
     this.location.back();
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }
