@@ -1,6 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
-<div class="container" *ngIf="!loading"></div>
+<div class="container" *ngIf="!loading">
 
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
