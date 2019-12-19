@@ -14,9 +14,9 @@ html,
 body {
   background-color: #fff;
   color: #555;
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Varela Round', 'arial', sans-serif;
   font-weight: 300;
-  font-size: 17px;
+  font-size: 15px;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
@@ -24,7 +24,7 @@ body {
 body {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 50px;
+  padding-bottom: 45px;
   /* zoom:90%; */
 }
 
