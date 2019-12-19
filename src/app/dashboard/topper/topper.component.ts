@@ -9,16 +9,17 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./topper.component.css']
 })
 export class TopperComponent implements OnInit {
-
   toppers: TopperModel[];
   loading: boolean;
   error: string;
   year: string;
   years: string[];
 
-  constructor(private topperService: TopperService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private topperService: TopperService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -35,8 +36,7 @@ export class TopperComponent implements OnInit {
   getToppers(year: string) {
     this.loading = true;
     this.year = year;
-    this.topperService.getToppersByYear(year)
-    .subscribe(
+    this.topperService.getToppersByYear(year).subscribe(
       (resData: any) => {
         this.toppers = resData;
         this.loading = false;
@@ -49,13 +49,12 @@ export class TopperComponent implements OnInit {
   }
 
   editTopper(id: string) {
-    this.router.navigate([id, 'edit'], {relativeTo: this.route});
+    this.router.navigate([id, 'edit'], { relativeTo: this.route });
   }
 
   deleteTopper(id: string) {
     this.loading = true;
-    this.topperService.deleteTopper(id)
-    .subscribe(
+    this.topperService.deleteTopper(id).subscribe(
       (resData: any) => {
         this.getToppers(this.year);
       },
@@ -69,5 +68,4 @@ export class TopperComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

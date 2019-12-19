@@ -1,4 +1,4 @@
-input[type="file"] {
+input[type='file'] {
   visibility: hidden;
 }
 
@@ -15,7 +15,7 @@ span {
   border: 1px solid #555;
 }
 
-.preview-image img{
+.preview-image img {
   width: auto;
   height: 100%;
   object-fit: cover;

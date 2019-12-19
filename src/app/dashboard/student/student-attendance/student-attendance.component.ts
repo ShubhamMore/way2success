@@ -11,7 +11,6 @@ import { StudentService } from '../../../services/student.service';
   styleUrls: ['./student-attendance.component.css']
 })
 export class StudentAttendanceComponent implements OnInit {
-
   id: string;
 
   loading: boolean;
@@ -38,16 +37,30 @@ export class StudentAttendanceComponent implements OnInit {
 
   date: string;
 
-  constructor(private attendanceService: AttendanceService,
-              private historyService: HistoryService,
-              private studentService: StudentService,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private attendanceService: AttendanceService,
+    private historyService: HistoryService,
+    private studentService: StudentService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
-
     this.loading = true;
-    this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     this.years = [];
     this.courses = [];
     this.batches = [];
@@ -67,37 +80,38 @@ export class StudentAttendanceComponent implements OnInit {
     this.year = this.date.split('-')[0];
 
     this.attendance = [];
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        this.id = params['id'];
-        this.historyService.getStudentHistory(this.id)
-        .subscribe(
-          (resData: any) => {
-            this.error = null;
-            this.courses = resData.history;
-            this.branch = resData.branch;
-            this.course = this.courses[0]._id;
-            this.batches = this.courses.find(course => course._id === this.course).batches;
-            this.batch = this.batches[0]._id;
-            this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
-            this.subject = this.subjects[0]._id;
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      this.id = params['id'];
+      this.historyService.getStudentHistory(this.id).subscribe(
+        (resData: any) => {
+          this.error = null;
+          this.courses = resData.history;
+          this.branch = resData.branch;
+          this.course = this.courses[0]._id;
+          this.batches = this.courses.find(course => course._id === this.course).batches;
+          this.batch = this.batches[0]._id;
+          this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
+          this.subject = this.subjects[0]._id;
 
-            this.searchAttendance(this.month, this.year, this.course, this.batch, this.subject);
-          },
-          (error: any) => {
-            this.error = error;
-            this.loading = false;
-          }
-        );
-      }
-    );
+          this.searchAttendance(this.month, this.year, this.course, this.batch, this.subject);
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    });
   }
 
   curDate() {
     const date = new Date();
-    this.date = date.getFullYear() + '-' + this.zeroAppend(date.getMonth() + 1) + '-' + this.zeroAppend(date.getDate());
+    this.date =
+      date.getFullYear() +
+      '-' +
+      this.zeroAppend(date.getMonth() + 1) +
+      '-' +
+      this.zeroAppend(date.getDate());
   }
 
   zeroAppend(n: number): string {
@@ -178,22 +192,23 @@ export class StudentAttendanceComponent implements OnInit {
   }
 
   searchAttendance(month: string, year: string, course: string, batch: string, subject: string) {
-    this.attendanceService.getAttendance(month, year, this.branch.branch, course, batch, subject, this.id)
-    .subscribe(
-      resData => {
-        this.error = null;
-        this.attendance = resData;
-        this.loading = false;
-      },
-      errorMessage => {
-        this.error = errorMessage;
-        this.loading = false;
-      }
-    );
+    this.attendanceService
+      .getAttendance(month, year, this.branch.branch, course, batch, subject, this.id)
+      .subscribe(
+        resData => {
+          this.error = null;
+          this.attendance = resData;
+          this.loading = false;
+        },
+        errorMessage => {
+          this.error = errorMessage;
+          this.loading = false;
+        }
+      );
   }
 
   makeDate(date: string) {
-    return (date.split('-')[2] + '-' + date.split('-')[1] + '-' + date.split('-')[0]);
+    return date.split('-')[2] + '-' + date.split('-')[1] + '-' + date.split('-')[0];
   }
 
   cancel() {
@@ -203,5 +218,4 @@ export class StudentAttendanceComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

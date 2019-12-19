@@ -14,7 +14,6 @@ import { BranchModel } from 'src/app/models/branch.model';
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
-
   loading: boolean;
 
   form: FormGroup;
@@ -41,11 +40,13 @@ export class StudentComponent implements OnInit {
 
   error: string;
 
-  constructor(private courseService: CourseService,
-              private studentService: StudentService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private courseService: CourseService,
+    private studentService: StudentService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -62,23 +63,22 @@ export class StudentComponent implements OnInit {
     this.subject = this.studentService.studentSearchData.subject;
     this.student = this.studentService.studentSearchData.student;
     this.noStudent = 'Please Select Branch';
-    this.courseService.getBranchesAndCourses()
-    .subscribe(
+    this.courseService.getBranchesAndCourses().subscribe(
       (resData: any) => {
         this.error = null;
         this.allCourses = resData.courses;
         this.branches = resData.branches;
         this.form = new FormGroup({
-          course : new FormControl('', {
+          course: new FormControl('', {
             validators: [Validators.required]
           }),
-          batch : new FormControl('', {
+          batch: new FormControl('', {
             validators: [Validators.required]
           }),
-          subject : new FormControl('', {
+          subject: new FormControl('', {
             validators: [Validators.required]
           }),
-          student : new FormControl(this.student, {
+          student: new FormControl(this.student, {
             validators: [Validators.required]
           })
         });
@@ -87,15 +87,15 @@ export class StudentComponent implements OnInit {
           this.onSelectBranch(this.branch);
           if (this.course !== '') {
             if (this.searchType === '0' || this.searchType === '1' || this.searchType === '2') {
-              this.form.patchValue({course: this.course});
+              this.form.patchValue({ course: this.course });
               this.onSelectCourse();
             }
             if (this.searchType === '0' || this.searchType === '1') {
-              this.form.patchValue({batch: this.batch});
+              this.form.patchValue({ batch: this.batch });
               this.onSelectBatch();
             }
             if (this.searchType === '0') {
-              this.form.patchValue({subject: this.subject});
+              this.form.patchValue({ subject: this.subject });
               this.onSelectSubject();
             }
           } else if (this.student !== null && this.searchType === '3') {
@@ -162,8 +162,8 @@ export class StudentComponent implements OnInit {
     if (id !== '') {
       this.course = id;
       this.studentService.studentSearchData.course = this.course;
-      this.batches = this.courses.find((course) => (course._id === id)).batch;
-      this.form.patchValue({ batch : '', subject : ''});
+      this.batches = this.courses.find(course => course._id === id).batch;
+      this.form.patchValue({ batch: '', subject: '' });
       this.students = [];
       if (this.searchType === '2') {
         this.searchStudent();
@@ -178,8 +178,8 @@ export class StudentComponent implements OnInit {
     if (id !== '') {
       this.batch = id;
       this.studentService.studentSearchData.batch = this.batch;
-      this.subjects = this.batches.find((batch) => (batch._id === id)).subjects;
-      this.form.patchValue({ subject : '' });
+      this.subjects = this.batches.find(batch => batch._id === id).subjects;
+      this.form.patchValue({ subject: '' });
       if (this.searchType === '1') {
         this.searchStudent();
       } else {
@@ -205,13 +205,28 @@ export class StudentComponent implements OnInit {
 
   prepareSearchData() {
     if (this.searchType === '0') {
-      return {branch: this.branch, course: this.course, batch: this.batch, subject: this.subject, searchType: this.searchType};
+      return {
+        branch: this.branch,
+        course: this.course,
+        batch: this.batch,
+        subject: this.subject,
+        searchType: this.searchType
+      };
     } else if (this.searchType === '1') {
-      return {branch: this.branch, course: this.course, batch: this.batch, searchType: this.searchType};
+      return {
+        branch: this.branch,
+        course: this.course,
+        batch: this.batch,
+        searchType: this.searchType
+      };
     } else if (this.searchType === '2') {
-      return {branch: this.branch, course: this.course, searchType: this.searchType};
+      return { branch: this.branch, course: this.course, searchType: this.searchType };
     } else if (this.searchType === '3') {
-      return {branch: this.branch, student: this.student.toLowerCase(), searchType: this.searchType};
+      return {
+        branch: this.branch,
+        student: this.student.toLowerCase(),
+        searchType: this.searchType
+      };
     }
   }
 
@@ -230,8 +245,7 @@ export class StudentComponent implements OnInit {
     if (this.branch !== '') {
       this.loading = true;
       const searchData: any = this.prepareSearchData();
-      this.studentService.getStudents(searchData)
-      .subscribe(
+      this.studentService.getStudents(searchData).subscribe(
         resData => {
           this.error = null;
           this.students = resData;
@@ -250,7 +264,7 @@ export class StudentComponent implements OnInit {
   }
 
   editStudent(id: string) {
-    this.router.navigate([id, 'edit'], {relativeTo: this.route});
+    this.router.navigate([id, 'edit'], { relativeTo: this.route });
   }
 
   deleteStudent(id: string) {
@@ -259,7 +273,7 @@ export class StudentComponent implements OnInit {
   }
 
   onPaymentClick(student: string) {
-    this.router.navigate([student, 'payment'], {relativeTo: this.route});
+    this.router.navigate([student, 'payment'], { relativeTo: this.route });
   }
 
   cancel() {
@@ -269,5 +283,4 @@ export class StudentComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

@@ -13,7 +13,6 @@ import { BranchModel } from 'src/app/models/branch.model';
   styleUrls: ['./add-exam.component.css']
 })
 export class AddExamComponent implements OnInit {
-
   loading: boolean;
 
   examForm: FormGroup;
@@ -41,10 +40,12 @@ export class AddExamComponent implements OnInit {
 
   date: string;
 
-  constructor(private courseService: CourseService,
-              private examService: ExamService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private courseService: CourseService,
+    private examService: ExamService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -53,32 +54,31 @@ export class AddExamComponent implements OnInit {
     this.courses = [];
     this.batches = [];
     this.subjects = [];
-    this. noStudent = 'Please Select Branch';
+    this.noStudent = 'Please Select Branch';
     this.curDate();
 
-    this.courseService.getBranchesAndCourses()
-    .subscribe(
+    this.courseService.getBranchesAndCourses().subscribe(
       resData => {
         this.error = null;
         this.allCourses = resData.courses;
         this.branches = resData.branches;
         this.examForm = new FormGroup({
-          examTitle : new FormControl(null, {
+          examTitle: new FormControl(null, {
             validators: [Validators.required]
           }),
-          outOfMarks : new FormControl(null, {
+          outOfMarks: new FormControl(null, {
             validators: [Validators.required, Validators.minLength(2), Validators.maxLength(3)]
           }),
-          passingMarks : new FormControl(null, {
+          passingMarks: new FormControl(null, {
             validators: [Validators.required, Validators.minLength(2), Validators.maxLength(3)]
           }),
-          course : new FormControl('', {
+          course: new FormControl('', {
             validators: [Validators.required]
           }),
-          batch : new FormControl('', {
+          batch: new FormControl('', {
             validators: [Validators.required]
           }),
-          subject : new FormControl('', {
+          subject: new FormControl('', {
             validators: [Validators.required]
           })
         });
@@ -95,7 +95,12 @@ export class AddExamComponent implements OnInit {
 
   curDate() {
     const date = new Date();
-    this.date = date.getFullYear() + '-' + this.zeroAppend(date.getMonth() + 1) + '-' + this.zeroAppend(date.getDate());
+    this.date =
+      date.getFullYear() +
+      '-' +
+      this.zeroAppend(date.getMonth() + 1) +
+      '-' +
+      this.zeroAppend(date.getDate());
   }
 
   zeroAppend(n: number): string {
@@ -133,8 +138,8 @@ export class AddExamComponent implements OnInit {
     const id = this.examForm.value.course;
     if (id !== '') {
       this.course = id;
-      this.batches = this.courses.find((course) => (course._id === id)).batch;
-      this.examForm.patchValue({ batch : '', subject: '' });
+      this.batches = this.courses.find(course => course._id === id).batch;
+      this.examForm.patchValue({ batch: '', subject: '' });
       this.batch = '';
       this.subject = '';
       this.noStudent = 'Please Select Batch';
@@ -145,8 +150,8 @@ export class AddExamComponent implements OnInit {
     const id = this.examForm.value.batch;
     if (id !== '') {
       this.batch = id;
-      this.subjects = this.batches.find((batch) => (batch._id === id)).subjects;
-      this.examForm.patchValue({ subject : '' });
+      this.subjects = this.batches.find(batch => batch._id === id).subjects;
+      this.examForm.patchValue({ subject: '' });
       this.subject = '';
       this.noStudent = 'Please Select Subject';
     }
@@ -162,8 +167,7 @@ export class AddExamComponent implements OnInit {
 
   searchStudent(course: string, batch: string, subject: string) {
     this.loading = true;
-    this.examService.getStudents(course, batch, subject)
-    .subscribe(
+    this.examService.getStudents(course, batch, subject).subscribe(
       resData => {
         this.error = null;
         console.log(resData);
@@ -173,7 +177,7 @@ export class AddExamComponent implements OnInit {
           this.noStudent = 'No Students Found';
         }
 
-        this.students.forEach((student) => {
+        this.students.forEach(student => {
           const marks = {
             student: student._id,
             marks: ''
@@ -211,13 +215,15 @@ export class AddExamComponent implements OnInit {
 
       console.log(exam);
 
-      this.examService.saveExam(exam)
-      .subscribe((val: any) => {
-        this.ngOnInit();
-      }, (error: any) => {
-        this.error = error;
-        this.loading = false;
-      });
+      this.examService.saveExam(exam).subscribe(
+        (val: any) => {
+          this.ngOnInit();
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
     }
   }
 

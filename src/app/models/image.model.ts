@@ -13,14 +13,22 @@ export class ImageModel {
   public width: string;
   public height: string;
 
-  // tslint:disable-next-line: max-line-length variable-name
-  constructor(_id: string, category: string, image_name: string, secure_url: string, public_id: string, created_at: string, width: string, height: string) {
-    this._id = _id;
+  constructor(
+    id: string,
+    category: string,
+    imageName: string,
+    secureUrl: string,
+    publicId: string,
+    createdAt: string,
+    width: string,
+    height: string
+  ) {
+    this._id = id;
     this.category = category;
-    this.image_name = image_name;
-    this.secure_url = secure_url;
-    this.public_id = public_id;
-    this.created_at = created_at;
+    this.image_name = imageName;
+    this.secure_url = secureUrl;
+    this.public_id = publicId;
+    this.created_at = createdAt;
     this.width = width;
     this.height = height;
   }

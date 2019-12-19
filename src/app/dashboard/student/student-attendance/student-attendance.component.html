@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
@@ -16,29 +15,53 @@
             <div class="col-md-6 col-12">
               <div class="row">
                 <div class="col-md-6 col-12">
-                    <div class="form-group mt-2">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text" for="month">Month</label>
-                        </div>
-                        <select class="form-control input-select" type="text" name="month" id="month" [value]="month" (change)="onSelectMonth($event.target.value)">
-                            <option class="select-option" *ngFor="let month of months, let i = index" [value]="zeroAppend(i+1)">{{month}}</option>
-                        </select>
+                  <div class="form-group mt-2">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="month">Month</label>
                       </div>
+                      <select
+                        class="form-control input-select"
+                        type="text"
+                        name="month"
+                        id="month"
+                        [value]="month"
+                        (change)="onSelectMonth($event.target.value)"
+                      >
+                        <option
+                          class="select-option"
+                          *ngFor="let month of months; let i = index"
+                          [value]="zeroAppend(i + 1)"
+                          >{{ month }}</option
+                        >
+                      </select>
                     </div>
                   </div>
-                  <div class="col-md-6 col-12">
-                    <div class="form-group mt-2">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text" for="year">Year</label>
-                        </div>
-                        <select class="form-control input-select" type="text" name="year" id="year" [value]="year" (change)="onSelectYear($event.target.value)">
-                          <option class="select-option" *ngFor="let year of years, let i = index" [value]="year">{{year}}</option>
-                        </select>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="form-group mt-2">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="year">Year</label>
                       </div>
+                      <select
+                        class="form-control input-select"
+                        type="text"
+                        name="year"
+                        id="year"
+                        [value]="year"
+                        (change)="onSelectYear($event.target.value)"
+                      >
+                        <option
+                          class="select-option"
+                          *ngFor="let year of years; let i = index"
+                          [value]="year"
+                          >{{ year }}</option
+                        >
+                      </select>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
           </div>
@@ -49,74 +72,110 @@
         <div class="col-md-4 col-12">
           <div class="form-group mt-2">
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="courses">Course</label>
-                </div>
-                <select class="form-control input-select" type="text" name="course" id="course" [value]="course" (change)="onSelectCourse($event.target.value)">
-                  <option class="select-option" value="">Select Course</option>
-                  <ng-container *ngIf="courses.length > 0">
-                    <option class="select-option" *ngFor="let course of courses, let i = index" [value]="zeroAppend(course._id)">{{course.course | uppercase}}</option>
-                  </ng-container>
-                </select>
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="courses">Course</label>
+              </div>
+              <select
+                class="form-control input-select"
+                type="text"
+                name="course"
+                id="course"
+                [value]="course"
+                (change)="onSelectCourse($event.target.value)"
+              >
+                <option class="select-option" value="">Select Course</option>
+                <ng-container *ngIf="courses.length > 0">
+                  <option
+                    class="select-option"
+                    *ngFor="let course of courses; let i = index"
+                    [value]="zeroAppend(course._id)"
+                    >{{ course.course | uppercase }}</option
+                  >
+                </ng-container>
+              </select>
             </div>
           </div>
         </div>
         <div class="col-md-4 col-12">
           <div class="form-group mt-2">
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="subjects">Batch</label>
-                </div>
-                <select class="form-control input-select" type="text" name="batch" id="batch" [value]="batch" (change)="onSelectBatch($event.target.value)">
-                  <option class="select-option" value="">Select Batch</option>
-                  <ng-container *ngIf="batches.length > 0">
-                    <option class="select-option" *ngFor="let batch of batches, let i = index" [value]="zeroAppend(batch._id)">{{batch.batch | uppercase}}</option>
-                  </ng-container>
-                </select>
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="subjects">Batch</label>
+              </div>
+              <select
+                class="form-control input-select"
+                type="text"
+                name="batch"
+                id="batch"
+                [value]="batch"
+                (change)="onSelectBatch($event.target.value)"
+              >
+                <option class="select-option" value="">Select Batch</option>
+                <ng-container *ngIf="batches.length > 0">
+                  <option
+                    class="select-option"
+                    *ngFor="let batch of batches; let i = index"
+                    [value]="zeroAppend(batch._id)"
+                    >{{ batch.batch | uppercase }}</option
+                  >
+                </ng-container>
+              </select>
             </div>
           </div>
         </div>
         <div class="col-md-4 col-12">
           <div class="form-group mt-2">
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="subjects">Subject</label>
-                </div>
-                <select class="form-control input-select" type="text" name="subject" id="subject" [value]="subject" (change)="onSelectSubject($event.target.value)">
-                  <option class="select-option" value="">Select Subject</option>
-                  <ng-container *ngIf="subjects.length > 0">
-                    <option class="select-option" *ngFor="let subject of subjects, let i = index" [value]="zeroAppend(subject._id)">{{subject.subject | uppercase}}</option>
-                  </ng-container>
-                </select>
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="subjects">Subject</label>
+              </div>
+              <select
+                class="form-control input-select"
+                type="text"
+                name="subject"
+                id="subject"
+                [value]="subject"
+                (change)="onSelectSubject($event.target.value)"
+              >
+                <option class="select-option" value="">Select Subject</option>
+                <ng-container *ngIf="subjects.length > 0">
+                  <option
+                    class="select-option"
+                    *ngFor="let subject of subjects; let i = index"
+                    [value]="zeroAppend(subject._id)"
+                    >{{ subject.subject | uppercase }}</option
+                  >
+                </ng-container>
+              </select>
             </div>
           </div>
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="row">
         <div class="col-md-10 col-12 mx-auto">
           <div class="row">
             <div class="col-md-6 col-12">
-              <label for=""><strong>Total Lectures : </strong>{{attendance.length}}</label>
+              <label for=""><strong>Total Lectures : </strong>{{ attendance.length }}</label>
             </div>
             <div class="col-md-6 col-12">
-              <label for=""><strong>Percentage : </strong>{{attendancePercentage()}}%</label>
+              <label for=""><strong>Percentage : </strong>{{ attendancePercentage() }}%</label>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 col-12">
-              <label for=""><strong>Present : </strong>{{present()}}</label>
+              <label for=""><strong>Present : </strong>{{ present() }}</label>
             </div>
             <div class="col-md-6 col-12">
-              <label for=""><strong>Absent : </strong>{{absent()}}</label>
+              <label for=""><strong>Absent : </strong>{{ absent() }}</label>
             </div>
           </div>
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="row" *ngIf="attendance.length > 0; else empty_attendance">
         <div class="col-md-8 col-12 mx-auto">
@@ -130,15 +189,17 @@
                 </tr>
               </thead>
               <tbody class="table-body">
-                <tr class="table-row" *ngFor="let atten of attendance, let i = index">
-                  <td class="table-data">{{ i+1 }}</td>
+                <tr class="table-row" *ngFor="let atten of attendance; let i = index">
+                  <td class="table-data">{{ i + 1 }}</td>
                   <td class="table-data">
                     <a class="student">
                       <p class="data">{{ makeDate(atten.date) }}</p>
                     </a>
                   </td>
                   <td class="table-data">
-                    <p class="data" [ngClass]="atten.attendanceStatus == '0' ? 'absent' : ''">{{ atten.attendanceStatus === "0" ? "Absent" : "Present" }}</p>
+                    <p class="data" [ngClass]="atten.attendanceStatus == '0' ? 'absent' : ''">
+                      {{ atten.attendanceStatus === '0' ? 'Absent' : 'Present' }}
+                    </p>
                   </td>
                 </tr>
               </tbody>

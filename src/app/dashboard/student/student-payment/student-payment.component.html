@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row">
@@ -11,49 +10,53 @@
           <button class="btn btn-sm float-right" type="button" (click)="cancel()">X</button>
           <h4 class="page-heading">Pay Fees</h4>
 
-          <hr>
+          <hr />
 
           <div class="row">
             <div class="col-12">
-
               <div class="row">
                 <div class="col-md-6 col-12">
-                  <strong>Student name : </strong>{{student.name}}
+                  <strong>Student name : </strong>{{ student.name }}
                 </div>
                 <div class="col-md-6 col-12">
-                  <strong>Branch : </strong>{{studentMetaData.branch}}
+                  <strong>Branch : </strong>{{ studentMetaData.branch }}
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6 col-12">
-                  <strong>Course : </strong>{{studentMetaData.course}}
+                  <strong>Course : </strong>{{ studentMetaData.course }}
                 </div>
                 <div class="col-md-6 col-12">
-                  <strong>Batch : </strong>{{studentMetaData.batch}}
+                  <strong>Batch : </strong>{{ studentMetaData.batch }}
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6 col-12">
-                  <strong>Total Fees : </strong>{{studentMetaData.totalFees}}
+                  <strong>Total Fees : </strong>{{ studentMetaData.totalFees }}
                 </div>
                 <div class="col-md-6 col-12">
-                  <strong>Subjects : </strong>{{studentMetaData.subjects.join(', ')}}
+                  <strong>Subjects : </strong>{{ studentMetaData.subjects.join(', ') }}
                 </div>
               </div>
 
-              <hr>
+              <hr />
 
               <form class="payment-form" (submit)="payFees()" [formGroup]="form">
-
                 <div class="row">
                   <div class="col-md-6 col-12">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="feeType">Fee Type</label>
                       </div>
-                      <select class="input-select form-control" name="feeType" id="feeType" formControlName="feeType" (change)="changeFeeType($event.target.value)">
+                      <select
+                        class="input-select form-control"
+                        name="feeType"
+                        id="feeType"
+                        formControlName="feeType"
+                        (change)="changeFeeType($event.target.value)"
+                      >
                         <option value="0">Regular Fees</option>
                         <option value="1">Installments</option>
                       </select>
@@ -65,9 +68,19 @@
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="date">Date</label>
                       </div>
-                      <input class="input-date form-control" type="date" name="date" id="date" formControlName="date">
+                      <input
+                        class="input-date form-control"
+                        type="date"
+                        name="date"
+                        id="date"
+                        formControlName="date"
+                      />
                     </div>
-                    <span class="input-error" *ngIf="!form.get('date').valid && form.get('date').touched">*Please Select Valid Date</span>
+                    <span
+                      class="input-error"
+                      *ngIf="!form.get('date').valid && form.get('date').touched"
+                      >*Please Select Valid Date</span
+                    >
                   </div>
                 </div>
 
@@ -75,21 +88,45 @@
                   <div class="col-md-6 col-12">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                          <label for="fee" class="input-group-text">Fee Amount</label>
+                        <label for="fee" class="input-group-text">Fee Amount</label>
                       </div>
-                      <input class="form-control" type="number" name="fee" id="fee" pattern="\d*" formControlName="fee" (input)="changeFeeAmount($event.target.value)" placeholder="Rs.">
+                      <input
+                        class="form-control"
+                        type="number"
+                        name="fee"
+                        id="fee"
+                        pattern="\d*"
+                        formControlName="fee"
+                        (input)="changeFeeAmount($event.target.value)"
+                        placeholder="Rs."
+                      />
                     </div>
-                    <span class="input-error" *ngIf="!form.get('fee').valid && form.get('fee').touched">*Please Enter fee minimum amount of Rs. 1000</span>
+                    <span
+                      class="input-error"
+                      *ngIf="!form.get('fee').valid && form.get('fee').touched"
+                      >*Please Enter fee minimum amount of Rs. 1000</span
+                    >
                   </div>
 
                   <div class="col-md-6 col-12">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                          <label for="lateFee" class="input-group-text">Late Fees : </label>
+                        <label for="lateFee" class="input-group-text">Late Fees : </label>
                       </div>
-                      <input class="form-control" type="number" name="lateFee" id="lateFee" formControlName="lateFee" (input)="addLateFeeAmount($event.target.value)">
+                      <input
+                        class="form-control"
+                        type="number"
+                        name="lateFee"
+                        id="lateFee"
+                        formControlName="lateFee"
+                        (input)="addLateFeeAmount($event.target.value)"
+                      />
                     </div>
-                    <span class="input-error" *ngIf="!form.get('lateFee').valid && form.get('lateFee').touched">*Please enter late fee amount</span>
+                    <span
+                      class="input-error"
+                      *ngIf="!form.get('lateFee').valid && form.get('lateFee').touched"
+                      >*Please enter late fee amount</span
+                    >
                   </div>
                 </div>
 
@@ -99,7 +136,13 @@
                       <div class="input-group-prepend">
                         <label for="paymentMode" class="input-group-text">Payment Mode </label>
                       </div>
-                      <select class="form-control" type="text" name="paymentMode" id="paymentMode" formControlName="paymentMode">
+                      <select
+                        class="form-control"
+                        type="text"
+                        name="paymentMode"
+                        id="paymentMode"
+                        formControlName="paymentMode"
+                      >
                         <option value="cash">Cash</option>
                         <option value="cheque">Cheque</option>
                         <option value="card">Card</option>
@@ -111,25 +154,35 @@
                   <div class="col-md-6 col-12">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                          <label for="description" class="input-group-text">Description</label>
+                        <label for="description" class="input-group-text">Description</label>
                       </div>
-                      <input class="form-control" type="text" name="description" id="description" formControlName="description" placeholder="">
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="description"
+                        id="description"
+                        formControlName="description"
+                        placeholder=""
+                      />
                     </div>
-                    <span class="input-error" *ngIf="!form.get('description').valid && form.get('description').touched">*Please enter Description</span>
+                    <span
+                      class="input-error"
+                      *ngIf="!form.get('description').valid && form.get('description').touched"
+                      >*Please enter Description</span
+                    >
                   </div>
                 </div>
 
-                <hr>
+                <hr />
 
                 <div class="row">
                   <div class="col-md-6 col-12">
-                    <label><strong>Total Amount : </strong>Rs. {{amount + lateFee}}.00/-</label>
+                    <label><strong>Total Amount : </strong>Rs. {{ amount + lateFee }}.00/-</label>
                   </div>
                   <div class="col-md-6 col-12">
                     <button type="submit" class="btn btn-primary btn-sm float-right">Save</button>
                   </div>
                 </div>
-
               </form>
             </div>
           </div>

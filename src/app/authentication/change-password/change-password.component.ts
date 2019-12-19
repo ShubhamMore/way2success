@@ -11,37 +11,40 @@ import { Validator } from '../../shared/validators';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
-
   form: FormGroup;
   loading: boolean;
   error: string;
 
-  constructor(private httpService: HttpService,
-              private encryptService: EncryptService,
-              private formBuilder: FormBuilder,
-              private validator: Validator) { }
+  constructor(
+    private httpService: HttpService,
+    private encryptService: EncryptService,
+    private formBuilder: FormBuilder,
+    private validator: Validator
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.form = this.formBuilder.group({
-      oldPassword: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(6)]
-      }),
-      password: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(6)]
-      }),
-      confirm_password: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(6)]
-      })
-    }, {
-      validators: this.validator.passwordValidator.bind(this)
-    });
+    this.form = this.formBuilder.group(
+      {
+        oldPassword: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(6)]
+        }),
+        password: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(6)]
+        }),
+        confirm_password: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(6)]
+        })
+      },
+      {
+        validators: this.validator.passwordValidator.bind(this)
+      }
+    );
     this.loading = false;
   }
 
   changePassword() {
     if (this.form.valid && !this.form.hasError('invalidPassword')) {
-
       this.loading = true;
       this.error = null;
 
@@ -49,12 +52,11 @@ export class ChangePasswordComponent implements OnInit {
         api: 'changePassword',
         data: {
           email: JSON.parse(localStorage.getItem('userData')).email,
-          password : this.encryptService.encrypt(this.form.value.oldPassword, environment.encKey),
-          newPassword : this.encryptService.encrypt(this.form.value.password, environment.encKey)
+          password: this.encryptService.encrypt(this.form.value.oldPassword, environment.encKey),
+          newPassword: this.encryptService.encrypt(this.form.value.password, environment.encKey)
         }
       };
-      this.httpService.httpPostAuth(data)
-      .subscribe(
+      this.httpService.httpPostAuth(data).subscribe(
         (resData: any) => {
           this.error = null;
           this.form.reset();

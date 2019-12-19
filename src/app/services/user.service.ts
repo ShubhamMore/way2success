@@ -7,18 +7,17 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {}
 
   checkUser(email: string) {
-      const data = {api: 'checkUser', data: {email}};
-      return this.httpService.httpPost(data).pipe(
-          map((response: any) => {
-              return response;
-          }),
-          catchError((err: any) => {
-              return throwError(err);
-          })
-      );
+    const data = { api: 'checkUser', data: { email } };
+    return this.httpService.httpPost(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
   }
 }

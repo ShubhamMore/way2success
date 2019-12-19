@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-3 mb-3">
@@ -15,7 +14,7 @@
               </span>
               <span class="badge" *ngIf="dashboard.enquiries > 0">
                 <span class="enquiries">
-                  <h6>{{dashboard.enquiries}}</h6>
+                  <h6>{{ dashboard.enquiries }}</h6>
                 </span>
               </span>
             </a>
@@ -28,13 +27,17 @@
         <div class="col-md-4 col-sm-12 mt-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center"><span class="pointer" routerLink="student">STUDENT</span></h3>
+              <h3 class="text-center">
+                <span class="pointer" routerLink="student">STUDENT</span>
+              </h3>
             </div>
             <div class="card-body">
-              <p>{{dashboard.students}} student/s in way2success</p>
+              <p>{{ dashboard.students }} student/s in way2success</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary float-right" type="button" (click)="addStudent()">Add Student</button>
+              <button class="btn btn-primary float-right" type="button" (click)="addStudent()">
+                Add Student
+              </button>
             </div>
           </div>
         </div>
@@ -42,13 +45,17 @@
         <div class="col-md-4 col-sm-12 mt-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center"><span class="pointer" routerLink="branch">BRANCH</span></h3>
+              <h3 class="text-center">
+                <span class="pointer" routerLink="branch">BRANCH</span>
+              </h3>
             </div>
             <div class="card-body">
-              <p>{{dashboard.branches}} branches in way2success</p>
+              <p>{{ dashboard.branches }} branches in way2success</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary float-right" type="button" (click)="addBranch()">Add Branch</button>
+              <button class="btn btn-primary float-right" type="button" (click)="addBranch()">
+                Add Branch
+              </button>
             </div>
           </div>
         </div>
@@ -56,13 +63,20 @@
         <div class="col-md-4 col-sm-12 mt-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center"><span class="pointer" routerLink="course">COURSE</span></h3>
+              <h3 class="text-center">
+                <span class="pointer" routerLink="course">COURSE</span>
+              </h3>
             </div>
             <div class="card-body">
-              <p>{{dashboard.courses}} courses offered in {{dashboard.branches}} branches of way2success</p>
+              <p>
+                {{ dashboard.courses }} courses offered in {{ dashboard.branches }} branches of
+                way2success
+              </p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary float-right" type="button" (click)="addCourse()">Add Course</button>
+              <button class="btn btn-primary float-right" type="button" (click)="addCourse()">
+                Add Course
+              </button>
             </div>
           </div>
         </div>
@@ -70,13 +84,17 @@
         <div class="col-md-4 col-sm-12 mt-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center"><span class="pointer" routerLink="media">MEDIA</span></h3>
+              <h3 class="text-center">
+                <span class="pointer" routerLink="media">MEDIA</span>
+              </h3>
             </div>
             <div class="card-body">
-              <p>{{dashboard.media}} media files available</p>
+              <p>{{ dashboard.media }} media files available</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary float-right" type="button" (click)="addMedia()">Add Video</button>
+              <button class="btn btn-primary float-right" type="button" (click)="addMedia()">
+                Add Video
+              </button>
             </div>
           </div>
         </div>
@@ -84,13 +102,17 @@
         <div class="col-md-4 col-sm-12 mt-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center"><span class="pointer" routerLink="image">IMAGES</span></h3>
+              <h3 class="text-center">
+                <span class="pointer" routerLink="image">IMAGES</span>
+              </h3>
             </div>
             <div class="card-body">
-              <p>{{dashboard.images}} images of {{dashboard.imageCategories}} Categories</p>
+              <p>{{ dashboard.images }} images of {{ dashboard.imageCategories }} Categories</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary float-right" type="button" (click)="addImages()">Add Images</button>
+              <button class="btn btn-primary float-right" type="button" (click)="addImages()">
+                Add Images
+              </button>
             </div>
           </div>
         </div>
@@ -98,27 +120,35 @@
         <div class="col-md-4 col-sm-12 mt-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center pointer"><span class="pointer" routerLink="topper">TOPPER</span></h3>
+              <h3 class="text-center pointer">
+                <span class="pointer" routerLink="topper">TOPPER</span>
+              </h3>
             </div>
-              <div class="card-body">
-                <p>{{dashboard.toppers}} toppers in way2success</p>
-              </div>
-              <div class="card-footer">
-                <button class="btn btn-primary float-right" type="button" (click)="addTopper()">Add Topper</button>
-              </div>
+            <div class="card-body">
+              <p>{{ dashboard.toppers }} toppers in way2success</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary float-right" type="button" (click)="addTopper()">
+                Add Topper
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="col-md-4 col-sm-12 mt-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center"><span class="pointer" routerLink="exam">EXAM</span></h3>
+              <h3 class="text-center">
+                <span class="pointer" routerLink="exam">EXAM</span>
+              </h3>
             </div>
             <div class="card-body">
-              <p>{{dashboard.exams}} exams are counducted in way2success</p>
+              <p>{{ dashboard.exams }} exams are counducted in way2success</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary float-right" type="button" (click)="addExam()">Add Exam</button>
+              <button class="btn btn-primary float-right" type="button" (click)="addExam()">
+                Add Exam
+              </button>
             </div>
           </div>
         </div>

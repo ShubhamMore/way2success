@@ -11,25 +11,24 @@ import { Location } from '@angular/common';
   styleUrls: ['./edit-branch.component.css']
 })
 export class EditBranchComponent implements OnInit {
-
   loading: boolean;
   error: string;
   form: FormGroup;
   branch: BranchModel;
 
-  constructor(private branchService: BranchService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private branchService: BranchService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.route.params
-    .subscribe((param: Params) => {
+    this.route.params.subscribe((param: Params) => {
       // tslint:disable-next-line: no-string-literal
       const id = param['id'];
-      this.branchService.getBranch(id)
-      .subscribe(
+      this.branchService.getBranch(id).subscribe(
         (resData: any) => {
           this.branch = resData;
           this.form = new FormGroup({
@@ -66,8 +65,7 @@ export class EditBranchComponent implements OnInit {
         email: this.form.value.email,
         phone: this.form.value.phone
       };
-      this.branchService.editBranch(branch)
-      .subscribe(
+      this.branchService.editBranch(branch).subscribe(
         (resData: any) => {
           this.location.back();
           this.loading = false;

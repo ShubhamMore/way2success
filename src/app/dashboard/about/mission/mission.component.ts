@@ -8,14 +8,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./mission.component.css']
 })
 export class MissionComponent implements OnInit {
-
   loading: boolean;
   edit: boolean;
   error: string;
   about: AboutModel;
   form: FormGroup;
 
-  constructor(private aboutService: AboutService) { }
+  constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
     this.loading = true;
@@ -25,13 +24,12 @@ export class MissionComponent implements OnInit {
         validators: []
       })
     });
-    this.aboutService.getAbout()
-    .subscribe(
+    this.aboutService.getAbout().subscribe(
       (resdata: any) => {
         this.about = resdata;
         if (this.about && this.about.mission !== '') {
           this.edit = false;
-          this.form.setValue({mission: this.about.mission});
+          this.form.setValue({ mission: this.about.mission });
         }
         this.loading = false;
       },
@@ -53,8 +51,7 @@ export class MissionComponent implements OnInit {
         about.vision = this.about.vision;
       }
       this.loading = true;
-      this.aboutService.saveAbout(about)
-      .subscribe(
+      this.aboutService.saveAbout(about).subscribe(
         (resdata: any) => {
           this.ngOnInit();
         },

@@ -8,9 +8,8 @@ describe('EditMediaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditMediaComponent ]
-    })
-    .compileComponents();
+      declarations: [EditMediaComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

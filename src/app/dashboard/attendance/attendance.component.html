@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-  
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
@@ -16,9 +15,18 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="branch">Branch </label>
             </div>
-            <select class="form-control input-select" type="text" name="branch" id="branch" (change)="onSelectBranch($event.target.value)" [value]="branch">
+            <select
+              class="form-control input-select"
+              type="text"
+              name="branch"
+              id="branch"
+              (change)="onSelectBranch($event.target.value)"
+              [value]="branch"
+            >
               <option class="select-option" value="">Select Branch</option>
-              <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+              <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{
+                branch.branchName
+              }}</option>
             </select>
           </div>
         </div>
@@ -28,16 +36,29 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="date">Date</label>
             </div>
-            <input class="form-control input-date" type="date" [value]="date" name="date" id="date" (input)="onDateChange($event.target.value)">
+            <input
+              class="form-control input-date"
+              type="date"
+              [value]="date"
+              name="date"
+              id="date"
+              (input)="onDateChange($event.target.value)"
+            />
             <div class="input-group-append">
-              <button class="btn btn-success" type="button" (click)="saveAttendance()" *ngIf="!attenTaken">Save</button>
+              <button
+                class="btn btn-success"
+                type="button"
+                (click)="saveAttendance()"
+                *ngIf="!attenTaken"
+              >
+                Save
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <hr class="horizontal-line">
+      <hr class="horizontal-line" />
       <form class="" [formGroup]="form">
-
         <div class="row">
           <div class="col-md-4 col-sm-12 mt-3">
             <div class="form-group">
@@ -45,9 +66,21 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="course">Course</label>
                 </div>
-                <select class="form-control input-select" type="text" name="course" id="course" formControlName="course" (change)="onSelectCourse()">
+                <select
+                  class="form-control input-select"
+                  type="text"
+                  name="course"
+                  id="course"
+                  formControlName="course"
+                  (change)="onSelectCourse()"
+                >
                   <option class="select-option" value="">Select Course</option>
-                  <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+                  <option
+                    class="select-option"
+                    *ngFor="let course of courses"
+                    [value]="course._id"
+                    >{{ course.courseName }}</option
+                  >
                 </select>
               </div>
             </div>
@@ -58,9 +91,18 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="batch">Batch</label>
                 </div>
-                <select class="form-control input-select" type="text" name="batch" id="batch" formControlName="batch" (change)="onSelectBatch()">
+                <select
+                  class="form-control input-select"
+                  type="text"
+                  name="batch"
+                  id="batch"
+                  formControlName="batch"
+                  (change)="onSelectBatch()"
+                >
                   <option class="select-option" value="">Select Batch Name</option>
-                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{batch.batchName}}</option>
+                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{
+                    batch.batchName
+                  }}</option>
                 </select>
               </div>
             </div>
@@ -71,16 +113,28 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="subject">Subject</label>
                 </div>
-                <select class="form-control input-select" type="text" name="subject" id="subject" formControlName="subject" (change)="onSelectSubject()">
+                <select
+                  class="form-control input-select"
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  formControlName="subject"
+                  (change)="onSelectSubject()"
+                >
                   <option class="select-option" value="">Select Subject</option>
-                  <option class="select-option" *ngFor="let curSubject of subjects" [value]="curSubject._id">{{curSubject.subject}}</option>
+                  <option
+                    class="select-option"
+                    *ngFor="let curSubject of subjects"
+                    [value]="curSubject._id"
+                    >{{ curSubject.subject }}</option
+                  >
                 </select>
               </div>
             </div>
           </div>
         </div>
       </form>
-      <br>
+      <br />
       <div class="pl-2 pr-2" *ngIf="!attenTaken">
         <div class="row" *ngIf="students.length > 0; else empty_students">
           <div class="table-responsive">
@@ -93,8 +147,12 @@
                 </tr>
               </thead>
               <tbody class="table-body">
-                <tr class="table-row" *ngFor="let student of students, let i = index" routerLinkActive="active">
-                  <td class="table-data">{{ i+1 }}</td>
+                <tr
+                  class="table-row"
+                  *ngFor="let student of students; let i = index"
+                  routerLinkActive="active"
+                >
+                  <td class="table-data">{{ i + 1 }}</td>
                   <td class="table-data">
                     <a class="student">
                       <p class="data">{{ student.name | uppercase }}</p>
@@ -102,8 +160,15 @@
                   </td>
                   <td class="table-data">
                     <div class="attendance-selector">
-                      <input class="attendance-checkbox" type="checkbox" [id]="student._id" (change)="markAttendance($event, student._id, i)">
-                      <label class="attendance-label" [for]="student._id">{{ attendance[i].attendanceStatus === "0" ? "A" : "P" }}</label>
+                      <input
+                        class="attendance-checkbox"
+                        type="checkbox"
+                        [id]="student._id"
+                        (change)="markAttendance($event, student._id, i)"
+                      />
+                      <label class="attendance-label" [for]="student._id">{{
+                        attendance[i].attendanceStatus === '0' ? 'A' : 'P'
+                      }}</label>
                     </div>
                   </td>
                 </tr>
@@ -112,7 +177,7 @@
           </div>
         </div>
         <ng-template #empty_students>
-          <h5 class="no-data-found pl-3">{{noStudent}}</h5>
+          <h5 class="no-data-found pl-3">{{ noStudent }}</h5>
         </ng-template>
       </div>
 
@@ -128,15 +193,15 @@
                 </tr>
               </thead>
               <tbody class="table-body">
-                <tr class="table-row" *ngFor="let atten of attendance, let i = index">
-                  <td class="table-data">{{ i+1 }}</td>
+                <tr class="table-row" *ngFor="let atten of attendance; let i = index">
+                  <td class="table-data">{{ i + 1 }}</td>
                   <td class="table-data">
                     <a class="student">
                       <p class="data">{{ atten.student | uppercase }}</p>
                     </a>
                   </td>
                   <td class="table-data">
-                    <p class="data">{{ atten.attendanceStatus === "0" ? "Absent" : "Present" }}</p>
+                    <p class="data">{{ atten.attendanceStatus === '0' ? 'Absent' : 'Present' }}</p>
                   </td>
                 </tr>
               </tbody>

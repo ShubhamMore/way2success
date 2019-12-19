@@ -11,7 +11,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./edit-exam.component.css']
 })
 export class EditExamComponent implements OnInit {
-
   id: string;
 
   loading: boolean;
@@ -27,47 +26,45 @@ export class EditExamComponent implements OnInit {
 
   date: string;
 
-  constructor(private examService: ExamService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private examService: ExamService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        this.id = params['id'];
-        this.examService.getExam(this.id)
-        .subscribe(
-          resData => {
-            this.error = null;
-            this.exam = resData.exam;
-            this.examMetaData = resData.examMetaData;
-            this.marks = this.exam.marks;
-            this.date = this.exam.date;
-            this.examForm = new FormGroup({
-              examTitle : new FormControl(this.exam.examTitle, {
-                validators: [Validators.required]
-              }),
-              outOfMarks : new FormControl(this.exam.outOfMarks, {
-                validators: [Validators.required]
-              }),
-              passingMarks : new FormControl(this.exam.passingMarks, {
-                validators: [Validators.required]
-              })
-            });
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      this.id = params['id'];
+      this.examService.getExam(this.id).subscribe(
+        resData => {
+          this.error = null;
+          this.exam = resData.exam;
+          this.examMetaData = resData.examMetaData;
+          this.marks = this.exam.marks;
+          this.date = this.exam.date;
+          this.examForm = new FormGroup({
+            examTitle: new FormControl(this.exam.examTitle, {
+              validators: [Validators.required]
+            }),
+            outOfMarks: new FormControl(this.exam.outOfMarks, {
+              validators: [Validators.required]
+            }),
+            passingMarks: new FormControl(this.exam.passingMarks, {
+              validators: [Validators.required]
+            })
+          });
 
-            this.loading = false;
-          },
-          errorMessage => {
-            this.error = errorMessage;
-            this.loading = false;
-          }
-        );
-      }
-    );
+          this.loading = false;
+        },
+        errorMessage => {
+          this.error = errorMessage;
+          this.loading = false;
+        }
+      );
+    });
   }
 
   inputmarks(event: any, index: number) {
@@ -90,13 +87,15 @@ export class EditExamComponent implements OnInit {
         marks: this.marks
       };
 
-      this.examService.editExam(exam._id, exam)
-      .subscribe((val) => {
-        this.location.back();
-        this.loading = false;
-      }, (error) => {
-        this.loading = false;
-      });
+      this.examService.editExam(exam._id, exam).subscribe(
+        val => {
+          this.location.back();
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
+        }
+      );
     }
   }
 

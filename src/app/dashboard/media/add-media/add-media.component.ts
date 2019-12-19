@@ -1,4 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, ɵConsole } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  ChangeDetectorRef,
+  ɵConsole
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CourseModel, BatchModel, SubjectModel } from 'src/app/models/course.model';
 import { CourseService } from 'src/app/services/course.service';
@@ -13,8 +20,7 @@ import { BranchModel } from 'src/app/models/branch.model';
   styleUrls: ['./add-media.component.css']
 })
 export class AddMediaComponent implements OnInit {
-
-  @ViewChild('videoPlayer', {static: false}) videoPlayer: ElementRef;
+  @ViewChild('videoPlayer', { static: false }) videoPlayer: ElementRef;
 
   loading: boolean;
   error: boolean;
@@ -36,29 +42,42 @@ export class AddMediaComponent implements OnInit {
 
   subjects: SubjectModel[];
 
-  constructor(private courseService: CourseService,
-              private mediaService: MediaService,
-              private router: Router,
-              private location: Location,
-              private route: ActivatedRoute,
-              private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(
+    private courseService: CourseService,
+    private mediaService: MediaService,
+    private router: Router,
+    private location: Location,
+    private route: ActivatedRoute,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     this.branches = [];
     this.allCourses = [];
     this.courses = [];
     this.batches = [];
     this.subjects = [];
-    this.courseService.getBranchesAndCourses()
-    .subscribe(
+    this.courseService.getBranchesAndCourses().subscribe(
       resData => {
         this.error = null;
         this.allCourses = resData.courses;
         this.branches = resData.branches;
         if (this.courses.length < 1) {
-
         }
         this.form = new FormGroup({
           title: new FormControl(null, {
@@ -116,7 +135,7 @@ export class AddMediaComponent implements OnInit {
   courseChanged() {
     this.batches = [];
     this.subjects = [];
-    const course = this.courses.find((cueCourse) => cueCourse._id === this.form.value.course);
+    const course = this.courses.find(cueCourse => cueCourse._id === this.form.value.course);
     this.batches = course.batch;
     this.form.patchValue({
       batch: '',
@@ -126,7 +145,7 @@ export class AddMediaComponent implements OnInit {
 
   batchChanged() {
     this.subjects = [];
-    const batch = this.batches.find((curBatch) => curBatch._id === this.form.value.batch);
+    const batch = this.batches.find(curBatch => curBatch._id === this.form.value.batch);
     this.subjects = batch.subjects;
     this.form.patchValue({
       subject: ''
@@ -189,8 +208,7 @@ export class AddMediaComponent implements OnInit {
     postData.append('startTime', StartTime);
     postData.append('media', this.uploadMedia, this.form.value.title);
 
-    this.mediaService.addMedia(postData)
-    .subscribe(
+    this.mediaService.addMedia(postData).subscribe(
       resData => {
         this.error = null;
         this.resetForm();
@@ -209,7 +227,7 @@ export class AddMediaComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.form.reset();
-    this.form.patchValue({course: '', batch: ''});
+    this.form.patchValue({ course: '', batch: '' });
     this.mediaPreview = null;
     this.uploadMedia = null;
   }

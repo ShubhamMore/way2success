@@ -1,5 +1,4 @@
 export class AttendanceModel {
-
   // tslint:disable-next-line: variable-name
   public _id: string;
   public date: string;
@@ -8,9 +7,15 @@ export class AttendanceModel {
   public subject: string;
   public attendance: StudentAttendanceModel[] = [];
 
-  // tslint:disable-next-line: variable-name
-  constructor(_id: string, date: string, branch: string, batch: string, subject: string, attendance: StudentAttendanceModel[]) {
-    this._id = _id;
+  constructor(
+    id: string,
+    date: string,
+    branch: string,
+    batch: string,
+    subject: string,
+    attendance: StudentAttendanceModel[]
+  ) {
+    this._id = id;
     this.date = date;
     this.branch = branch;
     this.batch = batch;

@@ -16,7 +16,6 @@ import { EncryptService } from '../../../encrypt.service';
   styleUrls: ['./edit-student.component.css']
 })
 export class EditStudentComponent implements OnInit {
-
   loading: boolean;
   error: boolean;
 
@@ -38,83 +37,81 @@ export class EditStudentComponent implements OnInit {
 
   student: StudentModel;
 
-  constructor(private userService: UserService,
-              private encryptService: EncryptService,
-              private studentService: StudentService,
-              private router: Router,
-              private location: Location,
-              private route: ActivatedRoute) { }
+  constructor(
+    private userService: UserService,
+    private encryptService: EncryptService,
+    private studentService: StudentService,
+    private router: Router,
+    private location: Location,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
     this.userExist = false;
     this.courses = this.batches = this.subjects = this.subjectsToAdd = [];
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        const id = params['id'];
-        this.student = this.studentService.getStudentForEditing(id)
-        .subscribe(
-          resData => {
-            this.error = null;
-            this.student = resData.student;
-            if (!this.student) {
-              this.router.navigate(['/page_not_found'], {relativeTo: this.route});
-              return;
-            }
-            this.allCourses = resData.courses;
-            this.branches = resData.branches;
-
-            this.form = new FormGroup({
-              name: new FormControl(this.student.name, {
-                validators: [Validators.required]
-              }),
-              birthDate: new FormControl(this.student.birthDate, {
-                validators: [Validators.required]
-              }),
-              email: new FormControl(this.student.email, {
-                validators: [Validators.required, Validators.email]
-              }),
-              phone: new FormControl(this.student.phone, {
-                validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
-              }),
-              address: new FormControl(this.student.address, {
-                validators: [Validators.required]
-              }),
-              branch: new FormControl(this.student.branch, {
-                validators: [Validators.required]
-              }),
-              course: new FormControl('', {
-                validators: [Validators.required]
-              }),
-              batch: new FormControl('', {
-                validators: [Validators.required]
-              }),
-              status: new FormControl(this.student.status, {
-                validators: [Validators.required]
-              })
-            });
-
-            this.branchChanged();
-            this.form.patchValue({course: this.student.course});
-            this.course = this.courses.find((course) => course._id === this.student.course);
-            this.batch = this.course.batch.find((batch) => batch._id === this.student.batch);
-            this.subjects = this.batch.subjects;
-            this.courseChanged();
-            this.form.patchValue({batch: this.student.batch});
-            this.batchChanged();
-            this.subjectsToAdd = this.student.subjects;
-
-            this.loading = false;
-          },
-          errorMessage => {
-            this.error = errorMessage;
-            this.loading = false;
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      const id = params['id'];
+      this.student = this.studentService.getStudentForEditing(id).subscribe(
+        resData => {
+          this.error = null;
+          this.student = resData.student;
+          if (!this.student) {
+            this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+            return;
           }
-        );
-      }
-    );
+          this.allCourses = resData.courses;
+          this.branches = resData.branches;
+
+          this.form = new FormGroup({
+            name: new FormControl(this.student.name, {
+              validators: [Validators.required]
+            }),
+            birthDate: new FormControl(this.student.birthDate, {
+              validators: [Validators.required]
+            }),
+            email: new FormControl(this.student.email, {
+              validators: [Validators.required, Validators.email]
+            }),
+            phone: new FormControl(this.student.phone, {
+              validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
+            }),
+            address: new FormControl(this.student.address, {
+              validators: [Validators.required]
+            }),
+            branch: new FormControl(this.student.branch, {
+              validators: [Validators.required]
+            }),
+            course: new FormControl('', {
+              validators: [Validators.required]
+            }),
+            batch: new FormControl('', {
+              validators: [Validators.required]
+            }),
+            status: new FormControl(this.student.status, {
+              validators: [Validators.required]
+            })
+          });
+
+          this.branchChanged();
+          this.form.patchValue({ course: this.student.course });
+          this.course = this.courses.find(course => course._id === this.student.course);
+          this.batch = this.course.batch.find(batch => batch._id === this.student.batch);
+          this.subjects = this.batch.subjects;
+          this.courseChanged();
+          this.form.patchValue({ batch: this.student.batch });
+          this.batchChanged();
+          this.subjectsToAdd = this.student.subjects;
+
+          this.loading = false;
+        },
+        errorMessage => {
+          this.error = errorMessage;
+          this.loading = false;
+        }
+      );
+    });
   }
 
   branchChanged() {
@@ -142,7 +139,7 @@ export class EditStudentComponent implements OnInit {
       this.batches = [];
       this.subjects = [];
       this.subjectsToAdd = [];
-      const course = this.courses.find((curCourse) => curCourse._id === id);
+      const course = this.courses.find(curCourse => curCourse._id === id);
       this.batches = course.batch;
       this.form.patchValue({
         batch: ''
@@ -155,7 +152,7 @@ export class EditStudentComponent implements OnInit {
     if (id !== '') {
       this.subjects = [];
       this.subjectsToAdd = [];
-      const batch = this.batches.find((curBatch) => curBatch._id === id);
+      const batch = this.batches.find(curBatch => curBatch._id === id);
       this.subjects = batch.subjects;
     }
   }
@@ -165,8 +162,7 @@ export class EditStudentComponent implements OnInit {
       this.userExist = false;
       return;
     } else if (this.form.controls.email.status === 'VALID') {
-      this.userService.checkUser(this.form.value.email)
-      .subscribe(
+      this.userService.checkUser(this.form.value.email).subscribe(
         (resData: any) => {
           this.userExist = resData.exist;
         },
@@ -207,8 +203,7 @@ export class EditStudentComponent implements OnInit {
       status: this.form.value.status
     };
 
-    this.studentService.editStudent(student)
-    .subscribe(
+    this.studentService.editStudent(student).subscribe(
       resData => {
         this.error = null;
         this.cancel();
@@ -231,7 +226,7 @@ export class EditStudentComponent implements OnInit {
   }
 
   subChecked(subject: string): boolean {
-    const s = this.subjectsToAdd.find((sub => sub === subject));
+    const s = this.subjectsToAdd.find(sub => sub === subject);
     if (!!s) {
       return true;
     }

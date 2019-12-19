@@ -7,43 +7,53 @@
       <div class="row mb-3" *ngFor="let branch of branches">
         <div class="cardBox col-md-10 col-12 mx-auto">
           <div class="card shadow">
-            <div class="card-header"><i class="fa fa-building-o"></i>&nbsp;&nbsp;&nbsp;{{branch.branchName}}</div>
+            <div class="card-header">
+              <i class="fa fa-building-o"></i>&nbsp;&nbsp;&nbsp;{{ branch.branchName }}
+            </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-md-6 col-12">
                   <div class="row">
                     <div class="col-12 mt-2">
                       <span><i class="fa fa-map-marker"></i></span>
-                      &nbsp;&nbsp;{{branch.address}}
+                      &nbsp;&nbsp;{{ branch.address }}
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12 mt-2">
                       <span><i class="fa fa-phone"></i></span>
-                      &nbsp;&nbsp;{{branch.phone}}
+                      &nbsp;&nbsp;{{ branch.phone }}
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-12 mt-2">
                       <span><i class="fa fa-envelope"></i></span>
-                      &nbsp;&nbsp;<a style="color:#3b3b3b!important;cursor: pointer;" href="mailto:{{branch.email}}">{{branch.email}}</a>
+                      &nbsp;&nbsp;<a
+                        style="color:#3b3b3b!important;cursor: pointer;"
+                        href="mailto:{{ branch.email }}"
+                        >{{ branch.email }}</a
+                      >
                     </div>
                   </div>
-                  <hr>
+                  <hr />
                 </div>
                 <div class="col-md-6 col-12">
                   <div class="text-center">
                     <strong>COURSES</strong>
                   </div>
-                  <hr>
+                  <hr />
                   <div class="course pr-1" *ngIf="branch.course.length > 0; else empty_course">
                     <div class="card" *ngFor="let course of branch.course">
                       <div class="card-header">
-                        <a class="collapsed card-link" data-toggle="collapse" href="{{'#' + branch.branchName + course.courseName}}">
-                          {{course.courseName}}
+                        <a
+                          class="collapsed card-link"
+                          data-toggle="collapse"
+                          href="{{ '#' + branch.branchName + course.courseName }}"
+                        >
+                          {{ course.courseName }}
                         </a>
                       </div>
-                      <div id="{{branch.branchName + course.courseName}}" class="collapse">
+                      <div id="{{ branch.branchName + course.courseName }}" class="collapse">
                         <div class="card-body">
                           <div class="table-responsive">
                             <table class="table table-sm">
@@ -55,12 +65,26 @@
                               <tbody class="table-body">
                                 <ng-container *ngFor="let batch of course.batch">
                                   <tr class="table-row">
-                                    <td class="table-data" class="text-left">{{batch.batchName}}</td>
-                                    <td class="table-data">
-                                      <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.subject}}</p>
+                                    <td class="table-data" class="text-left">
+                                      {{ batch.batchName }}
                                     </td>
                                     <td class="table-data">
-                                      <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.fee}}</p>
+                                      <p
+                                        class="data"
+                                        style="margin: 0;"
+                                        *ngFor="let curSubject of batch.subjects; let i = index"
+                                      >
+                                        {{ curSubject.subject }}
+                                      </p>
+                                    </td>
+                                    <td class="table-data">
+                                      <p
+                                        class="data"
+                                        style="margin: 0;"
+                                        *ngFor="let curSubject of batch.subjects; let i = index"
+                                      >
+                                        {{ curSubject.fee }}
+                                      </p>
                                     </td>
                                   </tr>
                                 </ng-container>

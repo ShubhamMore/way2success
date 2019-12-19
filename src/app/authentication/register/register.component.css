@@ -1,9 +1,9 @@
-.customCard{
-    width: 800px;
-  }
+.customCard {
+  width: 800px;
+}
 
-  @media only screen and (max-width: 1283px) {
-    .customCard{
-      width: 100%;
-    }
+@media only screen and (max-width: 1283px) {
+  .customCard {
+    width: 100%;
   }
+}

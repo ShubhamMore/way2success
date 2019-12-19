@@ -11,15 +11,13 @@ import { EnquiryService } from '../../services/enquiry.service';
   styleUrls: ['./content-contact.component.css']
 })
 export class ContentContactComponent implements OnInit {
-
   loading: boolean;
   error: string;
   contact: ContactModel;
   form: FormGroup;
   enquirySend: boolean;
 
-  constructor(private contactService: ContactService,
-              private enquiryService: EnquiryService) { }
+  constructor(private contactService: ContactService, private enquiryService: EnquiryService) {}
 
   ngOnInit() {
     this.loading = true;
@@ -36,10 +34,9 @@ export class ContentContactComponent implements OnInit {
       }),
       message: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(10)]
-      }),
+      })
     });
-    this.contactService.getContact()
-    .subscribe(
+    this.contactService.getContact().subscribe(
       (resData: any) => {
         this.contact = resData;
         this.loading = false;
@@ -58,11 +55,12 @@ export class ContentContactComponent implements OnInit {
         email: this.form.value.email,
         phone: this.form.value.phone,
         message: this.form.value.message,
-        date: Date().toString().substring(0, 21),
+        date: Date()
+          .toString()
+          .substring(0, 21),
         reply: []
       };
-      this.enquiryService.sendEnquiry(enquiry)
-      .subscribe(
+      this.enquiryService.sendEnquiry(enquiry).subscribe(
         (resData: any) => {
           this.enquirySend = true;
           this.form.reset();

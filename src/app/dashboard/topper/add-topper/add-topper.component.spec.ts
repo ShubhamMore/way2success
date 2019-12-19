@@ -8,9 +8,8 @@ describe('AddTopperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddTopperComponent ]
-    })
-    .compileComponents();
+      declarations: [AddTopperComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -10,7 +10,6 @@ import { MarksModel, ExamModel } from 'src/app/models/exam.model';
   styleUrls: ['./show-exam.component.css']
 })
 export class ShowExamComponent implements OnInit {
-
   loading: boolean;
 
   exam: ExamModel;
@@ -20,34 +19,32 @@ export class ShowExamComponent implements OnInit {
   marks: MarksModel[];
 
   error: string;
-  constructor(private examService: ExamService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private examService: ExamService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
     this.marks = [];
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        const id = params['id'];
-        this.examService.getExam(id)
-        .subscribe(
-          resData => {
-            this.error = null;
-            this.exam = resData.exam;
-            this.examMetaData = resData.examMetaData;
-            this.marks = this.exam.marks;
-            this.loading = false;
-          },
-          errorMessage => {
-            this.error = errorMessage;
-            this.loading = false;
-          }
-        );
-      }
-    );
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      const id = params['id'];
+      this.examService.getExam(id).subscribe(
+        resData => {
+          this.error = null;
+          this.exam = resData.exam;
+          this.examMetaData = resData.examMetaData;
+          this.marks = this.exam.marks;
+          this.loading = false;
+        },
+        errorMessage => {
+          this.error = errorMessage;
+          this.loading = false;
+        }
+      );
+    });
   }
 
   checkPassFail(marks: string, passingMarks: string): boolean {
@@ -58,15 +55,14 @@ export class ShowExamComponent implements OnInit {
   }
 
   editExam() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   cancel() {
-    this.router.navigate(['/admin', 'exam'], {relativeTo: this.route});
+    this.router.navigate(['/admin', 'exam'], { relativeTo: this.route });
   }
 
   onErrorClose() {
     this.error = null;
   }
-
 }

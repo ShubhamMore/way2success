@@ -7,11 +7,10 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ContactService {
-
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {}
 
   getContact() {
-    const data = {api: 'getContact', data: {}};
+    const data = { api: 'getContact', data: {} };
     return this.httpService.httpPost(data).pipe(
       map((response: any) => {
         return response;
@@ -23,7 +22,7 @@ export class ContactService {
   }
 
   saveContact(contact: any) {
-    const data = {api: 'saveContact', data: contact};
+    const data = { api: 'saveContact', data: contact };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

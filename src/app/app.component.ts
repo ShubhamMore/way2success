@@ -13,9 +13,11 @@ export class AppComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private route: ActivatedRoute) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -25,15 +27,14 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    this.authService.autoLogin()
-    .subscribe(
+    this.authService.autoLogin().subscribe(
       resData => {
         this.loading = false;
         this.authService.loadUser(userData);
       },
       errorMessage => {
         this.loading = false;
-        this.router.navigate(['/login'], {relativeTo: this.route});
+        this.router.navigate(['/login'], { relativeTo: this.route });
       }
     );
   }

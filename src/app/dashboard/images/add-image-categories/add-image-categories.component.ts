@@ -10,14 +10,12 @@ import { Location } from '@angular/common';
   styleUrls: ['./add-image-categories.component.css']
 })
 export class AddImageCategoriesComponent implements OnInit {
-
   loading: boolean;
   error: string;
   form: FormGroup;
   categories: ImageCategoryModel[];
 
-  constructor(private imageService: ImageService,
-              private location: Location) { }
+  constructor(private imageService: ImageService, private location: Location) {}
 
   ngOnInit() {
     this.loading = true;
@@ -27,8 +25,7 @@ export class AddImageCategoriesComponent implements OnInit {
         validators: [Validators.required]
       })
     });
-    this.imageService.getImageCategories()
-    .subscribe(
+    this.imageService.getImageCategories().subscribe(
       (resData: any) => {
         this.categories = resData;
         this.loading = false;
@@ -45,8 +42,7 @@ export class AddImageCategoriesComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.imageService.addCategory(this.form.value.category)
-    .subscribe(
+    this.imageService.addCategory(this.form.value.category).subscribe(
       (resData: any) => {
         this.ngOnInit();
       },
@@ -58,12 +54,13 @@ export class AddImageCategoriesComponent implements OnInit {
   }
 
   deleteCategory(id: string) {
-    // tslint:disable-next-line: max-line-length
-    const confirm = window.confirm('Do you really want to Delete this Category?\n If you Delete this Category all the images in this category will be permanantly deleted from Database and Server..\nIf you wish to delete this Click Ok');
+    const confirm = window.confirm(
+      // tslint:disable-next-line: max-line-length
+      'Do you really want to Delete this Category?\n If you Delete this Category all the images in this category will be permanantly deleted from Database and Server..\nIf you wish to delete this Click Ok'
+    );
     if (confirm) {
       this.loading = true;
-      this.imageService.deleteCategory(id)
-      .subscribe(
+      this.imageService.deleteCategory(id).subscribe(
         (resData: any) => {
           this.imageService.imageSearchData.category = '';
           this.ngOnInit();
@@ -83,5 +80,4 @@ export class AddImageCategoriesComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

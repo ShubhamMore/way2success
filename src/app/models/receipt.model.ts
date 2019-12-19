@@ -1,5 +1,4 @@
 export class ReceiptModel {
-
   // tslint:disable-next-line: variable-name
   public _id: string;
   public student: string;
@@ -12,17 +11,27 @@ export class ReceiptModel {
   public paymentMode: string;
   public description: string;
 
-  // tslint:disable-next-line: max-line-length variable-name
-  constructor(_id: string, student: string, course: string, branch: string, batch: string, date: string, feeType: string, amount: string, paymentMode: string, description: string) {
-      this._id = _id;
-      this.student = student;
-      this.course = course;
-      this.branch = branch;
-      this.batch = batch;
-      this.date = date;
-      this.feeType = feeType;
-      this.amount = amount;
-      this.paymentMode = paymentMode;
-      this.description = description;
+  constructor(
+    id: string,
+    student: string,
+    course: string,
+    branch: string,
+    batch: string,
+    date: string,
+    feeType: string,
+    amount: string,
+    paymentMode: string,
+    description: string
+  ) {
+    this._id = id;
+    this.student = student;
+    this.course = course;
+    this.branch = branch;
+    this.batch = batch;
+    this.date = date;
+    this.feeType = feeType;
+    this.amount = amount;
+    this.paymentMode = paymentMode;
+    this.description = description;
   }
 }

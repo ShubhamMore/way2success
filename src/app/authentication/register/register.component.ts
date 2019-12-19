@@ -14,7 +14,6 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   form: FormGroup;
 
   developmentMode: boolean;
@@ -23,47 +22,51 @@ export class RegisterComponent implements OnInit {
   loading: boolean;
   error: string = null;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private encryptService: EncryptService,
-              private userService: UserService,
-              private formBuilder: FormBuilder,
-              private validator: Validator) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private encryptService: EncryptService,
+    private userService: UserService,
+    private formBuilder: FormBuilder,
+    private validator: Validator
+  ) {}
 
   ngOnInit() {
     this.loading = true;
     this.developmentMode = !environment.production;
     if (!this.developmentMode) {
-      this.router.navigate(['page_not_found'], {relativeTo: this.route});
+      this.router.navigate(['page_not_found'], { relativeTo: this.route });
     }
     this.userExist = false;
-    this.form = this.formBuilder.group({
-      name: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      userType: new FormControl('', {
-        validators: [Validators.required]
-      }),
-      email: new FormControl(null, {
-        validators: [Validators.required, Validators.email]
-      }),
-      password: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(6)]
-      }),
-      confirm_password: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(6)]
-      })
-    }, {
-      validators: this.validator.passwordValidator.bind(this)
-    });
+    this.form = this.formBuilder.group(
+      {
+        name: new FormControl(null, {
+          validators: [Validators.required]
+        }),
+        userType: new FormControl('', {
+          validators: [Validators.required]
+        }),
+        email: new FormControl(null, {
+          validators: [Validators.required, Validators.email]
+        }),
+        password: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(6)]
+        }),
+        confirm_password: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(6)]
+        })
+      },
+      {
+        validators: this.validator.passwordValidator.bind(this)
+      }
+    );
     this.loading = false;
   }
 
   checkUser() {
     if (this.form.controls.email.status === 'VALID') {
-      this.userService.checkUser(this.form.value.email)
-      .subscribe(
+      this.userService.checkUser(this.form.value.email).subscribe(
         (resData: any) => {
           this.userExist = resData.exist;
         },
@@ -99,7 +102,7 @@ export class RegisterComponent implements OnInit {
     authObs.subscribe(
       resData => {
         this.loading = false;
-        this.router.navigate(['/login'], {relativeTo: this.route});
+        this.router.navigate(['/login'], { relativeTo: this.route });
       },
       errorMessage => {
         this.error = errorMessage;
@@ -113,5 +116,4 @@ export class RegisterComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

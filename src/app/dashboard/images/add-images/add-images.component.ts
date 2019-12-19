@@ -11,7 +11,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./add-images.component.css']
 })
 export class AddImagesComponent implements OnInit {
-
   imagePreview: string[];
   uploadImages: File[];
   categories: ImageCategoryModel[];
@@ -20,10 +19,12 @@ export class AddImagesComponent implements OnInit {
   error: string;
   invalidImage: boolean;
 
-  constructor(private imageService: ImageService,
-              private router: Router,
-              private location: Location,
-              private route: ActivatedRoute) {}
+  constructor(
+    private imageService: ImageService,
+    private router: Router,
+    private location: Location,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -35,12 +36,11 @@ export class AddImagesComponent implements OnInit {
         validators: [Validators.required]
       })
     });
-    this.imageService.getImageCategories()
-    .subscribe(
+    this.imageService.getImageCategories().subscribe(
       (resData: any) => {
         this.categories = resData;
         if (this.categories.length > 0) {
-          this.form.patchValue({category: this.categories[0]._id});
+          this.form.patchValue({ category: this.categories[0]._id });
         }
         this.loading = false;
       },
@@ -60,7 +60,7 @@ export class AddImagesComponent implements OnInit {
     for (let i = 0; i < n; i++) {
       ext = files[i].name.substring(files[i].name.lastIndexOf('.') + 1);
       if (!(imgExt.indexOf(ext) !== -1)) {
-        return this.invalidImage = true;
+        return (this.invalidImage = true);
       }
     }
     this.invalidImage = false;
@@ -91,17 +91,18 @@ export class AddImagesComponent implements OnInit {
       images.append('image', this.uploadImages[i], this.form.value.category + i);
     }
 
-    this.imageService.addImages(images)
-    .subscribe((responce: any) => {
-      this.imagePreview = [];
-      this.uploadImages = [];
-      this.form.reset();
-      this.cancel();
-    },
-    (error: any) => {
-      this.error = error;
-      this.loading = false;
-    });
+    this.imageService.addImages(images).subscribe(
+      (responce: any) => {
+        this.imagePreview = [];
+        this.uploadImages = [];
+        this.form.reset();
+        this.cancel();
+      },
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
+      }
+    );
   }
 
   cancelImage(index: number) {
@@ -111,7 +112,7 @@ export class AddImagesComponent implements OnInit {
 
   addCategory() {
     this.loading = true;
-    this.router.navigate(['/admin', 'image', 'category'], {relativeTo: this.route});
+    this.router.navigate(['/admin', 'image', 'category'], { relativeTo: this.route });
   }
 
   cancel() {
@@ -121,5 +122,4 @@ export class AddImagesComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

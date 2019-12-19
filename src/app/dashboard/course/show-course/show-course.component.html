@@ -1,61 +1,70 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
+  <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
-    <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
+  <div class="row mt-2">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-12 mx-auto">
+      <h4 class="page-heading text-center mb-3">{{ course.courseName | uppercase }}</h4>
 
-    <div class="row mt-2">
-        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-12 mx-auto">
+      <div class="row">
+        <div class="col-12"><strong>Branch : </strong>{{ course.branch }}</div>
+      </div>
 
-            <h4 class="page-heading text-center mb-3">{{course.courseName | uppercase}}</h4>
+      <div class="row">
+        <div class="col-12">
+          <div class="batch">
+            <label for="batch"><strong>Batches : </strong></label>
+          </div>
 
-            <div class="row">
-              <div class="col-12">
-                <strong>Branch : </strong>{{course.branch}}
-              </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-
-                    <div class="batch">
-                      <label for="batch"><strong>Batches : </strong></label>
-                    </div>
-
-                    <div class="table-responsive batches-border" id="batches">
-                        <table class="table table-sm">
-                            <thead class="table-heading text-center">
-                                <th class="table-heading-data">Batch</th>
-                                <th class="table-heading-data">Subjects</th>
-                                <th class="table-heading-data">Fees</th>
-                            </thead>
-                            <tbody class="table-body">
-                                <ng-container *ngFor="let batch of batches; let i = index">
-                                <tr class="table-row">
-                                    <td class="table-data" class="text-left">{{batch.batchName}}</td>
-                                    <td class="table-data">
-                                        <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.subject}}</p>
-                                    </td>
-                                    <td class="table-data">
-                                        <p class="data" style="margin: 0;" *ngFor="let curSubject of batch.subjects; let i = index">{{curSubject.fee}}</p>
-                                    </td>
-                                </tr>
-                                </ng-container>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-            <div class="row">
-                <div class="col-6">
-                    <button class="btn btn-dark btn-sm" type="button" (click)="cancel()">Back</button>
-                </div>
-                <div class="col-6">
-                    <button class="btn btn-light btn-sm float-right" type="button" (click)="editcourse()">Edit</button>
-                </div>
-            </div>
+          <div class="table-responsive batches-border" id="batches">
+            <table class="table table-sm">
+              <thead class="table-heading text-center">
+                <th class="table-heading-data">Batch</th>
+                <th class="table-heading-data">Subjects</th>
+                <th class="table-heading-data">Fees</th>
+              </thead>
+              <tbody class="table-body">
+                <ng-container *ngFor="let batch of batches; let i = index">
+                  <tr class="table-row">
+                    <td class="table-data" class="text-left">{{ batch.batchName }}</td>
+                    <td class="table-data">
+                      <p
+                        class="data"
+                        style="margin: 0;"
+                        *ngFor="let curSubject of batch.subjects; let i = index"
+                      >
+                        {{ curSubject.subject }}
+                      </p>
+                    </td>
+                    <td class="table-data">
+                      <p
+                        class="data"
+                        style="margin: 0;"
+                        *ngFor="let curSubject of batch.subjects; let i = index"
+                      >
+                        {{ curSubject.fee }}
+                      </p>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
+
+      <hr />
+      <div class="row">
+        <div class="col-6">
+          <button class="btn btn-dark btn-sm" type="button" (click)="cancel()">Back</button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-light btn-sm float-right" type="button" (click)="editcourse()">
+            Edit
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

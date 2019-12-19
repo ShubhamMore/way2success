@@ -7,11 +7,10 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class HistoryService {
-
   constructor(private httpService: HttpService) {}
 
   getStudentHistory(student: string) {
-    const data = {api: 'getStudentHistory', data: {student}};
+    const data = { api: 'getStudentHistory', data: { student } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

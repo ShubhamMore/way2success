@@ -1,40 +1,44 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-  
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
-   <div class="col-md-10 col-12 mx-auto">
-     <h4>Enquiries</h4>
-     <hr>
-     <div class="row">
-       <div class="col-12">
-         <div class="table-responsive" *ngIf="enquiries.length > 0; else empty_enquiries">
-           <table class="table table-sm table-hover">
-             <thead class="table-heading">
-               <tr class="table-row">
-                 <th class="table-heading-data">Id</th>
-                 <th class="table-heading-data">Name</th>
-                 <th class="table-heading-data">Email</th>
-                 <th class="table-heading-data">Message</th>
-               </tr>
-             </thead>
-             <tbody class="table-body">
-               <tr class="table-row pointer" *ngFor="let enquiry of enquiries; let i = index" [ngClass]="{'unseen-enquiry': enquiry.seen === '0'}" [routerLink]="enquiry._id">
-                <td class="table-data">{{i + 1}}</td>
-                <td class="table-data">{{ enquiry.name }}</td>
-                <td class="table-data">{{ enquiry.email }}</td>
-                <td class="table-data">{{ limitData(enquiry.message) }}</td>
-               </tr>
-             </tbody>
-           </table>
-         </div>
-         <ng-template #empty_enquiries>
+    <div class="col-md-10 col-12 mx-auto">
+      <h4>Enquiries</h4>
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive" *ngIf="enquiries.length > 0; else empty_enquiries">
+            <table class="table table-sm table-hover">
+              <thead class="table-heading">
+                <tr class="table-row">
+                  <th class="table-heading-data">Id</th>
+                  <th class="table-heading-data">Name</th>
+                  <th class="table-heading-data">Email</th>
+                  <th class="table-heading-data">Message</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr
+                  class="table-row pointer"
+                  *ngFor="let enquiry of enquiries; let i = index"
+                  [ngClass]="{ 'unseen-enquiry': enquiry.seen === '0' }"
+                  [routerLink]="enquiry._id"
+                >
+                  <td class="table-data">{{ i + 1 }}</td>
+                  <td class="table-data">{{ enquiry.name }}</td>
+                  <td class="table-data">{{ enquiry.email }}</td>
+                  <td class="table-data">{{ limitData(enquiry.message) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #empty_enquiries>
             <h5 class="no-data-found pl-3">No Enquiries Available</h5>
           </ng-template>
-       </div>
-     </div>
-   </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

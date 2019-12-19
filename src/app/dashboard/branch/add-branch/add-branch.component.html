@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
@@ -11,9 +10,8 @@
           <h3 class="page-heading text-center">Add New Branch</h3>
         </div>
       </div>
-      <hr class="horizontal-line">
+      <hr class="horizontal-line" />
       <form class="" [formGroup]="form" (submit)="addBranch()">
-
         <div class="row">
           <div class="col-12">
             <div class="form-group">
@@ -21,9 +19,20 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="branch">Branch</label>
                 </div>
-                <input class="form-control input-text" type="text" name="branch" id="branch" formControlName="branch" placeholder="Branch Name">
+                <input
+                  class="form-control input-text"
+                  type="text"
+                  name="branch"
+                  id="branch"
+                  formControlName="branch"
+                  placeholder="Branch Name"
+                />
               </div>
-              <span class="input-error" *ngIf="!form.get('branch').valid && form.get('branch').touched">*Please Enter Branch Name</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('branch').valid && form.get('branch').touched"
+                >*Please Enter Branch Name</span
+              >
             </div>
           </div>
         </div>
@@ -35,9 +44,22 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="address">Address</label>
                 </div>
-                <textarea class="form-control input-text" type="text" rows="2" minlength="10" name="address" id="address" formControlName="address" placeholder="49, New York, USA"></textarea>
+                <textarea
+                  class="form-control input-text"
+                  type="text"
+                  rows="2"
+                  minlength="10"
+                  name="address"
+                  id="address"
+                  formControlName="address"
+                  placeholder="49, New York, USA"
+                ></textarea>
               </div>
-              <span class="input-error" *ngIf="!form.get('address').valid && form.get('address').touched">*Please Enter Address</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('address').valid && form.get('address').touched"
+                >*Please Enter Address</span
+              >
             </div>
           </div>
         </div>
@@ -49,9 +71,20 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="email">E-mail</label>
                 </div>
-                <input class="form-control input-text" type="email" name="email" id="email" formControlName="email" placeholder="example@gmail.com">
+                <input
+                  class="form-control input-text"
+                  type="email"
+                  name="email"
+                  id="email"
+                  formControlName="email"
+                  placeholder="example@gmail.com"
+                />
               </div>
-              <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please Enter Valid Email</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('email').valid && form.get('email').touched"
+                >*Please Enter Valid Email</span
+              >
             </div>
           </div>
           <div class="col-md-6 col-sm-12">
@@ -60,20 +93,33 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="phonn">Phone</label>
                 </div>
-                <input class="form-control input-text" type="text" pattern="\d*" minlength="10" maxlength="10" name="phone" id="phone" formControlName="phone" placeholder="987654****">
+                <input
+                  class="form-control input-text"
+                  type="text"
+                  pattern="\d*"
+                  minlength="10"
+                  maxlength="10"
+                  name="phone"
+                  id="phone"
+                  formControlName="phone"
+                  placeholder="987654****"
+                />
               </div>
-              <span class="input-error" *ngIf="!form.get('phone').valid && form.get('phone').touched">*Please Enter Valid Phone Number</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('phone').valid && form.get('phone').touched"
+                >*Please Enter Valid Phone Number</span
+              >
             </div>
           </div>
         </div>
 
-        <hr>
+        <hr />
         <div class="row">
           <div class="col-12">
             <button class="btn btn-primary float-right" type="submit">Add</button>
           </div>
         </div>
-
       </form>
     </div>
   </div>

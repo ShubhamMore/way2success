@@ -9,9 +9,18 @@ export class MediaModel {
   public media: VideoModel;
   public duration: string;
   public startTime: string;
-  // tslint:disable-next-line: max-line-length variable-name
-  constructor(_id: string, title: string, branch: string, course: string, batch: string, subject: string, media: VideoModel, duration: string, startTime: string) {
-    this._id = _id;
+  constructor(
+    id: string,
+    title: string,
+    branch: string,
+    course: string,
+    batch: string,
+    subject: string,
+    media: VideoModel,
+    duration: string,
+    startTime: string
+  ) {
+    this._id = id;
     this.title = title;
     this.branch = branch;
     this.course = course;
@@ -35,12 +44,17 @@ export class VideoModel {
   // tslint:disable-next-line: variable-name
   public created_at: string;
 
-  // tslint:disable-next-line: max-line-length variable-name
-  constructor(_id: string, image_name: string, secure_url: string, public_id: string, created_at: string) {
-    this._id = _id;
-    this.image_name = image_name;
-    this.secure_url = secure_url;
-    this.public_id = public_id;
-    this.created_at = created_at;
+  constructor(
+    id: string,
+    imageName: string,
+    secureUrl: string,
+    publicId: string,
+    createdAt: string
+  ) {
+    this._id = id;
+    this.image_name = imageName;
+    this.secure_url = secureUrl;
+    this.public_id = publicId;
+    this.created_at = createdAt;
   }
 }

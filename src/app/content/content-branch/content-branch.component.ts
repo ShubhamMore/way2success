@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BranchModel } from '../../models/branch.model';
 import { BranchService } from '../../services/branch.service';
 
 @Component({
@@ -8,18 +7,16 @@ import { BranchService } from '../../services/branch.service';
   styleUrls: ['./content-branch.component.css']
 })
 export class ContentBranchComponent implements OnInit {
-
   loading: boolean;
   error: string;
   branches: any[];
 
-  constructor(private branchService: BranchService) { }
+  constructor(private branchService: BranchService) {}
 
   ngOnInit() {
     this.loading = true;
     this.branches = [];
-    this.branchService.getBranchesAndCoursesForContent()
-    .subscribe(
+    this.branchService.getBranchesAndCoursesForContent().subscribe(
       (resData: any) => {
         this.branches = resData;
         this.loading = false;
@@ -30,5 +27,4 @@ export class ContentBranchComponent implements OnInit {
       }
     );
   }
-
 }

@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, NgForm, FormBuilder } from '@angular/forms';
 import { Params, ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +12,6 @@ import { Validator } from '../../shared/validators';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-
   form: FormGroup;
   error: string;
   loading: boolean;
@@ -21,46 +19,53 @@ export class ResetPasswordComponent implements OnInit {
   token: string;
   user: string;
 
-  constructor(private httpService: HttpService,
-              private roure: ActivatedRoute,
-              private encryptService: EncryptService,
-              private router: Router,
-              private formBuilder: FormBuilder,
-              private validator: Validator) { }
+  constructor(
+    private httpService: HttpService,
+    private roure: ActivatedRoute,
+    private encryptService: EncryptService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private validator: Validator
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.form = this.formBuilder.group({
-      password: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      confirm_password: new FormControl(null, {
-        validators: [Validators.required]
-      })
-    }, {
-      validators: this.validator.passwordValidator.bind(this)
-    });
+    this.form = this.formBuilder.group(
+      {
+        password: new FormControl(null, {
+          validators: [Validators.required]
+        }),
+        confirm_password: new FormControl(null, {
+          validators: [Validators.required]
+        })
+      },
+      {
+        validators: this.validator.passwordValidator.bind(this)
+      }
+    );
 
-    this.roure.queryParams
-    .subscribe((params: Params) => {
+    this.roure.queryParams.subscribe((params: Params) => {
       if (params.key === undefined) {
-        this.router.navigate(['/page_not_found'], {relativeTo: this.roure});
+        this.router.navigate(['/page_not_found'], { relativeTo: this.roure });
       } else {
         this.token = params.key;
 
-        const data = { api: 'validateToken', data: { token: this.token }};
-        this.httpService.httpPost(data)
-        .subscribe(
+        const data = { api: 'validateToken', data: { token: this.token } };
+        this.httpService.httpPost(data).subscribe(
           (response: any) => {
             const valid = response.valid_token;
             if (valid) {
               this.loading = false;
             } else {
-              this.router.navigate(['/page_not_found'], {relativeTo: this.roure});
+              this.router.navigate(['/page_not_found'], {
+                relativeTo: this.roure
+              });
             }
           },
           (error: any) => {
-            this.router.navigate(['/page_not_found'], {relativeTo: this.roure});
+            this.router.navigate(['/page_not_found'], {
+              relativeTo: this.roure
+            });
           }
         );
       }
@@ -69,7 +74,6 @@ export class ResetPasswordComponent implements OnInit {
 
   reset() {
     if (this.form.valid && !this.form.hasError('invalidPassword')) {
-
       this.error = null;
       this.loading = true;
 
@@ -80,11 +84,10 @@ export class ResetPasswordComponent implements OnInit {
       };
 
       const data = { api: 'resetPassword', data: resetPassword };
-      this.httpService.httpPost(data)
-      .subscribe(
+      this.httpService.httpPost(data).subscribe(
         (val: any) => {
           this.form.reset();
-          this.router.navigate(['/login'], {relativeTo: this.roure});
+          this.router.navigate(['/login'], { relativeTo: this.roure });
         },
         (error: any) => {
           this.error = error;

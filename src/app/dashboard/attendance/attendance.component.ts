@@ -12,7 +12,6 @@ import { BranchModel } from 'src/app/models/branch.model';
   styleUrls: ['./attendance.component.css']
 })
 export class AttendanceComponent implements OnInit {
-
   loading: boolean;
 
   form: FormGroup;
@@ -41,10 +40,12 @@ export class AttendanceComponent implements OnInit {
 
   date: string;
 
-  constructor(private courseService: CourseService,
-              private attendaceService: AttendanceService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private courseService: CourseService,
+    private attendaceService: AttendanceService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -68,20 +69,19 @@ export class AttendanceComponent implements OnInit {
     this.batch = this.attendaceService.attendanceSearchData.batch;
     this.subject = this.attendaceService.attendanceSearchData.subject;
 
-    this.courseService.getBranchesAndCourses()
-    .subscribe(
+    this.courseService.getBranchesAndCourses().subscribe(
       (resData: any) => {
         this.error = null;
         this.allCourses = resData.courses;
         this.branches = resData.branches;
         this.form = new FormGroup({
-          course : new FormControl('', {
+          course: new FormControl('', {
             validators: [Validators.required]
           }),
-          batch : new FormControl('', {
+          batch: new FormControl('', {
             validators: [Validators.required]
           }),
-          subject : new FormControl('', {
+          subject: new FormControl('', {
             validators: [Validators.required]
           })
         });
@@ -89,11 +89,11 @@ export class AttendanceComponent implements OnInit {
         if (this.branch !== '') {
           this.onSelectBranch(this.branch);
           if (this.course !== '') {
-            this.form.patchValue({course: this.course});
+            this.form.patchValue({ course: this.course });
             this.onSelectCourse();
-            this.form.patchValue({batch: this.batch});
+            this.form.patchValue({ batch: this.batch });
             this.onSelectBatch();
-            this.form.patchValue({subject: this.subject});
+            this.form.patchValue({ subject: this.subject });
             this.onSelectSubject();
           } else {
             this.loading = false;
@@ -112,7 +112,12 @@ export class AttendanceComponent implements OnInit {
 
   curDate() {
     const date = new Date();
-    this.date = date.getFullYear() + '-' + this.zeroAppend(date.getMonth() + 1) + '-' + this.zeroAppend(date.getDate());
+    this.date =
+      date.getFullYear() +
+      '-' +
+      this.zeroAppend(date.getMonth() + 1) +
+      '-' +
+      this.zeroAppend(date.getDate());
     if (this.attendaceService.attendanceSearchData.date === null) {
       this.attendaceService.attendanceSearchData.date = this.date;
     }
@@ -163,9 +168,9 @@ export class AttendanceComponent implements OnInit {
     if (id !== '') {
       this.course = id;
       this.attendaceService.attendanceSearchData.course = this.course;
-      this.batches = this.courses.find((course) => (course._id === id)).batch;
+      this.batches = this.courses.find(course => course._id === id).batch;
       this.subjects = [];
-      this.form.patchValue({ batch : '', subject: '' });
+      this.form.patchValue({ batch: '', subject: '' });
       this.noStudent = 'Please Select Batch';
     }
   }
@@ -175,8 +180,8 @@ export class AttendanceComponent implements OnInit {
     if (id !== '') {
       this.batch = id;
       this.attendaceService.attendanceSearchData.batch = this.batch;
-      this.subjects = this.batches.find((batch) => (batch._id === id)).subjects;
-      this.form.patchValue({ subject : '' });
+      this.subjects = this.batches.find(batch => batch._id === id).subjects;
+      this.form.patchValue({ subject: '' });
       this.noStudent = 'Please Select Subject';
     }
   }
@@ -192,8 +197,7 @@ export class AttendanceComponent implements OnInit {
 
   searchStudent(course: string, batch: string, subject: string) {
     this.loading = true;
-    this.attendaceService.getStudents(course, batch, subject, this.date)
-    .subscribe(
+    this.attendaceService.getStudents(course, batch, subject, this.date).subscribe(
       (resData: any) => {
         this.error = null;
         if (resData.atten) {
@@ -207,7 +211,7 @@ export class AttendanceComponent implements OnInit {
             this.noStudent = 'No Students Found';
           }
 
-          this.students.forEach((student) => {
+          this.students.forEach(student => {
             const attendance = {
               student: student._id,
               attendanceStatus: '0'
@@ -230,12 +234,11 @@ export class AttendanceComponent implements OnInit {
       this.attendance[index].attendanceStatus = '1';
     } else {
       this.attendance[index].attendanceStatus = '0';
-
     }
   }
 
   saveAttendance() {
-    if (this.form.valid && (this.students.length > 0)) {
+    if (this.form.valid && this.students.length > 0) {
       this.loading = true;
       const attendance = {
         date: this.date,
@@ -244,13 +247,15 @@ export class AttendanceComponent implements OnInit {
         subject: this.form.value.subject,
         attendance: this.attendance
       };
-      this.attendaceService.saveAttendance(attendance)
-      .subscribe((responce: any) => {
-        this.ngOnInit();
-      }, (error: any) => {
-        this.error = error;
-        this.loading = false;
-      });
+      this.attendaceService.saveAttendance(attendance).subscribe(
+        (responce: any) => {
+          this.ngOnInit();
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
     }
   }
 

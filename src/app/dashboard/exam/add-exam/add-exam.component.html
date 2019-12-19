@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
@@ -16,9 +15,18 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="branch">Branch </label>
             </div>
-            <select class="form-control input-select" type="text" name="branch" id="branch" (change)="onSelectBranch($event.target.value)" [value]="branch">
+            <select
+              class="form-control input-select"
+              type="text"
+              name="branch"
+              id="branch"
+              (change)="onSelectBranch($event.target.value)"
+              [value]="branch"
+            >
               <option class="select-option" value="">Select Branch</option>
-              <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+              <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{
+                branch.branchName
+              }}</option>
             </select>
           </div>
         </div>
@@ -28,16 +36,21 @@
             <div class="input-group-prepend">
               <label class="input-group-text input-label" for="date">Date</label>
             </div>
-            <input class="form-control input-date" type="date" [(ngModel)]="date" name="date" id="date">
+            <input
+              class="form-control input-date"
+              type="date"
+              [(ngModel)]="date"
+              name="date"
+              id="date"
+            />
             <div class="input-group-append">
               <button class="btn btn-success" type="button" (click)="saveExam()">Save</button>
             </div>
           </div>
         </div>
       </div>
-      <hr class="horizontal-line">
+      <hr class="horizontal-line" />
       <form class="" [formGroup]="examForm">
-
         <div class="row">
           <div class="col-md-4 col-sm-12 mt-3">
             <div class="form-group">
@@ -45,10 +58,22 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="course">Course</label>
                 </div>
-                <select class="form-control input-select" type="text" name="course" id="course" formControlName="course" (change)="onSelectCourse()">
+                <select
+                  class="form-control input-select"
+                  type="text"
+                  name="course"
+                  id="course"
+                  formControlName="course"
+                  (change)="onSelectCourse()"
+                >
                   <option class="select-option" value="">Select Course</option>
-                  <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
-              </select>
+                  <option
+                    class="select-option"
+                    *ngFor="let course of courses"
+                    [value]="course._id"
+                    >{{ course.courseName }}</option
+                  >
+                </select>
               </div>
             </div>
           </div>
@@ -59,9 +84,18 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="batch">Batch </label>
                 </div>
-                <select class="form-control input-select" type="text" name="batch" id="batch" formControlName="batch" (change)="onSelectBatch()">
+                <select
+                  class="form-control input-select"
+                  type="text"
+                  name="batch"
+                  id="batch"
+                  formControlName="batch"
+                  (change)="onSelectBatch()"
+                >
                   <option class="select-option" value="">Select Batch Name</option>
-                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{batch.batchName}}</option>
+                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{
+                    batch.batchName
+                  }}</option>
                 </select>
               </div>
             </div>
@@ -73,28 +107,50 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="subject">Subject </label>
                 </div>
-                <select class="form-control input-select" type="text" name="subject" id="subject" formControlName="subject" (change)="onSelectSubject()">
+                <select
+                  class="form-control input-select"
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  formControlName="subject"
+                  (change)="onSelectSubject()"
+                >
                   <option class="select-option" value="">Select Subject</option>
-                  <option class="select-option" *ngFor="let curSubject of subjects" [value]="curSubject._id">{{curSubject.subject}}</option>
+                  <option
+                    class="select-option"
+                    *ngFor="let curSubject of subjects"
+                    [value]="curSubject._id"
+                    >{{ curSubject.subject }}</option
+                  >
                 </select>
               </div>
             </div>
           </div>
         </div>
 
-        <hr>
+        <hr />
 
         <div class="row p-2" *ngIf="students.length > 0">
-
           <div class="col-md-4 col-sm-12 mt-3">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="examTitle">Exam Title</label>
                 </div>
-                <input class="input-text form-control" type="text" name="examTitle" id="examTitle" formControlName="examTitle" placeholder="Exam Title">
+                <input
+                  class="input-text form-control"
+                  type="text"
+                  name="examTitle"
+                  id="examTitle"
+                  formControlName="examTitle"
+                  placeholder="Exam Title"
+                />
               </div>
-              <span class="input-error" *ngIf="!examForm.get('examTitle').valid && examForm.get('examTitle').touched">*Please enter Exam Title</span>
+              <span
+                class="input-error"
+                *ngIf="!examForm.get('examTitle').valid && examForm.get('examTitle').touched"
+                >*Please enter Exam Title</span
+              >
             </div>
           </div>
 
@@ -104,9 +160,23 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="outOfMarks">Out of Marks</label>
                 </div>
-                <input class="input-text form-control" type="text" pattern="\d*" minlength="2" maxlength="3" name="outOfMarks" id="outOfMarks" formControlName="outOfMarks" placeholder="100">
+                <input
+                  class="input-text form-control"
+                  type="text"
+                  pattern="\d*"
+                  minlength="2"
+                  maxlength="3"
+                  name="outOfMarks"
+                  id="outOfMarks"
+                  formControlName="outOfMarks"
+                  placeholder="100"
+                />
               </div>
-              <span class="input-error" *ngIf="!examForm.get('outOfMarks').valid && examForm.get('outOfMarks').touched">*Please enter Out of Marks</span>
+              <span
+                class="input-error"
+                *ngIf="!examForm.get('outOfMarks').valid && examForm.get('outOfMarks').touched"
+                >*Please enter Out of Marks</span
+              >
             </div>
           </div>
 
@@ -114,17 +184,32 @@
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <label class="input-group-text input-label" for="passingMarks">Passing marks</label>
+                  <label class="input-group-text input-label" for="passingMarks"
+                    >Passing marks</label
+                  >
                 </div>
-                <input class="input-text form-control" type="text" pattern="\d*" minlength="2" maxlength="3" name="passingMarks" id="passingMarks" formControlName="passingMarks" placeholder="40">
+                <input
+                  class="input-text form-control"
+                  type="text"
+                  pattern="\d*"
+                  minlength="2"
+                  maxlength="3"
+                  name="passingMarks"
+                  id="passingMarks"
+                  formControlName="passingMarks"
+                  placeholder="40"
+                />
               </div>
-              <span class="input-error" *ngIf="!examForm.get('passingMarks').valid && examForm.get('passingMarks').touched">*Please enter Passing marks</span>
+              <span
+                class="input-error"
+                *ngIf="!examForm.get('passingMarks').valid && examForm.get('passingMarks').touched"
+                >*Please enter Passing marks</span
+              >
             </div>
           </div>
-
         </div>
       </form>
-      <br>
+      <br />
       <div class="row" *ngIf="students.length > 0; else empty_students">
         <div class="table-responsive">
           <table class="table table-sm table-hover">
@@ -136,13 +221,24 @@
               </tr>
             </thead>
             <tbody class="table-body">
-              <tr class="table-row" *ngFor="let student of students, let i = index" routerLinkActive="active">
-                <td class="table-data">{{ i+1 }}</td>
+              <tr
+                class="table-row"
+                *ngFor="let student of students; let i = index"
+                routerLinkActive="active"
+              >
+                <td class="table-data">{{ i + 1 }}</td>
                 <td class="table-data">
-                    <p class="data">{{ student.name | uppercase }}</p>
+                  <p class="data">{{ student.name | uppercase }}</p>
                 </td>
                 <td class="table-data">
-                    <input class="input-text form-control" type="text" pattern="\d*" minlength="2" maxlength="3" (input)="inputmarks($event, i)">
+                  <input
+                    class="input-text form-control"
+                    type="text"
+                    pattern="\d*"
+                    minlength="2"
+                    maxlength="3"
+                    (input)="inputmarks($event, i)"
+                  />
                 </td>
               </tr>
             </tbody>
@@ -150,7 +246,7 @@
         </div>
       </div>
       <ng-template #empty_students>
-        <h5 class="no-data-found pl-3">{{noStudent}}</h5>
+        <h5 class="no-data-found pl-3">{{ noStudent }}</h5>
       </ng-template>
     </div>
   </div>

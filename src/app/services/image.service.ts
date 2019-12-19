@@ -8,15 +8,14 @@ import { ImageModel } from '../models/image.model';
   providedIn: 'root'
 })
 export class ImageService {
-
   imageSearchData: any = {
     category: ''
   };
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {}
 
   getImageCategories() {
-    const data = {api: 'getImageCategories', data: {}};
+    const data = { api: 'getImageCategories', data: {} };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -28,7 +27,7 @@ export class ImageService {
   }
 
   addCategory(category: string) {
-    const data = {api: 'newCategory', data: {category}};
+    const data = { api: 'newCategory', data: { category } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -40,7 +39,7 @@ export class ImageService {
   }
 
   deleteCategory(id: string) {
-    const data = {api: 'deleteCategory', data: {_id: id}};
+    const data = { api: 'deleteCategory', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -52,7 +51,7 @@ export class ImageService {
   }
 
   getImages() {
-    const data = {api: 'getImage', data: {}};
+    const data = { api: 'getImage', data: {} };
     return this.httpService.httpPost(data).pipe(
       map((response: any) => {
         return response;
@@ -64,7 +63,7 @@ export class ImageService {
   }
 
   getImagesByCategory(category: string) {
-    const data = {api: 'getImagesByCategory', data: {category}};
+    const data = { api: 'getImagesByCategory', data: { category } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -75,9 +74,8 @@ export class ImageService {
     );
   }
 
-
   addImages(images: FormData) {
-    const data = {api: 'newImages', data: images};
+    const data = { api: 'newImages', data: images };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -89,7 +87,7 @@ export class ImageService {
   }
 
   deleteImage(id: string) {
-    const data = {api: 'deleteImage', data: {public_id: id}};
+    const data = { api: 'deleteImage', data: { public_id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

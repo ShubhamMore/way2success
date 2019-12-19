@@ -1,25 +1,33 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
     <div class="col-md-10 col-12 mx-auto">
       <h4 class="page-heading text-center mb-3">Add New Media</h4>
       <form class="form" (submit)="addMedia()" [formGroup]="form">
-
         <div class="row">
-
           <div class="col-md-6 col-12">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="title">Title </label>
                 </div>
-                <input class="input-text form-control" type="text" name="title" id="title" formControlName="title" placeholder="Title">
+                <input
+                  class="input-text form-control"
+                  type="text"
+                  name="title"
+                  id="title"
+                  formControlName="title"
+                  placeholder="Title"
+                />
               </div>
-              <span class="input-error"*ngIf="!form.get('title').valid && form.get('title').touched">*Please enter Title for Media</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('title').valid && form.get('title').touched"
+                >*Please enter Title for Media</span
+              >
             </div>
           </div>
 
@@ -29,31 +37,62 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="branch">Branch </label>
                 </div>
-                <select class="input-select form-control" type="text" name="branch" id="branch" formControlName="branch" (change)="branchChanged()">
+                <select
+                  class="input-select form-control"
+                  type="text"
+                  name="branch"
+                  id="branch"
+                  formControlName="branch"
+                  (change)="branchChanged()"
+                >
                   <option class="select-option" value="">Select Branch</option>
-                  <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+                  <option
+                    class="select-option"
+                    *ngFor="let branch of branches"
+                    [value]="branch._id"
+                    >{{ branch.branchName }}</option
+                  >
                 </select>
               </div>
-              <span class="input-error"*ngIf="!form.get('branch').valid && form.get('branch').touched">*Please Select Branch</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('branch').valid && form.get('branch').touched"
+                >*Please Select Branch</span
+              >
             </div>
           </div>
-
         </div>
 
         <div class="row">
-
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="course">Course </label>
                 </div>
-                <select class="input-select form-control" type="text" name="course" id="course" formControlName="course" placeholder="course" (change)="courseChanged()">
+                <select
+                  class="input-select form-control"
+                  type="text"
+                  name="course"
+                  id="course"
+                  formControlName="course"
+                  placeholder="course"
+                  (change)="courseChanged()"
+                >
                   <option class="select-option" value="">Select Course</option>
-                  <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+                  <option
+                    class="select-option"
+                    *ngFor="let course of courses"
+                    [value]="course._id"
+                    >{{ course.courseName }}</option
+                  >
                 </select>
               </div>
-              <span class="input-error" *ngIf="!form.get('course').valid && form.get('course').touched">*Please Select Course</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('course').valid && form.get('course').touched"
+                >*Please Select Course</span
+              >
             </div>
           </div>
 
@@ -63,46 +102,74 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="batch">Batch </label>
                 </div>
-                <select class="input-select form-control" type="text" name="batchName" id="batchName" formControlName="batch" (change)="batchChanged()">
+                <select
+                  class="input-select form-control"
+                  type="text"
+                  name="batchName"
+                  id="batchName"
+                  formControlName="batch"
+                  (change)="batchChanged()"
+                >
                   <option class="select-option" value="">Select Batch</option>
-                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{batch.batchName}}</option>
+                  <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{
+                    batch.batchName
+                  }}</option>
                 </select>
               </div>
-              <span class="input-error" *ngIf="!form.get('batch').valid && form.get('batch').touched">*Please Select Batch Name</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('batch').valid && form.get('batch').touched"
+                >*Please Select Batch Name</span
+              >
             </div>
           </div>
-
         </div>
 
         <div class="row">
-            <div class="col-12">
-              <div class="form-group m-1">
-                <div *ngIf="subjects.length > 0; else empty_subject">
-                  <label class="input-label">Subjects : </label>
-                  <ng-container *ngFor="let curSubject of subjects, let i = index">
-                      &nbsp;&nbsp;
-                      <input class="input-radio" type="radio" formControlName="subject" id="subject" name="subject" class="subject" [value]="curSubject._id">
-                      {{curSubject.subject}}
-                  </ng-container>
-                </div>
-                <ng-template #empty_subject>
-                  <p class="no-data-found">No Subjects..</p>
-                </ng-template>
+          <div class="col-12">
+            <div class="form-group m-1">
+              <div *ngIf="subjects.length > 0; else empty_subject">
+                <label class="input-label">Subjects : </label>
+                <ng-container *ngFor="let curSubject of subjects; let i = index">
+                  &nbsp;&nbsp;
+                  <input
+                    class="input-radio"
+                    type="radio"
+                    formControlName="subject"
+                    id="subject"
+                    name="subject"
+                    class="subject"
+                    [value]="curSubject._id"
+                  />
+                  {{ curSubject.subject }}
+                </ng-container>
               </div>
+              <ng-template #empty_subject>
+                <p class="no-data-found">No Subjects..</p>
+              </ng-template>
             </div>
+          </div>
         </div>
 
         <div class="row">
-
           <div class="col-md-6 col-12">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="date">Date </label>
                 </div>
-                <input class="input-text form-control" type="date" name="date" id="date" formControlName="date" placeholder="">
+                <input
+                  class="input-text form-control"
+                  type="date"
+                  name="date"
+                  id="date"
+                  formControlName="date"
+                  placeholder=""
+                />
               </div>
-              <span class="input-error"*ngIf="!form.get('date').valid && form.get('date').touched">*Please Select Date</span>
+              <span class="input-error" *ngIf="!form.get('date').valid && form.get('date').touched"
+                >*Please Select Date</span
+              >
             </div>
           </div>
 
@@ -112,23 +179,47 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label" for="time">Time </label>
                 </div>
-                <input class="input-text form-control" type="time" name="time" id="time" formControlName="time" placeholder="">
+                <input
+                  class="input-text form-control"
+                  type="time"
+                  name="time"
+                  id="time"
+                  formControlName="time"
+                  placeholder=""
+                />
               </div>
-              <span class="input-error"*ngIf="!form.get('time').valid && form.get('time').touched">*Please Select Time</span>
+              <span class="input-error" *ngIf="!form.get('time').valid && form.get('time').touched"
+                >*Please Select Time</span
+              >
             </div>
           </div>
-
         </div>
 
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <div class="form-group m-1">
-                <label class="input-label">Select MEdia File : </label>
-                <div class="form-group">
-                    <button class="btn btn-link media-picker-btn" type="button" id="media" (click)="filePicker.click()">Click Here to Pick Video</button>
-                    <input class="form-control" type="file" #filePicker formControlName="media" (change)="onMediaPicked($event)" hidden>
-                </div>
-                <span class="input-error" *ngIf="form.get('media').invalid || mediaError">Please Select a Valid *.mp4 Video File</span>
+              <label class="input-label">Select MEdia File : </label>
+              <div class="form-group">
+                <button
+                  class="btn btn-link media-picker-btn"
+                  type="button"
+                  id="media"
+                  (click)="filePicker.click()"
+                >
+                  Click Here to Pick Video
+                </button>
+                <input
+                  class="form-control"
+                  type="file"
+                  #filePicker
+                  formControlName="media"
+                  (change)="onMediaPicked($event)"
+                  hidden
+                />
+              </div>
+              <span class="input-error" *ngIf="form.get('media').invalid || mediaError"
+                >Please Select a Valid *.mp4 Video File</span
+              >
             </div>
           </div>
 
@@ -136,12 +227,25 @@
             <div class="row" *ngIf="mediaPreview">
               <div class="col-12">
                 <div class="video-container">
-                  <video #videoPlayer class="video" disablePictureInPicture id="video" name="video" oncontextmenu="return false;" width="320" height="240" controls controlsList="nodownload noremoteplayback">
-                    <source [src]="mediaPreview" type="video/mp4">
+                  <video
+                    #videoPlayer
+                    class="video"
+                    disablePictureInPicture
+                    id="video"
+                    name="video"
+                    oncontextmenu="return false;"
+                    width="320"
+                    height="240"
+                    controls
+                    controlsList="nodownload noremoteplayback"
+                  >
+                    <source [src]="mediaPreview" type="video/mp4" />
                     <p>Your browser does not support the video tag.</p>
                   </video>
                   <div class="middle">
-                    <a class="delete" (click)="onCancelMedia()"><i class="fa fa-trash-o trash"></i></a>
+                    <a class="delete" (click)="onCancelMedia()"
+                      ><i class="fa fa-trash-o trash"></i
+                    ></a>
                   </div>
                 </div>
               </div>
@@ -149,17 +253,17 @@
           </div>
         </div>
 
-        <hr class="horizontal-line">
+        <hr class="horizontal-line" />
 
         <div class="row">
           <div class="col-12">
             <button class="btn btn-primary btn-add" type="submit">ADD</button>
-            <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">Cancel</button>
+            <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">
+              Cancel
+            </button>
           </div>
         </div>
-
       </form>
     </div>
-
   </div>
 </div>

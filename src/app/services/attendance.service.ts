@@ -7,7 +7,6 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class AttendanceService {
-
   attendanceSearchData: any = {
     date: null,
     branch: '',
@@ -19,7 +18,10 @@ export class AttendanceService {
   constructor(private httpService: HttpService) {}
 
   getStudents(course: string, batch: string, subject: string, date: string) {
-    const data = {api: 'getStudentsForAttendance', data: {course, batch, subject, date}};
+    const data = {
+      api: 'getStudentsForAttendance',
+      data: { course, batch, subject, date }
+    };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -31,7 +33,7 @@ export class AttendanceService {
   }
 
   saveAttendance(attendance: any) {
-    const data = {api: 'saveAttendance', data: attendance};
+    const data = { api: 'saveAttendance', data: attendance };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -42,8 +44,19 @@ export class AttendanceService {
     );
   }
 
-  getAttendance(month: string, year: string, branch: string, course: string, batch: string, subject: string, student: string) {
-    const data = {api: 'getAttendance', data: {month, year, branch, course, batch, subject, student}};
+  getAttendance(
+    month: string,
+    year: string,
+    branch: string,
+    course: string,
+    batch: string,
+    subject: string,
+    student: string
+  ) {
+    const data = {
+      api: 'getAttendance',
+      data: { month, year, branch, course, batch, subject, student }
+    };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

@@ -9,14 +9,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./aim.component.css']
 })
 export class AimComponent implements OnInit {
-
   loading: boolean;
   edit: boolean;
   error: string;
   about: AboutModel;
   form: FormGroup;
 
-  constructor(private aboutService: AboutService) { }
+  constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
     this.loading = true;
@@ -26,13 +25,12 @@ export class AimComponent implements OnInit {
         validators: []
       })
     });
-    this.aboutService.getAbout()
-    .subscribe(
+    this.aboutService.getAbout().subscribe(
       (resdata: any) => {
         this.about = resdata;
         if (this.about && this.about.aim !== '') {
           this.edit = false;
-          this.form.setValue({aim: this.about.aim});
+          this.form.setValue({ aim: this.about.aim });
         }
         this.loading = false;
       },
@@ -54,8 +52,7 @@ export class AimComponent implements OnInit {
         about.mission = this.about.mission;
       }
       this.loading = true;
-      this.aboutService.saveAbout(about)
-      .subscribe(
+      this.aboutService.saveAbout(about).subscribe(
         (resdata: any) => {
           this.ngOnInit();
         },

@@ -1,24 +1,35 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
     <div class="col-10 mx-auto">
       <div class="row">
         <div class="col-12">
-          <button class="btn btn-light float-right" (click)="editVision()" *ngIf="!edit">Edit</button>
+          <button class="btn btn-light float-right" (click)="editVision()" *ngIf="!edit">
+            Edit
+          </button>
           <h3 class="page-heading">Vision</h3>
         </div>
       </div>
-      <hr class="horizontal-line">
+      <hr class="horizontal-line" />
       <form class="" [formGroup]="form" (submit)="saveVision()" *ngIf="edit">
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
-              <textarea class="form-control" name="vision" id="vision" rows="7" formControlName="vision"></textarea>
-              <span class="input-error" *ngIf="!form.get('vision').valid && form.get('vision').touched">*Please Enter vision</span>
+              <textarea
+                class="form-control"
+                name="vision"
+                id="vision"
+                rows="7"
+                formControlName="vision"
+              ></textarea>
+              <span
+                class="input-error"
+                *ngIf="!form.get('vision').valid && form.get('vision').touched"
+                >*Please Enter vision</span
+              >
             </div>
           </div>
         </div>
@@ -27,13 +38,15 @@
             <button type="submit" class="btn btn-light">Save</button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-danger float-right" (click)="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger float-right" (click)="cancel()">
+              Cancel
+            </button>
           </div>
         </div>
       </form>
       <div class="row" *ngIf="!edit">
         <div class="col-11 p-2 mx-auto">
-          <p class="about-data">{{about.vision}}</p>
+          <p class="about-data">{{ about.vision }}</p>
         </div>
       </div>
     </div>

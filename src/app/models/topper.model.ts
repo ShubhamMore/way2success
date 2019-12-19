@@ -8,13 +8,20 @@ export class TopperModel {
   public image: TopperImageModel;
 
   // tslint:disable-next-line: max-line-length
-  constructor(id: string, name: string, score: string, year: string, details: string, image: TopperImageModel) {
-      this._id = id;
-      this.name = name;
-      this.score = score;
-      this.year = year;
-      this.details = details;
-      this.image = image;
+  constructor(
+    id: string,
+    name: string,
+    score: string,
+    year: string,
+    details: string,
+    image: TopperImageModel
+  ) {
+    this._id = id;
+    this.name = name;
+    this.score = score;
+    this.year = year;
+    this.details = details;
+    this.image = image;
   }
 }
 
@@ -32,15 +39,21 @@ export class TopperImageModel {
   public width: string;
   public height: string;
 
-  // tslint:disable-next-line: max-line-length variable-name
-  constructor(_id: string, image_name: string, secure_url: string, public_id: string, created_at: string, width: string, height: string) {
-    this._id = _id;
-    this.image_name = image_name;
-    this.secure_url = secure_url;
-    this.public_id = public_id;
-    this.created_at = created_at;
+  constructor(
+    id: string,
+    imageName: string,
+    secureUrl: string,
+    publicId: string,
+    createdAt: string,
+    width: string,
+    height: string
+  ) {
+    this._id = id;
+    this.image_name = imageName;
+    this.secure_url = secureUrl;
+    this.public_id = publicId;
+    this.created_at = createdAt;
     this.width = width;
     this.height = height;
   }
 }
-

@@ -11,7 +11,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./edit-topper.component.css']
 })
 export class EditTopperComponent implements OnInit {
-
   loading: boolean;
   error: string;
 
@@ -29,10 +28,12 @@ export class EditTopperComponent implements OnInit {
   year: string;
   years: string[];
 
-  constructor(private topperService: TopperService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private topperService: TopperService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -44,42 +45,38 @@ export class EditTopperComponent implements OnInit {
       this.years.push(year.toString());
     }
 
-    this.route.params
-    .subscribe(
-      (param: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        const id = param['id'];
-        this.topperService.getTopper(id)
-        .subscribe(
-          (resData: any) => {
-            this.topper = resData;
-            this.form = new FormGroup({
-              name: new FormControl(this.topper.name, {
-                validators: [Validators.required]
-              }),
-              year: new FormControl(this.topper.year, {
-                validators: [Validators.required]
-              }),
-              score: new FormControl(this.topper.score, {
-                validators: [Validators.required]
-              }),
-              details: new FormControl(this.topper.details, {
-                validators: [Validators.required]
-              }),
-              image: new FormControl(null, {
-                validators: []
-              })
-            });
-            this.onCancelImage();
-            this.loading = false;
-          },
-          (error: any) => {
-            this.error = error;
-            this.loading = false;
-          }
-        );
-      }
-    );
+    this.route.params.subscribe((param: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      const id = param['id'];
+      this.topperService.getTopper(id).subscribe(
+        (resData: any) => {
+          this.topper = resData;
+          this.form = new FormGroup({
+            name: new FormControl(this.topper.name, {
+              validators: [Validators.required]
+            }),
+            year: new FormControl(this.topper.year, {
+              validators: [Validators.required]
+            }),
+            score: new FormControl(this.topper.score, {
+              validators: [Validators.required]
+            }),
+            details: new FormControl(this.topper.details, {
+              validators: [Validators.required]
+            }),
+            image: new FormControl(null, {
+              validators: []
+            })
+          });
+          this.onCancelImage();
+          this.loading = false;
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    });
   }
 
   onImagePicked(event: Event) {
@@ -105,7 +102,7 @@ export class EditTopperComponent implements OnInit {
     this.uploadImage = null;
     this.imagePreview = null;
     this.imageError = false;
-    this.form.patchValue({image: null});
+    this.form.patchValue({ image: null });
   }
 
   saveTopper() {
@@ -120,12 +117,11 @@ export class EditTopperComponent implements OnInit {
       topper.append('year', this.form.value.year);
       topper.append('score', this.form.value.score);
       topper.append('details', this.form.value.details);
-      if ( this.uploadImage) {
+      if (this.uploadImage) {
         topper.append('image', this.uploadImage);
       }
 
-      this.topperService.editTopper(topper)
-      .subscribe(
+      this.topperService.editTopper(topper).subscribe(
         (resData: any) => {
           this.location.back();
         },
@@ -153,5 +149,4 @@ export class EditTopperComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

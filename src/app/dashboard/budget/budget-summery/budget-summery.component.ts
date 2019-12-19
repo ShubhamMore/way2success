@@ -9,7 +9,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./budget-summery.component.css']
 })
 export class BudgetSummeryComponent implements OnInit {
-
   statement: BudgetModel[];
 
   totalBalance: number;
@@ -26,34 +25,30 @@ export class BudgetSummeryComponent implements OnInit {
   year: string;
   searchType: string;
 
-  constructor(private budgetService: BudgetService,
-              private location: Location) { }
+  constructor(private budgetService: BudgetService, private location: Location) {}
 
   ngOnInit() {
-
     this.loading = true;
 
     this.searchType = this.budgetService.budgetSearchData.seatchType;
     this.month = this.budgetService.budgetSearchData.month;
     this.year = this.budgetService.budgetSearchData.year;
 
-    this.totalBalance = 0.00;
-    this.totalIncome = 0.00;
-    this.totalExpence = 0.00;
+    this.totalBalance = 0.0;
+    this.totalIncome = 0.0;
+    this.totalExpence = 0.0;
 
     if (this.searchType === '0') {
-      this.searchBudget({month: this.month, year: this.year});
+      this.searchBudget({ month: this.month, year: this.year });
     } else if (this.searchType === '1') {
-      this.searchBudget({year: this.year});
+      this.searchBudget({ year: this.year });
     } else if (this.searchType === '2') {
       this.searchBudget({});
     }
   }
 
-
   searchBudget(searchData: any) {
-    this.budgetService.getBudgetSummery(searchData)
-    .subscribe(
+    this.budgetService.getBudgetSummery(searchData).subscribe(
       (resData: any) => {
         this.statement = resData;
         if (this.statement.length > 0) {

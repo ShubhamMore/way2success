@@ -2,30 +2,54 @@
 
 <div class="row" *ngIf="!loading">
   <div class="col-12">
-
     <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
     <div class="backgroundBox">
       <div class="customCard">
-        <form class="form login-form" (submit)="login()" [formGroup]="form">  
+        <form class="form login-form" (submit)="login()" [formGroup]="form">
           <h2>Login</h2>
           <div class="Wrapper">
             <div class="Input">
-              <input type="email" id="email"  name="email"  formControlName="email" class="Input-text" placeholder="Enter your login Id">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                formControlName="email"
+                class="Input-text"
+                placeholder="Enter your login Id"
+              />
               <label for="input" class="Input-label">Email</label>
-              <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please enter E-Mail</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('email').valid && form.get('email').touched"
+                >*Please enter E-Mail</span
+              >
             </div>
           </div>
           <div class="Wrapper">
             <div class="Input">
-              <input type="password" id="password" class="form-control" name="password" formControlName="password" class="Input-text" placeholder="Enter your password">
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                name="password"
+                formControlName="password"
+                class="Input-text"
+                placeholder="Enter your password"
+              />
               <label for="input" class="Input-label">Password</label>
-              <span class="input-error" *ngIf="!form.get('password').valid && form.get('password').touched">*Please enter Password</span>
+              <span
+                class="input-error"
+                *ngIf="!form.get('password').valid && form.get('password').touched"
+                >*Please enter Password</span
+              >
             </div>
           </div>
           <div class="submitBtn">
-              <button type="submit" class="btn btn-primary float-left">Login</button>
-              <a class="float-right" routerLink="/forgotPassword">Forgot Password</a>
+            <button type="submit" class="btn btn-primary float-left">
+              Login
+            </button>
+            <a class="float-right" routerLink="/forgotPassword">Forgot Password</a>
           </div>
         </form>
       </div>

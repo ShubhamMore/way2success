@@ -16,7 +16,6 @@ import { BranchModel } from '../../../models/branch.model';
   styleUrls: ['./add-student.component.css']
 })
 export class AddStudentComponent implements OnInit {
-
   loading: boolean;
 
   error: boolean;
@@ -36,13 +35,15 @@ export class AddStudentComponent implements OnInit {
 
   subjectsToAdd: string[];
 
-  constructor(private courseService: CourseService,
-              private encryptService: EncryptService,
-              private studentService: StudentService,
-              private userService: UserService,
-              private router: Router,
-              private location: Location,
-              private route: ActivatedRoute) { }
+  constructor(
+    private courseService: CourseService,
+    private encryptService: EncryptService,
+    private studentService: StudentService,
+    private userService: UserService,
+    private router: Router,
+    private location: Location,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -53,14 +54,12 @@ export class AddStudentComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.subjectsToAdd = [];
-    this.courseService.getBranchesAndCourses()
-    .subscribe(
+    this.courseService.getBranchesAndCourses().subscribe(
       resData => {
         this.error = null;
         this.allCourses = resData.courses;
         this.branches = resData.branches;
         if (this.courses.length < 1) {
-
         }
         this.form = new FormGroup({
           name: new FormControl(null, {
@@ -128,7 +127,7 @@ export class AddStudentComponent implements OnInit {
       this.form.patchValue({
         batch: ''
       });
-      const course = this.courses.find((curCourse) => curCourse._id === id);
+      const course = this.courses.find(curCourse => curCourse._id === id);
       this.batches = course.batch;
       this.form.patchValue({
         batch: ''
@@ -141,15 +140,14 @@ export class AddStudentComponent implements OnInit {
     if (id !== '') {
       this.subjects = [];
       this.subjectsToAdd = [];
-      const batch = this.batches.find((curBatch) => curBatch._id === id);
+      const batch = this.batches.find(curBatch => curBatch._id === id);
       this.subjects = batch.subjects;
     }
   }
 
   checkUser() {
     if (this.form.controls.email.status === 'VALID') {
-      this.userService.checkUser(this.form.value.email)
-      .subscribe(
+      this.userService.checkUser(this.form.value.email).subscribe(
         (resData: any) => {
           this.userExist = resData.exist;
         },
@@ -189,8 +187,7 @@ export class AddStudentComponent implements OnInit {
       status: this.form.value.status
     };
 
-    this.studentService.addStudent(student)
-    .subscribe(
+    this.studentService.addStudent(student).subscribe(
       resData => {
         this.error = null;
         this.loading = false;
@@ -220,5 +217,4 @@ export class AddStudentComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

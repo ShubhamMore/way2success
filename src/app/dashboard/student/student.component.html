@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
@@ -16,28 +15,44 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="branch">Branch </label>
             </div>
-            <select class="form-control input-select" type="text" name="branch" id="branch" (change)="onSelectBranch($event.target.value)" [value]="branch">
+            <select
+              class="form-control input-select"
+              type="text"
+              name="branch"
+              id="branch"
+              (change)="onSelectBranch($event.target.value)"
+              [value]="branch"
+            >
               <option class="select-option" value="">Select Branch</option>
-              <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{branch.branchName}}</option>
+              <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{
+                branch.branchName
+              }}</option>
             </select>
           </div>
         </div>
 
         <div class="col-md-5 col-12">
           <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="searchType">Search By </label>
-              </div>
-              <select class="form-control input-select" type="text" name="searchType" id="searchType" (change)="onSelectSearchType($event)" [value]="searchType">
-                <option class="select-option" value="0">Course, Batch & Subject</option>
-                <option class="select-option" value="1">Course & Batch</option>
-                <option class="select-option" value="2">Course</option>
-                <option class="select-option" value="3">Student Name</option>
-              </select>
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="searchType">Search By </label>
+            </div>
+            <select
+              class="form-control input-select"
+              type="text"
+              name="searchType"
+              id="searchType"
+              (change)="onSelectSearchType($event)"
+              [value]="searchType"
+            >
+              <option class="select-option" value="0">Course, Batch & Subject</option>
+              <option class="select-option" value="1">Course & Batch</option>
+              <option class="select-option" value="2">Course</option>
+              <option class="select-option" value="3">Student Name</option>
+            </select>
           </div>
         </div>
       </div>
-      <hr class="horizontal-line">
+      <hr class="horizontal-line" />
       <form class="" [formGroup]="form">
         <div class="row" *ngIf="searchType === '3'">
           <div class="col-md-6 col-sm-12 mt-3">
@@ -46,7 +61,15 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="student">Name</label>
                 </div>
-                <input class="input-text form-control" type="text" name="student" id="student" formControlName="student" placeholder="Student" (keyup.enter)="searchByStudentName()">
+                <input
+                  class="input-text form-control"
+                  type="text"
+                  name="student"
+                  id="student"
+                  formControlName="student"
+                  placeholder="Student"
+                  (keyup.enter)="searchByStudentName()"
+                />
                 <div class="input-group-append">
                   <button class="btn btn-success" type="button" (click)="searchByStudentName()">
                     <i class="fa fa-search"></i>
@@ -63,9 +86,18 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="course">Course </label>
               </div>
-              <select class="form-control input-select" type="text" name="course" id="course" formControlName="course" (change)="onSelectCourse()">
+              <select
+                class="form-control input-select"
+                type="text"
+                name="course"
+                id="course"
+                formControlName="course"
+                (change)="onSelectCourse()"
+              >
                 <option class="select-option" value="">Select Course</option>
-                <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+                <option class="select-option" *ngFor="let course of courses" [value]="course._id">{{
+                  course.courseName
+                }}</option>
               </select>
             </div>
           </div>
@@ -75,9 +107,18 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="batch">Batch </label>
               </div>
-              <select class="form-control input-select" type="text" name="batch" id="batch" formControlName="batch" (change)="onSelectBatch()">
+              <select
+                class="form-control input-select"
+                type="text"
+                name="batch"
+                id="batch"
+                formControlName="batch"
+                (change)="onSelectBatch()"
+              >
                 <option class="select-option" value="">Select Batch Name</option>
-                <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{batch.batchName}}</option>
+                <option class="select-option" *ngFor="let batch of batches" [value]="batch._id">{{
+                  batch.batchName
+                }}</option>
               </select>
             </div>
           </div>
@@ -86,15 +127,27 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="subject">Subject </label>
               </div>
-              <select class="form-control input-select" type="text" name="subject" id="subject" formControlName="subject" (change)="onSelectSubject()">
+              <select
+                class="form-control input-select"
+                type="text"
+                name="subject"
+                id="subject"
+                formControlName="subject"
+                (change)="onSelectSubject()"
+              >
                 <option class="select-option" value="">Select subject</option>
-                <option class="select-option" *ngFor="let subject of subjects" [value]="subject._id">{{subject.subject}}</option>
+                <option
+                  class="select-option"
+                  *ngFor="let subject of subjects"
+                  [value]="subject._id"
+                  >{{ subject.subject }}</option
+                >
               </select>
             </div>
           </div>
         </div>
       </form>
-      <br>
+      <br />
       <div class="row" *ngIf="students.length > 0; else empty_students">
         <div class="table-responsive">
           <table class="table table-sm table-hover">
@@ -108,10 +161,14 @@
               </tr>
             </thead>
             <tbody class="table-body">
-              <tr class="table-row" *ngFor="let student of students, let i = index" routerLinkActive="active">
-                <td class="table-data">{{ i+1 }}</td>
+              <tr
+                class="table-row"
+                *ngFor="let student of students; let i = index"
+                routerLinkActive="active"
+              >
+                <td class="table-data">{{ i + 1 }}</td>
                 <td class="table-data">
-                  <a [routerLink]="student._id" class="student" >
+                  <a [routerLink]="student._id" class="student">
                     <p>{{ student.name | uppercase }}</p>
                   </a>
                 </td>
@@ -124,7 +181,13 @@
                   <p *ngIf="student.status == 2">PASS OUT</p>
                 </td>
                 <td class="table-data">
-                  <button class="btn btn-warning btn-sm text-white" type="button" (click)="onPaymentClick(student._id)">Payment</button>
+                  <button
+                    class="btn btn-warning btn-sm text-white"
+                    type="button"
+                    (click)="onPaymentClick(student._id)"
+                  >
+                    Payment
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -132,7 +195,7 @@
         </div>
       </div>
       <ng-template #empty_students>
-        <h5 class="no-data-found pl-3">{{noStudent}}</h5>
+        <h5 class="no-data-found pl-3">{{ noStudent }}</h5>
       </ng-template>
     </div>
   </div>

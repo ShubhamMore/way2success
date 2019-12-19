@@ -7,11 +7,10 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class EnquiryService {
-
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {}
 
   sendEnquiry(enquiry: any) {
-    const data = {api: 'sendEnquiry', data: enquiry};
+    const data = { api: 'sendEnquiry', data: enquiry };
     return this.httpService.httpPost(data).pipe(
       map((response: any) => {
         return response;
@@ -23,7 +22,7 @@ export class EnquiryService {
   }
 
   getEnquiries() {
-    const data = {api: 'getEnquiries', data: {}};
+    const data = { api: 'getEnquiries', data: {} };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -35,7 +34,7 @@ export class EnquiryService {
   }
 
   markEnquiryAsSeen(id: string) {
-    const data = {api: 'markEnquiryAsSeen', data: {_id: id}};
+    const data = { api: 'markEnquiryAsSeen', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -47,7 +46,7 @@ export class EnquiryService {
   }
 
   unseenEnquiries() {
-    const data = {api: 'unseenEnquiries', data: {}};
+    const data = { api: 'unseenEnquiries', data: {} };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -59,7 +58,7 @@ export class EnquiryService {
   }
 
   getEnquiry(id: string) {
-    const data = {api: 'getEnquiry', data: {_id: id}};
+    const data = { api: 'getEnquiry', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -71,7 +70,7 @@ export class EnquiryService {
   }
 
   newEnquiry(enquiry: any) {
-    const data = {api: 'newEnquiry', data: enquiry};
+    const data = { api: 'newEnquiry', data: enquiry };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -83,7 +82,7 @@ export class EnquiryService {
   }
 
   replyEnquiry(reply: any) {
-    const data = {api: 'replyEnquiry', data: reply};
+    const data = { api: 'replyEnquiry', data: reply };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

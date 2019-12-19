@@ -10,25 +10,24 @@ import { ReceiptModel } from '../../../models/receipt.model';
   styleUrls: ['./student-payment-receipts.component.css']
 })
 export class StudentPaymentReceiptsComponent implements OnInit {
-
   loading: boolean;
   error: string;
   receipts: ReceiptModel[];
 
-  constructor(private receiptService: ReceiptService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private receiptService: ReceiptService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
     this.receipts = [];
-    this.route.params
-    .subscribe((param) => {
+    this.route.params.subscribe(param => {
       // tslint:disable-next-line: no-string-literal
       const id = param['id'];
-      this.receiptService.getAllReceipts(id)
-      .subscribe(
+      this.receiptService.getAllReceipts(id).subscribe(
         (resdata: any) => {
           this.receipts = resdata;
           this.loading = false;
@@ -42,13 +41,12 @@ export class StudentPaymentReceiptsComponent implements OnInit {
   }
 
   showReceipt(id: string) {
-    this.router.navigate([id], {relativeTo: this.route});
+    this.router.navigate([id], { relativeTo: this.route });
   }
 
   deleteReceipt(id: string) {
     this.loading = true;
-    this.receiptService.deleteReceipt(id)
-    .subscribe(
+    this.receiptService.deleteReceipt(id).subscribe(
       (resData: any) => {
         this.ngOnInit();
       },

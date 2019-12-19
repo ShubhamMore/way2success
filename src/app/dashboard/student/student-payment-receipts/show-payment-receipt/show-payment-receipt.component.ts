@@ -9,24 +9,23 @@ import { Location } from '@angular/common';
   styleUrls: ['./show-payment-receipt.component.css']
 })
 export class ShowPaymentReceiptComponent implements OnInit {
-
   loading: boolean;
   error: string;
   receipt: ReceiptModel;
 
-  constructor(private receiptService: ReceiptService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private receiptService: ReceiptService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.route.params
-    .subscribe((param) => {
+    this.route.params.subscribe(param => {
       // tslint:disable-next-line: no-string-literal
       const id = param['receiptid'];
-      this.receiptService.getReceipt(id)
-      .subscribe(
+      this.receiptService.getReceipt(id).subscribe(
         (resdata: any) => {
           this.receipt = resdata;
           this.loading = false;

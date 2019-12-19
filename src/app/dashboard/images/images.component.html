@@ -1,12 +1,10 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
     <div class="col-12">
-
       <div class="row">
         <div class="col-md-6 col-12">
           <h3>Images</h3>
@@ -17,25 +15,35 @@
               <div class="input-group-prepend">
                 <label for="category" class="input-group-text">Category</label>
               </div>
-              <select name="category" id="category" class="form-control input-select" (change)="getImages($event.target.value)" [value]="category">
+              <select
+                name="category"
+                id="category"
+                class="form-control input-select"
+                (change)="getImages($event.target.value)"
+                [value]="category"
+              >
                 <option value="">Select Categoty</option>
-                <option *ngFor="let category of categories" [value]="category._id">{{category.category}}</option>
+                <option *ngFor="let category of categories" [value]="category._id">{{
+                  category.category
+                }}</option>
               </select>
             </div>
           </div>
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="row">
         <div class="col-12">
           <div class="row" *ngIf="images.length > 0; else noImages">
-            <span class="m-2" *ngFor="let image of images; let i = index;">
-               <div class="image-container">
-                <img [src]="image.secure_url" class="image" [alt]="image.image_name">
+            <span class="m-2" *ngFor="let image of images; let i = index">
+              <div class="image-container">
+                <img [src]="image.secure_url" class="image" [alt]="image.image_name" />
                 <div class="middle">
-                  <a class="delete" (click)="deleteImage(image.public_id)"><i class="fa fa-trash-o trash"></i></a>
+                  <a class="delete" (click)="deleteImage(image.public_id)"
+                    ><i class="fa fa-trash-o trash"></i
+                  ></a>
                 </div>
               </div>
             </span>

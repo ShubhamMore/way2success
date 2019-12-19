@@ -17,9 +17,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
   user: User;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private route: ActivatedRoute) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.isAuthenticated = false;
@@ -33,14 +35,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   goToHome() {
     if (!!this.user) {
       if (this.user.userType === 'admin') {
-        this.router.navigate(['/admin'], {relativeTo: this.route});
+        this.router.navigate(['/admin'], { relativeTo: this.route });
       } else if (this.user.userType === 'faculty') {
-        this.router.navigate(['/faculty', this.user._id], {relativeTo: this.route});
+        this.router.navigate(['/faculty', this.user._id], {
+          relativeTo: this.route
+        });
       } else if (this.user.userType === 'student') {
-        this.router.navigate(['/student', this.user._id], { relativeTo: this.route});
+        this.router.navigate(['/student', this.user._id], {
+          relativeTo: this.route
+        });
       }
     } else {
-      this.router.navigate(['/'], {relativeTo: this.route});
+      this.router.navigate(['/'], { relativeTo: this.route });
     }
   }
 

@@ -1,35 +1,35 @@
 .income-text {
-    color: #28a745;
+  color: #28a745;
 }
 
 .expence-text {
-    color: #dc3545;
+  color: #dc3545;
 }
 
 .negatice-balance {
-    color: #dc3545;
+  color: #dc3545;
 }
 
 .btn-delete-budget {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .income {
-    background-color: #ebfaeb;
+  background-color: #ebfaeb;
 }
 
 .expence {
-    background-color: #ffe6e6;
+  background-color: #ffe6e6;
 }
 
 .show-income {
-    height: auto;
-    max-height: 300px;
-    overflow-y: auto;
+  height: auto;
+  max-height: 300px;
+  overflow-y: auto;
 }
-  
+
 .show-expence {
-    height: auto;
-    max-height: 300px;
-    overflow-y: auto;
+  height: auto;
+  max-height: 300px;
+  overflow-y: auto;
 }

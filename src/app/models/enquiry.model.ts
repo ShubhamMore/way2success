@@ -1,5 +1,4 @@
 export class EnquiryModel {
-
   // tslint:disable-next-line: variable-name
   public _id: string;
   public name: string;
@@ -10,9 +9,17 @@ export class EnquiryModel {
   public seen: string;
   public reply: ReplyModel[];
 
-  // tslint:disable-next-line: variable-name
-  constructor(_id: string, name: string, phone: string, email: string, message: string, date: string, seen: string, reply: ReplyModel[]) {
-    this._id = _id;
+  constructor(
+    id: string,
+    name: string,
+    phone: string,
+    email: string,
+    message: string,
+    date: string,
+    seen: string,
+    reply: ReplyModel[]
+  ) {
+    this._id = id;
     this.name = name;
     this.phone = phone;
     this.email = email;
@@ -24,7 +31,6 @@ export class EnquiryModel {
 }
 
 export class ReplyModel {
-
   // tslint:disable-next-line: variable-name
   public _id: string;
   public subject: string;

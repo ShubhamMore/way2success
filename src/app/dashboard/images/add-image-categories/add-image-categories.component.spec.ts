@@ -8,9 +8,8 @@ describe('AddImageCategoriesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddImageCategoriesComponent ]
-    })
-    .compileComponents();
+      declarations: [AddImageCategoriesComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

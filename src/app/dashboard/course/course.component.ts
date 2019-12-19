@@ -11,7 +11,6 @@ import { BranchService } from 'src/app/services/branch.service';
   styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
-
   courses: CourseModel[];
   branches: BranchModel[];
   branch: string;
@@ -21,10 +20,12 @@ export class CourseComponent implements OnInit {
 
   error: string;
 
-  constructor(private branchService: BranchService,
-              private courseService: CourseService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private branchService: BranchService,
+    private courseService: CourseService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -32,8 +33,7 @@ export class CourseComponent implements OnInit {
     this.courses = [];
     this.branch = this.courseService.courseSearchData.branch;
     this.noCourses = 'Please Select Branch';
-    this.branchService.getBranches()
-    .subscribe(
+    this.branchService.getBranches().subscribe(
       (resData: any) => {
         this.error = null;
         this.branches = resData;
@@ -64,8 +64,7 @@ export class CourseComponent implements OnInit {
       this.branch = branch;
       this.courseService.courseSearchData.branch = this.branch;
       this.loading = true;
-      this.courseService.getCoursesByBranch(branch)
-      .subscribe(
+      this.courseService.getCoursesByBranch(branch).subscribe(
         (resData: any) => {
           this.error = null;
           this.courses = [];
@@ -84,24 +83,23 @@ export class CourseComponent implements OnInit {
   }
 
   newcourse() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
   editcourse(id: string) {
     console.log(id);
-    this.router.navigate([id, 'edit'], {relativeTo: this.route});
+    this.router.navigate([id, 'edit'], { relativeTo: this.route });
   }
 
   deletecourse(id: string) {
-    window.alert('You can\'t Delete the course due to Data Protection..');
+    window.alert(`You can\'t Delete the course due to Data Protection..`);
   }
 
   deactivateCourse(id: string) {
     const confirm = window.confirm('Do you really want to Deactivate tis Course??');
     if (confirm) {
       this.loading = true;
-      this.courseService.deactivateCourse(id)
-      .subscribe(
+      this.courseService.deactivateCourse(id).subscribe(
         (resdata: any) => {
           this.ngOnInit();
         },
@@ -117,8 +115,7 @@ export class CourseComponent implements OnInit {
     const confirm = window.confirm('Do you want to Activate tis Course Again..?');
     if (confirm) {
       this.loading = true;
-      this.courseService.activateCourse(id)
-      .subscribe(
+      this.courseService.activateCourse(id).subscribe(
         (resdata: any) => {
           this.ngOnInit();
         },
@@ -133,5 +130,4 @@ export class CourseComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

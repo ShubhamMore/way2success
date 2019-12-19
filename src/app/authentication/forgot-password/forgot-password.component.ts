@@ -9,14 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-
   form: FormGroup;
   emailSend: boolean;
   loading: boolean;
   error: string;
 
-  constructor(private httpService: HttpService,
-              private router: Router) { }
+  constructor(private httpService: HttpService, private router: Router) {}
 
   ngOnInit() {
     this.loading = true;
@@ -41,8 +39,7 @@ export class ForgotPasswordComponent implements OnInit {
         }
       };
 
-      this.httpService.httpPost(data)
-      .subscribe(
+      this.httpService.httpPost(data).subscribe(
         (resData: any) => {
           this.emailSend = true;
           this.loading = false;

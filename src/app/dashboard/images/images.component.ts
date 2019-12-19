@@ -9,7 +9,6 @@ import { ImageService } from '../../services/image.service';
   styleUrls: ['./images.component.css']
 })
 export class ImagesComponent implements OnInit {
-
   images: ImageModel[];
   categories: ImageCategoryModel[];
   category: string;
@@ -23,8 +22,7 @@ export class ImagesComponent implements OnInit {
     this.images = [];
     this.categories = [];
     this.category = this.imageService.imageSearchData.category;
-    this.imageService.getImageCategories()
-    .subscribe(
+    this.imageService.getImageCategories().subscribe(
       (resData: any) => {
         this.categories = resData;
         if (this.categories.length > 0) {
@@ -50,32 +48,33 @@ export class ImagesComponent implements OnInit {
       this.category = category;
       this.imageService.imageSearchData.category = this.category;
       this.images = [];
-      this.imageService.getImagesByCategory(this.category)
-      .subscribe((response: ImageModel[]) => {
-        this.images = response;
-        this.loading = false;
-      },
-      (error: any) => {
-        this.error = error;
-        this.loading = false;
-      });
+      this.imageService.getImagesByCategory(this.category).subscribe(
+        (response: ImageModel[]) => {
+          this.images = response;
+          this.loading = false;
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
     }
   }
 
   deleteImage(id: string) {
     this.loading = true;
-    this.imageService.deleteImage(id)
-    .subscribe((responce: any) => {
-      this.ngOnInit();
-    },
-    (error: any) => {
-      this.error = error;
-      this.loading = false;
-    });
+    this.imageService.deleteImage(id).subscribe(
+      (responce: any) => {
+        this.ngOnInit();
+      },
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
+      }
+    );
   }
 
   onErrorClose() {
     this.error = null;
   }
-
 }

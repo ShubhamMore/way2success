@@ -8,7 +8,6 @@ import { ExamModel } from '../models/exam.model';
   providedIn: 'root'
 })
 export class ExamService {
-
   examSearchData: any = {
     branch: '',
     course: '',
@@ -20,7 +19,10 @@ export class ExamService {
   constructor(private httpService: HttpService) {}
 
   getStudents(course: string, batch: string, subject: string) {
-    const data = {api: 'getStudentsForExam', data: {course, batch, subject}};
+    const data = {
+      api: 'getStudentsForExam',
+      data: { course, batch, subject }
+    };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -32,7 +34,7 @@ export class ExamService {
   }
 
   saveExam(exam: any) {
-    const data = {api: 'saveExam', data: exam};
+    const data = { api: 'saveExam', data: exam };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -44,7 +46,7 @@ export class ExamService {
   }
 
   getExams(course: string, batch: string, subject: string, year: string) {
-    const data = {api: 'getExams', data: {course, batch, subject, year}};
+    const data = { api: 'getExams', data: { course, batch, subject, year } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -55,8 +57,19 @@ export class ExamService {
     );
   }
 
-  getExamsPerformance(month: string, year: string, branch: string, course: string, batch: string, subject: string, student: string) {
-    const data = {api: 'getExamsPerformance', data: {month, year, branch, course, batch, subject, student}};
+  getExamsPerformance(
+    month: string,
+    year: string,
+    branch: string,
+    course: string,
+    batch: string,
+    subject: string,
+    student: string
+  ) {
+    const data = {
+      api: 'getExamsPerformance',
+      data: { month, year, branch, course, batch, subject, student }
+    };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -68,7 +81,7 @@ export class ExamService {
   }
 
   getExam(id: string) {
-    const data = {api: 'getExam', data: {_id: id}};
+    const data = { api: 'getExam', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -80,7 +93,7 @@ export class ExamService {
   }
 
   editExam(id: string, exam: ExamModel) {
-    const data = {api: 'editExam', data: {_id: id, exam}};
+    const data = { api: 'editExam', data: { _id: id, exam } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -92,7 +105,7 @@ export class ExamService {
   }
 
   deleteExam(id: string) {
-    const data = {api: 'deleteExam', data: {_id: id}};
+    const data = { api: 'deleteExam', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

@@ -1,36 +1,42 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
-  
+
   <div class="row mt-2">
     <div class="col-12 mx-auto">
-
       <div class="row">
         <div class="col-md-6 col-12">
-          <h3 class="page-heading mt-2">{{exam.examTitle}}</h3>
+          <h3 class="page-heading mt-2">{{ exam.examTitle }}</h3>
         </div>
         <div class="col-md-6 col-12">
-          <button class="btn btn-light ml-3 mt-2 float-right" type="button" (click)="cancel()">Cancel</button>
-          <button class="btn btn-light ml-3 mt-2 float-right" type="button" (click)="editExam()">Edit</button>
+          <button class="btn btn-light ml-3 mt-2 float-right" type="button" (click)="cancel()">
+            Cancel
+          </button>
+          <button class="btn btn-light ml-3 mt-2 float-right" type="button" (click)="editExam()">
+            Edit
+          </button>
         </div>
       </div>
 
-      <hr class="horizontal-line">
+      <hr class="horizontal-line" />
 
       <div class="row">
         <div class="col-md-4 col-sm-12">
-          <label for=""><strong>Branch : </strong>{{examMetaData.branch}}</label><br>
-          <label for=""><strong>Course : </strong>{{examMetaData.course}}</label><br>
+          <label for=""><strong>Branch : </strong>{{ examMetaData.branch }}</label
+          ><br />
+          <label for=""><strong>Course : </strong>{{ examMetaData.course }}</label
+          ><br />
         </div>
         <div class="col-md-4 col-sm-12">
-            <label for=""><strong>Batch : </strong>{{examMetaData.batch}}</label><br>
-          <label for=""><strong>Subject : </strong>{{examMetaData.subject}}</label>
+          <label for=""><strong>Batch : </strong>{{ examMetaData.batch }}</label
+          ><br />
+          <label for=""><strong>Subject : </strong>{{ examMetaData.subject }}</label>
         </div>
         <div class="col-md-4 col-sm-12">
-            <label for=""><strong>Passing Marks : </strong>{{exam.passingMarks}}</label><br>
-          <label for=""><strong>Date : </strong>{{exam.date}}</label>
+          <label for=""><strong>Passing Marks : </strong>{{ exam.passingMarks }}</label
+          ><br />
+          <label for=""><strong>Date : </strong>{{ exam.date }}</label>
         </div>
       </div>
 
@@ -46,16 +52,27 @@
               </tr>
             </thead>
             <tbody class="table-body">
-              <tr class="table-row" *ngFor="let mark of marks, let i = index" routerLinkActive="active">
-                <td class="table-data">{{ i+1 }}</td>
+              <tr
+                class="table-row"
+                *ngFor="let mark of marks; let i = index"
+                routerLinkActive="active"
+              >
+                <td class="table-data">{{ i + 1 }}</td>
                 <td class="table-data">
-                    <p class="data">{{ examMetaData.students[i].name | uppercase }}</p>
+                  <p class="data">{{ examMetaData.students[i].name | uppercase }}</p>
                 </td>
                 <td class="table-data">
-                    <p class="data"><span [ngClass]="checkPassFail(mark.marks, exam.passingMarks) ? 'pass' : 'fail'">{{mark.marks}}</span>/{{exam.outOfMarks}}</p>
+                  <p class="data">
+                    <span
+                      [ngClass]="checkPassFail(mark.marks, exam.passingMarks) ? 'pass' : 'fail'"
+                      >{{ mark.marks }}</span
+                    >/{{ exam.outOfMarks }}
+                  </p>
                 </td>
                 <td class="table-data">
-                    <p [ngClass]="checkPassFail(mark.marks, exam.passingMarks) ? '' : 'fail'">{{ checkPassFail(mark.marks, exam.passingMarks) ? "Pass" : "Fail" }}</p>
+                  <p [ngClass]="checkPassFail(mark.marks, exam.passingMarks) ? '' : 'fail'">
+                    {{ checkPassFail(mark.marks, exam.passingMarks) ? 'Pass' : 'Fail' }}
+                  </p>
                 </td>
               </tr>
             </tbody>

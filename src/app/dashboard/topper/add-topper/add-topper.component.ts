@@ -10,7 +10,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./add-topper.component.css']
 })
 export class AddTopperComponent implements OnInit {
-
   loading: boolean;
   error: string;
 
@@ -26,10 +25,12 @@ export class AddTopperComponent implements OnInit {
   year: string;
   years: string[];
 
-  constructor(private topperService: TopperService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private topperService: TopperService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -85,7 +86,7 @@ export class AddTopperComponent implements OnInit {
     this.uploadImage = null;
     this.imagePreview = null;
     this.imageError = false;
-    this.form.patchValue({image: null});
+    this.form.patchValue({ image: null });
   }
 
   addTopper() {
@@ -104,8 +105,7 @@ export class AddTopperComponent implements OnInit {
       topper.append('details', this.form.value.details);
       topper.append('image', this.uploadImage);
 
-      this.topperService.addTopper(topper)
-      .subscribe(
+      this.topperService.addTopper(topper).subscribe(
         (resData: any) => {
           this.ngOnInit();
         },
@@ -133,5 +133,4 @@ export class AddTopperComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

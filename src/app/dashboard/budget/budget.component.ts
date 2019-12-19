@@ -11,7 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./budget.component.css']
 })
 export class BudgetComponent implements OnInit {
-
   budgetForm: FormGroup;
 
   income: BudgetModel[];
@@ -37,14 +36,28 @@ export class BudgetComponent implements OnInit {
 
   date: string;
 
-  constructor(private budgetService: BudgetService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private budgetService: BudgetService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-
     this.loading = true;
-    this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     this.searchType = this.budgetService.budgetSearchData.seatchType;
     this.income = [];
     this.expence = [];
@@ -82,7 +95,12 @@ export class BudgetComponent implements OnInit {
 
   curDate() {
     const date = new Date();
-    this.date = date.getFullYear() + '-' + this.zeroAppend(date.getMonth() + 1) + '-' + this.zeroAppend(date.getDate());
+    this.date =
+      date.getFullYear() +
+      '-' +
+      this.zeroAppend(date.getMonth() + 1) +
+      '-' +
+      this.zeroAppend(date.getDate());
   }
 
   zeroAppend(n: number): string {
@@ -107,21 +125,20 @@ export class BudgetComponent implements OnInit {
   onSelectMonth(month: string) {
     this.month = month;
     this.budgetService.budgetSearchData.month = this.month;
-    this.searchBudget({month: this.month, year: this.year});
+    this.searchBudget({ month: this.month, year: this.year });
   }
 
   onSelectYear(year: string) {
     this.year = year;
     this.budgetService.budgetSearchData.year = this.year;
-    this.searchBudget({year: this.year});
+    this.searchBudget({ year: this.year });
   }
 
   searchBudget(searchData: any) {
-    this.totalBalance = 0.00;
-    this.totalIncome = 0.00;
-    this.totalExpence = 0.00;
-    this.budgetService.getBudget(searchData)
-    .subscribe(
+    this.totalBalance = 0.0;
+    this.totalIncome = 0.0;
+    this.totalExpence = 0.0;
+    this.budgetService.getBudget(searchData).subscribe(
       (resData: any) => {
         this.income = resData.income;
         this.expence = resData.expence;
@@ -129,13 +146,13 @@ export class BudgetComponent implements OnInit {
         // tslint:disable-next-line: no-conditional-assignment
         if ((len = this.income.length) > 0) {
           for (let i = 0; i < len; i++) {
-              this.totalIncome += parseFloat(this.income[i].amount);
+            this.totalIncome += parseFloat(this.income[i].amount);
           }
         }
         // tslint:disable-next-line: no-conditional-assignment
         if ((len = this.expence.length) > 0) {
           for (let i = 0; i < len; i++) {
-              this.totalExpence += parseFloat(this.expence[i].amount);
+            this.totalExpence += parseFloat(this.expence[i].amount);
           }
         }
         this.totalBalance = this.totalIncome - this.totalExpence;
@@ -166,10 +183,14 @@ export class BudgetComponent implements OnInit {
       date: this.budgetForm.value.date
     };
 
-    this.budgetService.saveBudget(budget)
-    .subscribe(
+    this.budgetService.saveBudget(budget).subscribe(
       (resData: any) => {
-        this.budgetForm.reset({budgetType: this.budgetType, date: this.date, budgetTitle: null, amount: null});
+        this.budgetForm.reset({
+          budgetType: this.budgetType,
+          date: this.date,
+          budgetTitle: null,
+          amount: null
+        });
         this.onSelectSearchType(this.searchType);
       },
       (error: any) => {
@@ -183,8 +204,7 @@ export class BudgetComponent implements OnInit {
     const confirm = window.confirm('Do you want to delete this?');
     if (confirm) {
       this.loading = true;
-      this.budgetService.deleteBudget(id)
-      .subscribe(
+      this.budgetService.deleteBudget(id).subscribe(
         (resData: any) => {
           this.onSelectSearchType(this.searchType);
         },
@@ -197,7 +217,7 @@ export class BudgetComponent implements OnInit {
   }
 
   statement() {
-    this.router.navigate(['summery'], {relativeTo: this.route});
+    this.router.navigate(['summery'], { relativeTo: this.route });
   }
 
   onErrorClose() {

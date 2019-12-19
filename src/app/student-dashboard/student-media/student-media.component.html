@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
@@ -13,25 +12,37 @@
               <h3 class="page-heading">Media</h3>
             </div>
             <div class="col-md-6 col-12">
-                <div class="form-group mt-2">
-                  <div class="input-group">
-                      <div class="input-group-prepend">
-                          <label class="input-group-text" for="subjects">Subject</label>
-                      </div>
-                      <select class="form-control input-select" type="text" name="subject" id="subject" [value]="subject" (change)="onSelectSubject($event.target.value)">
-                        <option class="select-option" value="">Select Subject</option>
-                        <ng-container *ngIf="studentData.subjects.length > 0">
-                          <option class="select-option" *ngFor="let subject of studentData.subjects, let i = index" [value]="subject._id">{{subject.subject | uppercase}}</option>
-                        </ng-container>
-                      </select>
+              <div class="form-group mt-2">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="subjects">Subject</label>
                   </div>
+                  <select
+                    class="form-control input-select"
+                    type="text"
+                    name="subject"
+                    id="subject"
+                    [value]="subject"
+                    (change)="onSelectSubject($event.target.value)"
+                  >
+                    <option class="select-option" value="">Select Subject</option>
+                    <ng-container *ngIf="studentData.subjects.length > 0">
+                      <option
+                        class="select-option"
+                        *ngFor="let subject of studentData.subjects; let i = index"
+                        [value]="subject._id"
+                        >{{ subject.subject | uppercase }}</option
+                      >
+                    </ng-container>
+                  </select>
                 </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="row" *ngIf="medias.length > 0; else empty_medias">
         <div class="col-md-8 col-12 mx-auto">
@@ -44,8 +55,8 @@
                 </tr>
               </thead>
               <tbody class="table-body">
-                <tr class="table-row" *ngFor="let media of medias, let i = index">
-                  <td class="table-data">{{ i+1 }}</td>
+                <tr class="table-row" *ngFor="let media of medias; let i = index">
+                  <td class="table-data">{{ i + 1 }}</td>
                   <td class="table-data">
                     <a class="media" [routerLink]="media._id">
                       <h5 class="media-title">{{ media.title | uppercase }}s</h5>

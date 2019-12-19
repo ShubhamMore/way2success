@@ -6,14 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./content-photos.component.css']
 })
 export class ContentPhotosComponent implements OnInit {
-
   loading: boolean;
   error: string;
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.loading = true;
     this.loading = false;
   }
-
 }

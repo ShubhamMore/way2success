@@ -22,23 +22,23 @@ export class StudentPaymentComponent implements OnInit {
   error: string;
   date: string;
 
-  constructor(private studentService: StudentService,
-              private receiptService: ReceiptService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private studentService: StudentService,
+    private receiptService: ReceiptService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
     this.feeType = '0';
     this.amount = this.lateFee = 0;
     this.curDate();
-    this.route.params
-    .subscribe((param) => {
+    this.route.params.subscribe(param => {
       // tslint:disable-next-line: no-string-literal
       const id = param['id'];
-      this.studentService.getStudentForPayment(id)
-      .subscribe(
+      this.studentService.getStudentForPayment(id).subscribe(
         (resData: any) => {
           this.student = resData.student;
           this.studentMetaData = resData.studentMetaData;
@@ -75,7 +75,12 @@ export class StudentPaymentComponent implements OnInit {
 
   curDate() {
     const date = new Date();
-    this.date = date.getFullYear() + '-' + this.zeroAppend(date.getMonth() + 1) + '-' + this.zeroAppend(date.getDate());
+    this.date =
+      date.getFullYear() +
+      '-' +
+      this.zeroAppend(date.getMonth() + 1) +
+      '-' +
+      this.zeroAppend(date.getDate());
   }
 
   zeroAppend(n: number): string {
@@ -87,13 +92,12 @@ export class StudentPaymentComponent implements OnInit {
 
   changeFeeType(feeType: string) {
     if (feeType === '0') {
-      this.form.patchValue({fee: this.studentMetaData.totalFees});
+      this.form.patchValue({ fee: this.studentMetaData.totalFees });
       this.amount = +this.studentMetaData.totalFees;
       return;
     }
-    this.form.patchValue({fee: 1000});
+    this.form.patchValue({ fee: 1000 });
     this.amount = 1000;
-
   }
 
   changeFeeAmount(fee: string) {
@@ -116,13 +120,14 @@ export class StudentPaymentComponent implements OnInit {
         feeType: this.form.value.feeType,
         amount: this.amount + this.lateFee,
         paymentMode: this.form.value.paymentMode,
-        description: this.form.value.description,
+        description: this.form.value.description
       };
-      this.receiptService.addReceipt(receipt)
-      .subscribe(
+      this.receiptService.addReceipt(receipt).subscribe(
         (resData: any) => {
           this.form.reset();
-          this.router.navigate(['/admin', 'student', this.student._id, 'receipt', resData._id], {relativeTo: this.route});
+          this.router.navigate(['/admin', 'student', this.student._id, 'receipt', resData._id], {
+            relativeTo: this.route
+          });
           this.loading = false;
         },
         (error: any) => {
@@ -130,25 +135,26 @@ export class StudentPaymentComponent implements OnInit {
           this.loading = false;
         }
       );
-    } else {}
+    } else {
+    }
   }
 
   cancel() {
     this.location.back();
   }
 
-  feeValidator(control: FormControl): {[s: string]: boolean} {
+  feeValidator(control: FormControl): { [s: string]: boolean } {
     const n = +control.value;
     if (n < 1000) {
-      return {invalidFee: true};
+      return { invalidFee: true };
     }
     return null;
   }
 
-  lateFeeValidator(control: FormControl): {[s: string]: boolean} {
+  lateFeeValidator(control: FormControl): { [s: string]: boolean } {
     const n = +control.value;
     if (n < 0) {
-      return {invalidLateFee: true};
+      return { invalidLateFee: true };
     }
     return null;
   }

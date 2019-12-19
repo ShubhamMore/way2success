@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row">
@@ -14,10 +13,12 @@
             </div>
             <div class="col-6">
               <button class="btn float-right" (click)="cancel()">X</button>
-              <button class="btn btn-primary mr-2 float-right" (click)="addCategory()">Add Category</button>
+              <button class="btn btn-primary mr-2 float-right" (click)="addCategory()">
+                Add Category
+              </button>
             </div>
           </div>
-          <hr>
+          <hr />
           <div class="row">
             <div class="col-md-10 col-12 mx-auto">
               <form [formGroup]="form" (submit)="onSaveImages()">
@@ -28,23 +29,47 @@
                         <div class="input-group-prepend">
                           <label class="input-group-text" for="category">Category</label>
                         </div>
-                        <select class="form-control" type="text" name="category" id="category" formControlName="category">
-                          <option value=''>Select Category</option>
-                          <option *ngFor="let category of categories" [value]='category._id'>{{category.category}}</option>
+                        <select
+                          class="form-control"
+                          type="text"
+                          name="category"
+                          id="category"
+                          formControlName="category"
+                        >
+                          <option value="">Select Category</option>
+                          <option *ngFor="let category of categories" [value]="category._id">{{
+                            category.category
+                          }}</option>
                         </select>
                       </div>
-                        <span *ngIf="!form.get('category').valid && form.get('category').touched">*Please Select Category</span>
+                      <span *ngIf="!form.get('category').valid && form.get('category').touched"
+                        >*Please Select Category</span
+                      >
                     </div>
                   </div>
                   <div class="col-md-6 col-12">
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-prepend">
-                          <label class="input-group-text" for="images">Images</label><br>
+                          <label class="input-group-text" for="images">Images</label><br />
                         </div>
-                        <input class="form-control" type="file" #filePicker (change)="onImagePicked($event)" multiple hidden>
+                        <input
+                          class="form-control"
+                          type="file"
+                          #filePicker
+                          (change)="onImagePicked($event)"
+                          multiple
+                          hidden
+                        />
                         <div class="input-group-append">
-                          <button class="btn btn-link" type="button" id="images" (click)="filePicker.click()">Click Here to Pick Image</button>
+                          <button
+                            class="btn btn-link"
+                            type="button"
+                            id="images"
+                            (click)="filePicker.click()"
+                          >
+                            Click Here to Pick Image
+                          </button>
                         </div>
                       </div>
                       <span *ngIf="invalidImage">*Please Select a Valid Image File</span>
@@ -52,7 +77,7 @@
                   </div>
                 </div>
 
-                <hr>
+                <hr />
 
                 <div class="row">
                   <div class="col-12">
@@ -63,22 +88,23 @@
             </div>
           </div>
 
-          <hr>
+          <hr />
 
           <div class="row">
             <div class="col-12">
               <div *ngIf="imagePreview.length > 0; else noImagePicked">
-                  <h4>Image To Upload : </h4>
+                <h4>Image To Upload :</h4>
 
-                  <div class="row">
-                      <span class="m-2" *ngFor="let image of imagePreview; let i = index;">
-                          <div class="preview-image">
-                              <img [src]="image" alt="Preview">
-                              <a class="remove-image"(click)="cancelImage(i)"><i class="fa fa-remove remove"></i></a>
-                          </div>
-                      </span>
-                  </div>
-
+                <div class="row">
+                  <span class="m-2" *ngFor="let image of imagePreview; let i = index">
+                    <div class="preview-image">
+                      <img [src]="image" alt="Preview" />
+                      <a class="remove-image" (click)="cancelImage(i)"
+                        ><i class="fa fa-remove remove"></i
+                      ></a>
+                    </div>
+                  </span>
+                </div>
               </div>
               <ng-template #noImagePicked><p>No Image Picked yet</p></ng-template>
             </div>

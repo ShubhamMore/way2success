@@ -7,11 +7,10 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ReceiptService {
-
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {}
 
   addReceipt(receipt: any) {
-    const data = {api: 'newReceipt', data: receipt};
+    const data = { api: 'newReceipt', data: receipt };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -23,7 +22,7 @@ export class ReceiptService {
   }
 
   getAllReceipts(student: string) {
-    const data = {api: 'getAllReceipts', data: {student}};
+    const data = { api: 'getAllReceipts', data: { student } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -35,7 +34,7 @@ export class ReceiptService {
   }
 
   getReceipt(receipt: string) {
-    const data = {api: 'getReceipt', data: {_id: receipt}};
+    const data = { api: 'getReceipt', data: { _id: receipt } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -47,7 +46,7 @@ export class ReceiptService {
   }
 
   deleteReceipt(receipt: string) {
-    const data = {api: 'deleteReceipt', data: {_id: receipt}};
+    const data = { api: 'deleteReceipt', data: { _id: receipt } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

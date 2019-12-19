@@ -11,34 +11,31 @@ import { EnquiryModel } from 'src/app/models/enquiry.model';
   styleUrls: ['./show-enquiry.component.css']
 })
 export class ShowEnquiryComponent implements OnInit {
-
   loading: boolean;
   enquiry: EnquiryModel;
   error: string;
-  constructor(private enquiryService: EnquiryService,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private enquiryService: EnquiryService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.route.params
-    .subscribe(
-      (param: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        const id = param['id'];
-        this.enquiryService.getEnquiry(id)
-        .subscribe(
-          (resDara: any) => {
-            this.enquiry = resDara;
-            this.loading = false;
-          },
-          (error: any) => {
-            this.error = error;
-            this.loading = false;
-          }
-        );
-      }
-    );
+    this.route.params.subscribe((param: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      const id = param['id'];
+      this.enquiryService.getEnquiry(id).subscribe(
+        (resDara: any) => {
+          this.enquiry = resDara;
+          this.loading = false;
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    });
   }
 
   cancel() {
@@ -48,5 +45,4 @@ export class ShowEnquiryComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

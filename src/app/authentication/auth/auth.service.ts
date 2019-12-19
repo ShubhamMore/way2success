@@ -34,20 +34,18 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   createUser(data: any) {
-    return this.http
-      .post<AuthResponseData>(environment.backend + 'newUser', data)
-      .pipe(
-        catchError(this.handleError),
-        tap(resData => {
-          this.handleAuthentication(
-            resData.email,
-            resData._id,
-            resData.userType,
-            resData.token,
-            +resData.expiresIn
-          );
-        })
-      );
+    return this.http.post<AuthResponseData>(environment.backend + 'newUser', data).pipe(
+      catchError(this.handleError),
+      tap(resData => {
+        this.handleAuthentication(
+          resData.email,
+          resData._id,
+          resData.userType,
+          resData.token,
+          +resData.expiresIn
+        );
+      })
+    );
   }
 
   login(email: string, password: string) {
@@ -55,24 +53,21 @@ export class AuthService {
       email,
       password
     };
-    return this.http
-      .post<AuthResponseData>(environment.backend + 'login', data)
-      .pipe(
-        catchError(this.handleError),
-        tap(resData => {
-          this.handleAuthentication(
-            resData.email,
-            resData._id,
-            resData.userType,
-            resData.token,
-            +resData.expiresIn
-          );
-        })
-      );
+    return this.http.post<AuthResponseData>(environment.backend + 'login', data).pipe(
+      catchError(this.handleError),
+      tap(resData => {
+        this.handleAuthentication(
+          resData.email,
+          resData._id,
+          resData.userType,
+          resData.token,
+          +resData.expiresIn
+        );
+      })
+    );
   }
 
   loadUser(userData: UserData) {
-
     const loadedUser = new User(
       userData.email,
       userData._id,
@@ -84,59 +79,58 @@ export class AuthService {
     if (loadedUser.token) {
       this.user.next(loadedUser);
       const expirationDuration =
-        new Date(userData._tokenExpirationDate).getTime() -
-        new Date().getTime();
+        new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
       this.autoLogout(expirationDuration);
 
       if (loadedUser.userType === 'admin') {
-        this.router.navigate(['/admin'], {relativeTo: this.route});
+        this.router.navigate(['/admin'], { relativeTo: this.route });
       } else if (loadedUser.userType === 'student') {
-        this.router.navigate(['/student', loadedUser._id], {relativeTo: this.route });
+        this.router.navigate(['/student', loadedUser._id], {
+          relativeTo: this.route
+        });
       } else if (loadedUser.userType === 'faculty') {
-        this.router.navigate(['/faculty', loadedUser._id], {relativeTo: this.route});
+        this.router.navigate(['/faculty', loadedUser._id], {
+          relativeTo: this.route
+        });
       } else {
-        this.router.navigate(['/'], {relativeTo: this.route});
+        this.router.navigate(['/'], { relativeTo: this.route });
       }
       return;
     }
   }
 
   autoLogin() {
-
     let token = '';
     if (localStorage.getItem('userData')) {
       token = 'Bearer ' + JSON.parse(localStorage.getItem('userData'))._token;
     }
     const headers = new HttpHeaders().set('Authorization', token);
-    return this.http.post(environment.backend + 'autoLogin', {}, { headers })
-    .pipe(
+    return this.http.post(environment.backend + 'autoLogin', {}, { headers }).pipe(
       map((response: any) => {
-          return response;
+        return response;
       }),
       catchError(err => {
-          let msg = 'SOMETHING BAD HAPPENED';
-          if (err.error) {
-            if (typeof(err.error) === 'object') {
-              msg = 'Can\'t Reach Server.., Please Try Again';
-            } else {
-              msg = err.error;
-            }
+        let msg = 'SOMETHING BAD HAPPENED';
+        if (err.error) {
+          if (typeof err.error === 'object') {
+            msg = 'Cant Reach Server.., Please Try Again';
+          } else {
+            msg = err.error;
           }
-          return throwError(msg);
+        }
+        return throwError(msg);
       })
     );
   }
 
   logout() {
-
     let token = '';
     if (localStorage.getItem('userData')) {
       token = 'Bearer ' + JSON.parse(localStorage.getItem('userData'))._token;
     }
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this.http.post(environment.backend + 'logout', {}, { headers })
-    .subscribe(
+    return this.http.post(environment.backend + 'logout', {}, { headers }).subscribe(
       resData => {
         this.user.next(null);
         this.router.navigate(['/login']);
@@ -160,15 +154,13 @@ export class AuthService {
   }
 
   logoutAll() {
-
     let token = '';
     if (localStorage.getItem('userData')) {
       token = 'Bearer ' + JSON.parse(localStorage.getItem('userData'))._token;
     }
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this.http.post(environment.backend + 'logoutAll', {}, { headers })
-    .subscribe(
+    return this.http.post(environment.backend + 'logoutAll', {}, { headers }).subscribe(
       resData => {
         this.user.next(null);
         this.router.navigate(['/login']);
@@ -207,8 +199,8 @@ export class AuthService {
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (errorRes.error) {
-      if (typeof(errorRes.error) === 'object') {
-        errorMessage = 'Can\'t Reach Server.., Please Try Again';
+      if (typeof errorRes.error === 'object') {
+        errorMessage = 'Cant Reach Server.., Please Try Again';
       } else {
         errorMessage = errorRes.error;
       }

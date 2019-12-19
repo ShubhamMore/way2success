@@ -13,7 +13,6 @@ import { BranchModel } from 'src/app/models/branch.model';
   styleUrls: ['./exam.component.css']
 })
 export class ExamComponent implements OnInit {
-
   loading: boolean;
 
   form: FormGroup;
@@ -40,13 +39,14 @@ export class ExamComponent implements OnInit {
   years: string[] = [];
   year: string;
 
-  constructor(private courseService: CourseService,
-              private examService: ExamService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private courseService: CourseService,
+    private examService: ExamService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-
     this.loading = true;
     this.year = new Date().getFullYear().toString();
     this.exams = [];
@@ -67,23 +67,22 @@ export class ExamComponent implements OnInit {
       this.years.push(i.toString());
     }
 
-    this.courseService.getBranchesAndCourses()
-    .subscribe(
+    this.courseService.getBranchesAndCourses().subscribe(
       (resData: any) => {
         this.error = null;
         this.allCourses = resData.courses;
         this.branches = resData.branches;
         this.form = new FormGroup({
-          course : new FormControl('', {
+          course: new FormControl('', {
             validators: [Validators.required]
           }),
-          batch : new FormControl('', {
+          batch: new FormControl('', {
             validators: [Validators.required]
           }),
-          subject : new FormControl('', {
+          subject: new FormControl('', {
             validators: [Validators.required]
           }),
-          year : new FormControl(this.year, {
+          year: new FormControl(this.year, {
             validators: [Validators.required]
           })
         });
@@ -91,11 +90,11 @@ export class ExamComponent implements OnInit {
         if (this.branch !== '') {
           this.onSelectBranch(this.branch);
           if (this.course !== '') {
-            this.form.patchValue({course: this.course});
+            this.form.patchValue({ course: this.course });
             this.onSelectCourse();
-            this.form.patchValue({batch: this.batch});
+            this.form.patchValue({ batch: this.batch });
             this.onSelectBatch();
-            this.form.patchValue({subject: this.subject});
+            this.form.patchValue({ subject: this.subject });
             this.onSelectSubject();
           } else {
             this.loading = false;
@@ -142,9 +141,9 @@ export class ExamComponent implements OnInit {
     if (id !== '') {
       this.course = id;
       this.examService.examSearchData.course = this.course;
-      this.batches = this.courses.find((course) => (course._id === id)).batch;
+      this.batches = this.courses.find(course => course._id === id).batch;
       this.subjects = [];
-      this.form.patchValue({ batch : '', subject: '' });
+      this.form.patchValue({ batch: '', subject: '' });
       this.noExam = 'Please Select Batch';
     }
   }
@@ -154,8 +153,8 @@ export class ExamComponent implements OnInit {
     if (id !== '') {
       this.batch = id;
       this.examService.examSearchData.batch = this.batch;
-      this.subjects = this.batches.find((batch) => (batch._id === id)).subjects;
-      this.form.patchValue({ subject : '' });
+      this.subjects = this.batches.find(batch => batch._id === id).subjects;
+      this.form.patchValue({ subject: '' });
       this.noExam = 'Please Select Subject';
     }
   }
@@ -187,8 +186,7 @@ export class ExamComponent implements OnInit {
 
   searchExans(course: string, batch: string, subject: string, year: string) {
     this.loading = true;
-    this.examService.getExams(course, batch, subject, year)
-    .subscribe(
+    this.examService.getExams(course, batch, subject, year).subscribe(
       (resData: any) => {
         this.error = null;
         this.exams = resData;
@@ -207,16 +205,17 @@ export class ExamComponent implements OnInit {
   }
 
   editExam(id: string) {
-    this.router.navigate([id, 'edit'], {relativeTo: this.route});
+    this.router.navigate([id, 'edit'], { relativeTo: this.route });
   }
 
   deleteExam(id: string) {
-    // tslint:disable-next-line: max-line-length
-    const confirm = window.confirm('Do you really want to Delete this Exam?\n If you Delete this Exam all the exam related data will be permanantly deleted from Database..\nIf you wish to delete this Click Ok');
+    const confirm = window.confirm(
+      // tslint:disable-next-line: max-line-length
+      'Do you really want to Delete this Exam?\n If you Delete this Exam all the exam related data will be permanantly deleted from Database..\nIf you wish to delete this Click Ok'
+    );
     if (confirm) {
       this.loading = true;
-      this.examService.deleteExam(id)
-      .subscribe(
+      this.examService.deleteExam(id).subscribe(
         (resData: any) => {
           this.error = null;
           this.ngOnInit();
@@ -232,5 +231,4 @@ export class ExamComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

@@ -12,7 +12,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./edit-media.component.css']
 })
 export class EditMediaComponent implements OnInit {
-
   loading: boolean;
   error: boolean;
 
@@ -30,86 +29,101 @@ export class EditMediaComponent implements OnInit {
   media: any;
   id: string;
 
-  constructor(private courseService: CourseService,
-              private mediaService: MediaService,
-              private router: Router,
-              private location: Location,
-              private route: ActivatedRoute) { }
+  constructor(
+    private courseService: CourseService,
+    private mediaService: MediaService,
+    private router: Router,
+    private location: Location,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     this.branches = [];
     this.allCourses = [];
     this.courses = [];
     this.batches = [];
     this.subjects = [];
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        this.id = params['id'];
-        this.mediaService.getMediaforEditing(this.id)
-        .subscribe(
-          resData => {
-            this.error = null;
-            this.media = resData.media;
-            // If no media available
-            if (!this.media) {
-              this.router.navigate(['/page_not_found'], {relativeTo: this.route});
-              return;
-            }
-            this.allCourses = resData.courses;
-            this.branches = resData.branches;
-            this.form = new FormGroup({
-              title: new FormControl(this.media.title, {
-                validators: [Validators.required]
-              }),
-              branch: new FormControl(this.media.branch, {
-                validators: [Validators.required]
-              }),
-              course: new FormControl('', {
-                validators: [Validators.required]
-              }),
-              batch: new FormControl('', {
-                validators: [Validators.required]
-              }),
-              subject: new FormControl(null, {
-                validators: [Validators.required]
-              }),
-              date: new FormControl(null, {
-                validators: [Validators.required]
-              }),
-              time: new FormControl(null, {
-                validators: [Validators.required]
-              })
-            });
-            this.branchChanged();
-            this.form.patchValue({course: this.media.course});
-            this.courseChanged();
-            this.form.patchValue({batch: this.media.batch});
-            this.batchChanged();
-            this.form.patchValue({subject: this.media.subject});
-
-            const startDateTime = this.media.startTime.split(' ');
-            const date = startDateTime[2] + '-' + this.month(startDateTime[0]) + '-' + startDateTime[1].replace(',', '');
-            this.form.patchValue({date});
-
-            const startTime = startDateTime[3].split(':');
-            const time = startTime[0] + ':' + startTime[1];
-            this.form.patchValue({time});
-
-            this.loading = false;
-
-          },
-          errorMessage => {
-            this.loading = false;
-            this.error = errorMessage;
-            this.router.navigate(['/page_not_found'], {relativeTo: this.route});
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      this.id = params['id'];
+      this.mediaService.getMediaforEditing(this.id).subscribe(
+        resData => {
+          this.error = null;
+          this.media = resData.media;
+          // If no media available
+          if (!this.media) {
+            this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+            return;
           }
-        );
-      }
-    );
+          this.allCourses = resData.courses;
+          this.branches = resData.branches;
+          this.form = new FormGroup({
+            title: new FormControl(this.media.title, {
+              validators: [Validators.required]
+            }),
+            branch: new FormControl(this.media.branch, {
+              validators: [Validators.required]
+            }),
+            course: new FormControl('', {
+              validators: [Validators.required]
+            }),
+            batch: new FormControl('', {
+              validators: [Validators.required]
+            }),
+            subject: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            date: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            time: new FormControl(null, {
+              validators: [Validators.required]
+            })
+          });
+          this.branchChanged();
+          this.form.patchValue({ course: this.media.course });
+          this.courseChanged();
+          this.form.patchValue({ batch: this.media.batch });
+          this.batchChanged();
+          this.form.patchValue({ subject: this.media.subject });
+
+          const startDateTime = this.media.startTime.split(' ');
+          const date =
+            startDateTime[2] +
+            '-' +
+            this.month(startDateTime[0]) +
+            '-' +
+            startDateTime[1].replace(',', '');
+          this.form.patchValue({ date });
+
+          const startTime = startDateTime[3].split(':');
+          const time = startTime[0] + ':' + startTime[1];
+          this.form.patchValue({ time });
+
+          this.loading = false;
+        },
+        errorMessage => {
+          this.loading = false;
+          this.error = errorMessage;
+          this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+        }
+      );
+    });
   }
 
   month(month: string) {
@@ -139,7 +153,7 @@ export class EditMediaComponent implements OnInit {
   courseChanged() {
     this.batches = [];
     this.subjects = [];
-    const course = this.courses.find((curCourse) => curCourse._id === this.form.value.course);
+    const course = this.courses.find(curCourse => curCourse._id === this.form.value.course);
     this.batches = course.batch;
     this.form.patchValue({
       batch: '',
@@ -149,7 +163,7 @@ export class EditMediaComponent implements OnInit {
 
   batchChanged() {
     this.subjects = [];
-    const batch = this.batches.find((curBatch) => curBatch._id === this.form.value.batch);
+    const batch = this.batches.find(curBatch => curBatch._id === this.form.value.batch);
     this.subjects = batch.subjects;
     this.form.patchValue({
       subject: ''
@@ -179,8 +193,7 @@ export class EditMediaComponent implements OnInit {
       startTime: StartTime
     };
 
-    this.mediaService.editMedia(media)
-    .subscribe(
+    this.mediaService.editMedia(media).subscribe(
       resData => {
         this.error = null;
         this.loading = false;

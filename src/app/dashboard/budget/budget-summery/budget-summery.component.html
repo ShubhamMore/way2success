@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
@@ -15,13 +14,15 @@
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="row">
         <div class="col-12">
-          <button class="btn btn-sm btn-success float-right" (click)="print()"><i class="fa fa-print"></i></button>
-          <h5>From: {{statementFrom}} To: {{statementTo}}</h5>
-          <br>
+          <button class="btn btn-sm btn-success float-right" (click)="print()">
+            <i class="fa fa-print"></i>
+          </button>
+          <h5>From: {{ statementFrom }} To: {{ statementTo }}</h5>
+          <br />
           <div class="table-responsive" *ngIf="statement.length > 0; else noStatement">
             <table class="table table-sm">
               <thead class="table-heading">
@@ -34,17 +35,25 @@
                 </tr>
               </thead>
               <tbody class="table-body income">
-                <tr class="table-row" *ngFor="let curStatement of statement, let i = index">
-                  <td class="table-data">{{ i+1 }}</td>
+                <tr class="table-row" *ngFor="let curStatement of statement; let i = index">
+                  <td class="table-data">{{ i + 1 }}</td>
                   <td class="table-data">{{ curStatement.date }}</td>
-                  <td class="table-data">{{curStatement.title}}</td>
-                  <td class="table-data">{{curStatement.type === '1' ? curStatement.amount : ''}}</td>
-                  <td class="table-data">{{curStatement.type === '0' ? curStatement.amount : ''}}</td>
+                  <td class="table-data">{{ curStatement.title }}</td>
+                  <td class="table-data">
+                    {{ curStatement.type === '1' ? curStatement.amount : '' }}
+                  </td>
+                  <td class="table-data">
+                    {{ curStatement.type === '0' ? curStatement.amount : '' }}
+                  </td>
                 </tr>
                 <tr class="table-row">
                   <td class="table-data" colspan="3"><strong>Total</strong></td>
-                  <td class="table-data"><strong>{{totalIncome}}</strong></td>
-                  <td class="table-data"><strong>{{totalExpence}}</strong></td>
+                  <td class="table-data">
+                    <strong>{{ totalIncome }}</strong>
+                  </td>
+                  <td class="table-data">
+                    <strong>{{ totalExpence }}</strong>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -52,10 +61,10 @@
           <ng-template #noStatement>
             <p>no Data Found</p>
           </ng-template>
-          <hr>
-          <Strong>Total Income : </Strong>{{totalIncome.toFixed(2)}}<br>
-          <Strong>Total Expence : </Strong>{{totalExpence.toFixed(2)}}<br>
-          <Strong>Total Balance : </Strong>{{totalBalance.toFixed(2)}}<br>
+          <hr />
+          <Strong>Total Income : </Strong>{{ totalIncome.toFixed(2) }}<br />
+          <Strong>Total Expence : </Strong>{{ totalExpence.toFixed(2) }}<br />
+          <Strong>Total Balance : </Strong>{{ totalBalance.toFixed(2) }}<br />
         </div>
       </div>
     </div>

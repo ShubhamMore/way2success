@@ -10,7 +10,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./student-dashboard.component.css']
 })
 export class StudentDashboardComponent implements OnInit {
-
   loading: boolean;
   error: boolean;
   student: StudentModel;
@@ -18,45 +17,45 @@ export class StudentDashboardComponent implements OnInit {
   studentMetaData: any;
   id: string;
 
-  constructor(private studentService: StudentService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private studentService: StudentService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
     this.subject = [];
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        this.id = params['id'];
-        if (!this.id) {
-          this.router.navigate(['/page_not_found'], {relativeTo: this.route});
-          return;
-        }
-        this.studentService.getStudent(this.id)
-        .subscribe(
-          (resData: any) => {
-            this.error = null;
-            this.student = resData.student;
-            if (!this.student) {
-              this.router.navigate(['/page_not_found'], {relativeTo: this.route});
-              return;
-            }
-            this.studentMetaData = resData.studentMetaData;
-            this.studentMetaData.subject.forEach((subject: any) => {
-              this.subject.push(subject.subject);
-            });
-            this.loading = false;
-          },
-          (errorMessage: any) => {
-            this.error = errorMessage;
-            this.loading = false;
-            this.router.navigate(['/page_not_found'], {relativeTo: this.route});
-          }
-        );
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      this.id = params['id'];
+      if (!this.id) {
+        this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+        return;
       }
-    );
+      this.studentService.getStudent(this.id).subscribe(
+        (resData: any) => {
+          this.error = null;
+          this.student = resData.student;
+          if (!this.student) {
+            this.router.navigate(['/page_not_found'], {
+              relativeTo: this.route
+            });
+            return;
+          }
+          this.studentMetaData = resData.studentMetaData;
+          this.studentMetaData.subject.forEach((subject: any) => {
+            this.subject.push(subject.subject);
+          });
+          this.loading = false;
+        },
+        (errorMessage: any) => {
+          this.error = errorMessage;
+          this.loading = false;
+          this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+        }
+      );
+    });
   }
 
   onErrorClose() {

@@ -18,7 +18,13 @@ import { ChangePasswordComponent } from './authentication/change-password/change
 import { ErrorComponent } from './error/error.component';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
-import { AdminAuthGuard, LoginGuard, ChangePassswordGuard, StudentAuthGuard, FacultyAuthGuard } from './authentication/auth/auth.guard';
+import {
+  AdminAuthGuard,
+  LoginGuard,
+  ChangePassswordGuard,
+  StudentAuthGuard,
+  FacultyAuthGuard
+} from './authentication/auth/auth.guard';
 
 import { RegisterComponent } from './authentication/register/register.component';
 
@@ -198,15 +204,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     ContentContactComponent,
     ContentAboutComponent,
     ContentPhotosComponent,
-    LoadingSpinnerComponent,
+    LoadingSpinnerComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutes,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutes, HttpClientModule],
   providers: [
     HttpService,
 
@@ -235,4 +235,4 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

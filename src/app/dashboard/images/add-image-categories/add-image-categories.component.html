@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row">
@@ -15,7 +14,7 @@
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="row">
         <div class="col-md-8 col-11 mx-auto">
@@ -25,21 +24,31 @@
                 <div class="form-group">
                   <label class="input-label" for="category">Category Name : </label>
                   <div class="input-group">
-                    <input class="form-control" type="text" name="category" id="category" formControlName="category" placeholder="Category">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="category"
+                      id="category"
+                      formControlName="category"
+                      placeholder="Category"
+                    />
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="submit">Add</button>
                     </div>
                   </div>
-                  <span class="input-error" *ngIf="!form.get('category').valid && form.get('category').touched">*Please Enter Category Name</span>
+                  <span
+                    class="input-error"
+                    *ngIf="!form.get('category').valid && form.get('category').touched"
+                    >*Please Enter Category Name</span
+                  >
                 </div>
               </div>
             </div>
-
           </form>
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="row">
         <div class="col-md-10 col-12 mx-auto">
@@ -55,10 +64,14 @@
                 </thead>
                 <tbody class="table-body">
                   <tr class="table-row" *ngFor="let category of categories; let i = index">
-                    <td class="table-data">{{i + 1}}</td>
-                    <td class="table-data">{{category.category}}</td>
+                    <td class="table-data">{{ i + 1 }}</td>
+                    <td class="table-data">{{ category.category }}</td>
                     <td class="table-data">
-                      <button type="button" class="btn btn-sm btn-danger" (click)="deleteCategory(category._id)">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteCategory(category._id)"
+                      >
                         <i class="fa fa-trash"></i>
                       </button>
                     </td>
@@ -70,7 +83,6 @@
           <ng-template #no_categories><p>No Category Added Yet</p></ng-template>
         </div>
       </div>
-
     </div>
   </div>
 </div>

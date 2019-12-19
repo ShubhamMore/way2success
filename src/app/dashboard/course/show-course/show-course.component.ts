@@ -10,7 +10,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./show-course.component.css']
 })
 export class ShowCourseComponent implements OnInit {
-
   course: CourseModel = null;
 
   loading: boolean;
@@ -21,42 +20,40 @@ export class ShowCourseComponent implements OnInit {
 
   batches: BatchModel[] = [];
 
-  constructor(private courseService: CourseService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        this.id = params['id'];
-        this.courseService.getCourse(this.id)
-        .subscribe(
-          resData => {
-            this.error = null;
-            this.course = resData;
-            this.batches = this.course.batch;
-            this.loading = false;
-            if (!this.course) {
-              this.router.navigate(['/page_not_found'], {relativeTo: this.route});
-              return;
-            }
-          },
-          errorMessage => {
-            this.loading = false;
-            this.error = errorMessage;
-            this.router.navigate(['/page_not_found'], {relativeTo: this.route});
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      this.id = params['id'];
+      this.courseService.getCourse(this.id).subscribe(
+        resData => {
+          this.error = null;
+          this.course = resData;
+          this.batches = this.course.batch;
+          this.loading = false;
+          if (!this.course) {
+            this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+            return;
           }
-        );
-      }
-    );
+        },
+        errorMessage => {
+          this.loading = false;
+          this.error = errorMessage;
+          this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+        }
+      );
+    });
   }
 
   editcourse() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   cancel() {
@@ -66,5 +63,4 @@ export class ShowCourseComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

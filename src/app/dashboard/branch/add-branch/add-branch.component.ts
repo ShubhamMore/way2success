@@ -8,11 +8,10 @@ import { BranchService } from '../../../services/branch.service';
   styleUrls: ['./add-branch.component.css']
 })
 export class AddBranchComponent implements OnInit {
-
   loading: boolean;
   error: string;
   form: FormGroup;
-  constructor(private branchService: BranchService) { }
+  constructor(private branchService: BranchService) {}
 
   ngOnInit() {
     this.loading = true;
@@ -42,8 +41,7 @@ export class AddBranchComponent implements OnInit {
         email: this.form.value.email,
         phone: this.form.value.phone
       };
-      this.branchService.addBranch(branch)
-      .subscribe(
+      this.branchService.addBranch(branch).subscribe(
         (resData: any) => {
           this.form.reset();
           this.loading = false;
@@ -59,5 +57,4 @@ export class AddBranchComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

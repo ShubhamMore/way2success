@@ -1,7 +1,6 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row">
@@ -10,7 +9,7 @@
         <div class="col-md-10 col-sm-12 mx-auto">
           <button class="btn btn-sm float-right" (click)="cancel()">X</button>
           <h3>Receipts</h3>
-          <hr>
+          <hr />
           <div class="row" *ngIf="receipts.length > 0; else empty_receipts">
             <div class="table-responsive">
               <table class="table table-sm table-hover">
@@ -23,22 +22,36 @@
                     <th>Show</th>
                     <th>Delete</th>
                   </tr>
-                  <tr class="receipt" *ngFor="let receipt of receipts; let i = index" routerLinkActive="active">
-                    <td>{{ i+1 }}</td>
+                  <tr
+                    class="receipt"
+                    *ngFor="let receipt of receipts; let i = index"
+                    routerLinkActive="active"
+                  >
+                    <td>{{ i + 1 }}</td>
                     <td>
                       {{ receipt.date }}
                     </td>
-                    <td>
-                      Rs. {{ receipt.amount }}.00/-
-                    </td>
+                    <td>Rs. {{ receipt.amount }}.00/-</td>
                     <td>
                       {{ receipt.paymentMode | uppercase }}
                     </td>
                     <td>
-                      <button type="button" class="btn btn-sm btn-warning text-white" (click)="showReceipt(receipt._id)"><i class="fa fa-info-circle"></i></button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-warning text-white"
+                        (click)="showReceipt(receipt._id)"
+                      >
+                        <i class="fa fa-info-circle"></i>
+                      </button>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-sm btn-danger" (click)="deleteReceipt(receipt._id)"><i class="fa fa-trash"></i></button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteReceipt(receipt._id)"
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>

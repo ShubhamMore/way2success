@@ -8,7 +8,6 @@ import { BudgetModel } from '../models/budget.model';
   providedIn: 'root'
 })
 export class BudgetService {
-
   budgetSearchData = {
     seatchType: '0',
     year: null,
@@ -18,7 +17,7 @@ export class BudgetService {
   constructor(private httpService: HttpService) {}
 
   getBudget(searchData: any) {
-    const data = {api: 'getBudget', data: searchData};
+    const data = { api: 'getBudget', data: searchData };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -30,7 +29,7 @@ export class BudgetService {
   }
 
   getBudgetSummery(searchData: any) {
-    const data = {api: 'getBudgetSummery', data: searchData};
+    const data = { api: 'getBudgetSummery', data: searchData };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -42,7 +41,7 @@ export class BudgetService {
   }
 
   saveBudget(budget: any) {
-    const data = {api: 'saveBudget', data: budget};
+    const data = { api: 'saveBudget', data: budget };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -54,7 +53,7 @@ export class BudgetService {
   }
 
   editBudget(budget: BudgetModel) {
-    const data = {api: 'editBudget', data: budget};
+    const data = { api: 'editBudget', data: budget };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -66,7 +65,7 @@ export class BudgetService {
   }
 
   deleteBudget(id: string) {
-    const data = {api: 'deleteBudget', data: {_id: id}};
+    const data = { api: 'deleteBudget', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

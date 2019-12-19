@@ -8,17 +8,15 @@ import { AboutModel } from '../../models/about.model';
   styleUrls: ['./content-about.component.css']
 })
 export class ContentAboutComponent implements OnInit {
-
   loading: boolean;
   error: string;
   about: AboutModel;
 
-  constructor(private aboutService: AboutService) { }
+  constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
     this.loading = true;
-    this.aboutService.getAbout()
-    .subscribe(
+    this.aboutService.getAbout().subscribe(
       (resData: any) => {
         this.about = resData;
         this.loading = false;

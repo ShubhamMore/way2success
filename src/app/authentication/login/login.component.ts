@@ -12,15 +12,16 @@ import { EncryptService } from '../../encrypt.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   form: FormGroup;
   loading: boolean;
   error: string = null;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private encryptService: EncryptService,
-              private route: ActivatedRoute) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private encryptService: EncryptService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -54,11 +55,19 @@ export class LoginComponent implements OnInit {
         if (resData.userType === 'admin') {
           this.router.navigate(['/admin'], { relativeTo: this.route });
         } else if (resData.userType === 'student') {
-          this.router.navigate(['/student', resData._id], { relativeTo: this.route });
+          this.router.navigate(['/student', resData._id], {
+            relativeTo: this.route
+          });
         } else if (resData.userType === 'faculty') {
-          this.router.navigate(['/faculty', resData._id], { relativeTo: this.route });
+          this.router.navigate(['/faculty', resData._id], {
+            relativeTo: this.route
+          });
         } else {
-          this.router.navigate(['/login'], { relativeTo: this.route, queryParams: { auth: 'false' }, skipLocationChange: true });
+          this.router.navigate(['/login'], {
+            relativeTo: this.route,
+            queryParams: { auth: 'false' },
+            skipLocationChange: true
+          });
         }
         this.form.reset();
       },

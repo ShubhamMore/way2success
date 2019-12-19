@@ -1,51 +1,75 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
   <div class="row mt-2">
-   <div class="col-md-10 col-12 mx-auto">
-     <h4>Branches</h4>
-     <hr>
-     <div class="row" *ngIf="branches.length > 0; else noBranch">
-       <div class="col-12">
-         <div class="table-responsive">
-           <table class="table table-sm">
-             <thead class="table-heading">
-               <tr class="table-row">
-                 <th class="table-heading-data">Id</th>
-                 <th class="table-heading-data">Branch</th>
-                 <th class="table-heading-data">Info</th>
-                 <th class="table-heading-data">Edit</th>
-                 <th class="table-heading-data">Activate/Deactivate</th>
-               </tr>
-             </thead>
-             <tbody class="table-body">
-               <tr class="rable-row" *ngFor="let branch of branches; let i = index">
-                <td class="table-data">{{i + 1}}</td>
-                <td class="table-data">{{branch.branchName}}</td>
-                <td class="table-data">
-                  <i class="fa fa-map-marker"></i>&nbsp;&nbsp;&nbsp;{{branch.address}}<br>
-                  <i class="fa fa-envelope"></i>&nbsp;&nbsp;&nbsp;<a href="mailto:{{branch.email}}">{{branch.email}}</a><br>
-                  <i class="fa fa-phone"></i>&nbsp;&nbsp;&nbsp;{{branch.phone}}
-                </td>
-                <td class="table-data">
-                  <button type="button" class="btn btn-sm btn-light" (click)="editBranch(branch._id)"><i class="fa fa-edit"></i></button>
-                </td>
-                <td class="table-data text-center">
-                  <button type="button" class="btn btn-sm btn-danger" title="Deactivate" (click)="deactivateBranch(branch._id)" *ngIf="branch.status === '1'"><i class="fa fa-power-off"></i></button>
-                  <button type="button" class="btn btn-sm btn-warning" title="Activate" (click)="activateBranch(branch._id)" *ngIf="branch.status === '0'"><i class="fa fa-power-off"></i></button>
-                </td>
-               </tr>
-             </tbody>
-           </table>
-         </div>
-       </div>
-     </div>
-     <ng-template #noBranch>
-       <p>No Branches Added Yet</p>
-     </ng-template>
-   </div>
+    <div class="col-md-10 col-12 mx-auto">
+      <h4>Branches</h4>
+      <hr />
+      <div class="row" *ngIf="branches.length > 0; else noBranch">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead class="table-heading">
+                <tr class="table-row">
+                  <th class="table-heading-data">Id</th>
+                  <th class="table-heading-data">Branch</th>
+                  <th class="table-heading-data">Info</th>
+                  <th class="table-heading-data">Edit</th>
+                  <th class="table-heading-data">Activate/Deactivate</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr class="rable-row" *ngFor="let branch of branches; let i = index">
+                  <td class="table-data">{{ i + 1 }}</td>
+                  <td class="table-data">{{ branch.branchName }}</td>
+                  <td class="table-data">
+                    <i class="fa fa-map-marker"></i>&nbsp;&nbsp;&nbsp;{{ branch.address }}<br />
+                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;&nbsp;<a
+                      href="mailto:{{ branch.email }}"
+                      >{{ branch.email }}</a
+                    ><br />
+                    <i class="fa fa-phone"></i>&nbsp;&nbsp;&nbsp;{{ branch.phone }}
+                  </td>
+                  <td class="table-data">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-light"
+                      (click)="editBranch(branch._id)"
+                    >
+                      <i class="fa fa-edit"></i>
+                    </button>
+                  </td>
+                  <td class="table-data text-center">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-danger"
+                      title="Deactivate"
+                      (click)="deactivateBranch(branch._id)"
+                      *ngIf="branch.status === '1'"
+                    >
+                      <i class="fa fa-power-off"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-warning"
+                      title="Activate"
+                      (click)="activateBranch(branch._id)"
+                      *ngIf="branch.status === '0'"
+                    >
+                      <i class="fa fa-power-off"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <ng-template #noBranch>
+        <p>No Branches Added Yet</p>
+      </ng-template>
+    </div>
   </div>
 </div>

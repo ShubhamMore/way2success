@@ -34,9 +34,11 @@ export class AddCourseComponent implements OnInit {
   loading: boolean;
   error: string;
 
-  constructor(private courseService: CourseService,
-              private branchService: BranchService,
-              private location: Location) { }
+  constructor(
+    private courseService: CourseService,
+    private branchService: BranchService,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
@@ -45,8 +47,7 @@ export class AddCourseComponent implements OnInit {
     this.subjects = [];
     this.error = null;
 
-    this.branchService.getBranches()
-    .subscribe(
+    this.branchService.getBranches().subscribe(
       (resData: any) => {
         this.branches = resData;
         // course form
@@ -234,8 +235,7 @@ export class AddCourseComponent implements OnInit {
 
     console.log(course);
 
-    this.courseService.addCourse(course)
-    .subscribe(
+    this.courseService.addCourse(course).subscribe(
       resData => {
         this.error = null;
         this.courseForm.reset();
@@ -256,5 +256,4 @@ export class AddCourseComponent implements OnInit {
   onErrorClose() {
     this.error = null;
   }
-
 }

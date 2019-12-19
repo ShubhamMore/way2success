@@ -11,43 +11,40 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./reply-enquiry.component.css']
 })
 export class ReplyEnquiryComponent implements OnInit {
-
   loading: boolean;
   enquiry: EnquiryModel;
   form: FormGroup;
   error: string;
-  constructor(private enquiryService: EnquiryService,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private enquiryService: EnquiryService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.route.params
-    .subscribe(
-      (param: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        const id = param['id'];
-        this.enquiryService.getEnquiry(id)
-        .subscribe(
-          (resDara: any) => {
-            this.enquiry = resDara;
-            this.form = new FormGroup({
-              subject: new FormControl(null, {
-                validators: [Validators.required]
-              }),
-              message: new FormControl(null, {
-                validators: [Validators.required]
-              })
-            });
-            this.loading = false;
-          },
-          (error: any) => {
-            this.error = error;
-            this.loading = false;
-          }
-        );
-      }
-    );
+    this.route.params.subscribe((param: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      const id = param['id'];
+      this.enquiryService.getEnquiry(id).subscribe(
+        (resDara: any) => {
+          this.enquiry = resDara;
+          this.form = new FormGroup({
+            subject: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            message: new FormControl(null, {
+              validators: [Validators.required]
+            })
+          });
+          this.loading = false;
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    });
   }
 
   sendReply() {
@@ -57,10 +54,11 @@ export class ReplyEnquiryComponent implements OnInit {
         enquiry: this.enquiry._id,
         subject: this.form.value.subject,
         message: this.form.value.message,
-        date: Date().toString().substring(0, 21)
+        date: Date()
+          .toString()
+          .substring(0, 21)
       };
-      this.enquiryService.replyEnquiry(reply)
-      .subscribe(
+      this.enquiryService.replyEnquiry(reply).subscribe(
         (resData: any) => {
           this.form.reset();
           this.loading = false;

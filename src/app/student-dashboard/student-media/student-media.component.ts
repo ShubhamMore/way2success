@@ -11,7 +11,6 @@ import { MediaService } from '../../services/media.service';
   styleUrls: ['./student-media.component.css']
 })
 export class StudentMediaComponent implements OnInit {
-
   id: string;
 
   loading: boolean;
@@ -27,47 +26,67 @@ export class StudentMediaComponent implements OnInit {
 
   date: string;
 
-  constructor(private studentService: StudentService,
-              private mediaService: MediaService,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private studentService: StudentService,
+    private mediaService: MediaService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
-
     this.loading = true;
-    this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     this.studentData = null;
     this.medias = [];
     this.subject = '';
 
     this.curDate();
 
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        this.id = params['id'];
-        this.studentService.getStudentDataForMedia(this.id)
-        .subscribe(
-          (resData: any) => {
-            this.error = null;
-            this.studentData = resData;
-            this.subject = this.studentData.subjects[0]._id;
-            this.searchMedia(this.date, this.studentData.course, this.studentData.batch, this.subject);
-            this.loading = false;
-          },
-          (errorMessage: any) => {
-            this.error = errorMessage;
-            this.loading = false;
-          }
-        );
-      }
-    );
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      this.id = params['id'];
+      this.studentService.getStudentDataForMedia(this.id).subscribe(
+        (resData: any) => {
+          this.error = null;
+          this.studentData = resData;
+          this.subject = this.studentData.subjects[0]._id;
+          this.searchMedia(
+            this.date,
+            this.studentData.course,
+            this.studentData.batch,
+            this.subject
+          );
+          this.loading = false;
+        },
+        (errorMessage: any) => {
+          this.error = errorMessage;
+          this.loading = false;
+        }
+      );
+    });
   }
 
   curDate() {
     const date = new Date();
-    this.date = this.months[date.getMonth()] + ' ' + this.zeroAppend(date.getDate()) + ', ' + date.getFullYear();
+    this.date =
+      this.months[date.getMonth()] +
+      ' ' +
+      this.zeroAppend(date.getDate()) +
+      ', ' +
+      date.getFullYear();
     console.log(this.date);
   }
 
@@ -86,9 +105,7 @@ export class StudentMediaComponent implements OnInit {
   }
 
   searchMedia(date: string, course: string, batch: string, subject: string) {
-
-    this.mediaService.getMediaForStudent(date, course, batch, subject)
-    .subscribe(
+    this.mediaService.getMediaForStudent(date, course, batch, subject).subscribe(
       resData => {
         this.error = null;
         this.medias = resData;

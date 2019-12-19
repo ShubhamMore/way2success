@@ -14,7 +14,7 @@ import { BranchModel } from 'src/app/models/branch.model';
 export class EditCourseComponent implements OnInit {
   id: string;
   course: CourseModel;
-    // Forms
+  // Forms
   courseForm: FormGroup;
   batchForm: FormGroup;
   subjectForm: FormGroup;
@@ -36,70 +36,68 @@ export class EditCourseComponent implements OnInit {
   loading: boolean;
   error: string;
 
-  constructor(private courseService: CourseService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.loading = true;
     this.branches = [];
     this.subjects = [];
     this.batches = [];
-    this.route.params
-    .subscribe(
-      (params: Params) => {
-        // tslint:disable-next-line: no-string-literal
-        this.id = params['id'];
-        this.courseService.getCourseForEditing(this.id)
-        .subscribe(
-          resData => {
-            this.error = null;
-            this.course = resData.course;
-            this.branches = resData.branches;
-            if (!this.course) {
-              this.router.navigate(['/page_not_found'], {relativeTo: this.route});
-              return;
-            }
-            this.batches = this.course.batch;
-
-            // course form
-            this.courseForm = new FormGroup({
-              course: new FormControl(this.course.courseName, {
-                validators: [Validators.required]
-              }),
-              branch: new FormControl(this.course.branch, {
-                validators: [Validators.required]
-              })
-            });
-
-            // Batch Form
-            this.batchForm = new FormGroup({
-              batchName: new FormControl(null, {
-                validators: [Validators.required]
-              })
-            });
-
-            // Subject Form
-            this.subjectForm = new FormGroup({
-              subject: new FormControl(null, {
-                validators: [Validators.required]
-              }),
-              fee: new FormControl(null, {
-                validators: [Validators.required]
-              })
-            });
-
-            this.loading = false;
-          },
-          errorMessage => {
-            this.loading = false;
-            this.error = errorMessage;
-            this.router.navigate(['/page_not_found'], {relativeTo: this.route});
+    this.route.params.subscribe((params: Params) => {
+      // tslint:disable-next-line: no-string-literal
+      this.id = params['id'];
+      this.courseService.getCourseForEditing(this.id).subscribe(
+        resData => {
+          this.error = null;
+          this.course = resData.course;
+          this.branches = resData.branches;
+          if (!this.course) {
+            this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+            return;
           }
-        );
-      }
-    );
+          this.batches = this.course.batch;
+
+          // course form
+          this.courseForm = new FormGroup({
+            course: new FormControl(this.course.courseName, {
+              validators: [Validators.required]
+            }),
+            branch: new FormControl(this.course.branch, {
+              validators: [Validators.required]
+            })
+          });
+
+          // Batch Form
+          this.batchForm = new FormGroup({
+            batchName: new FormControl(null, {
+              validators: [Validators.required]
+            })
+          });
+
+          // Subject Form
+          this.subjectForm = new FormGroup({
+            subject: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            fee: new FormControl(null, {
+              validators: [Validators.required]
+            })
+          });
+
+          this.loading = false;
+        },
+        errorMessage => {
+          this.loading = false;
+          this.error = errorMessage;
+          this.router.navigate(['/page_not_found'], { relativeTo: this.route });
+        }
+      );
+    });
   }
 
   // Add Subject
@@ -183,7 +181,7 @@ export class EditCourseComponent implements OnInit {
     this.editBatchIndex = index;
     this.editingBatch = true;
     this.batchForm.patchValue({
-      batchName: this.batches[index].batchName,
+      batchName: this.batches[index].batchName
     });
     this.subjects = this.batches[index].subjects;
   }
@@ -241,8 +239,7 @@ export class EditCourseComponent implements OnInit {
       batch: this.batches
     };
 
-    this.courseService.editCourse(course)
-    .subscribe(
+    this.courseService.editCourse(course).subscribe(
       resData => {
         this.error = null;
         this.loading = false;

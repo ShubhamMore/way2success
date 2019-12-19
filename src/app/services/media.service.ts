@@ -8,7 +8,6 @@ import { MediaModel } from '../models/MediaModel';
   providedIn: 'root'
 })
 export class MediaService {
-
   mediaSearchData: any = {
     branch: '',
     course: '',
@@ -16,10 +15,10 @@ export class MediaService {
     subject: ''
   };
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {}
 
   getAllMedia(media: any) {
-    const data = {api: 'getAllMedia', data: media};
+    const data = { api: 'getAllMedia', data: media };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -31,7 +30,7 @@ export class MediaService {
   }
 
   getMedia(id: string) {
-    const data = {api: 'getMedia', data: {_id: id}};
+    const data = { api: 'getMedia', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -43,7 +42,10 @@ export class MediaService {
   }
 
   getMediaForStudent(date: string, course: string, batch: string, subject: string) {
-    const data = {api: 'getMediaForStudent', data: {date, course, batch, subject}};
+    const data = {
+      api: 'getMediaForStudent',
+      data: { date, course, batch, subject }
+    };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -55,7 +57,7 @@ export class MediaService {
   }
 
   getMediaforEditing(id: string) {
-    const data = {api: 'getMediaforEditing', data: {_id: id}};
+    const data = { api: 'getMediaforEditing', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -66,8 +68,8 @@ export class MediaService {
     );
   }
 
-  addMedia(media: FormData ) {
-    const data = {api: 'newMedia', data: media};
+  addMedia(media: FormData) {
+    const data = { api: 'newMedia', data: media };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -79,7 +81,7 @@ export class MediaService {
   }
 
   editMedia(media: MediaModel) {
-    const data = {api: 'editMedia', data: media};
+    const data = { api: 'editMedia', data: media };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -91,7 +93,7 @@ export class MediaService {
   }
 
   deleteMedia(id: string) {
-    const data = {api: 'deleteMedia', data: {_id: id}};
+    const data = { api: 'deleteMedia', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

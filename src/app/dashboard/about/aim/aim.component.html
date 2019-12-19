@@ -1,25 +1,31 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
-  
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
-  
+
   <div class="row mt-2">
     <div class="col-10 mx-auto">
-
       <div class="row">
         <div class="col-12">
           <button class="btn btn-light float-right" (click)="editAim()" *ngIf="!edit">Edit</button>
           <h3 class="page-heading">Aim</h3>
         </div>
       </div>
-      <hr class="horizontal-line">
+      <hr class="horizontal-line" />
       <form class="" [formGroup]="form" (submit)="saveAim()" *ngIf="edit">
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
-              <textarea class="form-control" name="aim" id="aim" rows="7" formControlName="aim"></textarea>
-              <span class="input-error" *ngIf="!form.get('aim').valid && form.get('aim').touched">*Please Enter Aim</span>
+              <textarea
+                class="form-control"
+                name="aim"
+                id="aim"
+                rows="7"
+                formControlName="aim"
+              ></textarea>
+              <span class="input-error" *ngIf="!form.get('aim').valid && form.get('aim').touched"
+                >*Please Enter Aim</span
+              >
             </div>
           </div>
         </div>
@@ -28,13 +34,15 @@
             <button type="submit" class="btn btn-light">Save</button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-danger float-right" (click)="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger float-right" (click)="cancel()">
+              Cancel
+            </button>
           </div>
         </div>
       </form>
       <div class="row" *ngIf="!edit">
         <div class="col-11 p-2 mx-auto">
-          <p class="about-data">{{about.aim}}</p>
+          <p class="about-data">{{ about.aim }}</p>
         </div>
       </div>
     </div>

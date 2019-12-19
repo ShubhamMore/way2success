@@ -1,81 +1,124 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
-<div  *ngIf="!loading">
+<div *ngIf="!loading">
   <div class="backgroundBox">
     <div class="customCard">
       <form (submit)="sendEnquiry()" [formGroup]="form">
         <h2>Contact Us</h2>
-          <div class="Wrapper">
-            <div class="Input">
-              <input type="text" name="name" id="name" formControlName="name" class="Input-text" placeholder="Your name, e.g. John">
-              <label for="input" class="Input-label">Name</label>
-              <span class="input-error" *ngIf="!form.get('name').valid && form.get('name').touched">*Please Enter Name</span>
-            </div>
+        <div class="Wrapper">
+          <div class="Input">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              formControlName="name"
+              class="Input-text"
+              placeholder="Your name, e.g. John"
+            />
+            <label for="input" class="Input-label">Name</label>
+            <span class="input-error" *ngIf="!form.get('name').valid && form.get('name').touched"
+              >*Please Enter Name</span
+            >
           </div>
-          <div class="Wrapper">
-            <div class="Input">
-              <input type="text" name="email" id="email" formControlName="email" class="Input-text" placeholder="Your email, e.g. abc@xyz.com">
-              <label for="input" class="Input-label">Email</label>
-              <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched">*Please Enter Valid Email</span>
-            </div>
-          </div>
-          <div class="Wrapper">
-            <div class="Input">
-              <input type="text" pattern="\d*" name="phone" id="phone" maxlength="10" minlength="10" formControlName="phone" class="Input-text" placeholder="Your Contact, e.g. 9878098767">
-              <label for="input" class="Input-label">Contact</label>
-              <span class="input-error" *ngIf="!form.get('phone').valid && form.get('phone').touched">*Please enter Valid Contact Number</span>
-            </div>
-          </div>
-          <div class="Wrapper">
-            <div class="Input">
-              <input type="text" name="message" id="message" formControlName="message" class="Input-text" placeholder="Ask us any Query">
-              <label for="input" class="Input-label">Message</label>
-              <span class="input-error" *ngIf="!form.get('message').valid && form.get('message').touched">*Please Enter Message</span>
-            </div>
-          </div>
-          <div class="submitBtn">
-            <button type="submit" class="btn btn-primary">Send</button>
-          </div>
-        </form>
-      </div>
-      <div class="ourInfo">
-        <div class="ourInfoText">
-          <div class="row">
-              <div class="col-2">
-                  <i class="fa fa-map-marker"></i>
-              </div>
-              <div class="col-10">
-                <div class="text">
-                  {{contact.address}}
-                </div>
-              </div>
-            </div>
         </div>
-        <div class="ourInfoText">
-            <div class="row">
-                <div class="col-2">
-                    <i class="fa fa-phone"></i>
-                </div>
-                <div class="col-10">
-                  <div class="text">
-                    {{contact.numbers.join(', ')}}
-                  </div>
-                </div>
-              </div>
+        <div class="Wrapper">
+          <div class="Input">
+            <input
+              type="text"
+              name="email"
+              id="email"
+              formControlName="email"
+              class="Input-text"
+              placeholder="Your email, e.g. abc@xyz.com"
+            />
+            <label for="input" class="Input-label">Email</label>
+            <span class="input-error" *ngIf="!form.get('email').valid && form.get('email').touched"
+              >*Please Enter Valid Email</span
+            >
           </div>
-         
-        <div class="ourInfoText">
-          <div class="row">
-            <div class="col-2">
-                <i class="fa fa-envelope"></i>
-            </div>
-            <div class="col-10">
-              <div class="text">
-                  <a style="color:#fff!important" href="mailto:{{contact.email}}">{{contact.email}}</a>
-              </div>
+        </div>
+        <div class="Wrapper">
+          <div class="Input">
+            <input
+              type="text"
+              pattern="\d*"
+              name="phone"
+              id="phone"
+              maxlength="10"
+              minlength="10"
+              formControlName="phone"
+              class="Input-text"
+              placeholder="Your Contact, e.g. 9878098767"
+            />
+            <label for="input" class="Input-label">Contact</label>
+            <span class="input-error" *ngIf="!form.get('phone').valid && form.get('phone').touched"
+              >*Please enter Valid Contact Number</span
+            >
+          </div>
+        </div>
+        <div class="Wrapper">
+          <div class="Input">
+            <input
+              type="text"
+              name="message"
+              id="message"
+              formControlName="message"
+              class="Input-text"
+              placeholder="Ask us any Query"
+            />
+            <label for="input" class="Input-label">Message</label>
+            <span
+              class="input-error"
+              *ngIf="!form.get('message').valid && form.get('message').touched"
+              >*Please Enter Message</span
+            >
+          </div>
+        </div>
+        <div class="submitBtn">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </form>
+    </div>
+    <div class="ourInfo">
+      <div class="ourInfoText">
+        <div class="row">
+          <div class="col-2">
+            <i class="fa fa-map-marker"></i>
+          </div>
+          <div class="col-10">
+            <div class="text">
+              {{ contact.address }}
             </div>
           </div>
-         </div>
+        </div>
       </div>
+      <div class="ourInfoText">
+        <div class="row">
+          <div class="col-2">
+            <i class="fa fa-phone"></i>
+          </div>
+          <div class="col-10">
+            <div class="text">
+              {{ contact.numbers.join(', ') }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ourInfoText">
+        <div class="row">
+          <div class="col-2">
+            <i class="fa fa-envelope"></i>
+          </div>
+          <div class="col-10">
+            <div class="text">
+              <a style="color:#fff!important" href="mailto:{{ contact.email }}">{{
+                contact.email
+              }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

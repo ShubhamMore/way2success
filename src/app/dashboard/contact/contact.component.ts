@@ -10,7 +10,6 @@ import { ContactModel } from 'src/app/models/contact.model';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-
   loading: boolean;
   error: string;
   contact: ContactModel;
@@ -18,8 +17,7 @@ export class ContactComponent implements OnInit {
   form: FormGroup;
   noNumberErr: boolean;
 
-  constructor(private contactService: ContactService,
-              private location: Location) { }
+  constructor(private contactService: ContactService, private location: Location) {}
 
   ngOnInit() {
     this.loading = true;
@@ -36,8 +34,7 @@ export class ContactComponent implements OnInit {
         validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
       })
     });
-    this.contactService.getContact()
-    .subscribe(
+    this.contactService.getContact().subscribe(
       (resData: any) => {
         this.contact = resData;
         if (this.contact) {
@@ -63,7 +60,7 @@ export class ContactComponent implements OnInit {
       if (this.numbers.length > 0) {
         this.noNumberErr = false;
       }
-      this.form.patchValue({phone: null});
+      this.form.patchValue({ phone: null });
     }
   }
 
@@ -89,8 +86,7 @@ export class ContactComponent implements OnInit {
         contact._id = this.contact._id;
       }
       this.loading = true;
-      this.contactService.saveContact(contact)
-      .subscribe(
+      this.contactService.saveContact(contact).subscribe(
         (resdata: any) => {
           this.ngOnInit();
         },
