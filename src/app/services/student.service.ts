@@ -14,7 +14,8 @@ export class StudentService {
     course: '',
     batch: '',
     subject: '',
-    student: null
+    student: null,
+    studentType: '0'
   };
 
   getStudents(searchData: any) {

@@ -6,8 +6,29 @@
   <div class="row mt-2">
     <div class="col-12 mx-auto">
       <div class="row">
-        <div class="col-md-3 col-12">
+        <div class="col-12">
           <h3 class="page-heading">Students</h3>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-3 col-12">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="studentType">Type </label>
+            </div>
+            <select
+              class="form-control input-select"
+              type="text"
+              name="studentType"
+              id="studentType"
+              (change)="onSelectStudentType($event.target.value)"
+              [value]="studentType"
+            >
+              <option class="select-option" value="0">Regular</option>
+              <option class="select-option" value="1">Pass Out</option>
+            </select>
+          </div>
         </div>
 
         <div class="col-md-4 col-12">

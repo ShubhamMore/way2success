@@ -38,6 +38,8 @@ export class StudentComponent implements OnInit {
   subjects: SubjectModel[];
   subject: string;
 
+  studentType: string;
+
   error: string;
 
   constructor(
@@ -62,6 +64,7 @@ export class StudentComponent implements OnInit {
     this.batch = this.studentService.studentSearchData.batch;
     this.subject = this.studentService.studentSearchData.subject;
     this.student = this.studentService.studentSearchData.student;
+    this.studentType = this.studentService.studentSearchData.studentType;
     this.noStudent = 'Please Select Branch';
     this.courseService.getBranchesAndCourses().subscribe(
       (resData: any) => {
@@ -113,6 +116,11 @@ export class StudentComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  onSelectStudentType(studentType: string) {
+    this.studentType = studentType;
+    this.studentService.studentSearchData.studentType = this.studentType;
   }
 
   onSelectBranch(branch: string) {
@@ -210,22 +218,30 @@ export class StudentComponent implements OnInit {
         course: this.course,
         batch: this.batch,
         subject: this.subject,
-        searchType: this.searchType
+        searchType: this.searchType,
+        studentType: this.studentType
       };
     } else if (this.searchType === '1') {
       return {
         branch: this.branch,
         course: this.course,
         batch: this.batch,
-        searchType: this.searchType
+        searchType: this.searchType,
+        studentType: this.studentType
       };
     } else if (this.searchType === '2') {
-      return { branch: this.branch, course: this.course, searchType: this.searchType };
+      return {
+        branch: this.branch,
+        course: this.course,
+        searchType: this.searchType,
+        studentType: this.studentType
+      };
     } else if (this.searchType === '3') {
       return {
         branch: this.branch,
         student: this.student.toLowerCase(),
-        searchType: this.searchType
+        searchType: this.searchType,
+        studentType: this.studentType
       };
     }
   }
@@ -252,7 +268,6 @@ export class StudentComponent implements OnInit {
           if (this.students.length < 1) {
             this.noStudent = 'No Students Found';
           }
-          // this.clearSearchData();
           this.loading = false;
         },
         errorMessage => {
@@ -267,10 +282,10 @@ export class StudentComponent implements OnInit {
     this.router.navigate([id, 'edit'], { relativeTo: this.route });
   }
 
-  deleteStudent(id: string) {
-    // this.studentService.delete(id);
-    this.ngOnInit();
-  }
+  // deleteStudent(id: string) {
+  //   // this.studentService.delete(id);
+  //   this.ngOnInit();
+  // }
 
   onPaymentClick(student: string) {
     this.router.navigate([student, 'payment'], { relativeTo: this.route });
