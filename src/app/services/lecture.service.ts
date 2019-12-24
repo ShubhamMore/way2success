@@ -1,25 +1,24 @@
-import { StudentModel } from '../models/student.model';
 import { Injectable } from '@angular/core';
-import { HttpService } from './http.service';
 import { map, catchError } from 'rxjs/operators';
+import { HttpService } from './http.service';
 import { throwError } from 'rxjs';
+import { LectureModel } from '../models/lecture.model';
 
-@Injectable()
-export class StudentService {
-  constructor(private httpService: HttpService) {}
-
-  studentSearchData = {
+@Injectable({
+  providedIn: 'root'
+})
+export class LectureService {
+  lectureSearchData: any = {
     branch: '',
-    searchType: '0',
     course: '',
     batch: '',
-    subject: '',
-    student: null,
-    studentType: '0'
+    subject: ''
   };
 
-  getStudents(searchData: any) {
-    const data = { api: 'getStudents', data: searchData };
+  constructor(private httpService: HttpService) {}
+
+  getLecture(id: string) {
+    const data = { api: 'getLecture', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -30,8 +29,8 @@ export class StudentService {
     );
   }
 
-  getStudent(id: string) {
-    const data = { api: 'getStudent', data: { _id: id } };
+  getLecturesForStudent(course: string, batch: string, subject: string) {
+    const data = { api: 'getLecturesForStudent', data: { course, batch, subject } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -42,8 +41,8 @@ export class StudentService {
     );
   }
 
-  getStudentForPayment(id: string) {
-    const data = { api: 'getStudentForPayment', data: { _id: id } };
+  getLectureForEditing(id: string) {
+    const data = { api: 'getLectureForEditing', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -54,8 +53,8 @@ export class StudentService {
     );
   }
 
-  getStudentForEditing(id: string) {
-    const data = { api: 'getStudentForEditing', data: { _id: id } };
+  getLectures(lectureSearchData: any) {
+    const data = { api: 'getLectures', data: lectureSearchData };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -66,8 +65,8 @@ export class StudentService {
     );
   }
 
-  getStudentDataForMedia(id: string) {
-    const data = { api: 'getStudentDataForMedia', data: { _id: id } };
+  addLecture(lecture: any) {
+    const data = { api: 'newLecture', data: lecture };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -78,8 +77,8 @@ export class StudentService {
     );
   }
 
-  getStudentDataForLecture(id: string) {
-    const data = { api: 'getStudentDataForLecture', data: { _id: id } };
+  editLecture(lecture: LectureModel) {
+    const data = { api: 'editLecture', data: lecture };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -90,8 +89,8 @@ export class StudentService {
     );
   }
 
-  getStudentSubjects(id: string) {
-    const data = { api: 'getStudentSubjects', data: { _id: id } };
+  deleteLecture(id: string) {
+    const data = { api: 'deleteLecture', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -102,8 +101,8 @@ export class StudentService {
     );
   }
 
-  addStudent(student: any) {
-    const data = { api: 'newStudent', data: student };
+  newLectureContents(contents: FormData) {
+    const data = { api: 'newLectureContents', data: contents };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -114,8 +113,32 @@ export class StudentService {
     );
   }
 
-  editStudent(student: StudentModel) {
-    const data = { api: 'editStudent', data: student };
+  getLectureContent(id: string) {
+    const data = { api: 'getLectureContent', data: { _id: id } };
+    return this.httpService.httpPostAuth(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
+  getLectureContents(id: string) {
+    const data = { api: 'getLectureContents', data: { _id: id } };
+    return this.httpService.httpPostAuth(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
+  deleteLectureContent(id: string) {
+    const data = { api: 'deleteLectureContent', data: { public_id: id } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

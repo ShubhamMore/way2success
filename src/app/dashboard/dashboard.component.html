@@ -103,6 +103,24 @@
           <div class="card">
             <div class="card-header">
               <h3 class="text-center">
+                <span class="pointer" routerLink="lecture">LECTURE</span>
+              </h3>
+            </div>
+            <div class="card-body">
+              <p>{{ dashboard.lecture }} lectures are conductend</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary float-right" type="button" (click)="addLecture()">
+                Add Lecture
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 mt-3">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="text-center">
                 <span class="pointer" routerLink="image">IMAGES</span>
               </h3>
             </div>

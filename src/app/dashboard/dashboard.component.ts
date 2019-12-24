@@ -55,6 +55,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['media', 'new'], { relativeTo: this.route });
   }
 
+  addLecture() {
+    this.router.navigate(['lecture', 'new'], { relativeTo: this.route });
+  }
+
   addExam() {
     this.router.navigate(['exam', 'new'], { relativeTo: this.route });
   }

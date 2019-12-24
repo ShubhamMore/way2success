@@ -40,11 +40,23 @@ import { StudentPaymentComponent } from './dashboard/student/student-payment/stu
 import { StudentPaymentReceiptsComponent } from './dashboard/student/student-payment-receipts/student-payment-receipts.component';
 // tslint:disable-next-line: max-line-length
 import { ShowPaymentReceiptComponent } from './dashboard/student/student-payment-receipts/show-payment-receipt/show-payment-receipt.component';
+import { StudentLectureComponent } from './student-dashboard/student-lecture/student-lecture.component';
+import { ShowStudentLectureComponent } from './student-dashboard/student-lecture/show-student-lecture/show-student-lecture.component';
+// tslint:disable-next-line: max-line-length
+import { ShowStudentLectureContentComponent } from './student-dashboard/student-lecture/show-student-lecture-content/show-student-lecture-content.component';
 
 import { MediaComponent } from './dashboard/media/media.component';
 import { AddMediaComponent } from './dashboard/media/add-media/add-media.component';
 import { ShowMediaComponent } from './dashboard/media/show-media/show-media.component';
 import { EditMediaComponent } from './dashboard/media/edit-media/edit-media.component';
+
+import { LectureComponent } from './dashboard/lecture/lecture.component';
+import { AddLectureComponent } from './dashboard/lecture/add-lecture/add-lecture.component';
+import { EditLectureComponent } from './dashboard/lecture/edit-lecture/edit-lecture.component';
+
+import { LectureContentComponent } from './dashboard/lecture-content/lecture-content.component';
+import { AddLectureContentComponent } from './dashboard/lecture-content/add-lecture-content/add-lecture-content.component';
+import { ShowLectureContentComponent } from './dashboard/lecture-content/show-lecture-content/show-lecture-content.component';
 
 import { AttendanceComponent } from './dashboard/attendance/attendance.component';
 
@@ -296,6 +308,38 @@ const appRoutes: Routes = [
   },
 
   {
+    path: 'admin/lecture',
+    component: LectureComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'admin/lecture/new',
+    component: AddLectureComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'admin/lecture/:id/edit',
+    component: EditLectureComponent,
+    canActivate: [AdminAuthGuard]
+  },
+
+  {
+    path: 'admin/lecture/:id/content',
+    component: LectureContentComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'admin/lecture/:id/content/add',
+    component: AddLectureContentComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'admin/lecture/:id/content/:content',
+    component: ShowLectureContentComponent,
+    canActivate: [AdminAuthGuard]
+  },
+
+  {
     path: 'admin/exam',
     component: ExamComponent,
     canActivate: [AdminAuthGuard]
@@ -376,6 +420,22 @@ const appRoutes: Routes = [
   {
     path: 'student/:id/media/:mediaid',
     component: ShowStudentMediaComponent,
+    canActivate: [StudentAuthGuard]
+  },
+
+  {
+    path: 'student/:id/lecture',
+    component: StudentLectureComponent,
+    canActivate: [StudentAuthGuard]
+  },
+  {
+    path: 'student/:id/lecture/:lectureid',
+    component: ShowStudentLectureComponent,
+    canActivate: [StudentAuthGuard]
+  },
+  {
+    path: 'student/:id/lecture/:lectureid/:contentid',
+    component: ShowStudentLectureContentComponent,
     canActivate: [StudentAuthGuard]
   },
 

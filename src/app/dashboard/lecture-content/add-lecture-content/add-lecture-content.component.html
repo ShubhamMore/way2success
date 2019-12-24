@@ -1,0 +1,100 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div class="container" *ngIf="!loading">
+  <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
+
+  <div class="row mt-2">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12">
+          <button type="button" class="btn btn-sm float-right" (click)="cancel()">X</button>
+          <h3>Add files</h3>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
+          <form (submit)="onSaveFiles()">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="files">Files</label><br />
+                    </div>
+                    <input
+                      class="form-control"
+                      type="file"
+                      #filePicker
+                      (change)="onFilePicked($event)"
+                      multiple
+                      hidden
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-link"
+                        type="button"
+                        id="files"
+                        (click)="filePicker.click()"
+                      >
+                        Click Here to Pick Files
+                      </button>
+                    </div>
+                  </div>
+                  <span *ngIf="invalidfile">
+                    *Please Select a Valid File (*.pdf, '*.jpg, *.png, *.jpeg)
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <button class="btn btn-primary float-right" type="submit">Upload Files</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4>File To Upload</h4>
+
+          <div>
+            <div class="row">
+              <div class="col-md-8 col-12 mx-auto">
+                <div class="table-responsive" *ngIf="filePreview.length > 0; else noFiles">
+                  <table class="table table-sm table-hover">
+                    <thead class="table-heading">
+                      <tr class="table-row">
+                        <th class="table-heading-data">ID</th>
+                        <th class="table-heading-data">Content File</th>
+                        <th class="table-heading-data">Remove</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-body">
+                      <tr class="table-row" *ngFor="let file of filePreview; let i = index">
+                        <td class="table-data">{{ i + 1 }}</td>
+                        <td class="table-data">
+                          <span class="mr-2">
+                            {{ file }}
+                          </span>
+                        </td>
+                        <td class="table-data">
+                          <span class="cancel-file pointer" (click)="cancelFile(i)">X</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ng-template #noFiles>
+                  No Files Selected, Please Select Files to Upload
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

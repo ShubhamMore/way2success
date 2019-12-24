@@ -1,0 +1,36 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div class="container" *ngIf="!loading">
+  <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
+
+  <div class="row mt-2">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12">
+          <button type="button" class="btn btn-sm float-right" (click)="cancel()">X</button>
+          <h4>Lecture Content</h4>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <div *ngIf="lectureContent.contentType === 'PDF'">
+            <pdf-viewer
+              [src]="lectureContent.secure_url"
+              [render-text]="false"
+              [original-size]="true"
+            ></pdf-viewer>
+          </div>
+          <div class="text-center" *ngIf="lectureContent.contentType === 'IMAGE'">
+            <img
+              [src]="lectureContent.secure_url"
+              [alt]="lectureContent.content_name"
+              width="80%"
+              height="auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

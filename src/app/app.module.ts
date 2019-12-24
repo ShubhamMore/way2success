@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { AppComponent } from './app.component';
 
@@ -62,6 +63,14 @@ import { AddMediaComponent } from './dashboard/media/add-media/add-media.compone
 import { EditMediaComponent } from './dashboard/media/edit-media/edit-media.component';
 import { ShowMediaComponent } from './dashboard/media/show-media/show-media.component';
 
+import { LectureComponent } from './dashboard/lecture/lecture.component';
+import { AddLectureComponent } from './dashboard/lecture/add-lecture/add-lecture.component';
+import { EditLectureComponent } from './dashboard/lecture/edit-lecture/edit-lecture.component';
+
+import { LectureContentComponent } from './dashboard/lecture-content/lecture-content.component';
+import { AddLectureContentComponent } from './dashboard/lecture-content/add-lecture-content/add-lecture-content.component';
+import { ShowLectureContentComponent } from './dashboard/lecture-content/show-lecture-content/show-lecture-content.component';
+
 import { AttendanceComponent } from './dashboard/attendance/attendance.component';
 
 import { BranchComponent } from './dashboard/branch/branch.component';
@@ -87,6 +96,10 @@ import { ShowStudentReceiptsComponent } from './student-dashboard/show-student-r
 import { ShowReceiptComponent } from './student-dashboard/show-student-receipts/show-receipt/show-receipt.component';
 import { StudentMediaComponent } from './student-dashboard/student-media/student-media.component';
 import { ShowStudentMediaComponent } from './student-dashboard/student-media/show-student-media/show-student-media.component';
+import { StudentLectureComponent } from './student-dashboard/student-lecture/student-lecture.component';
+import { ShowStudentLectureComponent } from './student-dashboard/student-lecture/show-student-lecture/show-student-lecture.component';
+// tslint:disable-next-line: max-line-length
+import { ShowStudentLectureContentComponent } from './student-dashboard/student-lecture/show-student-lecture-content/show-student-lecture-content.component';
 
 import { TopperComponent } from './dashboard/topper/topper.component';
 import { AddTopperComponent } from './dashboard/topper/add-topper/add-topper.component';
@@ -116,6 +129,7 @@ import { CourseService } from './services/course.service';
 import { TopperService } from './services/topper.service';
 
 import { Validator } from './shared/validators';
+
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
@@ -163,11 +177,22 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     ShowReceiptComponent,
     StudentMediaComponent,
     ShowStudentMediaComponent,
+    StudentLectureComponent,
+    ShowStudentLectureComponent,
+    ShowStudentLectureContentComponent,
 
     MediaComponent,
     AddMediaComponent,
     ShowMediaComponent,
     EditMediaComponent,
+
+    LectureComponent,
+    AddLectureComponent,
+    EditLectureComponent,
+
+    LectureContentComponent,
+    AddLectureContentComponent,
+    ShowLectureContentComponent,
 
     AttendanceComponent,
 
@@ -204,9 +229,17 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     ContentContactComponent,
     ContentAboutComponent,
     ContentPhotosComponent,
+
     LoadingSpinnerComponent
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutes, HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutes,
+    HttpClientModule,
+    PdfViewerModule
+  ],
   providers: [
     HttpService,
 

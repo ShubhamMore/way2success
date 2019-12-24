@@ -102,6 +102,10 @@
       </li>
 
       <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+        <a class="nav-link" routerLink="/admin/lecture">Lecture</a>
+      </li>
+
+      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="nav-link" routerLink="/admin/contact">Contact</a>
       </li>
 
@@ -131,6 +135,9 @@
       </li>
       <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="nav-link active" routerLink="/student/{{ user._id }}/media">Media</a>
+      </li>
+      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+        <a class="nav-link active" routerLink="/student/{{ user._id }}/lecture">Lecture</a>
       </li>
       <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="nav-link active" routerLink="/student/{{ user._id }}/receipt">Receipt</a>
