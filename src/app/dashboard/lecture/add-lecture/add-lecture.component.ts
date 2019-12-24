@@ -168,4 +168,8 @@ export class AddLectureComponent implements OnInit {
     this.loading = true;
     this.location.back();
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

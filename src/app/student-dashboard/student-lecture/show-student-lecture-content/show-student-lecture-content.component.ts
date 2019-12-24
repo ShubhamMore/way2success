@@ -45,4 +45,8 @@ export class ShowStudentLectureContentComponent implements OnInit {
   cancel() {
     this.location.back();
   }
+
+  onErrorClose() {
+    this.error = null;
+  }
 }

@@ -163,7 +163,10 @@ export class EditLectureComponent implements OnInit {
   }
 
   cancel() {
-    this.loading = true;
     this.location.back();
+  }
+
+  onErrorClose() {
+    this.error = null;
   }
 }
