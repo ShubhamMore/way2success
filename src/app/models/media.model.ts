@@ -1,37 +1,30 @@
 export class MediaModel {
-  // tslint:disable-next-line: variable-name
-  public _id: string;
-  public title: string;
-  public branch: string;
-  public courseType: string;
-  public course: string;
-  public batch: string;
-  public subject: string;
-  public link: string;
-  public duration: string;
-  public startTime: string;
-
   constructor(
-    id: string,
-    title: string,
-    branch: string,
-    courseType: string,
-    course: string,
-    batch: string,
-    subject: string,
-    link: string,
-    duration: string,
-    startTime: string
-  ) {
-    this._id = id;
-    this.title = title;
-    this.branch = branch;
-    this.courseType = courseType;
-    this.course = course;
-    this.batch = batch;
-    this.subject = subject;
-    this.link = link;
-    this.duration = duration;
-    this.startTime = startTime;
-  }
+    // tslint:disable-next-line: variable-name
+    public _id: string,
+    public title: string,
+    public branch: string,
+    public courseType: string,
+    public course: string,
+    public batch: string,
+    public subject: string,
+    public media: MediaContentModel,
+    public duration: string,
+    public startTime: string
+  ) {}
+}
+
+export class MediaContentModel {
+  constructor(
+    // tslint:disable-next-line: variable-name
+    public _id: string,
+    // tslint:disable-next-line: variable-name
+    public media_name: string,
+    // tslint:disable-next-line: variable-name
+    public secure_url: string,
+    // tslint:disable-next-line: variable-name
+    public public_id: string,
+    // tslint:disable-next-line: variable-name
+    public created_at: string
+  ) {}
 }
