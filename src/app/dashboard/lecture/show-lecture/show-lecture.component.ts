@@ -97,7 +97,6 @@ export class ShowLectureComponent implements OnInit {
               const lectureTimeOut: number =
                 (Math.ceil(parseFloat(this.lecture.duration) * 60) - currentTime + bufferTime) *
                 1000;
-              console.log(lectureTimeOut);
               // set 'waitingToStart' Variable to null
               this.waitingToStart = null;
               this.lectureContentPrepared = true;

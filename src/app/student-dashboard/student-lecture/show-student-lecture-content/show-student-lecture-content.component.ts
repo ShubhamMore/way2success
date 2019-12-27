@@ -31,7 +31,6 @@ export class ShowStudentLectureContentComponent implements OnInit {
       this.lectureService.getLectureContent(id).subscribe(
         (resData: any) => {
           this.lectureContent = resData;
-          console.log(this.lectureContent);
           this.loading = false;
         },
         (error: any) => {

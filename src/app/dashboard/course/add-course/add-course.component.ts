@@ -98,7 +98,6 @@ export class AddCourseComponent implements OnInit {
         fee: this.subjectForm.value.fee
       };
       this.subjects.push(subject);
-      console.log(this.batches, this.subjects);
       this.resetSubjectForm();
     }
   }
@@ -128,7 +127,6 @@ export class AddCourseComponent implements OnInit {
       subject: this.subjectForm.value.subject,
       fee: this.subjectForm.value.fee
     };
-    console.log(index, subject);
     this.subjects[index] = subject;
     this.resetSubjectForm();
   }
@@ -236,8 +234,6 @@ export class AddCourseComponent implements OnInit {
       branch: this.courseForm.value.branch,
       batch: this.batches
     };
-
-    console.log(course);
 
     this.courseService.addCourse(course).subscribe(
       resData => {

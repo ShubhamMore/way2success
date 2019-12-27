@@ -38,12 +38,10 @@ export class ShowMediaContentComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
       this.id = params['id'];
-      console.log(this.id);
       this.mediaService.getMedia(this.id).subscribe(
         resData => {
           this.error = null;
           this.media = resData;
-          console.log(resData);
           this.loading = false;
 
           // If no media available

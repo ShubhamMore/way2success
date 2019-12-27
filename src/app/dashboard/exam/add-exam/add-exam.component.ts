@@ -195,7 +195,6 @@ export class AddExamComponent implements OnInit {
     this.examService.getStudents(course, batch, subject).subscribe(
       resData => {
         this.error = null;
-        console.log(resData);
         this.students = resData;
 
         if (this.students.length < 1) {

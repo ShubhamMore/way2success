@@ -47,7 +47,7 @@ export class HttpService {
         return response;
       }),
       catchError(err => {
-        console.log(err);
+        // console.log(err);
         let msg = 'SOMETHING BAD HAPPENED';
         if (err.error) {
           if (err.error.error === 'Please authenticate.') {

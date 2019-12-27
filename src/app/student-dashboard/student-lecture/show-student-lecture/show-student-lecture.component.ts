@@ -83,7 +83,6 @@ export class ShowStudentLectureComponent implements OnInit {
               // Calculate current Time
               let currentTime: number = Math.floor((new Date().getTime() - countDownDate) / 1000);
 
-              console.log(currentTime, parseFloat(this.lecture.duration) * 60 + bufferTime);
               // If current time is greater than duration plus buffer time, then video is expired
               if (currentTime > parseFloat(this.lecture.duration) * 60 + bufferTime) {
                 this.waitingToStart = 'Lecture Contents Expired';
