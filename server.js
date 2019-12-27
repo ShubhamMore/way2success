@@ -1,6 +1,7 @@
 //Install express server
 const express = require('express');
 const path = require('path');
+const compression = require('compression');
 
 const port = process.env.PORT;
 
@@ -8,7 +9,7 @@ const http = require('http');
 const app = express();
 
 const server = http.createServer(app);
-
+app.use(compression());
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/classManagement'));
 
