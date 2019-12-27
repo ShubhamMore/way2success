@@ -7,7 +7,8 @@ import { throwError } from 'rxjs';
 @Injectable()
 export class CourseService {
   courseSearchData = {
-    branch: ''
+    branch: '',
+    courseType: '0'
   };
 
   constructor(private httpService: HttpService) {}
@@ -36,8 +37,8 @@ export class CourseService {
     );
   }
 
-  getCoursesByBranch(branch: string) {
-    const data = { api: 'getCoursesByBranch', data: { branch } };
+  getCoursesByBranch(branch: string, courseType: string) {
+    const data = { api: 'getCoursesByBranch', data: { branch, courseType } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
@@ -84,7 +85,7 @@ export class CourseService {
     );
   }
 
-  editCourse(Course: CourseModel) {
+  editCourse(Course: any) {
     const data = { api: 'editCourse', data: Course };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {

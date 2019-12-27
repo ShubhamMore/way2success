@@ -8,7 +8,7 @@
       <h4 class="page-heading text-center mb-3">Add New Media</h4>
       <form class="form" (submit)="addMedia()" [formGroup]="form">
         <div class="row">
-          <div class="col-md-6 col-12">
+          <div class="col-12">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -30,7 +30,9 @@
               >
             </div>
           </div>
+        </div>
 
+        <div class="row">
           <div class="col-md-6 col-12">
             <div class="form-group">
               <div class="input-group">
@@ -58,6 +60,32 @@
                 class="input-error"
                 *ngIf="!form.get('branch').valid && form.get('branch').touched"
                 >*Please Select Branch</span
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="courseType">Course Type </label>
+                </div>
+                <select
+                  class="input-select form-control"
+                  type="text"
+                  name="courseType"
+                  id="courseType"
+                  formControlName="courseType"
+                  (change)="courseTypeChanged()"
+                >
+                  <option class="select-option" value="0">Diploma</option>
+                  <option class="select-option" value="1">Degree</option>
+                </select>
+              </div>
+              <span
+                class="input-error"
+                *ngIf="!form.get('courseType').valid && form.get('courseType').touched"
+                >*Please Select Course Type</span
               >
             </div>
           </div>

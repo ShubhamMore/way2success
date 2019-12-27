@@ -27,7 +27,7 @@ export class ShowStudentReceiptsComponent implements OnInit {
     this.route.params.subscribe(param => {
       // tslint:disable-next-line: no-string-literal
       const id = param['id'];
-      this.receiptService.getAllReceipts(id).subscribe(
+      this.receiptService.getAllReceiptsForStudent(id).subscribe(
         (resdata: any) => {
           this.receipts = resdata;
           this.loading = false;

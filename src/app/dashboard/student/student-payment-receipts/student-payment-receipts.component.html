@@ -20,6 +20,7 @@
                     <th>Amount</th>
                     <th>Payment Mode</th>
                     <th>Show</th>
+                    <th>Activate/Deactivate</th>
                     <th>Delete</th>
                   </tr>
                   <tr
@@ -35,7 +36,7 @@
                     <td>
                       {{ receipt.paymentMode | uppercase }}
                     </td>
-                    <td>
+                    <td class="text-center">
                       <button
                         type="button"
                         class="btn btn-sm btn-warning text-white"
@@ -44,7 +45,19 @@
                         <i class="fa fa-info-circle"></i>
                       </button>
                     </td>
-                    <td>
+                    <td class="text-center">
+                      <button
+                        type="button"
+                        class="btn btn-sm text-white"
+                        [ngClass]="receipt.status === '0' ? 'btn-warning' : 'btn-danger'"
+                        (click)="
+                          changeReceiptStatus(receipt._id, receipt.status === '0' ? '1' : '0')
+                        "
+                      >
+                        <i class="fa fa-power-off"></i>
+                      </button>
+                    </td>
+                    <td class="text-center">
                       <button
                         type="button"
                         class="btn btn-sm btn-danger"

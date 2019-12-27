@@ -6,6 +6,7 @@ export class ExamModel {
   public passingMarks: string;
   public date: string;
   public branch: string;
+  public courseType: string;
   public course: string;
   public batch: string;
   public subject: string;
@@ -18,6 +19,7 @@ export class ExamModel {
     passingMarks: string,
     date: string,
     branch: string,
+    courseType: string,
     course: string,
     batch: string,
     subject: string,
@@ -29,6 +31,7 @@ export class ExamModel {
     this.passingMarks = passingMarks;
     this.date = date;
     this.branch = branch;
+    this.courseType = courseType;
     this.course = course;
     this.batch = batch;
     this.subject = subject;

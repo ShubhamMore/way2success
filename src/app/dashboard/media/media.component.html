@@ -6,11 +6,11 @@
   <div class="row mt-2">
     <div class="col-md-10 col-sm-12 col-12 mx-auto">
       <div class="row">
-        <div class="col-md-6 col-12">
+        <div class="col-md-4 col-12">
           <h4 class="page-heading">Media</h4>
         </div>
 
-        <div class="col-md-6 col-12">
+        <div class="col-md-4 col-12">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="branch">Branch</label>
@@ -27,6 +27,25 @@
               <option class="select-option" *ngFor="let branch of branches" [value]="branch._id">{{
                 branch.branchName
               }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="courseType">Course Type </label>
+            </div>
+            <select
+              class="form-control input-select"
+              type="text"
+              name="courseType"
+              id="courseType"
+              (change)="onSelectCourseType($event.target.value)"
+              [value]="courseType"
+            >
+              <option class="select-option" value="0">Diploma</option>
+              <option class="select-option" value="1">Degree</option>
             </select>
           </div>
         </div>
@@ -140,6 +159,7 @@
               <tr class="table-row">
                 <th class="table-heading-data">ID</th>
                 <th class="table-heading-data">Title</th>
+                <th class="table-heading-data text-center">Show</th>
                 <th class="table-heading-data text-center">Edit</th>
                 <th class="table-heading-data text-center">Delete</th>
               </tr>
@@ -155,6 +175,15 @@
                   <a class="media" [routerLink]="media._id">
                     <h5 class="media-title">{{ media.title }}</h5>
                   </a>
+                </td>
+                <td class="table-data text-center">
+                  <button
+                    class="btn btn-warning btn-sm text-white edit-media-btn"
+                    type="button"
+                    (click)="showMedia(media._id)"
+                  >
+                    <i class="fa fa-info-circle"></i>
+                  </button>
                 </td>
                 <td class="table-data text-center">
                   <button

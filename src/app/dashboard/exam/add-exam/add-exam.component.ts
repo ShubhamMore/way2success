@@ -30,6 +30,8 @@ export class AddExamComponent implements OnInit {
   courses: CourseModel[];
   course: string;
 
+  courseType: string;
+
   batches: BatchModel[];
   batch: string;
 
@@ -118,10 +120,11 @@ export class AddExamComponent implements OnInit {
       this.subjects = [];
       this.branch = branch;
       this.course = '';
+      this.courseType = '0';
       this.batch = '';
       this.subject = '';
       this.allCourses.forEach(curCourse => {
-        if (curCourse.branch === branch) {
+        if (curCourse.branch === branch && curCourse.courseType === this.courseType) {
           this.courses.push(curCourse);
         }
       });
@@ -132,6 +135,28 @@ export class AddExamComponent implements OnInit {
       });
       this.noStudent = 'Please Select Course';
     }
+  }
+
+  onSelectCourseType(courseType: string) {
+    this.students = [];
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.courseType = courseType;
+    this.course = '';
+    this.batch = '';
+    this.subject = '';
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.branch === this.branch && curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.examForm.patchValue({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+    this.noStudent = 'Please Select Course';
   }
 
   onSelectCourse() {
@@ -207,13 +232,12 @@ export class AddExamComponent implements OnInit {
         passingMarks: this.examForm.value.passingMarks,
         date: this.date,
         branch: this.branch,
+        courseType: this.courseType,
         course: this.examForm.value.course,
         batch: this.examForm.value.batch,
         subject: this.examForm.value.subject,
         marks: this.marks
       };
-
-      console.log(exam);
 
       this.examService.saveExam(exam).subscribe(
         (val: any) => {

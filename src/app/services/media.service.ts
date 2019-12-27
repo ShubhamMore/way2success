@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { HttpService } from './http.service';
 import { throwError } from 'rxjs';
-import { MediaModel } from '../models/MediaModel';
+import { MediaModel } from '../models/media.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ import { MediaModel } from '../models/MediaModel';
 export class MediaService {
   mediaSearchData: any = {
     branch: '',
+    courseType: '0',
     course: '',
     batch: '',
     subject: ''
@@ -80,7 +81,7 @@ export class MediaService {
     );
   }
 
-  editMedia(media: MediaModel) {
+  editMedia(media: any) {
     const data = { api: 'editMedia', data: media };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {

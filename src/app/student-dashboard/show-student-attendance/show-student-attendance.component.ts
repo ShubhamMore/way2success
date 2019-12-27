@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
-import { AttendanceService } from 'src/app/services/attendance.service';
-import { HistoryService } from 'src/app/services/history.service';
+import { AttendanceService } from '../../services/attendance.service';
+import { HistoryService } from '../../services/history.service';
+import { StudentService } from '../../services/student.service';
 
 @Component({
   selector: 'app-show-student-attendance',
@@ -13,7 +14,7 @@ export class ShowStudentAttendanceComponent implements OnInit {
   id: string;
 
   loading: boolean;
-  error: string;
+  error: string = null;
 
   attendance: any[];
 
@@ -25,8 +26,11 @@ export class ShowStudentAttendanceComponent implements OnInit {
 
   branch: any;
 
+  allCourses: any[];
   courses: any[];
   course: string;
+
+  courseType: string[];
 
   batches: any[];
   batch: string;
@@ -39,6 +43,7 @@ export class ShowStudentAttendanceComponent implements OnInit {
   constructor(
     private attendanceService: AttendanceService,
     private historyService: HistoryService,
+    private studentService: StudentService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
@@ -59,11 +64,16 @@ export class ShowStudentAttendanceComponent implements OnInit {
       'Nov',
       'Dec'
     ];
-    this.attendance = this.years = this.courses = this.batches = this.subjects = [];
-    this.month = this.year = this.course = this.batch = this.subject = '';
-
+    this.years = [];
+    this.allCourses = [];
+    this.courseType = [];
+    this.month = '';
+    this.year = '';
+    this.course = '';
+    this.batch = '';
+    this.subject = '';
     this.curDate();
-    const n = +this.date.split('-')[0];
+    const n: number = +this.date.split('-')[0];
     for (let i = 2015; i <= n; i++) {
       this.years.push(i.toString());
     }
@@ -78,15 +88,10 @@ export class ShowStudentAttendanceComponent implements OnInit {
       this.historyService.getStudentHistory(this.id).subscribe(
         (resData: any) => {
           this.error = null;
-          this.courses = resData.history;
+          this.allCourses = resData.history;
+          this.courseType = resData.courseType;
           this.branch = resData.branch;
-          this.course = this.courses[0]._id;
-          this.batches = this.courses.find(course => course._id === this.course).batches;
-          this.batch = this.batches[0]._id;
-          this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
-          this.subject = this.subjects[0]._id;
-
-          this.searchAttendance(this.month, this.year, this.course, this.batch, this.subject);
+          this.onSelectCourseType(this.courseType[0]);
         },
         (error: any) => {
           this.error = error;
@@ -146,11 +151,27 @@ export class ShowStudentAttendanceComponent implements OnInit {
     return absent;
   }
 
-  onSelectcourse(course: string) {
-    this.course = course;
+  onSelectCourseType(courseType: string) {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.course = this.courses[0]._id;
+    this.batches = this.courses.find(course => course._id === this.course).batches;
+    this.batch = this.batches[0]._id;
+    this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
+    this.subject = this.subjects[0]._id;
+    this.searchAttendance(this.month, this.year, this.course, this.batch, this.subject);
+  }
+
+  onSelectCourse(course: string) {
     if (course !== '') {
       this.batches = [];
-      this.batches = this.courses.find(curcourse => curcourse._id === course).batches;
+      this.batches = this.courses.find(curCourse => curCourse._id === course).batches;
       this.batch = '';
       this.subjects = [];
       this.subject = '';

@@ -57,6 +57,18 @@ export class StudentPaymentReceiptsComponent implements OnInit {
     );
   }
 
+  changeReceiptStatus(id: string, status: string) {
+    this.receiptService.changeReceiptStatus(id, status).subscribe(
+      (resData: any) => {
+        this.ngOnInit();
+      },
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
+      }
+    );
+  }
+
   cancel() {
     this.location.back();
   }

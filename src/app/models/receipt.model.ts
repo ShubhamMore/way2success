@@ -10,6 +10,11 @@ export class ReceiptModel {
   public amount: string;
   public paymentMode: string;
   public description: string;
+  public chequeNumber: string;
+  public chequeDate: string;
+  public bankName: string;
+  public bankBranch: string;
+  public status: string;
 
   constructor(
     id: string,
@@ -21,7 +26,12 @@ export class ReceiptModel {
     feeType: string,
     amount: string,
     paymentMode: string,
-    description: string
+    description: string,
+    chequeNumber: string,
+    chequeDate: string,
+    bankName: string,
+    bankBranch: string,
+    status: string
   ) {
     this._id = id;
     this.student = student;
@@ -33,5 +43,10 @@ export class ReceiptModel {
     this.amount = amount;
     this.paymentMode = paymentMode;
     this.description = description;
+    this.chequeNumber = chequeNumber;
+    this.chequeDate = chequeDate;
+    this.bankName = bankName;
+    this.bankBranch = bankBranch;
+    this.status = status;
   }
 }

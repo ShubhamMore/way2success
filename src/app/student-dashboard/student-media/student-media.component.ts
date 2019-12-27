@@ -87,7 +87,6 @@ export class StudentMediaComponent implements OnInit {
       this.zeroAppend(date.getDate()) +
       ', ' +
       date.getFullYear();
-    console.log(this.date);
   }
 
   zeroAppend(n: number): string {

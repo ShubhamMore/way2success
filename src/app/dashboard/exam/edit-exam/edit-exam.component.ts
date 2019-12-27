@@ -81,6 +81,7 @@ export class EditExamComponent implements OnInit {
         passingMarks: this.examForm.value.passingMarks,
         date: this.date,
         branch: this.exam.branch,
+        courseType: this.exam.courseType,
         course: this.exam.course,
         batch: this.exam.batch,
         subject: this.exam.subject,

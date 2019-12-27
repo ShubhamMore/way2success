@@ -16,9 +16,11 @@ export class StudentPaymentComponent implements OnInit {
   amount: number;
   lateFee: number;
   form: FormGroup;
+  chequeDetailsForm: FormGroup;
   student: StudentModel;
   studentMetaData: any;
   feeType: string;
+  paymentMode: string;
   error: string;
   date: string;
 
@@ -60,6 +62,20 @@ export class StudentPaymentComponent implements OnInit {
               validators: [Validators.required]
             }),
             description: new FormControl(null, {
+              validators: [Validators.required]
+            })
+          });
+          this.chequeDetailsForm = new FormGroup({
+            chequeNumber: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            chequeDate: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            bankName: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            branch: new FormControl(null, {
               validators: [Validators.required]
             })
           });
@@ -108,9 +124,30 @@ export class StudentPaymentComponent implements OnInit {
     this.lateFee = +lateFee;
   }
 
+  changePaymentMode() {
+    this.paymentMode = this.form.value.paymentMode;
+  }
+
   payFees() {
     if (this.form.valid) {
+      if (this.paymentMode === 'cheque' && !this.chequeDetailsForm.valid) {
+        return;
+      }
       this.loading = true;
+      let chequeDetails: {
+        chequeNumber: string;
+        chequeDate: string;
+        bankName: string;
+        branch: string;
+      } = { chequeNumber: '', chequeDate: '', bankName: '', branch: '' };
+      if (this.paymentMode === 'cheque') {
+        chequeDetails = {
+          chequeNumber: this.chequeDetailsForm.value.chequeNumber,
+          chequeDate: this.chequeDetailsForm.value.chequeDate,
+          bankName: this.chequeDetailsForm.value.bankName,
+          branch: this.chequeDetailsForm.value.branch
+        };
+      }
       const receipt = {
         student: this.student._id,
         branch: this.student.branch,
@@ -120,7 +157,11 @@ export class StudentPaymentComponent implements OnInit {
         feeType: this.form.value.feeType,
         amount: this.amount + this.lateFee,
         paymentMode: this.form.value.paymentMode,
-        description: this.form.value.description
+        description: this.form.value.description,
+        chequeNumber: chequeDetails.chequeNumber,
+        chequeDate: chequeDetails.chequeDate,
+        bankName: chequeDetails.bankName,
+        bankBranch: chequeDetails.branch
       };
       this.receiptService.addReceipt(receipt).subscribe(
         (resData: any) => {

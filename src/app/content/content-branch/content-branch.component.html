@@ -42,69 +42,166 @@
                     <strong>COURSES</strong>
                   </div>
                   <hr />
-                  <div class="course pr-1" *ngIf="branch.course.length > 0; else empty_course">
-                    <ng-container *ngFor="let course of branch.course; let i = index">
-                      <div class="card">
-                        <div class="card-header">
-                          <a
-                            class="card-link"
-                            [ngClass]="{ collapsed: i !== 0 }"
-                            data-toggle="collapse"
-                            href="{{ '#' + 'course-' + course._id }}"
-                          >
-                            {{ course.courseName }}
-                          </a>
-                        </div>
-                        <div
-                          id="{{ 'course-' + course._id }}"
-                          class="collapse"
-                          [ngClass]="{ show: i === 0 }"
+                  <div>
+                    <ul class="nav nav-tabs nav-justified">
+                      <li class="nav-item pointer" (click)="changeCourseType('0')">
+                        <a
+                          class="nav-link"
+                          [ngClass]="
+                            courseType === '0' ? 'active-course-type' : 'inactive-course-type'
+                          "
+                          >Diploma</a
                         >
-                          <div class="card-body">
-                            <div class="table-responsive">
-                              <table class="table table-sm">
-                                <thead class="table-heading text-center">
-                                  <th class="table-heading-data">Batch</th>
-                                  <th class="table-heading-data">Subjects</th>
-                                  <th class="table-heading-data">Fees</th>
-                                </thead>
-                                <tbody class="table-body">
-                                  <ng-container *ngFor="let batch of course.batch">
-                                    <tr class="table-row">
-                                      <td class="table-data" class="text-left">
-                                        {{ batch.batchName }}
-                                      </td>
-                                      <td class="table-data">
-                                        <p
-                                          class="data"
-                                          style="margin: 0;"
-                                          *ngFor="let curSubject of batch.subjects; let i = index"
-                                        >
-                                          {{ curSubject.subject }}
-                                        </p>
-                                      </td>
-                                      <td class="table-data">
-                                        <p
-                                          class="data"
-                                          style="margin: 0;"
-                                          *ngFor="let curSubject of batch.subjects; let i = index"
-                                        >
-                                          {{ curSubject.fee }}
-                                        </p>
-                                      </td>
-                                    </tr>
-                                  </ng-container>
-                                </tbody>
-                              </table>
+                      </li>
+                      <li class="nav-item pointer" (click)="changeCourseType('1')">
+                        <a
+                          class="nav-link"
+                          [ngClass]="
+                            courseType === '1' ? 'active-course-type' : 'inactive-course-type'
+                          "
+                          >Degree</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="courseType === '0'">
+                    <div
+                      class="course pr-1"
+                      *ngIf="branch.diplomaCourse.length > 0; else empty_diploma_course"
+                    >
+                      <ng-container *ngFor="let course of branch.diplomaCourse; let i = index">
+                        <div class="card">
+                          <div class="card-header">
+                            <a
+                              class="card-link"
+                              [ngClass]="{ collapsed: i !== 0 }"
+                              data-toggle="collapse"
+                              href="{{ '#' + 'course-' + course._id }}"
+                            >
+                              {{ course.courseName }}
+                            </a>
+                          </div>
+                          <div
+                            id="{{ 'course-' + course._id }}"
+                            class="collapse"
+                            [ngClass]="{ show: i === 0 }"
+                          >
+                            <div class="card-body">
+                              <div class="table-responsive">
+                                <table class="table table-sm">
+                                  <thead class="table-heading text-center">
+                                    <th class="table-heading-data">Batch</th>
+                                    <th class="table-heading-data">Subjects</th>
+                                    <th class="table-heading-data">Fees</th>
+                                  </thead>
+                                  <tbody class="table-body">
+                                    <ng-container *ngFor="let batch of course.batch">
+                                      <tr class="table-row">
+                                        <td class="table-data" class="text-left">
+                                          {{ batch.batchName }}
+                                        </td>
+                                        <td class="table-data">
+                                          <p
+                                            class="data"
+                                            style="margin: 0;"
+                                            *ngFor="let curSubject of batch.subjects; let i = index"
+                                          >
+                                            {{ curSubject.subject }}
+                                          </p>
+                                        </td>
+                                        <td class="table-data">
+                                          <p
+                                            class="data"
+                                            style="margin: 0;"
+                                            *ngFor="let curSubject of batch.subjects; let i = index"
+                                          >
+                                            {{ curSubject.fee }}
+                                          </p>
+                                        </td>
+                                      </tr>
+                                    </ng-container>
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </ng-container>
+                      </ng-container>
+                    </div>
+                    <ng-template #empty_diploma_course>
+                      <p class="text-center">No Diploma Courses Available</p>
+                    </ng-template>
                   </div>
-                  <ng-template #empty_course>
-                    <p class="text-center">No Courses Available</p>
-                  </ng-template>
+
+                  <div *ngIf="courseType === '1'">
+                    <div
+                      class="course pr-1"
+                      *ngIf="branch.degreeCourse.length > 0; else empty_degree_course"
+                    >
+                      <ng-container *ngFor="let course of branch.degreeCourse; let i = index">
+                        <div class="card">
+                          <div class="card-header">
+                            <a
+                              class="card-link"
+                              [ngClass]="{ collapsed: i !== 0 }"
+                              data-toggle="collapse"
+                              href="{{ '#' + 'course-' + course._id }}"
+                            >
+                              {{ course.courseName }}
+                            </a>
+                          </div>
+                          <div
+                            id="{{ 'course-' + course._id }}"
+                            class="collapse"
+                            [ngClass]="{ show: i === 0 }"
+                          >
+                            <div class="card-body">
+                              <div class="table-responsive">
+                                <table class="table table-sm">
+                                  <thead class="table-heading text-center">
+                                    <th class="table-heading-data">Batch</th>
+                                    <th class="table-heading-data">Subjects</th>
+                                    <th class="table-heading-data">Fees</th>
+                                  </thead>
+                                  <tbody class="table-body">
+                                    <ng-container *ngFor="let batch of course.batch">
+                                      <tr class="table-row">
+                                        <td class="table-data" class="text-left">
+                                          {{ batch.batchName }}
+                                        </td>
+                                        <td class="table-data">
+                                          <p
+                                            class="data"
+                                            style="margin: 0;"
+                                            *ngFor="let curSubject of batch.subjects; let i = index"
+                                          >
+                                            {{ curSubject.subject }}
+                                          </p>
+                                        </td>
+                                        <td class="table-data">
+                                          <p
+                                            class="data"
+                                            style="margin: 0;"
+                                            *ngFor="let curSubject of batch.subjects; let i = index"
+                                          >
+                                            {{ curSubject.fee }}
+                                          </p>
+                                        </td>
+                                      </tr>
+                                    </ng-container>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                    <ng-template #empty_degree_course>
+                      <p class="text-center">No Degree Courses Available</p>
+                    </ng-template>
+                  </div>
                 </div>
               </div>
             </div>

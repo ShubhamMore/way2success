@@ -10,6 +10,7 @@ export class AttendanceService {
   attendanceSearchData: any = {
     date: null,
     branch: '',
+    courseType: '0',
     course: '',
     batch: '',
     subject: ''

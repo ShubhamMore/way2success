@@ -10,6 +10,7 @@ import { LectureModel } from '../models/lecture.model';
 export class LectureService {
   lectureSearchData: any = {
     branch: '',
+    courseType: '0',
     course: '',
     batch: '',
     subject: ''
@@ -29,8 +30,8 @@ export class LectureService {
     );
   }
 
-  getLecturesForStudent(course: string, batch: string, subject: string) {
-    const data = { api: 'getLecturesForStudent', data: { course, batch, subject } };
+  getLecturesForStudent(course: string, batch: string, subject: string, date: string) {
+    const data = { api: 'getLecturesForStudent', data: { course, batch, subject, date } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

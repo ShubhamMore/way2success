@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CourseModel, BatchModel, SubjectModel } from 'src/app/models/course.model';
-import { CourseService } from 'src/app/services/course.service';
-import { MediaService } from 'src/app/services/media.service';
+import { CourseModel, BatchModel, SubjectModel } from '../../models/course.model';
+import { CourseService } from '../../services/course.service';
+import { MediaService } from '../../services/media.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { MediaModel } from 'src/app/models/MediaModel';
-import { BranchModel } from 'src/app/models/branch.model';
+import { MediaModel } from '../../models/media.model';
+import { BranchModel } from '../../models/branch.model';
 
 @Component({
   selector: 'app-media',
@@ -28,6 +28,8 @@ export class MediaComponent implements OnInit {
   allCourses: CourseModel[];
   courses: CourseModel[];
   course: string;
+
+  courseType: string;
 
   batches: BatchModel[];
   batch: string;
@@ -55,6 +57,7 @@ export class MediaComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.branch = this.mediaService.mediaSearchData.branch;
+    this.courseType = this.mediaService.mediaSearchData.courseType;
     this.course = this.mediaService.mediaSearchData.course;
     this.batch = this.mediaService.mediaSearchData.batch;
     this.subject = this.mediaService.mediaSearchData.subject;
@@ -110,7 +113,7 @@ export class MediaComponent implements OnInit {
       this.mediaService.mediaSearchData.batch = '';
       this.mediaService.mediaSearchData.subject = '';
       this.allCourses.forEach(curCourse => {
-        if (curCourse.branch === branch) {
+        if (curCourse.branch === branch && curCourse.courseType === this.courseType) {
           this.courses.push(curCourse);
         }
       });
@@ -121,6 +124,29 @@ export class MediaComponent implements OnInit {
       });
       this.noMedia = 'Please Select Course';
     }
+  }
+
+  onSelectCourseType(courseType: string) {
+    this.allMedia = [];
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.courseType = courseType;
+    this.mediaService.mediaSearchData.courseType = this.courseType;
+    this.mediaService.mediaSearchData.course = '';
+    this.mediaService.mediaSearchData.batch = '';
+    this.mediaService.mediaSearchData.subject = '';
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.branch === this.branch && curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.reset({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+    this.noMedia = 'Please Select Course';
   }
 
   courseChanged() {
@@ -177,6 +203,10 @@ export class MediaComponent implements OnInit {
 
   editMedia(id: string) {
     this.router.navigate([id, 'edit'], { relativeTo: this.route });
+  }
+
+  showMedia(id: string) {
+    this.router.navigate([id, 'show'], { relativeTo: this.route });
   }
 
   deleteMedia(id: string) {

@@ -55,6 +55,9 @@ export class AddCourseComponent implements OnInit {
           course: new FormControl(null, {
             validators: [Validators.required]
           }),
+          courseType: new FormControl('', {
+            validators: [Validators.required]
+          }),
           branch: new FormControl('', {
             validators: [Validators.required]
           })
@@ -229,6 +232,7 @@ export class AddCourseComponent implements OnInit {
 
     const course = {
       courseName: this.courseForm.value.course,
+      courseType: this.courseForm.value.courseType,
       branch: this.courseForm.value.branch,
       batch: this.batches
     };

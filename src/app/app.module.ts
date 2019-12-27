@@ -62,6 +62,7 @@ import { MediaComponent } from './dashboard/media/media.component';
 import { AddMediaComponent } from './dashboard/media/add-media/add-media.component';
 import { EditMediaComponent } from './dashboard/media/edit-media/edit-media.component';
 import { ShowMediaComponent } from './dashboard/media/show-media/show-media.component';
+import { ShowMediaContentComponent } from './dashboard/media/show-media-content/show-media-content.component';
 
 import { LectureComponent } from './dashboard/lecture/lecture.component';
 import { AddLectureComponent } from './dashboard/lecture/add-lecture/add-lecture.component';
@@ -131,6 +132,7 @@ import { TopperService } from './services/topper.service';
 import { Validator } from './shared/validators';
 
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { ShowLectureComponent } from './dashboard/lecture/show-lecture/show-lecture.component';
 
 @NgModule({
   declarations: [
@@ -184,6 +186,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     MediaComponent,
     AddMediaComponent,
     ShowMediaComponent,
+    ShowMediaContentComponent,
     EditMediaComponent,
 
     LectureComponent,
@@ -230,7 +233,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     ContentAboutComponent,
     ContentPhotosComponent,
 
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+
+    ShowLectureComponent
   ],
   imports: [
     BrowserModule,

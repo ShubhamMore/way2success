@@ -7,61 +7,79 @@
     <div class="col-12 mx-auto">
       <div class="row">
         <div class="col-12">
-          <div class="row">
-            <div class="col-md-6 col-12">
-              <h3 class="page-heading">Exam Performance</h3>
-            </div>
-            <div class="col-md-6 col-12">
-              <div class="row">
-                <div class="col-md-6 col-12">
-                  <div class="form-group mt-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="month">Month</label>
-                      </div>
-                      <select
-                        class="form-control input-select"
-                        type="text"
-                        name="month"
-                        id="month"
-                        [value]="month"
-                        (change)="onSelectMonth($event.target.value)"
-                      >
-                        <option
-                          class="select-option"
-                          *ngFor="let month of months; let i = index"
-                          [value]="zeroAppend(i + 1)"
-                          >{{ month }}</option
-                        >
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-12">
-                  <div class="form-group mt-2">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="year">Year</label>
-                      </div>
-                      <select
-                        class="form-control input-select"
-                        type="text"
-                        name="year"
-                        id="year"
-                        [value]="year"
-                        (change)="onSelectYear($event.target.value)"
-                      >
-                        <option
-                          class="select-option"
-                          *ngFor="let year of years; let i = index"
-                          [value]="year"
-                          >{{ year }}</option
-                        >
-                      </select>
-                    </div>
-                  </div>
-                </div>
+          <h3 class="page-heading">Student Performance</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 col-12">
+          <div class="form-group mt-2">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="courseType">Course Type</label>
               </div>
+              <select
+                class="form-control input-select"
+                type="text"
+                name="courseType"
+                id="courseType"
+                (change)="onSelectCourseType($event.target.value)"
+              >
+                <option
+                  class="select-option"
+                  *ngFor="let curCourseType of courseType"
+                  [value]="curCourseType"
+                  >{{ curCourseType === '0' ? 'Diploma' : 'Degree' }}</option
+                >
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-12">
+          <div class="form-group mt-2">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="month">Month</label>
+              </div>
+              <select
+                class="form-control input-select"
+                type="text"
+                name="month"
+                id="month"
+                [value]="month"
+                (change)="onSelectMonth($event.target.value)"
+              >
+                <option
+                  class="select-option"
+                  *ngFor="let month of months; let i = index"
+                  [value]="zeroAppend(i + 1)"
+                  >{{ month }}</option
+                >
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-12">
+          <div class="form-group mt-2">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="year">Year</label>
+              </div>
+              <select
+                class="form-control input-select"
+                type="text"
+                name="year"
+                id="year"
+                [value]="year"
+                (change)="onSelectYear($event.target.value)"
+              >
+                <option
+                  class="select-option"
+                  *ngFor="let year of years; let i = index"
+                  [value]="year"
+                  >{{ year }}</option
+                >
+              </select>
             </div>
           </div>
         </div>

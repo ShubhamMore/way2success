@@ -25,7 +25,10 @@
         <div class="col-md-4 col-sm-12">
           <label for=""><strong>Branch : </strong>{{ examMetaData.branch }}</label
           ><br />
-          <label for=""><strong>Course : </strong>{{ examMetaData.course }}</label
+          <label for=""
+            ><strong>Course : </strong>{{ examMetaData.course }} &nbsp;&nbsp; ({{
+              exam.courseType === '0' ? 'Diploma' : 'Degree'
+            }})</label
           ><br />
         </div>
         <div class="col-md-4 col-sm-12">

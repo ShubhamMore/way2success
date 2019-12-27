@@ -6,11 +6,11 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-show-student-lecture',
-  templateUrl: './show-student-lecture.component.html',
-  styleUrls: ['./show-student-lecture.component.css']
+  selector: 'app-show-lecture',
+  templateUrl: './show-lecture.component.html',
+  styleUrls: ['./show-lecture.component.css']
 })
-export class ShowStudentLectureComponent implements OnInit {
+export class ShowLectureComponent implements OnInit {
   loading: boolean;
   error: string;
 
@@ -33,7 +33,7 @@ export class ShowStudentLectureComponent implements OnInit {
     this.lectureContentPrepared = false;
     this.route.params.subscribe((param: Params) => {
       // tslint:disable-next-line: no-string-literal
-      const id = param['lectureid'];
+      const id = param['id'];
       this.lectureService.getLectureContents(id).subscribe(
         (resData: any) => {
           this.lecture = resData.lecture;
@@ -83,7 +83,6 @@ export class ShowStudentLectureComponent implements OnInit {
               // Calculate current Time
               let currentTime: number = Math.floor((new Date().getTime() - countDownDate) / 1000);
 
-              console.log(currentTime, parseFloat(this.lecture.duration) * 60 + bufferTime);
               // If current time is greater than duration plus buffer time, then video is expired
               if (currentTime > parseFloat(this.lecture.duration) * 60 + bufferTime) {
                 this.waitingToStart = 'Lecture Contents Expired';
@@ -95,10 +94,10 @@ export class ShowStudentLectureComponent implements OnInit {
               }
 
               // Calculate media timeout
-              const mediaTimeOut: number =
+              const lectureTimeOut: number =
                 (Math.ceil(parseFloat(this.lecture.duration) * 60) - currentTime + bufferTime) *
                 1000;
-
+              console.log(lectureTimeOut);
               // set 'waitingToStart' Variable to null
               this.waitingToStart = null;
               this.lectureContentPrepared = true;
@@ -108,7 +107,7 @@ export class ShowStudentLectureComponent implements OnInit {
                 // Time is over then video is expire
                 this.waitingToStart = 'Lecture Contents are Expired';
                 this.lectureContentPrepared = false;
-              }, mediaTimeOut);
+              }, lectureTimeOut);
             }
           }, 1000);
         },

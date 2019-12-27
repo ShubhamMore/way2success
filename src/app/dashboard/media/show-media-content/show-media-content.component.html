@@ -3,7 +3,12 @@
 <div class="container" *ngIf="!loading">
   <app-error [message]="error" *ngIf="error" (close)="onErrorClose()"></app-error>
 
-  <div class="row">
+  <div class="row" *ngIf="waitingToStart">
+    <div class="col-12">
+      <p id="waitingToStart">{{ waitingToStart }}</p>
+    </div>
+  </div>
+  <div class="row" *ngIf="!waitingToStart && videoPrepared">
     <div class="col-10 mx-auto">
       <video
         #videoPlayer

@@ -32,6 +32,8 @@ export class StudentComponent implements OnInit {
   courses: CourseModel[];
   course: string;
 
+  courseType: string;
+
   batches: BatchModel[];
   batch: string;
 
@@ -59,6 +61,7 @@ export class StudentComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.branch = this.studentService.studentSearchData.branch;
+    this.courseType = this.studentService.studentSearchData.courseType;
     this.searchType = this.studentService.studentSearchData.searchType;
     this.course = this.studentService.studentSearchData.course;
     this.batch = this.studentService.studentSearchData.batch;
@@ -134,7 +137,7 @@ export class StudentComponent implements OnInit {
       this.studentService.studentSearchData.batch = '';
       this.studentService.studentSearchData.subject = '';
       this.allCourses.forEach(curCourse => {
-        if (curCourse.branch === branch) {
+        if (curCourse.branch === branch && curCourse.courseType === this.courseType) {
           this.courses.push(curCourse);
         }
       });
@@ -150,6 +153,34 @@ export class StudentComponent implements OnInit {
       } else {
         this.noStudent = 'Please Select Course';
       }
+    }
+  }
+
+  onSelectCourseType(courseType: string) {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.courseType = courseType;
+    this.studentService.studentSearchData.courseType = this.courseType;
+    this.studentService.studentSearchData.course = '';
+    this.studentService.studentSearchData.batch = '';
+    this.studentService.studentSearchData.subject = '';
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.branch === this.branch && curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.patchValue({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+    if (this.searchType === '3') {
+      if (this.branch !== '') {
+        this.noStudent = null;
+      }
+    } else {
+      this.noStudent = 'Please Select Course';
     }
   }
 
@@ -215,6 +246,7 @@ export class StudentComponent implements OnInit {
     if (this.searchType === '0') {
       return {
         branch: this.branch,
+        courseType: this.courseType,
         course: this.course,
         batch: this.batch,
         subject: this.subject,
@@ -224,6 +256,7 @@ export class StudentComponent implements OnInit {
     } else if (this.searchType === '1') {
       return {
         branch: this.branch,
+        courseType: this.courseType,
         course: this.course,
         batch: this.batch,
         searchType: this.searchType,
@@ -232,6 +265,7 @@ export class StudentComponent implements OnInit {
     } else if (this.searchType === '2') {
       return {
         branch: this.branch,
+        courseType: this.courseType,
         course: this.course,
         searchType: this.searchType,
         studentType: this.studentType
@@ -239,6 +273,7 @@ export class StudentComponent implements OnInit {
     } else if (this.searchType === '3') {
       return {
         branch: this.branch,
+        courseType: this.courseType,
         student: this.student.toLowerCase(),
         searchType: this.searchType,
         studentType: this.studentType

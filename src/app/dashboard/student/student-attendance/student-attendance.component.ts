@@ -26,8 +26,11 @@ export class StudentAttendanceComponent implements OnInit {
 
   branch: any;
 
+  allCourses: any[];
   courses: any[];
   course: string;
+
+  courseType: string[];
 
   batches: any[];
   batch: string;
@@ -62,9 +65,8 @@ export class StudentAttendanceComponent implements OnInit {
       'Dec'
     ];
     this.years = [];
-    this.courses = [];
-    this.batches = [];
-    this.subjects = [];
+    this.allCourses = [];
+    this.courseType = [];
     this.month = '';
     this.year = '';
     this.course = '';
@@ -86,15 +88,10 @@ export class StudentAttendanceComponent implements OnInit {
       this.historyService.getStudentHistory(this.id).subscribe(
         (resData: any) => {
           this.error = null;
-          this.courses = resData.history;
+          this.allCourses = resData.history;
+          this.courseType = resData.courseType;
           this.branch = resData.branch;
-          this.course = this.courses[0]._id;
-          this.batches = this.courses.find(course => course._id === this.course).batches;
-          this.batch = this.batches[0]._id;
-          this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
-          this.subject = this.subjects[0]._id;
-
-          this.searchAttendance(this.month, this.year, this.course, this.batch, this.subject);
+          this.onSelectCourseType(this.courseType[0]);
         },
         (error: any) => {
           this.error = error;
@@ -154,11 +151,27 @@ export class StudentAttendanceComponent implements OnInit {
     return absent;
   }
 
+  onSelectCourseType(courseType: string) {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.course = this.courses[0]._id;
+    this.batches = this.courses.find(course => course._id === this.course).batches;
+    this.batch = this.batches[0]._id;
+    this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
+    this.subject = this.subjects[0]._id;
+    this.searchAttendance(this.month, this.year, this.course, this.batch, this.subject);
+  }
+
   onSelectCourse(course: string) {
-    this.course = course;
     if (course !== '') {
       this.batches = [];
-      this.batches = this.courses.find(curcourse => curcourse._id === course).batches;
+      this.batches = this.courses.find(curCourse => curCourse._id === course).batches;
       this.batch = '';
       this.subjects = [];
       this.subject = '';

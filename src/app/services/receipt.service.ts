@@ -21,8 +21,32 @@ export class ReceiptService {
     );
   }
 
+  changeReceiptStatus(id: string, status: string) {
+    const data = { api: 'changeReceiptStatus', data: { _id: id, status } };
+    return this.httpService.httpPostAuth(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
   getAllReceipts(student: string) {
     const data = { api: 'getAllReceipts', data: { student } };
+    return this.httpService.httpPostAuth(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
+  getAllReceiptsForStudent(student: string) {
+    const data = { api: 'getAllReceiptsForStudent', data: { student } };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

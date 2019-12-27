@@ -30,6 +30,8 @@ export class AttendanceComponent implements OnInit {
   courses: CourseModel[];
   course: string;
 
+  courseType: string;
+
   batches: BatchModel[];
   batch: string;
 
@@ -65,6 +67,7 @@ export class AttendanceComponent implements OnInit {
       this.date = this.attendaceService.attendanceSearchData.date;
     }
     this.branch = this.attendaceService.attendanceSearchData.branch;
+    this.courseType = this.attendaceService.attendanceSearchData.courseType;
     this.course = this.attendaceService.attendanceSearchData.course;
     this.batch = this.attendaceService.attendanceSearchData.batch;
     this.subject = this.attendaceService.attendanceSearchData.subject;
@@ -142,7 +145,7 @@ export class AttendanceComponent implements OnInit {
       this.attendaceService.attendanceSearchData.batch = '';
       this.attendaceService.attendanceSearchData.subject = '';
       this.allCourses.forEach(curCourse => {
-        if (curCourse.branch === branch) {
+        if (curCourse.branch === branch && curCourse.courseType === this.courseType) {
           this.courses.push(curCourse);
         }
       });
@@ -153,6 +156,29 @@ export class AttendanceComponent implements OnInit {
       });
       this.noStudent = 'Please Select Course';
     }
+  }
+
+  onSelectCourseType(courseType: string) {
+    this.students = [];
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.courseType = courseType;
+    this.attendaceService.attendanceSearchData.courseType = this.courseType;
+    this.attendaceService.attendanceSearchData.course = '';
+    this.attendaceService.attendanceSearchData.batch = '';
+    this.attendaceService.attendanceSearchData.subject = '';
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.branch === this.branch && curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.patchValue({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+    this.noStudent = 'Please Select Course';
   }
 
   onDateChange(date: string) {

@@ -26,6 +26,8 @@ export class EditCourseComponent implements OnInit {
   branches: BranchModel[];
   // Local subjects Array
   subjects: any[];
+  newSubjects: any[];
+  newSubject: boolean;
   subErr = false;
   // Edited SUBJECT index
   editSubjectIndex: number;
@@ -33,6 +35,8 @@ export class EditCourseComponent implements OnInit {
   editBatchIndex: number;
   // batches array
   batches: any[];
+  newBatches: any[];
+  newBatch: boolean;
   loading: boolean;
   error: string;
 
@@ -46,8 +50,12 @@ export class EditCourseComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.branches = [];
-    this.subjects = [];
     this.batches = [];
+    this.newBatches = [];
+    this.subjects = [];
+    this.newSubjects = [];
+    this.newBatch = false;
+    this.newSubject = false;
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
       this.id = params['id'];
@@ -65,6 +73,9 @@ export class EditCourseComponent implements OnInit {
           // course form
           this.courseForm = new FormGroup({
             course: new FormControl(this.course.courseName, {
+              validators: [Validators.required]
+            }),
+            courseType: new FormControl(this.course.courseType, {
               validators: [Validators.required]
             }),
             branch: new FormControl(this.course.branch, {
@@ -104,12 +115,12 @@ export class EditCourseComponent implements OnInit {
   addSubject() {
     if (this.subjectForm.valid) {
       this.subErr = false;
-
       const subject = {
         subject: this.subjectForm.value.subject,
         fee: this.subjectForm.value.fee
       };
-      this.subjects.push(subject);
+      this.newSubjects.push(subject);
+      this.newSubject = true;
       this.resetSubjectForm();
     }
   }
@@ -118,10 +129,17 @@ export class EditCourseComponent implements OnInit {
   editSubjectData(index: number) {
     this.editSubjectIndex = index;
     this.editingSubject = true;
-    this.subjectForm.patchValue({
-      subject: this.subjects[index].subject,
-      fee: this.subjects[index].fee
-    });
+    if (!this.newSubject) {
+      this.subjectForm.patchValue({
+        subject: this.subjects[index].subject,
+        fee: this.subjects[index].fee
+      });
+    } else {
+      this.subjectForm.patchValue({
+        subject: this.newSubjects[index].subject,
+        fee: this.newSubjects[index].fee
+      });
+    }
   }
 
   editSubject(index: number) {
@@ -130,26 +148,44 @@ export class EditCourseComponent implements OnInit {
     }
     this.editSubjectIndex = null;
     this.editingSubject = false;
-    const subject: SubjectModel = {
-      _id: this.subjects[index]._id,
-      subject: this.subjectForm.value.subject,
-      fee: this.subjectForm.value.fee
-    };
-    console.log(index, subject);
-    this.subjects[index] = subject;
+    if (!this.newSubject) {
+      const subject: SubjectModel = {
+        _id: this.subjects[index]._id,
+        subject: this.subjectForm.value.subject,
+        fee: this.subjectForm.value.fee
+      };
+      this.subjects[index] = subject;
+    } else {
+      const subject: any = {
+        subject: this.subjectForm.value.subject,
+        fee: this.subjectForm.value.fee
+      };
+      this.newSubjects[index] = subject;
+    }
     this.resetSubjectForm();
+  }
+
+  changeSubjectType(subjectType: boolean) {
+    this.newSubject = subjectType;
   }
 
   // Cancel Edit
   cancelEditSubject() {
     this.editSubjectIndex = null;
     this.editingSubject = false;
-    this.resetBatchForm();
+    this.editingSubject = false;
+    this.resetSubjectForm();
   }
 
   // Reset Subject Form
   resetSubjectForm() {
     this.subjectForm.reset();
+  }
+
+  // Delete Subject
+  deleteSubject(index: number) {
+    this.newSubjects.splice(index, 1);
+    this.resetSubjectForm();
   }
 
   // Add Batch
@@ -159,7 +195,7 @@ export class EditCourseComponent implements OnInit {
     }
 
     // Subjects are not added
-    if (this.subjects.length < 1) {
+    if (this.newSubjects.length < 1) {
       this.subErr = true;
       return;
     }
@@ -167,11 +203,12 @@ export class EditCourseComponent implements OnInit {
     // Construct batch object
     const batch = {
       batchName: this.batchForm.value.batchName,
-      subjects: this.subjects
+      subjects: this.newSubjects
     };
 
     // add batch object to array
-    this.batches.push(batch);
+    this.newBatches.push(batch);
+    this.newBatch = true;
 
     this.resetBatchForm();
   }
@@ -180,10 +217,27 @@ export class EditCourseComponent implements OnInit {
   editBatchData(index: number) {
     this.editBatchIndex = index;
     this.editingBatch = true;
-    this.batchForm.patchValue({
-      batchName: this.batches[index].batchName
-    });
-    this.subjects = this.batches[index].subjects;
+    if (this.newBatch) {
+      this.batchForm.patchValue({
+        batchName: this.newBatches[index].batchName
+      });
+      this.newSubjects = this.newBatches[index].subjects;
+      this.newSubject = true;
+    } else {
+      this.batchForm.patchValue({
+        batchName: this.batches[index].batchName
+      });
+      this.subjects = [];
+      this.newSubjects = [];
+      this.batches[index].subjects.forEach(subject => {
+        if (subject._id) {
+          this.subjects.push(subject);
+        } else {
+          this.newSubjects.push(subject);
+        }
+      });
+      this.newSubject = false;
+    }
   }
 
   editBatch(index: number) {
@@ -191,19 +245,23 @@ export class EditCourseComponent implements OnInit {
       return;
     }
 
-    // If Subjects are not added
-    if (this.subjects.length < 1) {
-      this.subErr = true;
-      return;
-    }
     this.editBatchIndex = null;
     this.editingBatch = false;
-    const batch: BatchModel = {
-      _id: this.batches[index]._id,
-      batchName: this.batchForm.value.batchName,
-      subjects: this.subjects
-    };
-    this.batches[index] = batch;
+    if (this.newBatch) {
+      const batch: any = {
+        batchName: this.batchForm.value.batchName,
+        subjects: this.newSubjects
+      };
+      this.newBatches[index] = batch;
+    } else {
+      this.subjects = this.subjects.concat(this.newSubjects);
+      const batch: BatchModel = {
+        _id: this.batches[index]._id,
+        batchName: this.batchForm.value.batchName,
+        subjects: this.subjects
+      };
+      this.batches[index] = batch;
+    }
 
     this.resetBatchForm();
   }
@@ -219,7 +277,17 @@ export class EditCourseComponent implements OnInit {
   resetBatchForm() {
     this.batchForm.reset();
     this.subjects = [];
-    this.resetSubjectForm();
+    this.newSubjects = [];
+    this.cancelEditSubject();
+  }
+
+  deleteBatch(index: number) {
+    this.newBatches.splice(index, 1);
+    this.cancelEditBatch();
+  }
+
+  changeBatchType(batchType: boolean) {
+    this.newBatch = batchType;
   }
 
   // Add course
@@ -228,6 +296,8 @@ export class EditCourseComponent implements OnInit {
       return;
     }
 
+    this.batches = this.batches.concat(this.newBatches);
+
     if (this.batches.length < 1) {
       return;
     }
@@ -235,6 +305,7 @@ export class EditCourseComponent implements OnInit {
     const course: CourseModel = {
       _id: this.id,
       courseName: this.courseForm.value.course,
+      courseType: this.courseForm.value.courseType,
       branch: this.courseForm.value.branch,
       batch: this.batches
     };

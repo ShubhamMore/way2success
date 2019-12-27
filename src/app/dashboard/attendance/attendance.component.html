@@ -6,10 +6,11 @@
   <div class="row mt-2">
     <div class="col-12 mx-auto">
       <div class="row">
-        <div class="col-md-3 col-sm-12">
+        <div class="col-12">
           <h3 class="page-heading">Student Attendance</h3>
         </div>
-
+      </div>
+      <div class="row">
         <div class="col-md-4 col-12">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -31,7 +32,26 @@
           </div>
         </div>
 
-        <div class="col-md-5 col-sm-12">
+        <div class="col-md-4 col-12">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="courseType">Course Type </label>
+            </div>
+            <select
+              class="form-control input-select"
+              type="text"
+              name="courseType"
+              id="courseType"
+              (change)="onSelectCourseType($event.target.value)"
+              [value]="courseType"
+            >
+              <option class="select-option" value="0">Diploma</option>
+              <option class="select-option" value="1">Degree</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12">
           <div class="input-group">
             <div class="input-group-prepend">
               <label class="input-group-text" for="date">Date</label>

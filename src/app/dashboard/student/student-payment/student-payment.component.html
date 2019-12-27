@@ -142,6 +142,7 @@
                         name="paymentMode"
                         id="paymentMode"
                         formControlName="paymentMode"
+                        (change)="changePaymentMode()"
                       >
                         <option value="cash">Cash</option>
                         <option value="cheque">Cheque</option>
@@ -170,6 +171,114 @@
                       *ngIf="!form.get('description').valid && form.get('description').touched"
                       >*Please enter Description</span
                     >
+                  </div>
+                </div>
+
+                <div class="row" *ngIf="paymentMode === 'cheque'">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-12">
+                        <h5>Please Enter Cheque Details Here</h5>
+                      </div>
+                    </div>
+                    <form class="cheque-details-form" [formGroup]="chequeDetailsForm">
+                      <div class="row">
+                        <div class="col-md-6 col-12">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="chequeNumber"
+                                >Cheque Number</label
+                              >
+                            </div>
+                            <input
+                              class="input-text form-control"
+                              type="text"
+                              name="chequeNumber"
+                              id="chequeNumber"
+                              pattern="\d*"
+                              formControlName="chequeNumber"
+                            />
+                          </div>
+                          <span
+                            class="input-error"
+                            *ngIf="
+                              !chequeDetailsForm.get('chequeNumber').valid &&
+                              chequeDetailsForm.get('chequeNumber').touched
+                            "
+                            >*Please Enter Valid Cheque Number</span
+                          >
+                        </div>
+                        <div class="col-md-6 col-12">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="chequeDate">Cheque Date</label>
+                            </div>
+                            <input
+                              class="input-date form-control"
+                              type="date"
+                              name="chequeDate"
+                              id="chequeDate"
+                              formControlName="chequeDate"
+                            />
+                          </div>
+                          <span
+                            class="input-error"
+                            *ngIf="
+                              !chequeDetailsForm.get('chequeDate').valid &&
+                              chequeDetailsForm.get('chequeDate').touched
+                            "
+                            >*Please Enter Cheque Date</span
+                          >
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6 col-12">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="bankName">Bank Name</label>
+                            </div>
+                            <input
+                              class="input-text form-control"
+                              type="text"
+                              name="bankName"
+                              id="bankName"
+                              formControlName="bankName"
+                            />
+                          </div>
+                          <span
+                            class="input-error"
+                            *ngIf="
+                              !chequeDetailsForm.get('bankName').valid &&
+                              chequeDetailsForm.get('bankName').touched
+                            "
+                            >*Please Enter Bank Name</span
+                          >
+                        </div>
+                        <div class="col-md-6 col-12">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="branch">Branch</label>
+                            </div>
+                            <input
+                              class="input-text form-control"
+                              type="text"
+                              name="branch"
+                              id="branch"
+                              formControlName="branch"
+                            />
+                          </div>
+                          <span
+                            class="input-error"
+                            *ngIf="
+                              !chequeDetailsForm.get('branch').valid &&
+                              chequeDetailsForm.get('branch').touched
+                            "
+                            >*Please Enter Branch Name</span
+                          >
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
 

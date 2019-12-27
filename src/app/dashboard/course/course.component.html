@@ -6,10 +6,10 @@
   <div class="row mt-2">
     <div class="col-12 mx-auto">
       <div class="row">
-        <div class="col-md-6 col-12">
+        <div class="col-md-4 col-12">
           <h3 class="page-heading">Courses</h3>
         </div>
-        <div class="col-md-6 col-12">
+        <div class="col-md-4 col-12">
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -30,6 +30,26 @@
             </div>
           </div>
         </div>
+        <div class="col-md-4 col-12">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="courseType">Course Type</label>
+              </div>
+              <select
+                name="courseType"
+                id="courseType"
+                class="form-control input-select"
+                (change)="courseTypeChanged($event.target.value)"
+                [value]="courseType"
+              >
+                <option value="">Select Course Type</option>
+                <option value="0">Diploma</option>
+                <option value="1">Degree</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
       <hr />
       <div class="table-responsive" *ngIf="courses.length > 0; else empty_courses">
@@ -43,47 +63,45 @@
             </tr>
           </thead>
           <tbody class="table-body">
-            <tr
-              class="table-row"
-              *ngFor="let course of courses; let i = index"
-              routerLinkActive="active"
-            >
-              <td class="table-data">{{ i + 1 }}</td>
-              <td class="table-data">
-                <a class="data-link" [routerLink]="course._id">
-                  <h5 class="title">{{ course.courseName | uppercase }}</h5>
-                </a>
-              </td>
-              <td class="table-data text-center">
-                <button
-                  class="btn btn-light btn-sm btn-edit"
-                  type="button"
-                  (click)="editcourse(course._id)"
-                >
-                  <i class="fa fa-edit"></i>
-                </button>
-              </td>
-              <td class="table-data text-center">
-                <button
-                  type="button"
-                  class="btn btn-sm btn-danger"
-                  title="Deactivate"
-                  (click)="deactivateCourse(course._id)"
-                  *ngIf="course.status === '1'"
-                >
-                  <i class="fa fa-power-off"></i>
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-sm btn-warning"
-                  title="Activate"
-                  (click)="activateCourse(course._id)"
-                  *ngIf="course.status === '0'"
-                >
-                  <i class="fa fa-power-off"></i>
-                </button>
-              </td>
-            </tr>
+            <ng-container *ngFor="let course of courses; let i = index">
+              <tr class="table-row" routerLinkActive="active">
+                <td class="table-data">{{ i + 1 }}</td>
+                <td class="table-data">
+                  <a class="data-link" [routerLink]="course._id">
+                    <h5 class="title">{{ course.courseName | uppercase }}</h5>
+                  </a>
+                </td>
+                <td class="table-data text-center">
+                  <button
+                    class="btn btn-light btn-sm btn-edit"
+                    type="button"
+                    (click)="editcourse(course._id)"
+                  >
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </td>
+                <td class="table-data text-center">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger"
+                    title="Deactivate"
+                    (click)="deactivateCourse(course._id)"
+                    *ngIf="course.status === '1'"
+                  >
+                    <i class="fa fa-power-off"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-warning"
+                    title="Activate"
+                    (click)="activateCourse(course._id)"
+                    *ngIf="course.status === '0'"
+                  >
+                    <i class="fa fa-power-off"></i>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>

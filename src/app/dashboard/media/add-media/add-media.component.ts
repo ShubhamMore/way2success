@@ -7,12 +7,12 @@ import {
   ɵConsole
 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CourseModel, BatchModel, SubjectModel } from 'src/app/models/course.model';
-import { CourseService } from 'src/app/services/course.service';
-import { MediaService } from 'src/app/services/media.service';
+import { CourseModel, BatchModel, SubjectModel } from '../../../models/course.model';
+import { CourseService } from '../../../services/course.service';
+import { MediaService } from '../../../services/media.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { BranchModel } from 'src/app/models/branch.model';
+import { BranchModel } from '../../../models/branch.model';
 
 @Component({
   selector: 'app-add-media',
@@ -73,7 +73,7 @@ export class AddMediaComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.courseService.getBranchesAndCourses().subscribe(
-      resData => {
+      (resData: any) => {
         this.error = null;
         this.allCourses = resData.courses;
         this.branches = resData.branches;
@@ -84,6 +84,9 @@ export class AddMediaComponent implements OnInit {
             validators: [Validators.required]
           }),
           branch: new FormControl(this.branches[0]._id, {
+            validators: [Validators.required]
+          }),
+          courseType: new FormControl('0', {
             validators: [Validators.required]
           }),
           course: new FormControl('', {
@@ -109,7 +112,7 @@ export class AddMediaComponent implements OnInit {
         this.changeDetectorRef.detectChanges();
         this.loading = false;
       },
-      errorMessage => {
+      (errorMessage: any) => {
         this.error = errorMessage;
         this.loading = false;
       }
@@ -121,7 +124,29 @@ export class AddMediaComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.allCourses.forEach(curCourse => {
-      if (curCourse.branch === this.form.value.branch) {
+      if (
+        curCourse.branch === this.form.value.branch &&
+        curCourse.courseType === this.form.value.courseType
+      ) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.patchValue({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+  }
+
+  courseTypeChanged() {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.allCourses.forEach(curCourse => {
+      if (
+        curCourse.branch === this.form.value.branch &&
+        curCourse.courseType === this.form.value.courseType
+      ) {
         this.courses.push(curCourse);
       }
     });
@@ -201,6 +226,7 @@ export class AddMediaComponent implements OnInit {
     const postData = new FormData();
     postData.append('title', this.form.value.title);
     postData.append('branch', this.form.value.branch);
+    postData.append('courseType', this.form.value.courseType);
     postData.append('course', this.form.value.course);
     postData.append('batch', this.form.value.batch);
     postData.append('subject', this.form.value.subject);

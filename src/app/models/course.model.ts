@@ -2,12 +2,20 @@ export class CourseModel {
   // tslint:disable-next-line: variable-name
   public _id: string;
   public courseName: string;
+  public courseType: string;
   public branch: string;
   public batch: BatchModel[];
 
-  constructor(id: string, courseName: string, branch: string, batch: BatchModel[]) {
+  constructor(
+    id: string,
+    courseName: string,
+    courseType: string,
+    branch: string,
+    batch: BatchModel[]
+  ) {
     this._id = id;
     this.courseName = courseName;
+    this.courseType = courseType;
     this.branch = branch;
     this.batch = batch;
   }

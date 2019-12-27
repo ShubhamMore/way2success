@@ -9,12 +9,14 @@ import { BranchService } from '../../services/branch.service';
 export class ContentBranchComponent implements OnInit {
   loading: boolean;
   error: string;
+  courseType: string;
   branches: any[];
 
   constructor(private branchService: BranchService) {}
 
   ngOnInit() {
     this.loading = true;
+    this.courseType = '0';
     this.branches = [];
     this.branchService.getBranchesAndCoursesForContent().subscribe(
       (resData: any) => {
@@ -26,5 +28,9 @@ export class ContentBranchComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  changeCourseType(courseType: string) {
+    this.courseType = courseType;
   }
 }

@@ -11,7 +11,7 @@
 
       <form class="course-form" (submit)="addCourse()" [formGroup]="courseForm">
         <div class="row">
-          <div class="col-md-6 col-12">
+          <div class="col-12">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -33,7 +33,9 @@
               >
             </div>
           </div>
+        </div>
 
+        <div class="row">
           <div class="col-md-6 col-12">
             <div class="form-group">
               <div class="input-group">
@@ -56,6 +58,31 @@
                 class="input-error"
                 *ngIf="!courseForm.get('branch').valid && courseForm.get('branch').touched"
                 >*Please Select Branch</span
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="courseType">Course Type</label>
+                </div>
+                <select
+                  class="form-control input-select"
+                  name="courseType"
+                  id="courseType"
+                  formControlName="courseType"
+                >
+                  <option value="">Select Course Type</option>
+                  <option value="0">Diploma</option>
+                  <option value="1">Degree</option>
+                </select>
+              </div>
+              <span
+                class="input-error"
+                *ngIf="!courseForm.get('courseType').valid && courseForm.get('courseType').touched"
+                >*Please Select Course Type</span
               >
             </div>
           </div>
@@ -137,6 +164,7 @@
                                 type="text"
                                 name="fee"
                                 id="fee"
+                                pattern="\d*"
                                 formControlName="fee"
                                 placeholder="Fee"
                               />

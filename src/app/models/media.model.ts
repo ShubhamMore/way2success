@@ -3,6 +3,7 @@ export class MediaModel {
   public _id: string;
   public title: string;
   public branch: string;
+  public courseType: string;
   public course: string;
   public batch: string;
   public subject: string;
@@ -14,6 +15,7 @@ export class MediaModel {
     id: string,
     title: string,
     branch: string,
+    courseType: string,
     course: string,
     batch: string,
     subject: string,
@@ -24,6 +26,7 @@ export class MediaModel {
     this._id = id;
     this.title = title;
     this.branch = branch;
+    this.courseType = courseType;
     this.course = course;
     this.batch = batch;
     this.subject = subject;

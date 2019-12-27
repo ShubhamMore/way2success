@@ -22,6 +22,10 @@ export class StudentLectureComponent implements OnInit {
 
   subject: string;
 
+  months: string[];
+
+  date: string;
+
   constructor(
     private studentService: StudentService,
     private lectureService: LectureService,
@@ -33,7 +37,23 @@ export class StudentLectureComponent implements OnInit {
     this.loading = true;
     this.studentData = null;
     this.lectures = [];
+    this.months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     this.subject = '';
+
+    this.curDate();
 
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
@@ -43,7 +63,12 @@ export class StudentLectureComponent implements OnInit {
           this.error = null;
           this.studentData = resData;
           this.subject = this.studentData.subjects[0]._id;
-          this.searchLecture(this.studentData.course, this.studentData.batch, this.subject);
+          this.searchLecture(
+            this.studentData.course,
+            this.studentData.batch,
+            this.subject,
+            this.date
+          );
           this.loading = false;
         },
         (errorMessage: any) => {
@@ -54,15 +79,32 @@ export class StudentLectureComponent implements OnInit {
     });
   }
 
+  curDate() {
+    const date = new Date();
+    this.date =
+      this.months[date.getMonth()] +
+      ' ' +
+      this.zeroAppend(date.getDate()) +
+      ', ' +
+      date.getFullYear();
+  }
+
+  zeroAppend(n: number): string {
+    if (n < 10) {
+      return ('0' + n).toString();
+    }
+    return n.toString();
+  }
+
   onSelectSubject(subject: string) {
     this.subject = subject;
     if (subject !== '') {
-      this.searchLecture(this.studentData.course, this.studentData.batch, this.subject);
+      this.searchLecture(this.studentData.course, this.studentData.batch, this.subject, this.date);
     }
   }
 
-  searchLecture(course: string, batch: string, subject: string) {
-    this.lectureService.getLecturesForStudent(course, batch, subject).subscribe(
+  searchLecture(course: string, batch: string, subject: string, date: string) {
+    this.lectureService.getLecturesForStudent(course, batch, subject, date).subscribe(
       resData => {
         this.error = null;
         this.lectures = resData;

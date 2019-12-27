@@ -24,6 +24,7 @@ export class AddLectureComponent implements OnInit {
 
   subjects: SubjectModel[];
 
+  months: string[];
   date: string;
 
   constructor(
@@ -36,6 +37,20 @@ export class AddLectureComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     this.curDate();
     this.branches = [];
     this.allCourses = [];
@@ -56,6 +71,9 @@ export class AddLectureComponent implements OnInit {
           branch: new FormControl(this.branches[0]._id, {
             validators: [Validators.required]
           }),
+          courseType: new FormControl('0', {
+            validators: [Validators.required]
+          }),
           course: new FormControl('', {
             validators: [Validators.required]
           }),
@@ -66,6 +84,12 @@ export class AddLectureComponent implements OnInit {
             validators: [Validators.required]
           }),
           date: new FormControl(this.date, {
+            validators: [Validators.required]
+          }),
+          time: new FormControl(null, {
+            validators: [Validators.required]
+          }),
+          duration: new FormControl(null, {
             validators: [Validators.required]
           })
         });
@@ -101,7 +125,29 @@ export class AddLectureComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.allCourses.forEach(curCourse => {
-      if (curCourse.branch === this.form.value.branch) {
+      if (
+        curCourse.branch === this.form.value.branch &&
+        curCourse.courseType === this.form.value.courseType
+      ) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.patchValue({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+  }
+
+  courseTypeChanged() {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.allCourses.forEach(curCourse => {
+      if (
+        curCourse.branch === this.form.value.branch &&
+        curCourse.courseType === this.form.value.courseType
+      ) {
         this.courses.push(curCourse);
       }
     });
@@ -139,10 +185,16 @@ export class AddLectureComponent implements OnInit {
 
     this.loading = true;
 
+    const date = this.form.value.date.split('-');
+    const time = this.form.value.time + ':00';
+    const startTime = this.months[date[1] - 1] + ' ' + date[2] + ', ' + date[0] + ' ' + time;
+
     const lecture = {
       title: this.form.value.title,
-      date: this.date,
+      startTime,
+      duration: this.form.value.duration,
       branch: this.form.value.branch,
+      courseType: this.form.value.courseType,
       course: this.form.value.course,
       batch: this.form.value.batch,
       subject: this.form.value.subject

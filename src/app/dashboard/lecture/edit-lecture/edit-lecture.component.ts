@@ -29,6 +29,8 @@ export class EditLectureComponent implements OnInit {
 
   lecture: LectureModel;
 
+  months: string[];
+
   constructor(
     private courseService: CourseService,
     private lectureService: LectureService,
@@ -44,6 +46,20 @@ export class EditLectureComponent implements OnInit {
     this.courses = [];
     this.batches = [];
     this.subjects = [];
+    this.months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
       this.id = params['id'];
@@ -67,6 +83,9 @@ export class EditLectureComponent implements OnInit {
             branch: new FormControl(this.lecture.branch, {
               validators: [Validators.required]
             }),
+            courseType: new FormControl(this.lecture.courseType, {
+              validators: [Validators.required]
+            }),
             course: new FormControl('', {
               validators: [Validators.required]
             }),
@@ -76,7 +95,13 @@ export class EditLectureComponent implements OnInit {
             subject: new FormControl('', {
               validators: [Validators.required]
             }),
-            date: new FormControl(this.lecture.date, {
+            date: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            time: new FormControl(null, {
+              validators: [Validators.required]
+            }),
+            duration: new FormControl(this.lecture.duration, {
               validators: [Validators.required]
             })
           });
@@ -86,6 +111,20 @@ export class EditLectureComponent implements OnInit {
           this.form.patchValue({ batch: this.lecture.batch });
           this.batchChanged();
           this.form.patchValue({ subject: this.lecture.subject });
+
+          const startDateTime = this.lecture.startTime.split(' ');
+          const date =
+            startDateTime[2] +
+            '-' +
+            this.month(startDateTime[0]) +
+            '-' +
+            startDateTime[1].replace(',', '');
+          this.form.patchValue({ date });
+
+          const startTime = startDateTime[3].split(':');
+          const time = startTime[0] + ':' + startTime[1];
+          this.form.patchValue({ time });
+
           this.loading = false;
         },
         (errorMessage: any) => {
@@ -96,12 +135,42 @@ export class EditLectureComponent implements OnInit {
     });
   }
 
+  month(month: string) {
+    const m = this.months.indexOf(month) + 1;
+    if (m < 10) {
+      return '0' + m;
+    }
+    return m.toString();
+  }
+
   branchChanged() {
     this.courses = [];
     this.batches = [];
     this.subjects = [];
     this.allCourses.forEach(curCourse => {
-      if (curCourse.branch === this.form.value.branch) {
+      if (
+        curCourse.branch === this.form.value.branch &&
+        curCourse.courseType === this.form.value.courseType
+      ) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.patchValue({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+  }
+
+  courseTypeChanged() {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.allCourses.forEach(curCourse => {
+      if (
+        curCourse.branch === this.form.value.branch &&
+        curCourse.courseType === this.form.value.courseType
+      ) {
         this.courses.push(curCourse);
       }
     });
@@ -139,11 +208,17 @@ export class EditLectureComponent implements OnInit {
 
     this.loading = true;
 
+    const date = this.form.value.date.split('-');
+    const time = this.form.value.time + ':00';
+    const startTime = this.months[date[1] - 1] + ' ' + date[2] + ', ' + date[0] + ' ' + time;
+
     const lecture = {
       _id: this.lecture._id,
       title: this.form.value.title,
-      date: this.form.value.date,
+      startTime,
+      duration: this.form.value.duration,
       branch: this.form.value.branch,
+      courseType: this.form.value.courseType,
       course: this.form.value.course,
       batch: this.form.value.batch,
       subject: this.form.value.subject

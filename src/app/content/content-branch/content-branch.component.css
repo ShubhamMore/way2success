@@ -1,4 +1,4 @@
-.backgroundBox{
+.backgroundBox {
   height: 97vh;
 }
 .course {
@@ -6,45 +6,59 @@
   overflow-y: auto;
 }
 
-.card{
+.card {
   position: relative;
-  -moz-animation: movetop.75s ease-in; 
-  -ms-animation: movetop .75s ease-in ;
-  -o-animation: movetop .75s ease-in ;
-   animation: movetop .75s ease-in;
+  -moz-animation: movetop.75s ease-in;
+  -ms-animation: movetop 0.75s ease-in;
+  -o-animation: movetop 0.75s ease-in;
+  animation: movetop 0.75s ease-in;
 }
 
-.branchbox{
-  background-color:#272343;
+.branchbox {
+  background-color: #272343;
   min-height: 100vh;
   text-align: center;
 }
 
-.branchbox h3{
+.branchbox h3 {
   display: inline-block;
-  color:#fff;
+  color: #fff;
   padding: 20px 0;
   text-transform: uppercase;
 }
 
-.branchbox .cardBox{
+.branchbox .cardBox {
   padding: 5px 0;
 }
 
-.branchbox .card{
+.branchbox .card {
   border-radius: 0;
   background-color: rgba(000, 000, 000, 0);
-  
 }
-.card-header:first-child{
+.card-header:first-child {
   border-radius: 0;
 }
 
-.branchbox .card-header{
+.branchbox .card-header {
   background-color: #d0e1f9;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
-.branchbox .card-body{
+.branchbox .card-body {
   background-color: #d0e1f9;
+}
+
+.inactive-course-type:hover {
+  border: 1px solid #272343;
+  color: #272343;
+}
+
+.active-course-type {
+  background-color: #272343;
+  color: #fff;
+}
+
+.active-course-type:hover {
+  border: 1px solid #aaa;
+  color: #aaa;
 }

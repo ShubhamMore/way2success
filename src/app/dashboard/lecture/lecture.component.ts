@@ -29,6 +29,8 @@ export class LectureComponent implements OnInit {
   courses: CourseModel[];
   course: string;
 
+  courseType: string;
+
   batches: BatchModel[];
   batch: string;
 
@@ -55,6 +57,7 @@ export class LectureComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.branch = this.lectureService.lectureSearchData.branch;
+    this.courseType = this.lectureService.lectureSearchData.courseType;
     this.course = this.lectureService.lectureSearchData.course;
     this.batch = this.lectureService.lectureSearchData.batch;
     this.subject = this.lectureService.lectureSearchData.subject;
@@ -110,7 +113,7 @@ export class LectureComponent implements OnInit {
       this.lectureService.lectureSearchData.batch = '';
       this.lectureService.lectureSearchData.subject = '';
       this.allCourses.forEach(curCourse => {
-        if (curCourse.branch === branch) {
+        if (curCourse.branch === branch && curCourse.courseType === this.courseType) {
           this.courses.push(curCourse);
         }
       });
@@ -121,6 +124,29 @@ export class LectureComponent implements OnInit {
       });
       this.noLecture = 'Please Select Course';
     }
+  }
+
+  onSelectCourseType(courseType: string) {
+    this.lectures = [];
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.courseType = courseType;
+    this.lectureService.lectureSearchData.courseType = this.courseType;
+    this.lectureService.lectureSearchData.course = '';
+    this.lectureService.lectureSearchData.batch = '';
+    this.lectureService.lectureSearchData.subject = '';
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.branch === this.branch && curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.reset({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+    this.noLecture = 'Please Select Course';
   }
 
   courseChanged() {
@@ -178,6 +204,10 @@ export class LectureComponent implements OnInit {
 
   editLecture(id: string) {
     this.router.navigate([id, 'edit'], { relativeTo: this.route });
+  }
+
+  showLecture(id: string) {
+    this.router.navigate([id, 'show'], { relativeTo: this.route });
   }
 
   deleteLecture(id: string) {

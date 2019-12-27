@@ -28,6 +28,8 @@ export class ExamComponent implements OnInit {
   courses: CourseModel[];
   course: string;
 
+  courseType: string;
+
   batches: BatchModel[];
   batch: string;
 
@@ -56,6 +58,7 @@ export class ExamComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.branch = this.examService.examSearchData.branch;
+    this.courseType = this.examService.examSearchData.courseType;
     this.course = this.examService.examSearchData.course;
     this.batch = this.examService.examSearchData.batch;
     this.subject = this.examService.examSearchData.subject;
@@ -123,7 +126,7 @@ export class ExamComponent implements OnInit {
       this.examService.examSearchData.batch = '';
       this.examService.examSearchData.subject = '';
       this.allCourses.forEach(curCourse => {
-        if (curCourse.branch === branch) {
+        if (curCourse.branch === branch && curCourse.courseType === this.courseType) {
           this.courses.push(curCourse);
         }
       });
@@ -134,6 +137,29 @@ export class ExamComponent implements OnInit {
       });
       this.noExam = 'Please Select Course';
     }
+  }
+
+  onSelectCourseType(courseType: string) {
+    this.exams = [];
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.courseType = courseType;
+    this.examService.examSearchData.courseType = this.courseType;
+    this.examService.examSearchData.course = '';
+    this.examService.examSearchData.batch = '';
+    this.examService.examSearchData.subject = '';
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.branch === this.branch && curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.patchValue({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+    this.noExam = 'Please Select Course';
   }
 
   onSelectCourse() {

@@ -1,4 +1,3 @@
-<p>add-lecture works!</p>
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div class="container" *ngIf="!loading">
@@ -6,10 +5,10 @@
 
   <div class="row mt-2">
     <div class="col-md-10 col-12 mx-auto">
-      <h4 class="page-heading text-center mb-3">Add New LEcture</h4>
+      <h4 class="page-heading text-center mb-3">Add New Lecture</h4>
       <form class="form" (submit)="addLecture()" [formGroup]="form">
         <div class="row">
-          <div class="col-md-6 col-12">
+          <div class="col-12">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -31,7 +30,9 @@
               >
             </div>
           </div>
+        </div>
 
+        <div class="row">
           <div class="col-md-6 col-12">
             <div class="form-group">
               <div class="input-group">
@@ -59,6 +60,32 @@
                 class="input-error"
                 *ngIf="!form.get('branch').valid && form.get('branch').touched"
                 >*Please Select Branch</span
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="courseType">Course Type </label>
+                </div>
+                <select
+                  class="input-select form-control"
+                  type="text"
+                  name="courseType"
+                  id="courseType"
+                  formControlName="courseType"
+                  (change)="courseTypeChanged()"
+                >
+                  <option class="select-option" value="0">Diploma</option>
+                  <option class="select-option" value="1">Degree</option>
+                </select>
+              </div>
+              <span
+                class="input-error"
+                *ngIf="!form.get('courseType').valid && form.get('courseType').touched"
+                >*Please Select Course Type</span
               >
             </div>
           </div>
@@ -174,6 +201,52 @@
               </div>
               <span class="input-error" *ngIf="!form.get('date').valid && form.get('date').touched"
                 >*Please Select Date</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="time">Time </label>
+                </div>
+                <input
+                  class="input-text form-control"
+                  type="time"
+                  name="time"
+                  id="time"
+                  formControlName="time"
+                  placeholder=""
+                />
+              </div>
+              <span class="input-error" *ngIf="!form.get('time').valid && form.get('time').touched"
+                >*Please Enter Time</span
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text input-label" for="duration">Duration </label>
+                </div>
+                <input
+                  class="input-text form-control"
+                  type="text"
+                  name="duration"
+                  id="duration"
+                  formControlName="duration"
+                  placeholder="In Minutes"
+                />
+              </div>
+              <span
+                class="input-error"
+                *ngIf="!form.get('duration').valid && form.get('duration').touched"
+                >*Please Enter Duration in Minutes</span
               >
             </div>
           </div>

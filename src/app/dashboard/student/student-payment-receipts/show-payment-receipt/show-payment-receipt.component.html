@@ -16,7 +16,24 @@
                 </h2>
               </div>
             </div>
+
             <hr />
+
+            <div class="row" *ngIf="receipt.paymentMode === 'cheque'">
+              <div class="col-md-6 col-12">
+                <span>Cheque Number : {{ receipt.chequeNumber }}</span>
+              </div>
+              <div class="col-md-6 col-12">
+                <span>Cheque Date : {{ receipt.chequeDate }}</span>
+              </div>
+              <div class="col-md-6 col-12">
+                <span>Bank Name : {{ receipt.bankName }}</span>
+              </div>
+              <div class="col-md-6 col-12">
+                <span>Bank Branch : {{ receipt.bankBranch }}</span>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-12 mt-5">
                 <div class="receipt pb-5">

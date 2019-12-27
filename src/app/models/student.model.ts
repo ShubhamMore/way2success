@@ -7,6 +7,7 @@ export class StudentModel {
   public email: string;
   public address: string;
   public branch: string;
+  public courseType: string;
   public course: string;
   public batch: string;
   public subjects: string[];
@@ -20,6 +21,7 @@ export class StudentModel {
     email: string,
     address: string,
     branch: string,
+    courseType: string,
     course: string,
     batch: string,
     subjects: string[],
@@ -32,6 +34,7 @@ export class StudentModel {
     this.email = email;
     this.address = address;
     this.branch = branch;
+    this.courseType = courseType;
     this.course = course;
     this.batch = batch;
     this.subjects = subjects;

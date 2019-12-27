@@ -13,7 +13,7 @@ export class ShowStudentPerformanceComponent implements OnInit {
   id: string;
 
   loading: boolean;
-  error: string = null;
+  error: string;
 
   exams: any[];
 
@@ -25,8 +25,11 @@ export class ShowStudentPerformanceComponent implements OnInit {
 
   branch: any;
 
+  allCourses: any[];
   courses: any[];
   course: string;
+
+  courseType: string[];
 
   batches: any[];
   batch: string;
@@ -59,8 +62,12 @@ export class ShowStudentPerformanceComponent implements OnInit {
       'Nov',
       'Dec'
     ];
-    this.exams = this.years = this.courses = this.batches = this.subjects = [];
-    this.month = this.year = this.course = this.batch = this.subject = '';
+    this.exams = [];
+    this.years = [];
+    this.allCourses = [];
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
     this.curDate();
     const n: number = +this.date.split('-')[0];
     for (let i = 2015; i <= n; i++) {
@@ -77,14 +84,10 @@ export class ShowStudentPerformanceComponent implements OnInit {
       this.historyService.getStudentHistory(this.id).subscribe(
         (resData: any) => {
           this.error = null;
-          this.courses = resData.history;
-          this.branch = resData.branch;
-          this.course = this.courses[0]._id;
-          this.batches = this.courses.find(course => course._id === this.course).batches;
-          this.batch = this.batches[0]._id;
-          this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
-          this.subject = this.subjects[0]._id;
-          this.searchExams(this.month, this.year, this.course, this.batch, this.subject);
+          this.allCourses = resData.history;
+          this.courseType = resData.courseType;
+          this.branch = resData.branch.branch;
+          this.onSelectCourseType(this.courseType[0]);
         },
         (error: any) => {
           this.error = error;
@@ -109,6 +112,23 @@ export class ShowStudentPerformanceComponent implements OnInit {
       return ('0' + n).toString();
     }
     return n.toString();
+  }
+
+  onSelectCourseType(courseType: string) {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.course = this.courses[0]._id;
+    this.batches = this.courses.find(course => course._id === this.course).batches;
+    this.batch = this.batches[0]._id;
+    this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
+    this.subject = this.subjects[0]._id;
+    this.searchExams(this.month, this.year, this.course, this.batch, this.subject);
   }
 
   onSelectcourse(course: string) {

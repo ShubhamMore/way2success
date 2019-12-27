@@ -8,6 +8,12 @@
       <h4 class="page-heading text-center mb-3">{{ course.courseName | uppercase }}</h4>
 
       <div class="row">
+        <div class="col-12">
+          <strong>Course Type : </strong>{{ course.courseType === '0' ? 'Diploma' : 'Degree' }}
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-12"><strong>Branch : </strong>{{ course.branch }}</div>
       </div>
 

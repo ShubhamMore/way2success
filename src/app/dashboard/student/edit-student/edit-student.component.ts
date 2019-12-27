@@ -22,10 +22,12 @@ export class EditStudentComponent implements OnInit {
   form: FormGroup;
 
   branches: BranchModel[];
+  branch: string;
 
   allCourses: CourseModel[];
   courses: CourseModel[];
   course: CourseModel;
+  courseType: string;
 
   userExist: boolean;
 
@@ -63,7 +65,8 @@ export class EditStudentComponent implements OnInit {
           }
           this.allCourses = resData.courses;
           this.branches = resData.branches;
-
+          this.branch = this.student.branch;
+          this.courseType = this.student.courseType;
           this.form = new FormGroup({
             name: new FormControl(this.student.name, {
               validators: [Validators.required]
@@ -81,6 +84,9 @@ export class EditStudentComponent implements OnInit {
               validators: [Validators.required]
             }),
             branch: new FormControl(this.student.branch, {
+              validators: [Validators.required]
+            }),
+            courseType: new FormControl(this.student.courseType, {
               validators: [Validators.required]
             }),
             course: new FormControl('', {
@@ -117,6 +123,7 @@ export class EditStudentComponent implements OnInit {
   branchChanged() {
     const id = this.form.value.branch;
     if (id !== '') {
+      this.branch = id;
       this.courses = [];
       this.batches = [];
       this.subjects = [];
@@ -131,6 +138,23 @@ export class EditStudentComponent implements OnInit {
         }
       });
     }
+  }
+
+  courseTypeChanged() {
+    this.courseType = this.form.value.courseType;
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.subjectsToAdd = [];
+    this.form.patchValue({
+      course: '',
+      batch: ''
+    });
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.branch === this.branch && curCourse.courseType === this.courseType) {
+        this.courses.push(curCourse);
+      }
+    });
   }
 
   courseChanged() {
@@ -197,6 +221,7 @@ export class EditStudentComponent implements OnInit {
       password: this.encryptService.encrypt(this.form.value.phone, environment.encKey),
       address: this.form.value.address,
       course: this.form.value.course,
+      courseType: this.form.value.courseType,
       batch: this.form.value.batch,
       subjects: this.subjectsToAdd,
       branch: this.form.value.branch,

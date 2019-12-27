@@ -17,6 +17,7 @@ export class CourseComponent implements OnInit {
   loading: boolean;
 
   noCourses: string;
+  courseType: string;
 
   error: string;
 
@@ -32,6 +33,7 @@ export class CourseComponent implements OnInit {
     this.branches = [];
     this.courses = [];
     this.branch = this.courseService.courseSearchData.branch;
+    this.courseType = this.courseService.courseSearchData.courseType;
     this.noCourses = 'Please Select Branch';
     this.branchService.getBranches().subscribe(
       (resData: any) => {
@@ -59,27 +61,39 @@ export class CourseComponent implements OnInit {
     );
   }
 
+  courseTypeChanged(courseType: string) {
+    if (courseType !== '') {
+      this.courseType = courseType;
+      this.courseService.courseSearchData.courseType = this.courseType;
+      this.searchCourse(this.branch, courseType);
+    }
+  }
+
   branchChanged(branch: string) {
     if (branch !== '') {
       this.branch = branch;
       this.courseService.courseSearchData.branch = this.branch;
       this.loading = true;
-      this.courseService.getCoursesByBranch(branch).subscribe(
-        (resData: any) => {
-          this.error = null;
-          this.courses = [];
-          this.courses = resData;
-          if (this.courses.length < 1) {
-            this.noCourses = 'No Courses Available for this Branch';
-          }
-          this.loading = false;
-        },
-        (errorMessage: any) => {
-          this.error = errorMessage;
-          this.loading = false;
-        }
-      );
+      this.searchCourse(branch, this.courseType);
     }
+  }
+
+  searchCourse(branch: string, courseType: string) {
+    this.courseService.getCoursesByBranch(branch, courseType).subscribe(
+      (resData: any) => {
+        this.error = null;
+        this.courses = [];
+        this.courses = resData;
+        if (this.courses.length < 1) {
+          this.noCourses = 'No Courses Available for this Branch';
+        }
+        this.loading = false;
+      },
+      (errorMessage: any) => {
+        this.error = errorMessage;
+        this.loading = false;
+      }
+    );
   }
 
   newcourse() {
@@ -87,7 +101,6 @@ export class CourseComponent implements OnInit {
   }
 
   editcourse(id: string) {
-    console.log(id);
     this.router.navigate([id, 'edit'], { relativeTo: this.route });
   }
 

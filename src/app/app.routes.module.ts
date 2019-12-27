@@ -48,11 +48,13 @@ import { ShowStudentLectureContentComponent } from './student-dashboard/student-
 import { MediaComponent } from './dashboard/media/media.component';
 import { AddMediaComponent } from './dashboard/media/add-media/add-media.component';
 import { ShowMediaComponent } from './dashboard/media/show-media/show-media.component';
+import { ShowMediaContentComponent } from './dashboard/media/show-media-content/show-media-content.component';
 import { EditMediaComponent } from './dashboard/media/edit-media/edit-media.component';
 
 import { LectureComponent } from './dashboard/lecture/lecture.component';
 import { AddLectureComponent } from './dashboard/lecture/add-lecture/add-lecture.component';
 import { EditLectureComponent } from './dashboard/lecture/edit-lecture/edit-lecture.component';
+import { ShowLectureComponent } from './dashboard/lecture/show-lecture/show-lecture.component';
 
 import { LectureContentComponent } from './dashboard/lecture-content/lecture-content.component';
 import { AddLectureContentComponent } from './dashboard/lecture-content/add-lecture-content/add-lecture-content.component';
@@ -297,13 +299,18 @@ const appRoutes: Routes = [
     canActivate: [AdminAuthGuard]
   },
   {
-    path: 'admin/media/:id',
-    component: ShowMediaComponent,
+    path: 'admin/media/:id/show',
+    component: ShowMediaContentComponent,
     canActivate: [AdminAuthGuard]
   },
   {
     path: 'admin/media/:id/edit',
     component: EditMediaComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'admin/media/:id',
+    component: ShowMediaComponent,
     canActivate: [AdminAuthGuard]
   },
 
@@ -320,6 +327,11 @@ const appRoutes: Routes = [
   {
     path: 'admin/lecture/:id/edit',
     component: EditLectureComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'admin/lecture/:id/show',
+    component: ShowLectureComponent,
     canActivate: [AdminAuthGuard]
   },
 

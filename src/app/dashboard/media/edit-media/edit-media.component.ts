@@ -79,6 +79,9 @@ export class EditMediaComponent implements OnInit {
             branch: new FormControl(this.media.branch, {
               validators: [Validators.required]
             }),
+            courseType: new FormControl(this.media.courseType, {
+              validators: [Validators.required]
+            }),
             course: new FormControl('', {
               validators: [Validators.required]
             }),
@@ -139,7 +142,29 @@ export class EditMediaComponent implements OnInit {
     this.batches = [];
     this.subjects = [];
     this.allCourses.forEach(curCourse => {
-      if (curCourse.branch === this.form.value.branch) {
+      if (
+        curCourse.branch === this.form.value.branch &&
+        curCourse.courseType === this.form.value.courseType
+      ) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.form.patchValue({
+      course: '',
+      batch: '',
+      subject: ''
+    });
+  }
+
+  courseTypeChanged() {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.allCourses.forEach(curCourse => {
+      if (
+        curCourse.branch === this.form.value.branch &&
+        curCourse.courseType === this.form.value.courseType
+      ) {
         this.courses.push(curCourse);
       }
     });
@@ -185,6 +210,7 @@ export class EditMediaComponent implements OnInit {
       _id: this.id,
       title: this.form.value.title,
       branch: this.form.value.branch,
+      courseType: this.form.value.courseType,
       course: this.form.value.course,
       batch: this.form.value.batch,
       subject: this.form.value.subject,

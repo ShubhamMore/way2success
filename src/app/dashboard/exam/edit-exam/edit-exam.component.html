@@ -34,17 +34,18 @@
           ><br />
           <label for=""><strong>Course : </strong>{{ examMetaData.course }}</label
           ><br />
+          <label for=""><strong>Subject : </strong>{{ examMetaData.subject }}</label
+          ><br />
         </div>
         <div class="col-md-6 col-sm-12">
+          <label for=""
+            ><strong>Course Type : </strong
+            >{{ exam.courseType === '0' ? 'Diploma' : 'Degree' }}</label
+          ><br />
           <label for=""><strong>Batch : </strong>{{ examMetaData.batch }}</label
           ><br />
           <label for=""><strong>Date : </strong>{{ exam.date }}</label
           ><br />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <label for=""><strong>Subject : </strong>{{ examMetaData.subject }}</label>
         </div>
       </div>
 

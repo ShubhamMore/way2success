@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ExamService } from 'src/app/services/exam.service';
-import { HistoryService } from 'src/app/services/history.service';
+import { ExamService } from '../../../services/exam.service';
+import { HistoryService } from '../../../services/history.service';
 @Component({
   selector: 'app-student-performance',
   templateUrl: './student-performance.component.html',
@@ -24,8 +24,11 @@ export class StudentPerformanceComponent implements OnInit {
 
   branch: any;
 
+  allCourses: any[];
   courses: any[];
   course: string;
+
+  courseType: string[];
 
   batches: any[];
   batch: string;
@@ -58,7 +61,12 @@ export class StudentPerformanceComponent implements OnInit {
       'Nov',
       'Dec'
     ];
-    this.exams = this.years = this.courses = this.batches = this.subjects = [];
+    this.exams = [];
+    this.years = [];
+    this.allCourses = [];
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
     this.curDate();
     const n: number = +this.date.split('-')[0];
     for (let i = 2015; i <= n; i++) {
@@ -75,14 +83,10 @@ export class StudentPerformanceComponent implements OnInit {
       this.historyService.getStudentHistory(this.id).subscribe(
         (resData: any) => {
           this.error = null;
-          this.courses = resData.history;
+          this.allCourses = resData.history;
+          this.courseType = resData.courseType;
           this.branch = resData.branch.branch;
-          this.course = this.courses[0]._id;
-          this.batches = this.courses.find(course => course._id === this.course).batches;
-          this.batch = this.batches[0]._id;
-          this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
-          this.subject = this.subjects[0]._id;
-          this.searchExams(this.month, this.year, this.course, this.batch, this.subject);
+          this.onSelectCourseType(this.courseType[0]);
         },
         (error: any) => {
           this.error = error;
@@ -107,6 +111,23 @@ export class StudentPerformanceComponent implements OnInit {
       return ('0' + n).toString();
     }
     return n.toString();
+  }
+
+  onSelectCourseType(courseType: string) {
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.allCourses.forEach(curCourse => {
+      if (curCourse.courseType === courseType) {
+        this.courses.push(curCourse);
+      }
+    });
+    this.course = this.courses[0]._id;
+    this.batches = this.courses.find(course => course._id === this.course).batches;
+    this.batch = this.batches[0]._id;
+    this.subjects = this.batches.find(batch => batch._id === this.batch).subjects;
+    this.subject = this.subjects[0]._id;
+    this.searchExams(this.month, this.year, this.course, this.batch, this.subject);
   }
 
   onSelectcourse(course: string) {
@@ -147,7 +168,6 @@ export class StudentPerformanceComponent implements OnInit {
   }
 
   searchExams(month: string, year: string, course: string, batch: string, subject: string) {
-    console.log(month, year, subject);
     this.examService
       .getExamsPerformance(month, year, this.branch.branch, course, batch, subject, this.id)
       .subscribe(

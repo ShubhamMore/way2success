@@ -1,15 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { MediaService } from '../../../services/media.service';
-// tslint:disable-next-line: quotemark
 import { MediaModel } from '../../../models/media.model';
 
 @Component({
-  selector: 'app-show-student-media',
-  templateUrl: './show-student-media.component.html',
-  styleUrls: ['./show-student-media.component.css']
+  selector: 'app-show-media-content',
+  templateUrl: './show-media-content.component.html',
+  styleUrls: ['./show-media-content.component.css']
 })
-export class ShowStudentMediaComponent implements OnInit {
+export class ShowMediaContentComponent implements OnInit {
   @ViewChild('videoPlayer', { static: false }) videoPlayer: ElementRef;
 
   loading: boolean;
@@ -38,25 +37,25 @@ export class ShowStudentMediaComponent implements OnInit {
     this.videoPrepared = false;
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
-      this.id = params['mediaid'];
+      this.id = params['id'];
+      console.log(this.id);
       this.mediaService.getMedia(this.id).subscribe(
-        (resData: any) => {
+        resData => {
           this.error = null;
           this.media = resData;
+          console.log(resData);
           this.loading = false;
 
           // If no media available
           if (!this.media) {
-            this.router.navigate(['/page_not_found'], {
-              relativeTo: this.route
-            });
+            this.router.navigate(['/page_not_found'], { relativeTo: this.route });
             return;
           }
 
           // Set Count Down Date
           const countDownDate = new Date(this.media.startTime).getTime();
 
-          // Set Int  erval
+          // Set Interval
           const x = setInterval(() => {
             // Get today's date and time
             const now = new Date().getTime();
@@ -130,8 +129,9 @@ export class ShowStudentMediaComponent implements OnInit {
             }
           }, 1000);
         },
-        (errorMessage: null) => {
+        errorMessage => {
           this.loading = false;
+          this.error = errorMessage;
           this.router.navigate(['/page_not_found'], { relativeTo: this.route });
         }
       );

@@ -10,6 +10,7 @@ import { ExamModel } from '../models/exam.model';
 export class ExamService {
   examSearchData: any = {
     branch: '',
+    courseType: '0',
     course: '',
     batch: '',
     subject: '',

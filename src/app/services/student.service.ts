@@ -10,6 +10,7 @@ export class StudentService {
 
   studentSearchData = {
     branch: '',
+    courseType: '0',
     searchType: '0',
     course: '',
     batch: '',
