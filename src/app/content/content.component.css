@@ -1,0 +1,82 @@
+.home-page-text{
+    width: 50%;
+    color: #fff;
+    padding: 200px 0;
+    position: relative;
+    -moz-animation: moveright .8s ease-in;
+    -ms-animation: moveright .8s ease-in;
+    -o-animation: moveright .8s ease-in;
+    animation: moveright .8s ease-in;
+}
+.home-page-text h1{
+    letter-spacing: 4px;
+}
+.home-page-text p{
+    letter-spacing: 1.5px;
+    font-size: 18px;
+}
+.bg-home-img
+{
+    height: 97vh;
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-image: linear-gradient(to right,rgba(39, 35, 66, 0.9),rgba(39, 35, 66, 0.7)),url(src/assets/images/engineering-wallpaper.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+@media only screen and (max-width: 1200px){
+    .home-page-text{
+        width: 100%;
+    }
+   
+}
+
+
+
+@keyframes moveright {
+    from {
+      opacity: 0;
+      transform: translate(-30px, 0px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0px);
+    }
+  }
+  
+  /* Firefox < 16 */
+  @-moz-keyframes moveright {
+    from {
+      opacity: 0;
+      transform: translate(-30px, 0px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0px);
+    }
+  }
+  
+  /* Safari, Chrome and Opera > 12.1*/
+  @-webkit-keyframes moveright {
+    from {
+      opacity: 0;
+      transform: translate(-30px, 0px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0px);
+    }
+  }
+  
+  /* Internet Explorer */
+  @-ms-keyframes moveright {
+    from {
+      opacity: 0;
+      transform: translate(-30px, 0px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0px);
+    }
+  }
