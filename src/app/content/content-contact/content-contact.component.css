@@ -5,13 +5,18 @@
   text-align: unset;
 }
 
+.customCard{
+  float: left;
+  margin-right: 150px;
+}
+
 .ourInfo{
   position: relative;
-  display: inline-block;
+  display: block;
+  float: left;
   color: white;
   bottom: 120px;
-  padding-left: 250px;
-  padding-top: 150px;
+  padding-top: 200px;
   width: 625px;
   -moz-animation: fadein 1.5s; 
   -ms-animation: fadein 1.5s;
