@@ -74,6 +74,13 @@ body {
   background: #c1c1c1;
 }
 
+.flex-container{
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /*---------------------Custom card css start---------------------------------*/
 
 .backgroundBox {

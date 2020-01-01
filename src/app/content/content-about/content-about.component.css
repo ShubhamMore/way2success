@@ -33,200 +33,103 @@
   background-image: linear-gradient(rgb(0, 0, 0), rgba(39, 35, 67, 0));
 }
 
-.customCard {
+.vision {
+  position: relative;
   display: inline-block;
   height: 100%;
   width: 100%;
+  color: white;
+}
+.vision h2{
+  letter-spacing: 3px;
+}
+.vision .vision-body{
+  font-size: 20px;
+   padding-bottom: 20px;
+}
+.topper-block:before{
+  content: " ";
+  display: block;
+  height: 2px;
+  width: 100px;
+  background-color: white;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+.topper-block{
+  padding-top: 10px;
+  color: white;
+  padding: 40px 0;
+}
+
+.topper-card{
+  position: relative;
+  margin: 20px;
   background-color: #d0e1f9;
-}
+  flex-basis: 300px;
+  height: 450px;
+  -moz-animation: fadein 1s ease-in 0.5s;
+  -ms-animation: fadein 1s ease-in 0.5s;
+  -o-animation: fadein 1s ease-in 0.5s;
+  animation: fadein 1s ease-in 0.5s;
+  animation-fill-mode: backwards;
+ }
 
-.card1 {
-  position: relative;
-  -moz-animation: moveright 1s ease-in 0.5s;
-  -ms-animation: moveright 1s ease-in 0.5s;
-  -o-animation: moveright 1s ease-in 0.5s;
-  animation: moveright 1s ease-in 0.5s;
-  animation-fill-mode: backwards;
-}
-.card2 {
-  position: relative;
-  -moz-animation: movetop 1s ease-in 0.5s;
-  -ms-animation: movetop 1s ease-in 0.5s;
-  -o-animation: movetop 1s ease-in 0.5s;
-  animation: movetop 1s ease-in 0.5s;
-  animation-fill-mode: backwards;
-}
-.card3 {
-  position: relative;
-  -moz-animation: moveleft 1s ease-in 0.5s;
-  -ms-animation: moveleft 1s ease-in 0.5s;
-  -o-animation: moveleft 1s ease-in 0.5s;
-  animation: moveleft 1s ease-in 0.5s;
-  animation-fill-mode: backwards;
-}
 
+ .topper-pic{
+  height: 170px;
+  padding:10px;
+  text-align: center;
+ }
+ .topper-pic img{
+  vertical-align: middle;
+  margin-top: 10px;
+  height:150px;
+  width: 150px;
+  border-radius: 50%;
+ }
+
+ .topper-desc{
+  margin-top: 10px;
+  text-align: center;
+  padding: 10px;
+ }
+ .topper-desc h5{
+  color:#272343;
+  text-transform: uppercase;
+ }
+ .topper-desc h5:after{
+  display: block;
+  height: 2px;
+  background-color: #272343;
+  content: " ";
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 10px;
+ }
+
+ .topper-desc ul{
+  list-style-type: none;
+  padding:25px 0 25px 40px;
+  color: #272343;
+  font-size: 17px;
+ }
+ .topper-desc li{
+   padding: 5px 0;
+   text-align: left;
+   width: 100%;
+ }
+ .topper-desc label{
+   width: 50%;
+   padding-right: 15px;
+ }
+ .topper-desc span{
+  width: 50%;
+}
 @media only screen and (max-width: 991px) {
-  .card2 {
+  .vision {
     position: relative;
-    -moz-animation: moveleft 1s ease-in 0.5s;
-    -ms-animation: moveleft 1s ease-in 0.5s;
-    -o-animation: moveleft 1s ease-in 0.5s;
-    animation: moveleft 1s ease-in 0.5s;
-    animation-fill-mode: backwards;
-  }
-  .card3 {
-    position: relative;
-    -moz-animation: moveright 1s ease-in 0.5s;
-    -ms-animation: moveright 1s ease-in 0.5s;
-    -o-animation: moveright 1s ease-in 0.5s;
-    animation: moveright 1s ease-in 0.5s;
-    animation-fill-mode: backwards;
-  }
-}
-
-@keyframes moveright {
-  from {
-    opacity: 0;
-    transform: translate(-30px, 0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Firefox < 16 */
-@-moz-keyframes moveright {
-  from {
-    opacity: 0;
-    transform: translate(-30px, 0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Safari, Chrome and Opera > 12.1*/
-@-webkit-keyframes moveright {
-  from {
-    opacity: 0;
-    transform: translate(-30px, 0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Internet Explorer */
-@-ms-keyframes moveright {
-  from {
-    opacity: 0;
-    transform: translate(-30px, 0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/*---------------------Custom Animations Start---------------------------------*/
-
-/*-------------------Move left Animation------------------*/
-
-@keyframes moveleft {
-  from {
-    opacity: 0;
-    transform: translate(30px, 0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Firefox < 16 */
-@-moz-keyframes moveleft {
-  from {
-    opacity: 0;
-    transform: translate(30px, 0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Safari, Chrome and Opera > 12.1*/
-@-webkit-keyframes moveleft {
-  from {
-    opacity: 0;
-    transform: translate(30px, 0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Internet Explorer */
-@-ms-keyframes moveleft {
-  from {
-    opacity: 0;
-    transform: translate(30px, 0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/*-------------------Move top Animation------------------*/
-
-@keyframes movetop {
-  from {
-    opacity: 0;
-    transform: translate(0, 30px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Firefox < 16 */
-@-moz-keyframes movetop {
-  from {
-    opacity: 0;
-    transform: translate(0, 30px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Safari, Chrome and Opera > 12.1*/
-@-webkit-keyframes movetop {
-  from {
-    opacity: 0;
-    transform: translate(0, 30px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
-  }
-}
-
-/* Internet Explorer */
-@-ms-keyframes movetop {
-  from {
-    opacity: 0;
-    transform: translate(0, 30px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0px);
+    padding: 0 20px;
   }
 }
