@@ -215,9 +215,22 @@
                   <p>+91 {{ student.phone }}</p>
                 </td>
                 <td class="table-data">
-                  <p *ngIf="student.status == 0">ACTIVATED</p>
-                  <p *ngIf="student.status == 1">FEE PENDING</p>
-                  <p *ngIf="student.status == 2">PASS OUT</p>
+                  <button
+                    class="btn btn-sm"
+                    [title]="student.status === '1' ? 'Deactivate' : 'Activate'"
+                    [ngClass]="student.status === '0' ? 'btn-warning' : 'btn-danger'"
+                    (click)="
+                      changeStudentStatus(
+                        student._id,
+                        student.status === '0' ? '1' : '0',
+                        student.phone
+                      )
+                    "
+                    *ngIf="student.status !== '2'"
+                  >
+                    <i class="fa fa-power-off"></i>
+                  </button>
+                  <p *ngIf="student.status === '2'">PASS OUT</p>
                 </td>
                 <td class="table-data">
                   <button

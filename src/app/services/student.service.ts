@@ -55,6 +55,18 @@ export class StudentService {
     );
   }
 
+  changeStudentStatus(id: string, status: string, password: string) {
+    const data = { api: 'changeStudentStatus', data: { _id: id, status, password } };
+    return this.httpService.httpPostAuth(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
   getStudentForEditing(id: string) {
     const data = { api: 'getStudentForEditing', data: { _id: id } };
     return this.httpService.httpPostAuth(data).pipe(

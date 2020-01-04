@@ -93,7 +93,7 @@ export class AddStudentComponent implements OnInit {
           batch: new FormControl('', {
             validators: [Validators.required]
           }),
-          status: new FormControl('0', {
+          status: new FormControl('1', {
             validators: [Validators.required]
           })
         });

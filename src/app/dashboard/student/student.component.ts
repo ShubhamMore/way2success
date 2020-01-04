@@ -4,9 +4,11 @@ import { CourseModel, BatchModel, SubjectModel } from 'src/app/models/course.mod
 import { StudentService } from 'src/app/services/student.service';
 import { CourseService } from 'src/app/services/course.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { BranchModel } from 'src/app/models/branch.model';
+import { EncryptService } from 'src/app/encrypt.service';
 
 @Component({
   selector: 'app-student',
@@ -47,6 +49,7 @@ export class StudentComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private studentService: StudentService,
+    private encryptService: EncryptService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location
@@ -324,6 +327,26 @@ export class StudentComponent implements OnInit {
 
   onPaymentClick(student: string) {
     this.router.navigate([student, 'payment'], { relativeTo: this.route });
+  }
+
+  changeStudentStatus(id: string, status: string, phone: string) {
+    const confirm = window.confirm(
+      `Do you really want to ${status === '0' ? 'Deactivate' : 'Activate'} this student??`
+    );
+    if (confirm) {
+      this.loading = true;
+      const password = status === '0' ? '' : this.encryptService.encrypt(phone, environment.encKey);
+      this.studentService.changeStudentStatus(id, status, password).subscribe(
+        resData => {
+          this.error = null;
+          this.ngOnInit();
+        },
+        errorMessage => {
+          this.error = errorMessage;
+          this.loading = false;
+        }
+      );
+    }
   }
 
   cancel() {

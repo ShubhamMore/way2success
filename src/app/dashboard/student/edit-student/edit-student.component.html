@@ -291,9 +291,14 @@
                   name="status"
                   id="status"
                   formControlName="status"
+                  [value]="student.status"
                 >
-                  <option class="select-option" value="0">Activated</option>
-                  <option class="select-option" value="1">Fees Pending</option>
+                  <option class="select-option" value="0" *ngIf="student.status === '0'"
+                    >Deactivate</option
+                  >
+                  <option class="select-option" value="1" *ngIf="student.status === '1'"
+                    >Activate</option
+                  >
                   <option class="select-option" value="2">Pass Out</option>
                 </select>
               </div>
