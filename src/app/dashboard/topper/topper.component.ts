@@ -65,6 +65,19 @@ export class TopperComponent implements OnInit {
     );
   }
 
+  changeTopperStatus(id: string, status: string) {
+    this.loading = true;
+    this.topperService.changeTopperStatus(id, status).subscribe(
+      (resData: any) => {
+        this.getToppers(this.year);
+      },
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
+      }
+    );
+  }
+
   onErrorClose() {
     this.error = null;
   }

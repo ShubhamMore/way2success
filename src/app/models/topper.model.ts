@@ -6,7 +6,8 @@ export class TopperModel {
     public score: string,
     public year: string,
     public details: string,
-    public image: TopperImageModel
+    public image: TopperImageModel,
+    public status: string
   ) {}
 }
 

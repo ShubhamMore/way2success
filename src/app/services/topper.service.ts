@@ -55,6 +55,18 @@ export class TopperService {
     );
   }
 
+  changeTopperStatus(id: string, status: any) {
+    const data = { api: 'changeTopperStatus', data: { _id: id, status } };
+    return this.httpService.httpPostAuth(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
   editTopper(Topper: any) {
     const data = { api: 'editTopper', data: Topper };
     return this.httpService.httpPostAuth(data).pipe(
