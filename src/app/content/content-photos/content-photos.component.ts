@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-content-photos',
@@ -7,11 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentPhotosComponent implements OnInit {
   loading: boolean;
+  images: any;
   error: string;
-  constructor() {}
+  constructor(private imageService: ImageService) {}
 
   ngOnInit() {
     this.loading = true;
-    this.loading = false;
+    this.imageService.getImageCategoriesForContent().subscribe(
+      (resData: any) => {
+        this.images = resData;
+        // console.log(this.images);
+        this.loading = false;
+      },
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
+      }
+    );
   }
 }

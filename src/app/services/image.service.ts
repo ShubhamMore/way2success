@@ -26,6 +26,18 @@ export class ImageService {
     );
   }
 
+  getImageCategoriesForContent() {
+    const data = { api: 'getImageCategoriesForContent', data: {} };
+    return this.httpService.httpPost(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
   addCategory(category: string) {
     const data = { api: 'newCategory', data: { category } };
     return this.httpService.httpPostAuth(data).pipe(

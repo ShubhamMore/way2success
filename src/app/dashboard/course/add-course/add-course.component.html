@@ -223,7 +223,7 @@
                               <td class="table-data">{{ curSubject.fee }}</td>
                               <td class="table-data">
                                 <button
-                                  class="btn btn-light btn-delete-subject"
+                                  class="btn btn-sm btn-light btn-delete-subject"
                                   type="button"
                                   (click)="editSubjectData(i)"
                                 >
@@ -232,7 +232,7 @@
                               </td>
                               <td class="table-data">
                                 <button
-                                  class="btn btn-danger btn-delete-subject"
+                                  class="btn btn-sm btn-danger btn-delete-subject"
                                   type="button"
                                   (click)="deleteSubject(i)"
                                 >
@@ -253,7 +253,7 @@
                 <div class="row">
                   <div class="col-12">
                     <button
-                      class="btn btn-primary btn-add-batch"
+                      class="btn btn-sm btn-primary btn-add-batch"
                       type="submit"
                       (click)="addBatch()"
                       *ngIf="!editingBatch"
@@ -261,7 +261,7 @@
                       ADD BATCH
                     </button>
                     <button
-                      class="btn btn-primary btn-save-batch"
+                      class="btn btn-sm btn-primary btn-save-batch"
                       type="button"
                       (click)="editBatch(editBatchIndex)"
                       *ngIf="editingBatch"
@@ -269,7 +269,7 @@
                       SAVE BATCH
                     </button>
                     <button
-                      class="btn btn-light ml-3 btn-cancel-edit-batch"
+                      class="btn btn-sm btn-light ml-3 btn-cancel-edit-batch"
                       type="button"
                       (click)="cancelEditBatch()"
                       *ngIf="editingBatch"
@@ -324,7 +324,7 @@
                       </td>
                       <td class="table-data">
                         <button
-                          class="btn btn-light btn-edit-batch"
+                          class="btn btn-sm btn-light btn-edit-batch"
                           type="button"
                           (click)="editBatchData(i)"
                         >
@@ -333,7 +333,7 @@
                       </td>
                       <td class="table-data">
                         <button
-                          class="btn btn-danger btn-delete-batch"
+                          class="btn btn-sm btn-danger btn-delete-batch"
                           type="button"
                           (click)="deleteBatch(i)"
                         >
@@ -351,8 +351,12 @@
         <hr />
         <div class="row">
           <div class="col-12">
-            <button class="btn btn-primary btn-add" type="submit">ADD</button>
-            <button class="btn btn-light btn-cancel float-right" type="button" (click)="cancel()">
+            <button class="btn btn-sm btn-primary btn-add" type="submit">ADD</button>
+            <button
+              class="btn btn-sm btn-light btn-cancel float-right"
+              type="button"
+              (click)="cancel()"
+            >
               Cancel
             </button>
           </div>

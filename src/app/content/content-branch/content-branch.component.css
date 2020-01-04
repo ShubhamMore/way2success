@@ -50,6 +50,7 @@
 
 .inactive-course-type:hover {
   border: 1px solid #272343;
+  border-bottom: none;
   color: #272343;
 }
 
@@ -59,6 +60,6 @@
 }
 
 .active-course-type:hover {
-  border: 1px solid #aaa;
-  color: #aaa;
+  border: 1px solid #342f58;
+  color: #eee;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AboutService } from '../services/about.service';
 
 @Component({
   selector: 'app-content',
@@ -7,11 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
   loading: boolean;
+  content: string;
   error: string;
-  constructor() {}
+  constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
     this.loading = true;
-    this.loading = false;
+    this.aboutService.getContent().subscribe(
+      (resData: any) => {
+        this.content = resData.content;
+        this.loading = false;
+      },
+      (error: any) => {
+        this.error = error;
+        this.loading = false;
+      }
+    );
   }
 }

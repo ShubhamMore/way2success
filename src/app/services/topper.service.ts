@@ -21,7 +21,7 @@ export class TopperService {
 
   getToppers() {
     const data = { api: 'getAllToppers', data: {} };
-    return this.httpService.httpPost(data).pipe(
+    return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;
       }),
@@ -43,8 +43,8 @@ export class TopperService {
     );
   }
 
-  addTopper(Topper: any) {
-    const data = { api: 'newTopper', data: Topper };
+  addTopper(topper: any) {
+    const data = { api: 'newTopper', data: topper };
     return this.httpService.httpPostAuth(data).pipe(
       map((response: any) => {
         return response;

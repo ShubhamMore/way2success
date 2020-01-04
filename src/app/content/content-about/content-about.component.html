@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="row" *ngIf="about">
-          <div class="col-lg-12" *ngIf="about.vision !== ''">
+          <div class="col-md-8 col-12 mx-auto" *ngIf="about.vision !== ''">
             <div class="vision">
               <h2><i class="fa fa-eye" style="padding-right: 20px"></i>VISION</h2>
               <div class="vision-body scroll text-justify">
@@ -19,37 +19,41 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="topper-block">
-          <h2>OUR TOPPERS</h2>
-          <div class="flex-container">
-              <div class="topper-card" *ngFor="let topper of toppers">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="topper-block">
+              <h2>OUR TOPPERS</h2>
+              <div class="flex-container">
+                <div class="topper-card" *ngFor="let topper of toppers">
                   <div class="topper-pic">
-                    <img class="shadow-lg" [src]="topper.image.secure_url" onerror="this.src='/assets/images/topper.png'">
+                    <img
+                      class="shadow-lg"
+                      [src]="topper.image.secure_url"
+                      onerror="this.src='/assets/images/topper.png'"
+                    />
                   </div>
                   <div class="topper-desc">
-                    <h5>{{topper.name}}</h5>
+                    <h5>{{ topper.name }}</h5>
                     {{ topper.description }}
                     <ul>
-                        <li>
-                            <label >Subject : </label>
-                            <span>{{topper.details}}</span>
-                          </li>
                       <li>
-                        <label >Score : </label>
-                        <span>{{topper.score}}</span>
+                        <label>Subject : </label>
+                        <span>{{ topper.details }}</span>
                       </li>
                       <li>
-                          <label >Year : </label>
-                          <span>{{topper.year}}</span>
-                        </li>
-                      </ul>
+                        <label>Score : </label>
+                        <span>{{ topper.score }}</span>
+                      </li>
+                      <li>
+                        <label>Year : </label>
+                        <span>{{ topper.year }}</span>
+                      </li>
+                    </ul>
                   </div>
+                </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>

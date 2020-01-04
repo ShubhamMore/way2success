@@ -11,6 +11,30 @@ export class AboutService {
 
   getAbout() {
     const data = { api: 'getAbout', data: {} };
+    return this.httpService.httpPostAuth(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
+  getContent() {
+    const data = { api: 'getContent', data: {} };
+    return this.httpService.httpPost(data).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
+  getAboutAndToppers() {
+    const data = { api: 'getAboutAndToppers', data: {} };
     return this.httpService.httpPost(data).pipe(
       map((response: any) => {
         return response;

@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AboutService } from 'src/app/services/about.service';
 import { AboutModel } from 'src/app/models/about.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 @Component({
-  selector: 'app-mission',
-  templateUrl: './mission.component.html',
-  styleUrls: ['./mission.component.css']
+  selector: 'app-about-content',
+  templateUrl: './about-content.component.html',
+  styleUrls: ['./about-content.component.css']
 })
-export class MissionComponent implements OnInit {
+export class AboutContentComponent implements OnInit {
   loading: boolean;
   edit: boolean;
   error: string;
@@ -20,16 +21,16 @@ export class MissionComponent implements OnInit {
     this.loading = true;
     this.edit = true;
     this.form = new FormGroup({
-      mission: new FormControl(null, {
-        validators: []
+      content: new FormControl(null, {
+        validators: [Validators.required]
       })
     });
     this.aboutService.getAbout().subscribe(
       (resdata: any) => {
         this.about = resdata;
-        if (this.about && this.about.mission !== '') {
+        if (this.about && this.about.content !== '') {
           this.edit = false;
-          this.form.setValue({ mission: this.about.mission });
+          this.form.setValue({ content: this.about.content });
         }
         this.loading = false;
       },
@@ -40,14 +41,13 @@ export class MissionComponent implements OnInit {
     );
   }
 
-  saveMission() {
+  saveContent() {
     if (this.form.valid) {
       const about: any = {
-        mission: this.form.value.mission
+        content: this.form.value.content
       };
       if (this.about) {
         about._id = this.about._id;
-        about.aim = this.about.aim;
         about.vision = this.about.vision;
       }
       this.loading = true;
@@ -63,7 +63,7 @@ export class MissionComponent implements OnInit {
     }
   }
 
-  editMission() {
+  editContent() {
     this.edit = true;
   }
 

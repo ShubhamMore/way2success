@@ -47,8 +47,7 @@ export class VisionComponent implements OnInit {
       };
       if (this.about) {
         about._id = this.about._id;
-        about.aim = this.about.aim;
-        about.mission = this.about.mission;
+        about.aim = this.about.content;
       }
       this.loading = true;
       this.aboutService.saveAbout(about).subscribe(

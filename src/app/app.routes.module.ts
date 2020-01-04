@@ -82,8 +82,7 @@ import { ShowReceiptComponent } from './student-dashboard/show-student-receipts/
 import { StudentMediaComponent } from './student-dashboard/student-media/student-media.component';
 import { ShowStudentMediaComponent } from './student-dashboard/student-media/show-student-media/show-student-media.component';
 
-import { AimComponent } from './dashboard/about/aim/aim.component';
-import { MissionComponent } from './dashboard/about/mission/mission.component';
+import { AboutContentComponent } from './dashboard/about/about-content/about-content.component';
 import { VisionComponent } from './dashboard/about/vision/vision.component';
 
 import { ContactComponent } from './dashboard/contact/contact.component';
@@ -144,12 +143,7 @@ const appRoutes: Routes = [
     canActivate: [AdminAuthGuard]
   },
 
-  { path: 'admin/aim', component: AimComponent, canActivate: [AdminAuthGuard] },
-  {
-    path: 'admin/mission',
-    component: MissionComponent,
-    canActivate: [AdminAuthGuard]
-  },
+  { path: 'admin/content', component: AboutContentComponent, canActivate: [AdminAuthGuard] },
   {
     path: 'admin/vision',
     component: VisionComponent,

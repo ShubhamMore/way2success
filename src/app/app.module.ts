@@ -36,9 +36,8 @@ import { AddCourseComponent } from './dashboard/course/add-course/add-course.com
 import { EditCourseComponent } from './dashboard/course/edit-course/edit-course.component';
 import { ShowCourseComponent } from './dashboard/course/show-course/show-course.component';
 
-import { AimComponent } from './dashboard/about/aim/aim.component';
+import { AboutContentComponent } from './dashboard/about/about-content/about-content.component';
 import { VisionComponent } from './dashboard/about/vision/vision.component';
-import { MissionComponent } from './dashboard/about/mission/mission.component';
 
 import { ContactComponent } from './dashboard/contact/contact.component';
 
@@ -215,9 +214,8 @@ import { ShowLectureComponent } from './dashboard/lecture/show-lecture/show-lect
     AddTopperComponent,
     EditTopperComponent,
 
-    AimComponent,
+    AboutContentComponent,
     VisionComponent,
-    MissionComponent,
 
     ContactComponent,
 

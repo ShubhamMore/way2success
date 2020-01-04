@@ -7,24 +7,28 @@
     <div class="col-10 mx-auto">
       <div class="row">
         <div class="col-12">
-          <button class="btn btn-light float-right" (click)="editAim()" *ngIf="!edit">Edit</button>
-          <h3 class="page-heading">Aim</h3>
+          <button class="btn btn-light float-right" (click)="editContent()" *ngIf="!edit">
+            Edit
+          </button>
+          <h3 class="page-heading">Content</h3>
         </div>
       </div>
       <hr class="horizontal-line" />
-      <form class="" [formGroup]="form" (submit)="saveAim()" *ngIf="edit">
+      <form class="" [formGroup]="form" (submit)="saveContent()" *ngIf="edit">
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
               <textarea
                 class="form-control"
-                name="aim"
-                id="aim"
+                name="content"
+                id="content"
                 rows="7"
-                formControlName="aim"
+                formControlName="content"
               ></textarea>
-              <span class="input-error" *ngIf="!form.get('aim').valid && form.get('aim').touched"
-                >*Please Enter Aim</span
+              <span
+                class="input-error"
+                *ngIf="!form.get('content').valid && form.get('content').touched"
+                >*Please Enter Content</span
               >
             </div>
           </div>
@@ -42,7 +46,7 @@
       </form>
       <div class="row" *ngIf="!edit">
         <div class="col-11 p-2 mx-auto">
-          <p class="about-data">{{ about.aim }}</p>
+          <p class="about-data">{{ about.content }}</p>
         </div>
       </div>
     </div>
