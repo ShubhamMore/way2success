@@ -17,7 +17,6 @@ export class ContentPhotosComponent implements OnInit {
     this.imageService.getImageCategoriesForContent().subscribe(
       (resData: any) => {
         this.categories = resData;
-        // console.log(this.images);
         this.loading = false;
       },
       (error: any) => {
