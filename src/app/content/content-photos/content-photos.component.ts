@@ -8,7 +8,7 @@ import { ImageService } from 'src/app/services/image.service';
 })
 export class ContentPhotosComponent implements OnInit {
   loading: boolean;
-  images: any;
+  categories: any;
   error: string;
   constructor(private imageService: ImageService) {}
 
@@ -16,7 +16,7 @@ export class ContentPhotosComponent implements OnInit {
     this.loading = true;
     this.imageService.getImageCategoriesForContent().subscribe(
       (resData: any) => {
-        this.images = resData;
+        this.categories = resData;
         // console.log(this.images);
         this.loading = false;
       },

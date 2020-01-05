@@ -18,6 +18,7 @@ import { ChangePasswordComponent } from './authentication/change-password/change
 
 import { ErrorComponent } from './error/error.component';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
+import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
 
 import {
   AdminAuthGuard,
@@ -241,7 +242,8 @@ import { ShowLectureComponent } from './dashboard/lecture/show-lecture/show-lect
     ReactiveFormsModule,
     AppRoutes,
     HttpClientModule,
-    PdfViewerModule
+    PdfViewerModule,
+    Angular2ImageGalleryModule
   ],
   providers: [
     HttpService,
