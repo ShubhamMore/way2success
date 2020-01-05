@@ -42,6 +42,9 @@
 /*Media Queries*/
 
 @media only screen and (max-width: 1324px) {
+  .backgroundBox{
+    display: inline-block;
+  }
   .ourInfo{
     padding-left: 0px;
     width: 100%;
@@ -53,7 +56,7 @@
  }
 }
 
-@media only screen and (max-width: 764px) {
+@media only screen and (max-width: 764px) { 
   .ourInfoText{
     padding: 0px 20px;
     letter-spacing: 5px;
