@@ -119,7 +119,7 @@ export class AddTopperComponent implements OnInit {
 
   imageValidate(fileName: string): boolean {
     const extension = ['jpg', 'jpeg', 'png'];
-    const ext: string = fileName.substring(fileName.lastIndexOf('.') + 1);
+    const ext: string = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
     if (!extension.includes(ext)) {
       return false;
     }

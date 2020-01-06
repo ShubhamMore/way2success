@@ -58,7 +58,7 @@ export class AddImagesComponent implements OnInit {
     let ext: string = null;
     const n: number = files.length;
     for (let i = 0; i < n; i++) {
-      ext = files[i].name.substring(files[i].name.lastIndexOf('.') + 1);
+      ext = files[i].name.substring(files[i].name.lastIndexOf('.') + 1).toLowerCase();
       if (!(imgExt.indexOf(ext) !== -1)) {
         return (this.invalidImage = true);
       }

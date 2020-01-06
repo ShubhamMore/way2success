@@ -264,7 +264,7 @@ export class AddMediaComponent implements OnInit {
   }
 
   mediaValidate(fileName: string): boolean {
-    const ext: string = fileName.substring(fileName.lastIndexOf('.') + 1);
+    const ext: string = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
     if (ext !== 'mp4') {
       return false;
     }
