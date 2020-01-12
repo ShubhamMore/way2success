@@ -25,6 +25,7 @@ body {
   position: relative;
   min-height: 100vh;
   padding-bottom: 45px;
+  background-color: #f2fce8;
   /* zoom:90%; */
 }
 
@@ -74,7 +75,7 @@ body {
   background: #c1c1c1;
 }
 
-.flex-container{
+.flex-container {
   display: flex;
   align-items: stretch;
   flex-wrap: wrap;

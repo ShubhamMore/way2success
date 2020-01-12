@@ -1,5 +1,9 @@
+.category h2 {
+  text-align: center;
+  padding: 20px 0;
+}
 
-.category h2{
-    text-align: center;
-    padding: 20px 0;
+.image-bg-color {
+  background-color: #d0e1f9;
+  height: 100vh;
 }

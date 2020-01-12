@@ -1,15 +1,18 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
-<div *ngIf="!loading" class="photosBox">
-  <div *ngFor="let category of categories" class="category">
-    <div *ngIf="category.categoryURL">
-        <h2>{{category.category}}</h2>
-        <gallery 
-            [flexBorderSize]="3" 
-            [flexImageSize]="7"
-            [maxRowsPerPage]="100"
-            [metadataUri]="category.categoryURL">
+<div class="image-bg-color">
+  <div *ngIf="!loading" class="photosBox">
+    <div *ngFor="let category of categories" class="category">
+      <div *ngIf="category.categoryURL">
+        <h2>{{ category.category }}</h2>
+        <gallery
+          [flexBorderSize]="3"
+          [flexImageSize]="7"
+          [maxRowsPerPage]="100"
+          [metadataUri]="category.categoryURL"
+        >
         </gallery>
+      </div>
     </div>
   </div>
 </div>
