@@ -60,6 +60,7 @@
               <th class="table-heading-data">Course</th>
               <th class="table-heading-data text-center">Edit</th>
               <th class="table-heading-data text-center">Activate/Deactivate</th>
+              <!-- <th class="table-heading-data text-center">Delete</th> -->
             </tr>
           </thead>
           <tbody class="table-body">
@@ -75,7 +76,7 @@
                   <button
                     class="btn btn-light btn-sm btn-edit"
                     type="button"
-                    (click)="editcourse(course._id)"
+                    (click)="editCourse(course._id)"
                   >
                     <i class="fa fa-edit"></i>
                   </button>
@@ -100,6 +101,15 @@
                     <i class="fa fa-power-off"></i>
                   </button>
                 </td>
+                <!-- <td class="table-data text-center">
+                  <button
+                    class="btn btn-danger btn-sm btn-delete"
+                    type="button"
+                    (click)="deleteCourse(course._id)"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td> -->
               </tr>
             </ng-container>
           </tbody>

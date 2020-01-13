@@ -96,15 +96,15 @@ export class CourseComponent implements OnInit {
     );
   }
 
-  newcourse() {
+  newCourse() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
-  editcourse(id: string) {
+  editCourse(id: string) {
     this.router.navigate([id, 'edit'], { relativeTo: this.route });
   }
 
-  deletecourse(id: string) {
+  deleteCourse(id: string) {
     window.alert(`You can\'t Delete the course due to Data Protection..`);
   }
 

@@ -256,6 +256,7 @@
                                 <th class="table-heading-data">Subject</th>
                                 <th class="table-heading-data">Fee</th>
                                 <th class="table-heading-data">Edit</th>
+                                <th class="table-heading-data">Delete</th>
                               </thead>
                               <tbody class="table-body">
                                 <ng-container *ngFor="let curSubject of subjects; let i = index">
@@ -264,11 +265,20 @@
                                     <td class="table-data">{{ curSubject.fee }}</td>
                                     <td class="table-data text-center">
                                       <button
-                                        class="btn btn-light btn-sm btn-delete-subject"
+                                        class="btn btn-light btn-sm btn-edit-subject"
                                         type="button"
                                         (click)="editSubjectData(i)"
                                       >
                                         <i class="fa fa-edit"></i>
+                                      </button>
+                                    </td>
+                                    <td class="table-data text-center">
+                                      <button
+                                        class="btn btn-danger btn-sm btn-delete-subject"
+                                        type="button"
+                                        (click)="deleteSubject(i)"
+                                      >
+                                        <i class="fa fa-trash"></i>
                                       </button>
                                     </td>
                                   </tr>
@@ -403,6 +413,7 @@
                         <th class="table-heading-data">Subjects</th>
                         <th class="table-heading-data">Fees</th>
                         <th class="table-heading-data">Edit</th>
+                        <th class="table-heading-data">Delete</th>
                       </thead>
                       <tbody class="table-body">
                         <ng-container *ngFor="let batch of batches; let i = index">
@@ -433,6 +444,15 @@
                                 (click)="editBatchData(i)"
                               >
                                 <i class="fa fa-edit"></i>
+                              </button>
+                            </td>
+                            <td class="table-data">
+                              <button
+                                class="btn btn-danger btn-sm btn-delete-batch"
+                                type="button"
+                                (click)="deleteBatch(i)"
+                              >
+                                <i class="fa fa-trash"></i>
                               </button>
                             </td>
                           </tr>

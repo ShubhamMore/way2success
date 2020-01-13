@@ -184,7 +184,14 @@ export class EditCourseComponent implements OnInit {
 
   // Delete Subject
   deleteSubject(index: number) {
-    this.newSubjects.splice(index, 1);
+    if (this.newSubject) {
+      this.newSubjects.splice(index, 1);
+    } else {
+      const confirm = window.confirm('Do you really want to delete This Subject??');
+      if (confirm) {
+        this.subjects.splice(index, 1);
+      }
+    }
     this.resetSubjectForm();
   }
 
@@ -282,7 +289,14 @@ export class EditCourseComponent implements OnInit {
   }
 
   deleteBatch(index: number) {
-    this.newBatches.splice(index, 1);
+    if (this.newBatch) {
+      this.newBatches.splice(index, 1);
+    } else {
+      const confirm = window.confirm('Do you really want to delete This Batch??');
+      if (confirm) {
+        this.batches.splice(index, 1);
+      }
+    }
     this.cancelEditBatch();
   }
 
