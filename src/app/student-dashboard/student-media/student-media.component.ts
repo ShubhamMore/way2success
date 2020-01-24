@@ -22,6 +22,9 @@ export class StudentMediaComponent implements OnInit {
 
   studentData: any;
 
+  batch: string;
+
+  subjects: any[];
   subject: string;
 
   date: string;
@@ -51,6 +54,7 @@ export class StudentMediaComponent implements OnInit {
     ];
     this.studentData = null;
     this.medias = [];
+    this.subjects = [];
     this.subject = '';
 
     this.curDate();
@@ -62,7 +66,9 @@ export class StudentMediaComponent implements OnInit {
         (resData: any) => {
           this.error = null;
           this.studentData = resData;
-          this.subject = this.studentData.subjects[0]._id;
+          this.batch = this.studentData.batches[0]._id;
+          this.onSelectBatch(this.batch);
+          this.subject = this.subjects[0]._id;
           this.searchMedia(
             this.date,
             this.studentData.course,
@@ -96,10 +102,21 @@ export class StudentMediaComponent implements OnInit {
     return n.toString();
   }
 
+  onSelectBatch(batch: string) {
+    if (batch !== '') {
+      this.batch = batch;
+      this.studentData.batches.forEach(curBatch => {
+        if (curBatch._id === batch) {
+          this.subjects = curBatch.subjects;
+        }
+      });
+    }
+  }
+
   onSelectSubject(subject: string) {
-    this.subject = subject;
     if (subject !== '') {
-      this.searchMedia(this.date, this.studentData.course, this.studentData.batch, this.subject);
+      this.subject = subject;
+      this.searchMedia(this.date, this.studentData.course, this.batch, this.subject);
     }
   }
 

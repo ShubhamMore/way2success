@@ -13,7 +13,6 @@ export class StudentDashboardComponent implements OnInit {
   loading: boolean;
   error: boolean;
   student: StudentModel;
-  subject: string[];
   studentMetaData: any;
   id: string;
 
@@ -25,7 +24,6 @@ export class StudentDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.subject = [];
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
       this.id = params['id'];
@@ -44,9 +42,6 @@ export class StudentDashboardComponent implements OnInit {
             return;
           }
           this.studentMetaData = resData.studentMetaData;
-          this.studentMetaData.subject.forEach((subject: any) => {
-            this.subject.push(subject.subject);
-          });
           this.loading = false;
         },
         (errorMessage: any) => {
@@ -56,6 +51,14 @@ export class StudentDashboardComponent implements OnInit {
         }
       );
     });
+  }
+
+  subjects(subjects: any) {
+    const subject: string[] = [];
+    subjects.forEach(curSubject => {
+      subject.push(curSubject.subject);
+    });
+    return subject.join(', ');
   }
 
   onErrorClose() {

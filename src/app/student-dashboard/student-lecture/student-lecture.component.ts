@@ -20,6 +20,9 @@ export class StudentLectureComponent implements OnInit {
 
   studentData: any;
 
+  batch: string;
+
+  subjects: any[];
   subject: string;
 
   months: string[];
@@ -37,6 +40,7 @@ export class StudentLectureComponent implements OnInit {
     this.loading = true;
     this.studentData = null;
     this.lectures = [];
+    this.subjects = [];
     this.months = [
       'Jan',
       'Feb',
@@ -62,7 +66,9 @@ export class StudentLectureComponent implements OnInit {
         (resData: any) => {
           this.error = null;
           this.studentData = resData;
-          this.subject = this.studentData.subjects[0]._id;
+          this.batch = this.studentData.batches[0]._id;
+          this.onSelectBatch(this.batch);
+          this.subject = this.subjects[0]._id;
           this.searchLecture(
             this.studentData.course,
             this.studentData.batch,
@@ -96,10 +102,21 @@ export class StudentLectureComponent implements OnInit {
     return n.toString();
   }
 
+  onSelectBatch(batch: string) {
+    if (batch !== '') {
+      this.batch = batch;
+      this.studentData.batches.forEach(curBatch => {
+        if (curBatch._id === batch) {
+          this.subjects = curBatch.subjects;
+        }
+      });
+    }
+  }
+
   onSelectSubject(subject: string) {
-    this.subject = subject;
     if (subject !== '') {
-      this.searchLecture(this.studentData.course, this.studentData.batch, this.subject, this.date);
+      this.subject = subject;
+      this.searchLecture(this.studentData.course, this.batch, this.subject, this.date);
     }
   }
 

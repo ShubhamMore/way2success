@@ -32,12 +32,14 @@ export class EditStudentComponent implements OnInit {
   userExist: boolean;
 
   batches: BatchModel[];
+  batchesToAdd: any[];
   batch: BatchModel;
+  curBatch: string;
 
   subjects: SubjectModel[];
   subjectsToAdd: string[];
 
-  student: StudentModel;
+  student: any;
 
   constructor(
     private userService: UserService,
@@ -51,12 +53,16 @@ export class EditStudentComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.userExist = false;
-    this.courses = this.batches = this.subjects = this.subjectsToAdd = [];
+    this.batchesToAdd = [];
+    this.courses = [];
+    this.batches = [];
+    this.subjects = [];
+    this.subjectsToAdd = [];
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
       const id = params['id'];
       this.student = this.studentService.getStudentForEditing(id).subscribe(
-        resData => {
+        (resData: any) => {
           this.error = null;
           this.student = resData.student;
           if (!this.student) {
@@ -103,16 +109,19 @@ export class EditStudentComponent implements OnInit {
           this.branchChanged();
           this.form.patchValue({ course: this.student.course });
           this.course = this.courses.find(course => course._id === this.student.course);
-          this.batch = this.course.batch.find(batch => batch._id === this.student.batch);
+          this.batch = this.course.batch.find(batch => batch._id === this.student.batches[0].batch);
           this.subjects = this.batch.subjects;
           this.courseChanged();
-          this.form.patchValue({ batch: this.student.batch });
+          this.batchesToAdd = this.student.batches;
+          this.curBatch = this.batchesToAdd[0].batch;
+          this.subjectsToAdd = this.batchesToAdd[0].subjects;
+          this.form.patchValue({ batch: this.curBatch });
           this.batchChanged();
-          this.subjectsToAdd = this.student.subjects;
+          // this.subjectsToAdd = this.student.subjects;
 
           this.loading = false;
         },
-        errorMessage => {
+        (errorMessage: any) => {
           this.error = errorMessage;
           this.loading = false;
         }
@@ -126,6 +135,7 @@ export class EditStudentComponent implements OnInit {
       this.branch = id;
       this.courses = [];
       this.batches = [];
+      this.batchesToAdd = [];
       this.subjects = [];
       this.subjectsToAdd = [];
       this.form.patchValue({
@@ -133,7 +143,7 @@ export class EditStudentComponent implements OnInit {
         batch: ''
       });
       this.allCourses.forEach(curCourse => {
-        if (curCourse.branch === id) {
+        if (curCourse.branch === id && curCourse.courseType === this.courseType) {
           this.courses.push(curCourse);
         }
       });
@@ -144,6 +154,7 @@ export class EditStudentComponent implements OnInit {
     this.courseType = this.form.value.courseType;
     this.courses = [];
     this.batches = [];
+    this.batchesToAdd = [];
     this.subjects = [];
     this.subjectsToAdd = [];
     this.form.patchValue({
@@ -161,6 +172,7 @@ export class EditStudentComponent implements OnInit {
     const id = this.form.value.course;
     if (id !== '') {
       this.batches = [];
+      this.batchesToAdd = [];
       this.subjects = [];
       this.subjectsToAdd = [];
       const course = this.courses.find(curCourse => curCourse._id === id);
@@ -175,9 +187,69 @@ export class EditStudentComponent implements OnInit {
     const id = this.form.value.batch;
     if (id !== '') {
       this.subjects = [];
+      this.addBatch();
+      this.curBatch = this.form.value.batch;
       this.subjectsToAdd = [];
       const batch = this.batches.find(curBatch => curBatch._id === id);
       this.subjects = batch.subjects;
+      this.batchesToAdd.forEach(curBatch => {
+        if (curBatch.batch === this.form.value.batch) {
+          this.subjectsToAdd = curBatch.subjects;
+        }
+      });
+    }
+  }
+
+  subjectsChanged(event: any, subject: string) {
+    if (event.target.checked) {
+      this.subjectsToAdd.push(subject);
+      return;
+    }
+    const i = this.subjectsToAdd.indexOf(subject);
+    this.subjectsToAdd.splice(i, 1);
+    if (this.subjectsToAdd.length === 0) {
+      let index = -1;
+      this.batchesToAdd.forEach((curBatch, j) => {
+        if (curBatch.batch === this.form.value.batch) {
+          index = j;
+        }
+      });
+      if (index !== -1) {
+        this.batchesToAdd.splice(index, 1);
+      }
+    }
+  }
+
+  subChecked(subject: string): boolean {
+    const s = this.subjectsToAdd.find(sub => sub === subject);
+    if (!!s) {
+      return true;
+    }
+    return false;
+  }
+
+  addBatch() {
+    if (this.curBatch) {
+      let index = -1;
+      this.batchesToAdd.forEach((curBatch, j) => {
+        if (curBatch.batch === this.curBatch) {
+          index = j;
+        }
+      });
+      if (index === -1 && this.subjectsToAdd.length > 0) {
+        const batch = {
+          batch: this.curBatch,
+          subjects: this.subjectsToAdd
+        };
+        this.batchesToAdd.push(batch);
+      }
+      if (index !== -1) {
+        if (this.subjectsToAdd.length > 0) {
+          this.batchesToAdd[index].subjects = this.subjectsToAdd;
+        } else {
+          this.batchesToAdd.splice(index, 1);
+        }
+      }
     }
   }
 
@@ -202,7 +274,8 @@ export class EditStudentComponent implements OnInit {
       return;
     }
 
-    if (this.subjectsToAdd.length < 1) {
+    this.addBatch();
+    if (this.batchesToAdd.length < 1) {
       return;
     }
 
@@ -220,42 +293,24 @@ export class EditStudentComponent implements OnInit {
       email: this.form.value.email,
       password: this.encryptService.encrypt(this.form.value.phone, environment.encKey),
       address: this.form.value.address,
-      course: this.form.value.course,
-      courseType: this.form.value.courseType,
-      batch: this.form.value.batch,
-      subjects: this.subjectsToAdd,
       branch: this.form.value.branch,
+      courseType: this.form.value.courseType,
+      course: this.form.value.course,
+      batches: this.batchesToAdd,
       status: this.form.value.status
     };
 
     this.studentService.editStudent(student).subscribe(
-      resData => {
+      (resData: any) => {
         this.error = null;
         this.cancel();
         this.loading = false;
       },
-      errorMessage => {
+      (errorMessage: any) => {
         this.error = errorMessage;
         this.loading = false;
       }
     );
-  }
-
-  subjectsChanged(event: any, subject: string) {
-    if (event.target.checked) {
-      this.subjectsToAdd.push(subject);
-      return;
-    }
-    const i = this.subjectsToAdd.indexOf(subject);
-    this.subjectsToAdd.splice(i, 1);
-  }
-
-  subChecked(subject: string): boolean {
-    const s = this.subjectsToAdd.find(sub => sub === subject);
-    if (!!s) {
-      return true;
-    }
-    return false;
   }
 
   cancel() {

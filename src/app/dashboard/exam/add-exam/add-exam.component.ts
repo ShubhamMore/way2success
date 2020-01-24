@@ -193,7 +193,7 @@ export class AddExamComponent implements OnInit {
   searchStudent(course: string, batch: string, subject: string) {
     this.loading = true;
     this.examService.getStudents(course, batch, subject).subscribe(
-      resData => {
+      (resData: any) => {
         this.error = null;
         this.students = resData;
 
@@ -211,7 +211,7 @@ export class AddExamComponent implements OnInit {
 
         this.loading = false;
       },
-      errorMessage => {
+      (errorMessage: any) => {
         this.error = errorMessage;
         this.loading = false;
       }

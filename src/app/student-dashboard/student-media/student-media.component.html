@@ -8,10 +8,35 @@
       <div class="row">
         <div class="col-12">
           <div class="row">
-            <div class="col-md-6 col-12">
+            <div class="col-md-4 col-12">
               <h3 class="page-heading">Media</h3>
             </div>
-            <div class="col-md-6 col-12">
+            <div class="col-md-4 col-12">
+              <div class="form-group mt-2">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="batch">Batch</label>
+                  </div>
+                  <select
+                    class="form-control input-select"
+                    type="text"
+                    name="batch"
+                    id="batch"
+                    [value]="batch"
+                    (change)="onSelectBatch($event.target.value)"
+                  >
+                    <option class="select-option" value="">Select Batch</option>
+                    <option
+                      class="select-option"
+                      *ngFor="let batch of studentData.batches; let i = index"
+                      [value]="batch._id"
+                      >{{ batch.batch | uppercase }}</option
+                    >
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
               <div class="form-group mt-2">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -26,14 +51,12 @@
                     (change)="onSelectSubject($event.target.value)"
                   >
                     <option class="select-option" value="">Select Subject</option>
-                    <ng-container *ngIf="studentData.subjects.length > 0">
-                      <option
-                        class="select-option"
-                        *ngFor="let subject of studentData.subjects; let i = index"
-                        [value]="subject._id"
-                        >{{ subject.subject | uppercase }}</option
-                      >
-                    </ng-container>
+                    <option
+                      class="select-option"
+                      *ngFor="let subject of subjects; let i = index"
+                      [value]="subject._id"
+                      >{{ subject.subject | uppercase }}</option
+                    >
                   </select>
                 </div>
               </div>

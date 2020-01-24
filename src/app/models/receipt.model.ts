@@ -3,8 +3,9 @@ export class ReceiptModel {
     // tslint:disable-next-line: variable-name
     public _id: string,
     public student: string,
-    public course: string,
     public branch: string,
+    public courseType: string,
+    public course: string,
     public batch: string,
     public date: string,
     public feeType: string,

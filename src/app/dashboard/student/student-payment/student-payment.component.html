@@ -25,19 +25,12 @@
 
               <div class="row">
                 <div class="col-md-6 col-12">
-                  <strong>Course : </strong>{{ studentMetaData.course }}
+                  <strong>Course : </strong>{{ studentMetaData.course }} &nbsp; ({{
+                    studentMetaData.courseType
+                  }})
                 </div>
-                <div class="col-md-6 col-12">
-                  <strong>Batch : </strong>{{ studentMetaData.batch }}
-                </div>
-              </div>
-
-              <div class="row">
                 <div class="col-md-6 col-12">
                   <strong>Total Fees : </strong>{{ studentMetaData.totalFees }}
-                </div>
-                <div class="col-md-6 col-12">
-                  <strong>Subjects : </strong>{{ studentMetaData.subjects.join(', ') }}
                 </div>
               </div>
 

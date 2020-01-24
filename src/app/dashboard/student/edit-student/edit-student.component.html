@@ -132,7 +132,7 @@
 
         <div class="row">
           <div class="col-md-6 col-sm-12">
-            <div class="form-group m-1">
+            <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label">branch</label>
@@ -144,7 +144,7 @@
                   id="branch"
                   formControlName="branch"
                   (change)="branchChanged()"
-                  disabled
+                  [attr.disabled]="true"
                 >
                   <option class="select-option" value="">Select Branch</option>
                   <option

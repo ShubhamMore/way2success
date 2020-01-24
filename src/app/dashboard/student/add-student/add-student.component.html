@@ -132,7 +132,7 @@
 
         <div class="row">
           <div class="col-md-6 col-sm-12">
-            <div class="form-group m-1">
+            <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <label class="input-group-text input-label">branch</label>
@@ -265,6 +265,7 @@
                   name="subject"
                   class="subject"
                   (change)="subjectsChanged($event, curSubject._id)"
+                  [checked]="subChecked(curSubject._id)"
                   value="curSubject._id"
                 />
                 {{ curSubject.subject }}

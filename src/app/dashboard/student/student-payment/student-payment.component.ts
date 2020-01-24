@@ -152,7 +152,7 @@ export class StudentPaymentComponent implements OnInit {
         student: this.student._id,
         branch: this.student.branch,
         course: this.student.course,
-        batch: this.student.batch,
+        courseType: this.student.courseType,
         date: this.form.value.date,
         feeType: this.form.value.feeType,
         amount: this.amount + this.lateFee,

@@ -20,7 +20,7 @@ export class EditExamComponent implements OnInit {
   examMetaData: any;
   exam: ExamModel;
 
-  marks: MarksModel[] = [];
+  marks: MarksModel[];
 
   error: string;
 
@@ -35,11 +35,12 @@ export class EditExamComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.marks = [];
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
       this.id = params['id'];
       this.examService.getExam(this.id).subscribe(
-        resData => {
+        (resData: any) => {
           this.error = null;
           this.exam = resData.exam;
           this.examMetaData = resData.examMetaData;
@@ -59,7 +60,7 @@ export class EditExamComponent implements OnInit {
 
           this.loading = false;
         },
-        errorMessage => {
+        (errorMessage: any) => {
           this.error = errorMessage;
           this.loading = false;
         }
@@ -89,11 +90,12 @@ export class EditExamComponent implements OnInit {
       };
 
       this.examService.editExam(exam._id, exam).subscribe(
-        val => {
+        (resData: any) => {
           this.location.back();
           this.loading = false;
         },
-        error => {
+        (error: any) => {
+          this.error = error;
           this.loading = false;
         }
       );

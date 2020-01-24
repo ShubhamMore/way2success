@@ -69,18 +69,37 @@
                 </tr>
                 <tr class="table-row">
                   <td class="table-data table-data-parameter">
-                    <p class="data-heading"><strong>Batch</strong></p>
+                    <p class="data-heading">
+                      <strong
+                        >Batches / <br />
+                        Subjects</strong
+                      >
+                    </p>
                   </td>
                   <td class="table-data table-data-value">
-                    <p class="data">{{ studentMetaData.batch }}</p>
-                  </td>
-                </tr>
-                <tr class="table-row">
-                  <td class="table-data table-data-parameter">
-                    <p class="data-heading"><strong>Subjects</strong></p>
-                  </td>
-                  <td class="table-data table-data-value">
-                    <p class="data">{{ subject.join(', ') }}</p>
+                    <div class="table-responsive">
+                      <table class="table table-sm">
+                        <thead class="table-heading">
+                          <tr class="table-row">
+                            <th class="table-heading-data">Batch</th>
+                            <th class="table-heading-data">Subjects</th>
+                          </tr>
+                        </thead>
+                        <tbody class="table-body">
+                          <tr
+                            class="table-row"
+                            *ngFor="let batch of studentMetaData.batches; let i = index"
+                          >
+                            <td class="table-data">
+                              {{ batch.batch }}
+                            </td>
+                            <td class="table-data">
+                              {{ subjects(batch.subjects) }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </td>
                 </tr>
                 <tr class="table-row">

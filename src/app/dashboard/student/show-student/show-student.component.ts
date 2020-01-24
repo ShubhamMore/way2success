@@ -13,7 +13,6 @@ export class ShowStudentComponent implements OnInit {
   loading: boolean;
   error: boolean;
   student: StudentModel;
-  subject: string[];
   studentMetaData: any;
   id: string;
 
@@ -26,12 +25,11 @@ export class ShowStudentComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.subject = [];
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
       this.id = params['id'];
       this.studentService.getStudent(this.id).subscribe(
-        resData => {
+        (resData: any) => {
           this.error = null;
           this.student = resData.student;
           if (!this.student) {
@@ -39,18 +37,23 @@ export class ShowStudentComponent implements OnInit {
             return;
           }
           this.studentMetaData = resData.studentMetaData;
-          this.studentMetaData.subject.forEach(subject => {
-            this.subject.push(subject.subject);
-          });
           this.loading = false;
         },
-        errorMessage => {
+        (errorMessage: any) => {
           this.error = errorMessage;
           this.loading = false;
           this.router.navigate(['/page_not_found'], { relativeTo: this.route });
         }
       );
     });
+  }
+
+  subjects(subjects: any) {
+    const subject: string[] = [];
+    subjects.forEach(curSubject => {
+      subject.push(curSubject.subject);
+    });
+    return subject.join(', ');
   }
 
   studentAttendance() {
