@@ -35,7 +35,6 @@ import { ShowStudentComponent } from './dashboard/student/show-student/show-stud
 import { EditStudentComponent } from './dashboard/student/edit-student/edit-student.component';
 import { StudentAttendanceComponent } from './dashboard/student/student-attendance/student-attendance.component';
 import { StudentPerformanceComponent } from './dashboard/student/student-performance/student-performance.component';
-import { StudentHistoryComponent } from './dashboard/student/student-history/student-history.component';
 import { StudentPaymentComponent } from './dashboard/student/student-payment/student-payment.component';
 import { StudentPaymentReceiptsComponent } from './dashboard/student/student-payment-receipts/student-payment-receipts.component';
 // tslint:disable-next-line: max-line-length
@@ -238,11 +237,6 @@ const appRoutes: Routes = [
   {
     path: 'admin/student/:id/performance',
     component: StudentPerformanceComponent,
-    canActivate: [AdminAuthGuard]
-  },
-  {
-    path: 'admin/student/:id/history',
-    component: StudentHistoryComponent,
     canActivate: [AdminAuthGuard]
   },
   {

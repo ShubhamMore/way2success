@@ -64,10 +64,6 @@ export class ShowStudentComponent implements OnInit {
     this.router.navigate(['performance'], { relativeTo: this.route });
   }
 
-  studentHistory() {
-    this.router.navigate(['history'], { relativeTo: this.route });
-  }
-
   studentReceipts() {
     this.router.navigate(['receipt'], { relativeTo: this.route });
   }
